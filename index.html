@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACTT Reference</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#121b2e;
+      --panel2:#0f172a;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --border:rgba(231,238,252,.12);
+      --accent:#5aa7ff;
+      --accent2:#7cdaff;
+      --danger:#ff6b6b;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:14px;
+      --radius2:10px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.20), transparent 55%),
+                  radial-gradient(900px 600px at 100% 20%, rgba(124,218,255,.14), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,18,32,.92), rgba(11,18,32,.72));
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap{ max-width: 1100px; margin: 0 auto; padding: 14px 14px; }
+    .topbar{
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      flex-wrap: wrap;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      min-width: 220px;
+    }
+    .logo{
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--shadow);
+    }
+    .titleblock{ display:flex; flex-direction:column; line-height:1.1; }
+    .titleblock .title{ font-weight: 800; letter-spacing: .2px; }
+    .titleblock .subtitle{ color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+
+    .search{
+      flex: 1;
+      min-width: 220px;
+      display:flex; gap:10px; align-items:center; justify-content:flex-end;
+    }
+    .search input{
+      width: min(520px, 100%);
+      padding: 10px 12px;
+      background: rgba(18,27,46,.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      outline: none;
+    }
+    .search input::placeholder{ color: rgba(169,183,214,.75); }
+    .btn{
+      border: 1px solid var(--border);
+      background: rgba(18,27,46,.85);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      touch-action: manipulation;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    main .wrap{ padding-top: 16px; padding-bottom: 26px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      align-items:start;
+    }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .viewer{ position: static !important; }
+    }
+
+    .panel{
+      background: rgba(18,27,46,.72);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel h2{
+      margin:0;
+      padding: 14px 14px 8px;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .panel .meta{
+      padding: 0 14px 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Left: sections */
+    .section{
+      border-top: 1px solid var(--border);
+      padding: 12px 14px 14px;
+    }
+    .section:first-of-type{ border-top: none; }
+    .sectionHeader{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .sectionHeader .label{
+      font-weight: 750;
+      font-size: 15px;
+    }
+    .sectionHeader .desc{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+    .topicBtns{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .topic{
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,.62);
+      color: var(--text);
+      padding: 9px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 13.5px;
+      line-height: 1.1;
+      touch-action: manipulation;
+    }
+    .topic:hover{ border-color: rgba(90,167,255,.55); }
+    .topic.active{
+      background: linear-gradient(135deg, rgba(90,167,255,.28), rgba(124,218,255,.18));
+      border-color: rgba(90,167,255,.65);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Right: viewer */
+    .viewer{
+      position: sticky;
+      top: 88px;
+    }
+    .viewerHeader{
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15,23,42,.55);
+    }
+    .crumb{
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    .viewerTitle{
+      margin-top: 6px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .viewerBody{
+      padding: 14px;
+    }
+    .hint{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .callout{
+      margin-top: 12px;
+      border: 1px dashed rgba(90,167,255,.45);
+      background: rgba(90,167,255,.08);
+      border-radius: var(--radius2);
+      padding: 12px;
+    }
+    .codehint{
+      margin-top: 10px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      overflow:auto;
+      color: rgba(231,238,252,.95);
+      white-space: pre;
+    }
+
+    /* Accordion */
+    details{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(15,23,42,.55);
+      margin-top: 10px;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      padding: 11px 12px;
+      font-weight: 700;
+      list-style: none;
+      outline: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details[open] summary{
+      border-bottom: 1px solid var(--border);
+      background: rgba(90,167,255,.10);
+    }
+    .accBody{
+      padding: 10px 12px 12px;
+      color: rgba(231,238,252,.95);
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .accBody ul{ margin: 8px 0 0 18px; padding:0; }
+    .accBody li{ margin: 4px 0; }
+    .mutedSmall{
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-top: 10px;
+    }
+    footer{
+      color: rgba(169,183,214,.8);
+      font-size: 12.5px;
+      padding: 14px 14px 24px;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="titleblock">
+          <div class="title">ACTT Reference</div>
+          <div class="subtitle">Offline field reference (structure first; content added topic-by-topic)</div>
+        </div>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search buttons (e.g., airway, pressor, TBI, burn)" aria-label="Search topics" />
+        <button class="btn" id="clearBtn" type="button">Clear</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="grid">
+      <!-- LEFT: button map -->
+      <section class="panel" aria-label="ACTT sections">
+        <h2>Sections</h2>
+        <div class="meta">
+          Tap a topic button to open it on the right. Content is intentionally empty until you paste NotebookLM extractions.
+        </div>
+        <div id="sectionsRoot"></div>
+      </section>
+
+      <!-- RIGHT: viewer -->
+      <aside class="panel viewer" aria-label="Topic viewer">
+        <div class="viewerHeader">
+          <div class="crumb" id="crumb">Not selected</div>
+          <div class="viewerTitle" id="viewerTitle">Select a topic</div>
+        </div>
+        <div class="viewerBody" id="viewerBody">
+          <div class="hint">
+            This file is the first repository artifact: a working offline shell with your button map embedded.
+            Next, you’ll extract one topic from NotebookLM and paste it into this file’s <span class="pill">CONTENT</span> object.
+          </div>
+
+          <div class="callout">
+            <div style="font-weight:800;margin-bottom:6px;">How we’ll add content (later)</div>
+            <div class="hint">
+              For a given topic, we’ll store sections like <span class="pill">Quick actions</span>, <span class="pill">Indications</span>,
+              <span class="pill">Decision points</span>, <span class="pill">Procedure steps</span>, etc. (still grounded in your ACTT sources).
+            </div>
+            <div class="codehint" aria-label="Content placeholder example">
+CONTENT["airway_assessment_decisions"] = {
+  "Quick actions": [
+    "…",
+    "…"
+  ],
+  "Indications / triggers": [
+    "…"
+  ],
+  "Decision points": [
+    "…"
+  ],
+  "Pitfalls": [
+    "…"
+  ],
+  "Source anchors": [
+    "Doc — slide/page …",
+    "Doc — slide/page …"
+  ]
+};
+            </div>
+            <div class="mutedSmall">
+              You won’t need any extra files for this to work in Readdle Documents—everything stays in this one index.html.
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  ACTT Reference • Single-file offline shell • Version 0.1
+</footer>
+
+<script>
+  /******************************************************************
+   * BUTTON MAP (embedded; no file loading)
+   ******************************************************************/
+  const MAP = {
+    appTitle: "ACTT Reference",
+    version: "0.1",
+    sections: [
+      {
+        id: "airway_breathing",
+        label: "Airway & Breathing",
+        description: "Airway decisions, advanced airway, ventilation/oxygenation, thoracic interventions.",
+        topics: [
+          { id: "airway_assessment_decisions", label: "Airway assessment" },
+          { id: "airway_intubate_vs_surgical", label: "Airway decision-making (intubate vs surgical)" },
+          { id: "rsi_and_contingency", label: "RSI + contingency plan" },
+          { id: "rescue_airway_devices", label: "Rescue airway devices" },
+          { id: "failed_airway_surgical", label: "Failed airway → emergency surgical airway" },
+          { id: "burn_inhalation_airway", label: "Burn/inhalation airway considerations" },
+          { id: "mechanical_vent_management", label: "Mechanical ventilation management" },
+          { id: "oxygenation_strategy", label: "Oxygenation strategy (FiO₂/PEEP)" },
+          { id: "noninvasive_support", label: "Non-invasive respiratory support" },
+          { id: "thoracic_trauma_overview", label: "Thoracic trauma: immediate threats" },
+          { id: "needle_decompression", label: "Needle decompression" },
+          { id: "tube_thoracostomy", label: "Tube thoracostomy" }
+        ]
+      },
+      {
+        id: "shock_resuscitation",
+        label: "Shock, Perfusion & Resuscitation",
+        description: "Perfusion assessment, fluid strategy, vasopressors, condition-specific targets.",
+        topics: [
+          { id: "shock_recognition", label: "Shock recognition (clinical)" },
+          { id: "perfusion_assessment", label: "Perfusion assessment (bedside markers)" },
+          { id: "fluid_responsiveness", label: "Fluid responsiveness (dynamic assessment)" },
+          { id: "hemodynamic_targets", label: "Hemodynamic targets by condition" },
+          { id: "sepsis_resuscitation_strategy", label: "Sepsis resuscitation strategy" },
+          { id: "burn_resuscitation_strategy", label: "Burn resuscitation strategy + fluid creep" },
+          { id: "peds_restrictive_fluids", label: "Peds: restrictive fluids in specific contexts" },
+          { id: "vasopressor_selection", label: "Vasopressors: selection" },
+          { id: "vasopressor_admin_safety", label: "Vasopressors: administration & safety" },
+          { id: "titration_reassessment", label: "Titration + reassessment" }
+        ]
+      },
+      {
+        id: "neuro_burns_environmental",
+        label: "Neurotrauma, Burns & Environmental Injury",
+        description: "TBI priorities, burns assessment/resus, hypothermia, ortho reductions, complications.",
+        topics: [
+          { id: "tbi_secondary_injury_bundle", label: "TBI: secondary injury prevention bundle" },
+          { id: "tbi_icp_management", label: "TBI: suspected elevated ICP management" },
+          { id: "tbi_monitoring_tools", label: "TBI monitoring tools (incl ultrasound adjuncts)" },
+          { id: "tbi_seizure_management", label: "TBI: seizure prevention/treatment" },
+          { id: "burns_tbsa_assessment", label: "Burns: TBSA / severity assessment" },
+          { id: "burns_wound_care", label: "Burns: wound care (debridement/dressings)" },
+          { id: "burns_resus_monitoring", label: "Burns: resuscitation & monitoring" },
+          { id: "burns_inhalation_link", label: "Burns: inhalation injury (cross-ref airway)" },
+          { id: "escharotomy", label: "Escharotomy: indications & overview" },
+          { id: "burns_complications", label: "Burns: complications in prolonged care" },
+          { id: "hypothermia_staging_actions", label: "Hypothermia: staging & initial actions" },
+          { id: "hypothermia_rewarming", label: "Hypothermia: rewarming methods" },
+          { id: "ortho_shoulder_reductions", label: "Orthopedics: shoulder reductions" },
+          { id: "compartment_syndrome_watch", label: "Compartment syndrome: recognition/monitoring" }
+        ]
+      },
+      {
+        id: "sepsis_infectious",
+        label: "Sepsis & Infectious Syndromes",
+        description: "Recognition, key differentials, antimicrobials, source control in austere context.",
+        topics: [
+          { id: "sepsis_recognition_initial", label: "Sepsis recognition & initial actions" },
+          { id: "sepsis_differentials", label: "Differentials (incl malaria/dengue patterns)" },
+          { id: "sepsis_scores", label: "Scoring / early warning tools" },
+          { id: "antibiotics_empiric", label: "Antibiotics: empiric selection (resource-aware)" },
+          { id: "antibiotics_timing", label: "Antibiotics: timing priorities" },
+          { id: "source_control", label: "Source control: identify & act" }
+        ]
+      },
+      {
+        id: "analgesia_sedation_pharm",
+        label: "Analgesia, Sedation & High-Risk Medications",
+        description: "PSA, pain strategies, core drug profiles, reversals, fibrinolysis package.",
+        topics: [
+          { id: "psa_safety_setup", label: "Procedural sedation: setup & safety" },
+          { id: "ketamine_roles", label: "Ketamine: sedation/analgesia roles" },
+          { id: "multimodal_pain", label: "Multimodal pain strategy" },
+          { id: "core_drug_profiles", label: "Core drug profiles (high-risk meds)" },
+          { id: "peds_dosing_adjustments", label: "Peds dosing + organ dysfunction adjustments" },
+          { id: "reversal_rescue_agents", label: "Reversal/rescue agents" },
+          { id: "stemi_fibrinolysis_package", label: "STEMI: fibrinolysis screening/package" }
+        ]
+      },
+      {
+        id: "monitoring_diagnostics",
+        label: "Monitoring & Diagnostics",
+        description: "ECG, POCT, access, output monitoring for trending/resus.",
+        topics: [
+          { id: "ecg_framework", label: "ECG interpretation framework" },
+          { id: "stemi_recognition", label: "STEMI recognition (cross-ref fibrinolysis)" },
+          { id: "poct_interpretation", label: "POCT interpretation (lactate, acid-base, glucose, electrolytes)" },
+          { id: "neuro_labs_targets", label: "Neuro-specific labs/targets (e.g., sodium)" },
+          { id: "vascular_access", label: "Vascular access (IV/IO/central if applicable)" },
+          { id: "urinary_catheter_output", label: "Urinary catheter + output monitoring" }
+        ]
+      },
+      {
+        id: "operations_pfc_team",
+        label: "Operations, PFC & Team Functions",
+        description: "Resource-limited decisions, documentation, telemedicine, agitation control, team behaviors.",
+        topics: [
+          { id: "resource_limited_framework", label: "Resource-limited decision framework" },
+          { id: "ethics_triage_termination", label: "Ethics/triage/termination decisions" },
+          { id: "adapt_guidelines_constraints", label: "Adapting guidelines to constraints" },
+          { id: "pfc_documentation_flowsheets", label: "PFC documentation/flowsheets (24–72h)" },
+          { id: "telemedicine_workflows", label: "Telemedicine / remote consult workflows" },
+          { id: "agitation_management", label: "Agitation/combative management pathway" },
+          { id: "team_behaviors_crm", label: "Team behaviors under stress (CRM-style)" }
+        ]
+      }
+    ]
+  };
+
+  /******************************************************************
+   * CONTENT STORE (intentionally empty at start)
+   * Add NotebookLM extractions here later, keyed by topic id.
+   ******************************************************************/
+  const CONTENT = {
+    // Example (leave commented until you paste real content):
+    // "airway_assessment_decisions": {
+    //   "Quick actions": ["..."],
+    //   "Indications / triggers": ["..."],
+    //   "Decision points": ["..."],
+    //   "Pitfalls": ["..."],
+    //   "Source anchors": ["Doc — slide/page ..."]
+    // }
+  };
+
+  /******************************************************************
+   * UI RENDER
+   ******************************************************************/
+  const sectionsRoot = document.getElementById("sectionsRoot");
+  const searchInput  = document.getElementById("searchInput");
+  const clearBtn     = document.getElementById("clearBtn");
+
+  const crumbEl      = document.getElementById("crumb");
+  const titleEl      = document.getElementById("viewerTitle");
+  const bodyEl       = document.getElementById("viewerBody");
+
+  let activeTopicId = null;
+  let activeSectionLabel = null;
+
+  function normalize(s){
+    return (s || "").toLowerCase().trim();
+  }
+
+  function renderSections(filterText = ""){
+    const q = normalize(filterText);
+    sectionsRoot.innerHTML = "";
+
+    MAP.sections.forEach(sec => {
+      const topicsFiltered = sec.topics.filter(t => {
+        if (!q) return true;
+        const hay = normalize(sec.label + " " + sec.description + " " + t.label);
+        return hay.includes(q);
+      });
+
+      // If filtering and no topics match, hide section
+      if (q && topicsFiltered.length === 0) return;
+
+      const wrap = document.createElement("div");
+      wrap.className = "section";
+
+      const header = document.createElement("div");
+      header.className = "sectionHeader";
+
+      const left = document.createElement("div");
+      const label = document.createElement("div");
+      label.className = "label";
+      label.textContent = sec.label;
+
+      const desc = document.createElement("div");
+      desc.className = "desc";
+      desc.textContent = sec.description;
+
+      left.appendChild(label);
+      left.appendChild(desc);
+
+      const right = document.createElement("div");
+      const pill = document.createElement("span");
+      pill.className = "pill";
+      pill.textContent = `${topicsFiltered.length} topic${topicsFiltered.length === 1 ? "" : "s"}`;
+      right.appendChild(pill);
+
+      header.appendChild(left);
+      header.appendChild(right);
+
+      const btns = document.createElement("div");
+      btns.className = "topicBtns";
+
+      topicsFiltered.forEach(t => {
+        const b = document.createElement("button");
+        b.className = "topic";
+        b.type = "button";
+        b.textContent = t.label;
+        b.dataset.topicId = t.id;
+        b.dataset.sectionLabel = sec.label;
+
+        if (t.id === activeTopicId) b.classList.add("active");
+
+        b.addEventListener("click", () => {
+          activeTopicId = t.id;
+          activeSectionLabel = sec.label;
+          // Re-render to update active styling
+          renderSections(searchInput.value);
+          renderViewer(sec.label, t.label, t.id);
+        });
+
+        btns.appendChild(b);
+      });
+
+      wrap.appendChild(header);
+      wrap.appendChild(btns);
+      sectionsRoot.appendChild(wrap);
+    });
+  }
+
+  function renderViewer(sectionLabel, topicLabel, topicId){
+    crumbEl.textContent = sectionLabel;
+    titleEl.textContent = topicLabel;
+
+    const data = CONTENT[topicId];
+
+    // Empty state
+    if (!data){
+      bodyEl.innerHTML = `
+        <div class="hint">
+          <div style="font-weight:800;margin-bottom:6px;">No content added yet</div>
+          <div>
+            This topic is ready for your first NotebookLM extraction.
+            When you paste it, we’ll format it into standard sections (Quick actions, Indications, Decision points, etc.)
+            and store it under <span class="pill">${topicId}</span>.
+          </div>
+        </div>
+
+        <div class="callout">
+          <div style="font-weight:800;margin-bottom:6px;">Next action (for you)</div>
+          <div class="hint">
+            Run one NotebookLM extraction for:
+            <span class="pill">${topicLabel}</span>
+            and paste the output back into this chat.
+          </div>
+          <div class="mutedSmall">
+            I’ll then give you the exact content block to paste into this file—only for this single topic.
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    // Render filled topic as accordions
+    const keys = Object.keys(data);
+    const acc = keys.map(k => {
+      const items = Array.isArray(data[k]) ? data[k] : [String(data[k])];
+      const lis = items.map(x => `<li>${escapeHtml(String(x))}</li>`).join("");
+      return `
+        <details>
+          <summary>${escapeHtml(k)}</summary>
+          <div class="accBody"><ul>${lis}</ul></div>
+        </details>
+      `;
+    }).join("");
+
+    bodyEl.innerHTML = `
+      <div class="hint">
+        Content loaded from embedded <span class="pill">CONTENT</span> store.
+      </div>
+      ${acc}
+    `;
+  }
+
+  function escapeHtml(str){
+    return str
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  // Search behavior
+  searchInput.addEventListener("input", () => {
+    renderSections(searchInput.value);
+  });
+  clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    renderSections("");
+    searchInput.focus();
+  });
+
+  // Initial render
+  renderSections("");
+</script>
+</body>
+</html>
