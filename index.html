@@ -30,6 +30,7 @@
                   radial-gradient(900px 600px at 100% 20%, rgba(124,218,255,.14), transparent 60%),
                   var(--bg);
       color:var(--text);
+      min-height: 100vh;
     }
 
     header{
@@ -48,6 +49,7 @@
     .brand{
       display:flex; gap:10px; align-items:center;
       min-width: 220px;
+      cursor: pointer;
     }
     .logo{
       width: 38px; height: 38px; border-radius: 10px;
@@ -85,17 +87,6 @@
     .btn:active{ transform: translateY(1px); }
 
     main .wrap{ padding-top: 16px; padding-bottom: 26px; }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 14px;
-      align-items:start;
-    }
-
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .viewer{ position: static !important; }
-    }
 
     .panel{
       background: rgba(18,27,46,.72);
@@ -116,58 +107,148 @@
       font-size: 13px;
     }
 
-    /* Left: sections */
-    .section{
-      border-top: 1px solid var(--border);
-      padding: 12px 14px 14px;
+    /* HOME VIEW - Large Section Buttons */
+    .homeView{
+      display: block;
     }
-    .section:first-of-type{ border-top: none; }
-    .sectionHeader{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    .homeGrid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      padding: 14px;
     }
-    .sectionHeader .label{
-      font-weight: 750;
-      font-size: 15px;
+    .sectionBtn{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(15,23,42,.8), rgba(18,27,46,.9));
+      border-radius: var(--radius);
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: border-color 0.15s, transform 0.1s;
+      text-align: left;
+      min-height: 100px;
     }
-    .sectionHeader .desc{
+    .sectionBtn:hover{
+      border-color: rgba(90,167,255,.55);
+    }
+    .sectionBtn:active{
+      transform: translateY(2px);
+    }
+    .sectionBtn .sectionLabel{
+      font-weight: 800;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .sectionBtn .sectionDesc{
       color: var(--muted);
       font-size: 13px;
-      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .sectionBtn .topicCount{
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(90,167,255,.15);
+      color: var(--accent2);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .sectionBtn.hidden{
+      display: none;
+    }
+
+    /* SECTION VIEW - Sub-buttons */
+    .sectionView{
+      display: none;
+    }
+    .sectionView.active{
+      display: block;
+    }
+    .sectionHeader{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .backBtn{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,.7);
+      border-radius: 12px;
+      color: var(--text);
+      cursor: pointer;
+      touch-action: manipulation;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .backBtn:hover{
+      border-color: rgba(90,167,255,.55);
+    }
+    .backBtn:active{
+      transform: translateY(1px);
+    }
+    .sectionViewTitle{
+      font-weight: 800;
+      font-size: 18px;
+      flex: 1;
     }
     .topicBtns{
-      display:flex;
+      display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 10px;
+      padding: 14px;
     }
     .topic{
       border: 1px solid var(--border);
       background: rgba(15,23,42,.62);
       color: var(--text);
-      padding: 9px 10px;
+      padding: 12px 14px;
       border-radius: 12px;
       cursor:pointer;
-      font-size: 13.5px;
-      line-height: 1.1;
+      font-size: 14px;
+      line-height: 1.2;
       touch-action: manipulation;
+      text-align: left;
+      max-width: 100%;
     }
     .topic:hover{ border-color: rgba(90,167,255,.55); }
     .topic.active{
       background: linear-gradient(135deg, rgba(90,167,255,.28), rgba(124,218,255,.18));
       border-color: rgba(90,167,255,.65);
     }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
+    .topic.hidden{
+      display: none;
     }
 
-    /* Right: viewer */
+    /* TOPIC VIEW - Viewer Panel */
+    .topicView{
+      display: none;
+    }
+    .topicView.active{
+      display: block;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+      .viewer{ position: static !important; }
+    }
     .viewer{
       position: sticky;
       top: 88px;
@@ -176,6 +257,12 @@
       padding: 14px;
       border-bottom: 1px solid var(--border);
       background: rgba(15,23,42,.55);
+    }
+    .viewerNav{
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
     .crumb{
       color: var(--muted);
@@ -214,6 +301,16 @@
       color: rgba(231,238,252,.95);
       white-space: pre;
     }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
 
     /* Accordion */
     details{
@@ -248,6 +345,19 @@
       font-size: 12.5px;
       margin-top: 10px;
     }
+
+    /* Topic list panel in topic view */
+    .topicListPanel{
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    .topicListPanel .topicBtns{
+      padding: 10px;
+    }
+    .topicListPanel .topic{
+      width: 100%;
+    }
+
     footer{
       color: rgba(169,183,214,.8);
       font-size: 12.5px;
@@ -261,7 +371,7 @@
 <header>
   <div class="wrap">
     <div class="topbar">
-      <div class="brand">
+      <div class="brand" id="brandHome">
         <div class="logo" aria-hidden="true"></div>
         <div class="titleblock">
           <div class="title">ACTT Reference</div>
@@ -270,7 +380,7 @@
       </div>
 
       <div class="search">
-        <input id="searchInput" type="search" placeholder="Search buttons (e.g., airway, pressor, TBI, burn)" aria-label="Search topics" />
+        <input id="searchInput" type="search" placeholder="Search..." aria-label="Search" />
         <button class="btn" id="clearBtn" type="button">Clear</button>
       </div>
     </div>
@@ -279,36 +389,384 @@
 
 <main>
   <div class="wrap">
-    <div class="grid">
-      <!-- LEFT: button map -->
+    <!-- HOME VIEW: 7 Large Section Buttons -->
+    <div id="homeView" class="homeView">
       <section class="panel" aria-label="ACTT sections">
-        <h2>Sections</h2>
+        <h2>Select a Section</h2>
         <div class="meta">
-          Tap a topic button to open it on the right. Content is intentionally empty until you paste NotebookLM extractions.
+          Tap a section to see its topics. Content is added topic-by-topic via NotebookLM extractions.
         </div>
-        <div id="sectionsRoot"></div>
+        <div id="homeGrid" class="homeGrid"></div>
       </section>
+    </div>
 
-      <!-- RIGHT: viewer -->
-      <aside class="panel viewer" aria-label="Topic viewer">
-        <div class="viewerHeader">
-          <div class="crumb" id="crumb">Not selected</div>
-          <div class="viewerTitle" id="viewerTitle">Select a topic</div>
+    <!-- SECTION VIEW: Sub-buttons for a section -->
+    <div id="sectionView" class="sectionView">
+      <section class="panel" aria-label="Section topics">
+        <div class="sectionHeader">
+          <button class="backBtn" id="backToHome" type="button">← Back to Home</button>
+          <div class="sectionViewTitle" id="sectionViewTitle">Section</div>
         </div>
-        <div class="viewerBody" id="viewerBody">
-          <div class="hint">
-            This file is the first repository artifact: a working offline shell with your button map embedded.
-            Next, you’ll extract one topic from NotebookLM and paste it into this file’s <span class="pill">CONTENT</span> object.
-          </div>
+        <div id="topicBtnsContainer" class="topicBtns"></div>
+      </section>
+    </div>
 
-          <div class="callout">
-            <div style="font-weight:800;margin-bottom:6px;">How we’ll add content (later)</div>
-            <div class="hint">
-              For a given topic, we’ll store sections like <span class="pill">Quick actions</span>, <span class="pill">Indications</span>,
-              <span class="pill">Decision points</span>, <span class="pill">Procedure steps</span>, etc. (still grounded in your ACTT sources).
+    <!-- TOPIC VIEW: Viewer panel -->
+    <div id="topicView" class="topicView">
+      <div class="grid">
+        <!-- LEFT: Topic list for this section -->
+        <section class="panel topicListPanel" aria-label="Topic list">
+          <div class="sectionHeader">
+            <button class="backBtn" id="backToSection" type="button">← Back</button>
+            <div class="sectionViewTitle" id="topicListTitle">Topics</div>
+          </div>
+          <div id="topicListBtns" class="topicBtns"></div>
+        </section>
+
+        <!-- RIGHT: Viewer -->
+        <aside class="panel viewer" aria-label="Topic viewer">
+          <div class="viewerHeader">
+            <div class="viewerNav">
+              <button class="backBtn" id="backToHome2" type="button">← Home</button>
             </div>
-            <div class="codehint" aria-label="Content placeholder example">
-CONTENT["airway_assessment_decisions"] = {
+            <div class="crumb" id="crumb">Section</div>
+            <div class="viewerTitle" id="viewerTitle">Topic</div>
+          </div>
+          <div class="viewerBody" id="viewerBody">
+            <div class="hint">Select a topic to view its content.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  ACTT Reference • Single-file offline shell • Version 0.2
+</footer>
+
+<script>
+  /******************************************************************
+   * BUTTON MAP (embedded; no file loading)
+   * Structure: sections -> topics (sub-buttons)
+   ******************************************************************/
+  const MAP = {
+    appTitle: "ACTT Reference",
+    version: "0.2",
+    sections: [
+      {
+        id: "airway_breathing",
+        label: "Airway & Breathing",
+        description: "Airway decisions, RSI, failed airway, ventilation/oxygenation, thoracic interventions.",
+        topics: [
+          { id: "airway_assessment_plan", label: "Airway assessment & airway plan" },
+          { id: "rsi_intubation_workflow", label: "RSI / intubation workflow" },
+          { id: "failed_airway_rescue", label: "Failed airway & rescue pathway (SGA → cannot intubate/cannot ventilate)" },
+          { id: "surgical_airway_fona", label: "Surgical airway (FONA / cric)" },
+          { id: "ventilation_management", label: "Ventilation management (setup + ongoing)" },
+          { id: "oxygenation_strategy", label: "Oxygenation strategy (FiO₂/PEEP; context-dependent targets)" },
+          { id: "thoracic_trauma_interventions", label: "Thoracic trauma interventions (needle decompression, chest tube)" }
+        ]
+      },
+      {
+        id: "shock_resuscitation",
+        label: "Shock & Resuscitation",
+        description: "Perfusion assessment, fluid strategy, vasopressors, condition-specific targets.",
+        topics: [
+          { id: "shock_recognition_perfusion", label: "Shock recognition & perfusion assessment" },
+          { id: "fluid_responsiveness", label: "Fluid responsiveness (dynamic assessments)" },
+          { id: "sepsis_resuscitation", label: "Sepsis resuscitation (fluids → pressors decision framework)" },
+          { id: "burn_resuscitation", label: "Burn resuscitation (avoid \"fluid creep\")" },
+          { id: "vasopressors", label: "Vasopressors (selection, administration, safety)" },
+          { id: "targets_by_condition", label: "Targets by condition (e.g., sepsis vs TBI)" }
+        ]
+      },
+      {
+        id: "neuro_burns_environmental",
+        label: "Neurotrauma, Burns & Environmental",
+        description: "TBI priorities, burns assessment/resus, hypothermia, ortho reductions, complications.",
+        topics: [
+          { id: "tbi_secondary_injury", label: "TBI: secondary injury prevention bundle" },
+          { id: "tbi_elevated_icp", label: "TBI: elevated ICP concern (recognition + management options)" },
+          { id: "tbi_seizure", label: "TBI: seizure prevention/treatment" },
+          { id: "burns_assessment", label: "Burns: assessment (TBSA/severity)" },
+          { id: "burns_wound_care", label: "Burns: wound care & dressings" },
+          { id: "burns_escharotomy", label: "Burns: escharotomy (indications)" },
+          { id: "hypothermia_rewarming", label: "Hypothermia: staging & rewarming" },
+          { id: "ortho_compartment", label: "Ortho: reductions & compartment syndrome watch" }
+        ]
+      },
+      {
+        id: "sepsis_infectious",
+        label: "Sepsis & Infectious Syndromes",
+        description: "Recognition, key differentials, antimicrobials, source control in austere context.",
+        topics: [
+          { id: "sepsis_recognition", label: "Sepsis recognition & initial actions" },
+          { id: "differentials_tropical", label: "Key differentials in austere/tropical context (malaria, dengue patterns)" },
+          { id: "antibiotics_empiric", label: "Antibiotics: empiric selection & timing" },
+          { id: "source_control", label: "Source control (what to identify, what's feasible)" },
+          { id: "scoring_early_warning", label: "Scoring / early warning tools (qSOFA/adapted tools)" }
+        ]
+      },
+      {
+        id: "analgesia_sedation",
+        label: "Analgesia, Sedation & High-Risk Meds",
+        description: "PSA, pain strategies, core drug profiles, reversals, fibrinolysis package.",
+        topics: [
+          { id: "procedural_sedation", label: "Procedural sedation: setup & safety" },
+          { id: "ketamine_use", label: "Ketamine use (sedation/analgesia roles)" },
+          { id: "multimodal_pain", label: "Multimodal pain management" },
+          { id: "core_drug_profiles", label: "Core drug profiles & contraindications (ACTT set)" },
+          { id: "reversal_rescue", label: "Reversal/rescue agents" },
+          { id: "stemi_fibrinolysis", label: "STEMI: fibrinolysis package (screen + adjuncts)" }
+        ]
+      },
+      {
+        id: "monitoring_diagnostics",
+        label: "Monitoring & Diagnostics",
+        description: "ECG, POCT, access, output monitoring for trending/resus.",
+        topics: [
+          { id: "ecg_interpretation", label: "ECG interpretation (ACTT-relevant)" },
+          { id: "stemi_recognition", label: "STEMI recognition" },
+          { id: "poct_interpretation", label: "POCT interpretation (lactate/acid-base, glucose, electrolytes)" },
+          { id: "vascular_access", label: "Vascular access (IV/IO ± central)" },
+          { id: "urine_output_monitoring", label: "Urine output monitoring (Foley, trending)" }
+        ]
+      },
+      {
+        id: "operations_pfc_team",
+        label: "Operations / PFC / Team",
+        description: "Resource-limited decisions, documentation, telemedicine, agitation control, team behaviors.",
+        topics: [
+          { id: "resource_limited_ethics", label: "Resource-limited decision-making & ethics (triage/termination)" },
+          { id: "pfc_documentation", label: "Prolonged field care documentation (flowsheets, trending 24–72h)" },
+          { id: "telemedicine_consult", label: "Telemedicine / remote consult workflow" },
+          { id: "agitation_management", label: "Agitation/combative patient management (de-escalation → restraint → chemical)" },
+          { id: "adapting_guidelines", label: "Adapting guidelines to constraints (vent, pressors, RRT availability)" }
+        ]
+      }
+    ]
+  };
+
+  /******************************************************************
+   * CONTENT STORE (intentionally empty at start)
+   * Add NotebookLM extractions here later, keyed by topic id.
+   ******************************************************************/
+  const CONTENT = {
+    // Example (leave commented until you paste real content):
+    // "airway_assessment_plan": {
+    //   "Quick actions": ["..."],
+    //   "Indications / triggers": ["..."],
+    //   "Decision points": ["..."],
+    //   "Pitfalls": ["..."],
+    //   "Source anchors": ["Doc — slide/page ..."]
+    // }
+  };
+
+  /******************************************************************
+   * UI STATE & ELEMENTS
+   ******************************************************************/
+  // Views
+  const homeView = document.getElementById("homeView");
+  const sectionView = document.getElementById("sectionView");
+  const topicView = document.getElementById("topicView");
+
+  // Home view elements
+  const homeGrid = document.getElementById("homeGrid");
+
+  // Section view elements
+  const backToHomeBtn = document.getElementById("backToHome");
+  const sectionViewTitle = document.getElementById("sectionViewTitle");
+  const topicBtnsContainer = document.getElementById("topicBtnsContainer");
+
+  // Topic view elements
+  const backToSectionBtn = document.getElementById("backToSection");
+  const backToHome2Btn = document.getElementById("backToHome2");
+  const topicListTitle = document.getElementById("topicListTitle");
+  const topicListBtns = document.getElementById("topicListBtns");
+  const crumbEl = document.getElementById("crumb");
+  const titleEl = document.getElementById("viewerTitle");
+  const bodyEl = document.getElementById("viewerBody");
+
+  // Search elements
+  const searchInput = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearBtn");
+  const brandHome = document.getElementById("brandHome");
+
+  // State
+  let currentView = "home"; // "home" | "section" | "topic"
+  let currentSectionId = null;
+  let currentTopicId = null;
+
+  /******************************************************************
+   * UTILITY FUNCTIONS
+   ******************************************************************/
+  function normalize(s) {
+    return (s || "").toLowerCase().trim();
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function getSection(sectionId) {
+    return MAP.sections.find(s => s.id === sectionId);
+  }
+
+  function getTopic(sectionId, topicId) {
+    const section = getSection(sectionId);
+    if (!section) return null;
+    return section.topics.find(t => t.id === topicId);
+  }
+
+  /******************************************************************
+   * VIEW MANAGEMENT
+   ******************************************************************/
+  function showView(view) {
+    currentView = view;
+    homeView.style.display = view === "home" ? "block" : "none";
+    sectionView.className = view === "section" ? "sectionView active" : "sectionView";
+    topicView.className = view === "topic" ? "topicView active" : "topicView";
+
+    // Update search placeholder
+    if (view === "home") {
+      searchInput.placeholder = "Search sections...";
+    } else if (view === "section") {
+      searchInput.placeholder = "Search topics in this section...";
+    } else {
+      searchInput.placeholder = "Search topics...";
+    }
+
+    // Clear search when switching views
+    searchInput.value = "";
+    applySearch("");
+  }
+
+  /******************************************************************
+   * HOME VIEW RENDERING
+   ******************************************************************/
+  function renderHomeView() {
+    homeGrid.innerHTML = "";
+
+    MAP.sections.forEach(sec => {
+      const btn = document.createElement("button");
+      btn.className = "sectionBtn";
+      btn.type = "button";
+      btn.dataset.sectionId = sec.id;
+
+      btn.innerHTML = `
+        <div class="sectionLabel">${escapeHtml(sec.label)}</div>
+        <div class="sectionDesc">${escapeHtml(sec.description)}</div>
+        <div class="topicCount">${sec.topics.length} topics</div>
+      `;
+
+      btn.addEventListener("click", () => {
+        currentSectionId = sec.id;
+        renderSectionView(sec.id);
+        showView("section");
+      });
+
+      homeGrid.appendChild(btn);
+    });
+  }
+
+  /******************************************************************
+   * SECTION VIEW RENDERING
+   ******************************************************************/
+  function renderSectionView(sectionId) {
+    const section = getSection(sectionId);
+    if (!section) return;
+
+    sectionViewTitle.textContent = section.label;
+    topicBtnsContainer.innerHTML = "";
+
+    section.topics.forEach(topic => {
+      const btn = document.createElement("button");
+      btn.className = "topic";
+      btn.type = "button";
+      btn.textContent = topic.label;
+      btn.dataset.topicId = topic.id;
+
+      btn.addEventListener("click", () => {
+        currentTopicId = topic.id;
+        renderTopicView(sectionId, topic.id);
+        showView("topic");
+      });
+
+      topicBtnsContainer.appendChild(btn);
+    });
+  }
+
+  /******************************************************************
+   * TOPIC VIEW RENDERING
+   ******************************************************************/
+  function renderTopicView(sectionId, topicId) {
+    const section = getSection(sectionId);
+    const topic = getTopic(sectionId, topicId);
+    if (!section || !topic) return;
+
+    // Update header
+    topicListTitle.textContent = section.label;
+    crumbEl.textContent = section.label;
+    titleEl.textContent = topic.label;
+
+    // Render topic list (left side)
+    topicListBtns.innerHTML = "";
+    section.topics.forEach(t => {
+      const btn = document.createElement("button");
+      btn.className = "topic" + (t.id === topicId ? " active" : "");
+      btn.type = "button";
+      btn.textContent = t.label;
+      btn.dataset.topicId = t.id;
+
+      btn.addEventListener("click", () => {
+        currentTopicId = t.id;
+        renderTopicView(sectionId, t.id);
+      });
+
+      topicListBtns.appendChild(btn);
+    });
+
+    // Render viewer content (right side)
+    renderViewerContent(topicId, topic.label);
+  }
+
+  function renderViewerContent(topicId, topicLabel) {
+    const data = CONTENT[topicId];
+
+    // Empty state
+    if (!data) {
+      bodyEl.innerHTML = `
+        <div class="hint">
+          <div style="font-weight:800;margin-bottom:6px;">No content added yet</div>
+          <div>
+            This topic is ready for your first NotebookLM extraction.
+            When you paste it, we'll format it into standard sections (Quick actions, Indications, Decision points, etc.)
+            and store it under <span class="pill">${escapeHtml(topicId)}</span>.
+          </div>
+        </div>
+
+        <div class="callout">
+          <div style="font-weight:800;margin-bottom:6px;">Next action (for you)</div>
+          <div class="hint">
+            Run one NotebookLM extraction for:
+            <span class="pill">${escapeHtml(topicLabel)}</span>
+            and paste the output back into this chat.
+          </div>
+          <div class="mutedSmall">
+            I'll then give you the exact content block to paste into this file—only for this single topic.
+          </div>
+        </div>
+
+        <div class="callout">
+          <div style="font-weight:800;margin-bottom:6px;">Content structure example</div>
+          <div class="codehint" aria-label="Content placeholder example">
+CONTENT["${escapeHtml(topicId)}"] = {
   "Quick actions": [
     "…",
     "…"
@@ -327,274 +785,6 @@ CONTENT["airway_assessment_decisions"] = {
     "Doc — slide/page …"
   ]
 };
-            </div>
-            <div class="mutedSmall">
-              You won’t need any extra files for this to work in Readdle Documents—everything stays in this one index.html.
-            </div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</main>
-
-<footer>
-  ACTT Reference • Single-file offline shell • Version 0.1
-</footer>
-
-<script>
-  /******************************************************************
-   * BUTTON MAP (embedded; no file loading)
-   ******************************************************************/
-  const MAP = {
-    appTitle: "ACTT Reference",
-    version: "0.1",
-    sections: [
-      {
-        id: "airway_breathing",
-        label: "Airway & Breathing",
-        description: "Airway decisions, advanced airway, ventilation/oxygenation, thoracic interventions.",
-        topics: [
-          { id: "airway_assessment_decisions", label: "Airway assessment" },
-          { id: "airway_intubate_vs_surgical", label: "Airway decision-making (intubate vs surgical)" },
-          { id: "rsi_and_contingency", label: "RSI + contingency plan" },
-          { id: "rescue_airway_devices", label: "Rescue airway devices" },
-          { id: "failed_airway_surgical", label: "Failed airway → emergency surgical airway" },
-          { id: "burn_inhalation_airway", label: "Burn/inhalation airway considerations" },
-          { id: "mechanical_vent_management", label: "Mechanical ventilation management" },
-          { id: "oxygenation_strategy", label: "Oxygenation strategy (FiO₂/PEEP)" },
-          { id: "noninvasive_support", label: "Non-invasive respiratory support" },
-          { id: "thoracic_trauma_overview", label: "Thoracic trauma: immediate threats" },
-          { id: "needle_decompression", label: "Needle decompression" },
-          { id: "tube_thoracostomy", label: "Tube thoracostomy" }
-        ]
-      },
-      {
-        id: "shock_resuscitation",
-        label: "Shock, Perfusion & Resuscitation",
-        description: "Perfusion assessment, fluid strategy, vasopressors, condition-specific targets.",
-        topics: [
-          { id: "shock_recognition", label: "Shock recognition (clinical)" },
-          { id: "perfusion_assessment", label: "Perfusion assessment (bedside markers)" },
-          { id: "fluid_responsiveness", label: "Fluid responsiveness (dynamic assessment)" },
-          { id: "hemodynamic_targets", label: "Hemodynamic targets by condition" },
-          { id: "sepsis_resuscitation_strategy", label: "Sepsis resuscitation strategy" },
-          { id: "burn_resuscitation_strategy", label: "Burn resuscitation strategy + fluid creep" },
-          { id: "peds_restrictive_fluids", label: "Peds: restrictive fluids in specific contexts" },
-          { id: "vasopressor_selection", label: "Vasopressors: selection" },
-          { id: "vasopressor_admin_safety", label: "Vasopressors: administration & safety" },
-          { id: "titration_reassessment", label: "Titration + reassessment" }
-        ]
-      },
-      {
-        id: "neuro_burns_environmental",
-        label: "Neurotrauma, Burns & Environmental Injury",
-        description: "TBI priorities, burns assessment/resus, hypothermia, ortho reductions, complications.",
-        topics: [
-          { id: "tbi_secondary_injury_bundle", label: "TBI: secondary injury prevention bundle" },
-          { id: "tbi_icp_management", label: "TBI: suspected elevated ICP management" },
-          { id: "tbi_monitoring_tools", label: "TBI monitoring tools (incl ultrasound adjuncts)" },
-          { id: "tbi_seizure_management", label: "TBI: seizure prevention/treatment" },
-          { id: "burns_tbsa_assessment", label: "Burns: TBSA / severity assessment" },
-          { id: "burns_wound_care", label: "Burns: wound care (debridement/dressings)" },
-          { id: "burns_resus_monitoring", label: "Burns: resuscitation & monitoring" },
-          { id: "burns_inhalation_link", label: "Burns: inhalation injury (cross-ref airway)" },
-          { id: "escharotomy", label: "Escharotomy: indications & overview" },
-          { id: "burns_complications", label: "Burns: complications in prolonged care" },
-          { id: "hypothermia_staging_actions", label: "Hypothermia: staging & initial actions" },
-          { id: "hypothermia_rewarming", label: "Hypothermia: rewarming methods" },
-          { id: "ortho_shoulder_reductions", label: "Orthopedics: shoulder reductions" },
-          { id: "compartment_syndrome_watch", label: "Compartment syndrome: recognition/monitoring" }
-        ]
-      },
-      {
-        id: "sepsis_infectious",
-        label: "Sepsis & Infectious Syndromes",
-        description: "Recognition, key differentials, antimicrobials, source control in austere context.",
-        topics: [
-          { id: "sepsis_recognition_initial", label: "Sepsis recognition & initial actions" },
-          { id: "sepsis_differentials", label: "Differentials (incl malaria/dengue patterns)" },
-          { id: "sepsis_scores", label: "Scoring / early warning tools" },
-          { id: "antibiotics_empiric", label: "Antibiotics: empiric selection (resource-aware)" },
-          { id: "antibiotics_timing", label: "Antibiotics: timing priorities" },
-          { id: "source_control", label: "Source control: identify & act" }
-        ]
-      },
-      {
-        id: "analgesia_sedation_pharm",
-        label: "Analgesia, Sedation & High-Risk Medications",
-        description: "PSA, pain strategies, core drug profiles, reversals, fibrinolysis package.",
-        topics: [
-          { id: "psa_safety_setup", label: "Procedural sedation: setup & safety" },
-          { id: "ketamine_roles", label: "Ketamine: sedation/analgesia roles" },
-          { id: "multimodal_pain", label: "Multimodal pain strategy" },
-          { id: "core_drug_profiles", label: "Core drug profiles (high-risk meds)" },
-          { id: "peds_dosing_adjustments", label: "Peds dosing + organ dysfunction adjustments" },
-          { id: "reversal_rescue_agents", label: "Reversal/rescue agents" },
-          { id: "stemi_fibrinolysis_package", label: "STEMI: fibrinolysis screening/package" }
-        ]
-      },
-      {
-        id: "monitoring_diagnostics",
-        label: "Monitoring & Diagnostics",
-        description: "ECG, POCT, access, output monitoring for trending/resus.",
-        topics: [
-          { id: "ecg_framework", label: "ECG interpretation framework" },
-          { id: "stemi_recognition", label: "STEMI recognition (cross-ref fibrinolysis)" },
-          { id: "poct_interpretation", label: "POCT interpretation (lactate, acid-base, glucose, electrolytes)" },
-          { id: "neuro_labs_targets", label: "Neuro-specific labs/targets (e.g., sodium)" },
-          { id: "vascular_access", label: "Vascular access (IV/IO/central if applicable)" },
-          { id: "urinary_catheter_output", label: "Urinary catheter + output monitoring" }
-        ]
-      },
-      {
-        id: "operations_pfc_team",
-        label: "Operations, PFC & Team Functions",
-        description: "Resource-limited decisions, documentation, telemedicine, agitation control, team behaviors.",
-        topics: [
-          { id: "resource_limited_framework", label: "Resource-limited decision framework" },
-          { id: "ethics_triage_termination", label: "Ethics/triage/termination decisions" },
-          { id: "adapt_guidelines_constraints", label: "Adapting guidelines to constraints" },
-          { id: "pfc_documentation_flowsheets", label: "PFC documentation/flowsheets (24–72h)" },
-          { id: "telemedicine_workflows", label: "Telemedicine / remote consult workflows" },
-          { id: "agitation_management", label: "Agitation/combative management pathway" },
-          { id: "team_behaviors_crm", label: "Team behaviors under stress (CRM-style)" }
-        ]
-      }
-    ]
-  };
-
-  /******************************************************************
-   * CONTENT STORE (intentionally empty at start)
-   * Add NotebookLM extractions here later, keyed by topic id.
-   ******************************************************************/
-  const CONTENT = {
-    // Example (leave commented until you paste real content):
-    // "airway_assessment_decisions": {
-    //   "Quick actions": ["..."],
-    //   "Indications / triggers": ["..."],
-    //   "Decision points": ["..."],
-    //   "Pitfalls": ["..."],
-    //   "Source anchors": ["Doc — slide/page ..."]
-    // }
-  };
-
-  /******************************************************************
-   * UI RENDER
-   ******************************************************************/
-  const sectionsRoot = document.getElementById("sectionsRoot");
-  const searchInput  = document.getElementById("searchInput");
-  const clearBtn     = document.getElementById("clearBtn");
-
-  const crumbEl      = document.getElementById("crumb");
-  const titleEl      = document.getElementById("viewerTitle");
-  const bodyEl       = document.getElementById("viewerBody");
-
-  let activeTopicId = null;
-  let activeSectionLabel = null;
-
-  function normalize(s){
-    return (s || "").toLowerCase().trim();
-  }
-
-  function renderSections(filterText = ""){
-    const q = normalize(filterText);
-    sectionsRoot.innerHTML = "";
-
-    MAP.sections.forEach(sec => {
-      const topicsFiltered = sec.topics.filter(t => {
-        if (!q) return true;
-        const hay = normalize(sec.label + " " + sec.description + " " + t.label);
-        return hay.includes(q);
-      });
-
-      // If filtering and no topics match, hide section
-      if (q && topicsFiltered.length === 0) return;
-
-      const wrap = document.createElement("div");
-      wrap.className = "section";
-
-      const header = document.createElement("div");
-      header.className = "sectionHeader";
-
-      const left = document.createElement("div");
-      const label = document.createElement("div");
-      label.className = "label";
-      label.textContent = sec.label;
-
-      const desc = document.createElement("div");
-      desc.className = "desc";
-      desc.textContent = sec.description;
-
-      left.appendChild(label);
-      left.appendChild(desc);
-
-      const right = document.createElement("div");
-      const pill = document.createElement("span");
-      pill.className = "pill";
-      pill.textContent = `${topicsFiltered.length} topic${topicsFiltered.length === 1 ? "" : "s"}`;
-      right.appendChild(pill);
-
-      header.appendChild(left);
-      header.appendChild(right);
-
-      const btns = document.createElement("div");
-      btns.className = "topicBtns";
-
-      topicsFiltered.forEach(t => {
-        const b = document.createElement("button");
-        b.className = "topic";
-        b.type = "button";
-        b.textContent = t.label;
-        b.dataset.topicId = t.id;
-        b.dataset.sectionLabel = sec.label;
-
-        if (t.id === activeTopicId) b.classList.add("active");
-
-        b.addEventListener("click", () => {
-          activeTopicId = t.id;
-          activeSectionLabel = sec.label;
-          // Re-render to update active styling
-          renderSections(searchInput.value);
-          renderViewer(sec.label, t.label, t.id);
-        });
-
-        btns.appendChild(b);
-      });
-
-      wrap.appendChild(header);
-      wrap.appendChild(btns);
-      sectionsRoot.appendChild(wrap);
-    });
-  }
-
-  function renderViewer(sectionLabel, topicLabel, topicId){
-    crumbEl.textContent = sectionLabel;
-    titleEl.textContent = topicLabel;
-
-    const data = CONTENT[topicId];
-
-    // Empty state
-    if (!data){
-      bodyEl.innerHTML = `
-        <div class="hint">
-          <div style="font-weight:800;margin-bottom:6px;">No content added yet</div>
-          <div>
-            This topic is ready for your first NotebookLM extraction.
-            When you paste it, we’ll format it into standard sections (Quick actions, Indications, Decision points, etc.)
-            and store it under <span class="pill">${topicId}</span>.
-          </div>
-        </div>
-
-        <div class="callout">
-          <div style="font-weight:800;margin-bottom:6px;">Next action (for you)</div>
-          <div class="hint">
-            Run one NotebookLM extraction for:
-            <span class="pill">${topicLabel}</span>
-            and paste the output back into this chat.
-          </div>
-          <div class="mutedSmall">
-            I’ll then give you the exact content block to paste into this file—only for this single topic.
           </div>
         </div>
       `;
@@ -607,7 +797,7 @@ CONTENT["airway_assessment_decisions"] = {
       const items = Array.isArray(data[k]) ? data[k] : [String(data[k])];
       const lis = items.map(x => `<li>${escapeHtml(String(x))}</li>`).join("");
       return `
-        <details>
+        <details open>
           <summary>${escapeHtml(k)}</summary>
           <div class="accBody"><ul>${lis}</ul></div>
         </details>
@@ -622,27 +812,99 @@ CONTENT["airway_assessment_decisions"] = {
     `;
   }
 
-  function escapeHtml(str){
-    return str
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
+  /******************************************************************
+   * SEARCH FUNCTIONALITY
+   ******************************************************************/
+  function applySearch(query) {
+    const q = normalize(query);
+
+    if (currentView === "home") {
+      // Filter section buttons on home view
+      const sectionBtns = homeGrid.querySelectorAll(".sectionBtn");
+      sectionBtns.forEach(btn => {
+        const sectionId = btn.dataset.sectionId;
+        const section = getSection(sectionId);
+        if (!section) return;
+
+        const hay = normalize(section.label + " " + section.description);
+        const topicMatch = section.topics.some(t => normalize(t.label).includes(q));
+
+        if (!q || hay.includes(q) || topicMatch) {
+          btn.classList.remove("hidden");
+        } else {
+          btn.classList.add("hidden");
+        }
+      });
+    } else if (currentView === "section") {
+      // Filter topic buttons within current section
+      const topicBtns = topicBtnsContainer.querySelectorAll(".topic");
+      topicBtns.forEach(btn => {
+        const label = btn.textContent;
+        if (!q || normalize(label).includes(q)) {
+          btn.classList.remove("hidden");
+        } else {
+          btn.classList.add("hidden");
+        }
+      });
+    } else if (currentView === "topic") {
+      // Filter topic buttons in the left panel
+      const topicBtns = topicListBtns.querySelectorAll(".topic");
+      topicBtns.forEach(btn => {
+        const label = btn.textContent;
+        if (!q || normalize(label).includes(q)) {
+          btn.classList.remove("hidden");
+        } else {
+          btn.classList.add("hidden");
+        }
+      });
+    }
   }
 
-  // Search behavior
+  /******************************************************************
+   * EVENT LISTENERS
+   ******************************************************************/
+  // Search
   searchInput.addEventListener("input", () => {
-    renderSections(searchInput.value);
+    applySearch(searchInput.value);
   });
+
   clearBtn.addEventListener("click", () => {
     searchInput.value = "";
-    renderSections("");
+    applySearch("");
     searchInput.focus();
   });
 
-  // Initial render
-  renderSections("");
+  // Navigation
+  brandHome.addEventListener("click", () => {
+    showView("home");
+    renderHomeView();
+  });
+
+  backToHomeBtn.addEventListener("click", () => {
+    showView("home");
+    renderHomeView();
+  });
+
+  backToSectionBtn.addEventListener("click", () => {
+    if (currentSectionId) {
+      renderSectionView(currentSectionId);
+      showView("section");
+    } else {
+      showView("home");
+      renderHomeView();
+    }
+  });
+
+  backToHome2Btn.addEventListener("click", () => {
+    showView("home");
+    renderHomeView();
+  });
+
+  /******************************************************************
+   * INITIAL RENDER
+   ******************************************************************/
+  renderHomeView();
+  showView("home");
 </script>
 </body>
 </html>
