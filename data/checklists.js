@@ -115,7 +115,133 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Track and document all casualties: name, triage category, treatment, disposition'
       ]
     },
-    {id:'pre-sail',type:'placeholder',title:'Pre-Sail Medical Readiness',badge:'Operational \u00b7 Readiness',desc:'Official pre-sail medical readiness checklist. PDF version pending.',icon:'&#9875;'},
+    {
+      id:'pre-sail',
+      type:'operational',
+      title:'RCN Pre-Sail Medical Equipment & Stores',
+      badge:'Operational \u00b7 Pre-Sail Readiness',
+      desc:'Official RCN pre-sail medical equipment and stores checklist. To be completed and verified 2 weeks prior to sailing. One copy forwarded to applicable FSMO and Fleet PA for review.',
+      icon:'&#9875;',
+      preamble:'To be completed and verified 2 weeks prior to sailing. One copy is to be forwarded to the applicable FSMO and Fleet PA for review before sailing. This list constitutes the minimum equipment required to provide care with a PA or MO onboard RCN Vessels. Variations from this list are subject to written waiver by the applicable FSMO in advance of sailing.',
+      groups:[
+        {
+          id:'equipment',
+          title:'Equipment',
+          section:'EQUIPMENT',
+          items:[
+            {id:'defib-aed',label:'Defibrillator/AED',notes:'Check all monitoring functions and alarm settings'},
+            {id:'ventilator',label:'Ventilator',notes:'If electrical powered then require O\u2082 concentrator or adequate O\u2082 supply to oxygenate the system.'},
+            {id:'iv-infusion-pump',label:'IV Infusion Pump',notes:''},
+            {id:'blood-chemistry-analyser',label:'Blood Chemistry Analyser or equivalent POC test',notes:'Need to be able to check: Blood Chemistry, Blood Gas, Cardiac Enzymes. Ensure printer is serviceable and spare batteries are available.'},
+            {id:'o2-delivery',label:'O\u2082 Delivery system (Flynn equivalent)',notes:'Needs to be ready for immediate use and have a dedicated wrench to open bottle in kit'},
+            {id:'bag-mask-valve',label:'Bag Mask Valve with PEEP Valve',notes:'Squeeze bag and make sure it functions correctly. Replace if required.'},
+            {id:'suction-device',label:'Suction device',notes:'In addition to manual suction device in kits'},
+            {id:'external-rewarming',label:'External Rewarming Device',notes:'Currently using \u201cBair Hugger\u201d'},
+            {id:'iv-solution-warmer',label:'IV Solution Warmer',notes:'Can be Bair Hugger attachment, or standalone device with spare battery.'},
+            {id:'ecg-12-lead',label:'12 lead ECG',notes:'Can be internal to Defib/AED or Standalone ECG Machine'},
+            {id:'stretcher-transfer',label:'Stretcher capable of transferring a patient \u201cover the guardrails\u201d IAW STANAG 1412',notes:'RCN Currently using Stokes litter'},
+            {id:'stretcher-internal',label:'Stretcher capable of moving patient securely inside the ship',notes:'RCN Currently using Ashton-Waters litter'},
+            {id:'deployment-bag',label:'One stocked rapid Deployment Bag per PA/MO/Med Tech',notes:'Similar to 6545-CF-002-1002 KIT, TREATMENT, FIELD PACK, MED TECH, BAG and 6545-CF-002-8529 KIT, TREATMENT, MEDICATIONS, MED TECH BAG. Med Techs must have the above bag completely stocked when embarked, as well as a copy of the most current procedure and protocol manual for Med Techs. The above bag is kitted IAW the Med Tech Scope of Practice.'}
+          ]
+        },
+        {
+          id:'defib-supplies',
+          title:'Defib / AED / Monitor',
+          section:'SUPPLIES',
+          items:[
+            {id:'defib-spare-paper',label:'Spare paper for Defibrillator/AED',notes:''},
+            {id:'defib-spare-pads',label:'Spare Defib/Pacing PADs',notes:'Be aware that pacing pads can only be used for specified time before needing changing. Check user manual for details.'},
+            {id:'bp-cuffs',label:'Appropriate different sized BP cuffs for monitoring equipment',notes:''},
+            {id:'etco2-lines',label:'If monitor has ET CO\u2082 capability, do you have spare lines?',notes:''},
+            {id:'electrodes',label:'Electrodes for all monitors',notes:''}
+          ]
+        },
+        {
+          id:'ventilator-supplies',
+          title:'Ventilator',
+          items:[
+            {id:'ventilator-hose',label:'Hose to connect to patient',notes:'Need: Hose, Filter (if required), Mask or Tube fitting. Securing device to connect to face and support the tubing if connected to tube'}
+          ]
+        },
+        {
+          id:'iv-pump-supplies',
+          title:'IV Pump',
+          items:[
+            {id:'iv-tubing-filters',label:'Tubing and Filters',notes:'Some emergency medications need filter in the line as well as the tubing.'}
+          ]
+        },
+        {
+          id:'blood-analyser-supplies',
+          title:'Blood Analyser',
+          items:[
+            {id:'istat-cartridges',label:'Cartridges to analyse blood: Blood Chemistry, Blood Gas, Cardiac Enzymes',notes:'Currently using iStat Cartridges. Need to have a minimum of 4 of each for local area sailing if resupply is not going to be an issue (may be substituted with Qualitative POC rapid tests if available with FSMO Concurrence). iStat Cartridges shall be maintained in the refrigerator, however one of each cartridge shall be left at room temperature for immediate emergency use (and dated as to when it was removed as indicated on the packaging) and replaced as per the package instructions (two of them are 14 days and one is 2 months, it\'s written on the package). Ships are not to sail from any port without at least 4 of each cartridge.'}
+          ]
+        },
+        {
+          id:'ecg-supplies',
+          title:'ECG Machine / AED',
+          items:[
+            {id:'ecg-spare-paper',label:'Spare ECG paper',notes:''},
+            {id:'ecg-spare-electrodes',label:'Spare electrodes',notes:''}
+          ]
+        },
+        {
+          id:'o2-supplies',
+          title:'O\u2082 Delivery / Breathing Assists',
+          items:[
+            {id:'pharyngeal-airways',label:'Pharyngeal Airways',notes:'King LT and/or LMAs of appropriate sizes'},
+            {id:'opa-npa',label:'OPA/NPAs',notes:'Appropriate sizes'},
+            {id:'et-tubes',label:'ET Tubes',notes:'Appropriate sizes'},
+            {id:'laryngoscope',label:'Laryngoscope',notes:''},
+            {id:'tube-securing',label:'Tube Securing device',notes:''},
+            {id:'etco2-monitor',label:'End Tidal CO\u2082 monitor device',notes:'Continuous preferred through monitor, but qualitative is minimum standard.'},
+            {id:'surgical-airway',label:'Surgical Airway kit',notes:''},
+            {id:'nrb-masks',label:'Nonrebreather masks',notes:''},
+            {id:'nasal-prongs',label:'Nasal Prongs',notes:''},
+            {id:'bougie',label:'Bougie',notes:''},
+            {id:'gastric-decompression',label:'Gastric decompression tube',notes:''},
+            {id:'intubation-drugs',label:'Intubation Drugs',notes:'Per scope of practice/trg'}
+          ]
+        },
+        {
+          id:'circulation-supplies',
+          title:'Circulation Assists',
+          items:[
+            {id:'chest-seals',label:'Chest Seals',notes:'Minimum standard is seal with valve. Currently using SAM Brand Seal.'},
+            {id:'decompression-catheter',label:'Decompression catheter',notes:''},
+            {id:'chest-tubes',label:'Chest Tubes',notes:'Appropriate sizes'},
+            {id:'water-seal',label:'Water Seal for Chest tube',notes:'Current Safari PleurEvac \u2013 blood collection and re-infusion system desirable'},
+            {id:'iv-tubing-circ',label:'IV Tubing',notes:'Need: Secondary admin sets, Set for general use. Filters (as above for pump)'},
+            {id:'burretrol',label:'Burretrol',notes:'For administering precise medication doses and in event of failure of IV Pump'}
+          ]
+        },
+        {
+          id:'misc-supplies',
+          title:'Misc Equipment',
+          items:[
+            {id:'saline-lock',label:'Saline lock',notes:''},
+            {id:'pelvic-binder',label:'Pelvic binder',notes:''},
+            {id:'splinting',label:'Splinting devices for long bone fractures',notes:''},
+            {id:'burn-dressings',label:'Burn Dressings',notes:''},
+            {id:'cervical-collar',label:'Cervical Collar',notes:''},
+            {id:'urinary-catheter',label:'Urinary catheter and collection bag',notes:''}
+          ]
+        },
+        {
+          id:'drugs-meds',
+          title:'Drugs / Meds',
+          items:[
+            {id:'iv-solutions',label:'IV Solutions in Bags for ready use',notes:'Need: NS, RL, D5W, Mannitol, Dopamine'},
+            {id:'acls-drugs',label:'ACLS Drugs',notes:''},
+            {id:'acls-post-resus',label:'ACLS Post Resuscitation Drugs',notes:''},
+            {id:'cyanide-antidote',label:'Cyanide Antidote Kit',notes:'Attach RCN protocol to box with amyl nitrate'},
+            {id:'txa',label:'TXA',notes:''},
+            {id:'tnk',label:'TNK',notes:'Attach CAF TNK policy documents to the box for quick reference.'},
+            {id:'tnk-post-admin',label:'TNK Post administration drugs',notes:'Attach CAF TNK policy documents'}
+          ]
+        }
+      ]
+    },
     {id:'equipment-daily',type:'placeholder',title:'Equipment Daily Check',badge:'Operational \u00b7 Equipment',desc:'Daily medical equipment inspection checklist. PDF version pending.',icon:'&#9881;'},
     {id:'equipment-weekly',type:'placeholder',title:'Equipment Weekly Check',badge:'Operational \u00b7 Equipment',desc:'Weekly medical equipment inspection and inventory. PDF version pending.',icon:'&#9881;'},
     {id:'controlled-substances',type:'placeholder',title:'Controlled Substance Count',badge:'Operational \u00b7 Administrative',desc:'Controlled substance accountability checklist. PDF version pending.',icon:'&#128274;'},
