@@ -233,5 +233,10 @@ window.ACTT.crossLinks={
 'prolonged-holding/escalation':{title:'Escalation Triggers',path:'#/prolonged-holding/holding-limits'},
 'prolonged-holding/device-checks':{title:'Device Checks',path:'#/prolonged-holding/device-maintenance'},
 'team/failure-recognition':{title:'Failure Recognition',path:'#/team/sustained-performance'},
-'prolonged-holding/pitfalls':{title:'Prolonged Hold Pitfalls',path:'#/pitfalls/error-prevention'}
+'prolonged-holding/pitfalls':{title:'Prolonged Hold Pitfalls',path:'#/pitfalls/error-prevention'},
+'checklists/rsi':{title:'RSI Cognitive Aid Checklist',path:'#/checklists/rsi'},
+'checklists/anaphylaxis':{title:'Anaphylaxis Cognitive Aid',path:'#/checklists/anaphylaxis'},
+'checklists/post-rosc':{title:'Post-ROSC Checklist',path:'#/checklists/post-rosc'},
+'checklists/medevac':{title:'MEDEVAC 9-Line',path:'#/checklists/medevac'},
+'checklists/mascal':{title:'MASCAL Triage Checklist',path:'#/checklists/mascal'}
 };
