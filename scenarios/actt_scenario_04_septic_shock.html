@@ -244,6 +244,34 @@ cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
 }
 .reset-btn:hover{border-color:var(--accent);color:var(--accent)}
 
+/* BACK LINK */
+.back-link{
+font-family:var(--mono);font-size:13px;color:var(--accent);
+text-decoration:none;display:flex;align-items:center;gap:4px;white-space:nowrap;
+}
+.back-link:hover{text-decoration:underline}
+
+/* MED TABLE */
+.med-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:13px}
+.med-table th,.med-table td{padding:8px 10px;border:1px solid var(--border);text-align:left;line-height:1.45}
+.med-table th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);background:var(--surface)}
+.med-table td{color:var(--text)}
+
+/* SCENARIO NAV FOOTER */
+.scenario-nav{
+display:flex;justify-content:space-between;align-items:center;gap:12px;
+margin-top:32px;padding:20px 0;border-top:1px solid var(--border);
+}
+.scenario-nav a{
+font-family:var(--mono);font-size:13px;font-weight:600;
+color:var(--accent);text-decoration:none;
+padding:8px 16px;border:1px solid var(--border);border-radius:6px;
+transition:border-color .2s,background .2s;
+}
+.scenario-nav a:hover{border-color:var(--accent);background:var(--accent-dim);text-decoration:none}
+.scenario-nav .nav-placeholder{width:140px}
+.scenario-nav .nav-center{font-family:var(--mono);font-size:12px;color:var(--text-muted)}
+
 /* RESPONSIVE */
 @media(max-width:480px){
 .topbar{padding:0 10px}
@@ -253,6 +281,8 @@ cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
 .panel{padding:16px}
 .decision{padding:16px}
 .score-breakdown{gap:16px}
+.scenario-nav{gap:8px}
+.scenario-nav .nav-placeholder{display:none}
 }
 </style>
 </head>
@@ -262,9 +292,10 @@ cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
 <nav class="topbar" role="navigation" aria-label="Scenario progress">
 <div class="topbar-left">
 <span class="actt-badge">ACTT</span>
-<span class="topbar-title">Scenario 4 — Septic Shock</span>
+<span class="topbar-title">Scenario 04 — Septic Shock</span>
 </div>
 <div class="topbar-right">
+<a class="back-link" href="index.html">← All Scenarios</a>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 <span class="progress-label" id="progressLabel">0 / 5</span>
 </div>
@@ -751,6 +782,13 @@ Further hemodynamic collapse despite pressors. Worsening respiratory failure fro
 
 </div>
 </div>
+
+<!-- SCENARIO NAVIGATION -->
+<nav class="scenario-nav" aria-label="Scenario navigation">
+<a href="actt_scenario_03_burn_inhalation.html">← Scenario 03</a>
+<a class="nav-center" href="index.html">All Scenarios</a>
+<a href="actt_scenario_05_combative_casualty.html">Scenario 05 →</a>
+</nav>
 
 </main>
 
