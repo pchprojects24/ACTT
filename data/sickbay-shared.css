@@ -364,6 +364,72 @@ strong { color: var(--text-primary); }
 }
 
 /* ─────────────────────────────────────────────────────────────
+   PATTERN D — Expandable "Hs & Ts" detail items
+   Used in ACLS cardiac-arrest algorithms
+   ───────────────────────────────────────────────────────────── */
+
+details.ht-item {
+  margin-bottom: 6px;
+}
+
+details.ht-item summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+  list-style: none;          /* hide default triangle */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+details.ht-item summary::-webkit-details-marker { display: none; }
+
+details.ht-item summary::before {
+  content: '▸';
+  font-size: 0.75rem;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+details.ht-item[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+details.ht-item summary:hover {
+  text-decoration: underline;
+}
+
+.ht-detail {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 10px 14px;
+  margin: 6px 0 8px;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.ht-detail p { margin: 0 0 6px; }
+
+.ht-detail strong { color: var(--text-primary); }
+
+.ht-detail ul {
+  margin: 2px 0 6px 18px;
+  color: #cbd5e1;
+}
+
+.ht-detail .ht-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
    PRINT
    ───────────────────────────────────────────────────────────── */
 
