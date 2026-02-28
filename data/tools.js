@@ -212,9 +212,33 @@ function calculateBurn() {
 }
 
 // Dose Calculator
+window._doseExtraInputs = window._doseExtraInputs || {};
+const doseInputPrompts = {
+  tbsa: { label: 'TBSA Burned (%)', min: 1, max: 100 }
+};
+function requestDoseExtraInput(key) {
+  const config = doseInputPrompts[key];
+  if (!config) return;
+  const existing = window._doseExtraInputs[key];
+  const value = prompt(`Enter ${config.label}`, existing || '');
+  if (value === null) return;
+  const normalizedValue = value.trim();
+  if (!normalizedValue) {
+    alert(`Please enter a valid ${config.label} between ${config.min} and ${config.max}.`);
+    return;
+  }
+  const parsed = parseFloat(normalizedValue);
+  if (Number.isNaN(parsed) || parsed < config.min || parsed > config.max) {
+    alert(`Please enter a valid ${config.label} between ${config.min} and ${config.max}.`);
+    return;
+  }
+  window._doseExtraInputs[key] = parsed;
+  calculateDoses();
+}
 function calculateDoses() {
   const weight = parseFloat(document.getElementById('doseWeight')?.value) || 0;
   if (weight <= 0) { document.getElementById('doseResults').innerHTML = ''; return; }
+  const tbsa = parseFloat(window._doseExtraInputs.tbsa) || 0;
   const drugs = [
     {name:'Ketamine (Analgesic IV)', dose: `${(weight*0.1).toFixed(1)}\u2013${(weight*0.2).toFixed(1)} mg`, route:'IV/IO slow push', note:'Low-dose analgesia. Do not confuse with dissociative dose.'},
     {name:'Ketamine (Dissociative IV)', dose: `${(weight*1).toFixed(0)} mg`, route:'IV/IO', note:'Full dissociation / RSI induction dose. Pair with paralytic for RSI.'},
@@ -231,7 +255,7 @@ function calculateDoses() {
     {name:'Levetiracetam', dose: `2000 mg`, route:'IV/IO over 15 min', note:'Seizure maintenance after acute control with midazolam.'},
     {name:'Norepinephrine', dose: `2\u20134 mcg/min start`, route:'IV infusion', note:'First-line vasopressor. Requires pump and close monitoring.'},
     {name:'Sepsis Crystalloid', dose: `${(weight*30).toFixed(0)} mL`, route:'IV over 3 hours', note:'Initial sepsis resuscitation. Reassess respiratory tolerance.'},
-    {name:'Burn Fluid (Rule of 10s)', dose: `${Math.round(parseFloat(document.getElementById('burnTBSA')?.value||0)*10 + (weight>80?Math.floor((weight-80)/10)*100:0))} mL/hr`, route:'IV', note:'Requires TBSA input. Adjust by 25% based on urine output.'},
+    {name:'Burn Fluid (Rule of 10s)', dose: tbsa > 0 ? `${Math.round(tbsa*10 + (weight>80?Math.floor((weight-80)/10)*100:0))} mL/hr` : 'Tap to add TBSA', route:'IV', note:'Requires TBSA input. Adjust by 25% based on urine output.', extraInputKey: tbsa > 0 ? '' : 'tbsa'},
   ];
   // Tenecteplase by weight band
   let tnkDose = '';
@@ -244,7 +268,7 @@ function calculateDoses() {
 
   let html = '<div class="dose-results">';
   drugs.forEach(d => {
-    html += `<div class="dose-card"><div class="dc-drug">${d.name}</div><div class="dc-dose">${d.dose}</div><div class="dc-route">${d.route}</div><div class="dc-note">${d.note}</div></div>`;
+    html += `<div class="dose-card"><div class="dc-drug">${d.name}</div><div class="dc-dose">${d.dose}</div><div class="dc-route">${d.route}</div><div class="dc-note">${d.note}</div>${d.extraInputKey ? `<button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="requestDoseExtraInput('${d.extraInputKey}')">Add ${doseInputPrompts[d.extraInputKey].label}</button>` : ''}</div>`;
   });
   html += '</div>';
   document.getElementById('doseResults').innerHTML = html;
