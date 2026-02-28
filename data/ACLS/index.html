@@ -4,106 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ACLS References — ACTT Sick Bay</title>
-<style>
-:root {
-  --bg-primary: #0f172a;
-  --bg-card: #243044;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
-  --border: #334155;
-  --radius: 8px;
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--bg-primary); color: var(--text-primary); line-height: 1.6;
-  min-height: 100vh; padding: 0;
-}
-.top-bar {
-  background: #1a2332; border-bottom: 1px solid var(--border);
-  padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0; z-index: 10;
-}
-.top-bar h1 { font-size: 1.2rem; font-weight: 700; }
-.back-link {
-  color: var(--accent); text-decoration: none; font-size: 0.9rem; white-space: nowrap;
-}
-.back-link:hover { text-decoration: underline; }
-.subtitle { color: var(--text-secondary); font-size: 0.9rem; padding: 16px 20px 0; }
-.cards-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 14px; padding: 16px 20px 40px;
-}
-.card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 18px 20px; text-decoration: none; color: var(--text-primary);
-  transition: border-color 0.2s, box-shadow 0.2s; display: block;
-}
-.card:hover {
-  border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none;
-}
-.card-title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
-.card-desc { color: var(--text-secondary); font-size: 0.85rem; }
-</style>
+<link rel="stylesheet" href="../sickbay-shared.css">
 </head>
 <body>
-<div class="top-bar">
+<div class="idx-bar">
   <h1>ACLS References</h1>
   <a class="back-link" href="../../index.html#/sickbay">&larr; Back to Sick Bay</a>
 </div>
-<p class="subtitle">Advanced Cardiovascular Life Support algorithms and special situation pathways.</p>
-<div class="cards-grid">
-  <a class="card" href="bradycardia.html">
-    <div class="card-title">Bradycardia</div>
-    <div class="card-desc">Bradycardia with pulse algorithm.</div>
-  </a>
-  <a class="card" href="tachycardia.html">
-    <div class="card-title">Tachycardia</div>
-    <div class="card-desc">Tachycardia with pulse algorithm.</div>
-  </a>
-  <a class="card" href="shockable_vf_pvt.html">
-    <div class="card-title">Shockable VF / pVT</div>
-    <div class="card-desc">Ventricular fibrillation and pulseless VT pathway.</div>
-  </a>
-  <a class="card" href="nonshockable_pea_asystole.html">
-    <div class="card-title">Non-shockable PEA / Asystole</div>
-    <div class="card-desc">Pulseless electrical activity and asystole pathway.</div>
-  </a>
-  <a class="card" href="acs_stemi.html">
-    <div class="card-title">ACS / STEMI</div>
-    <div class="card-desc">Acute coronary syndrome and STEMI pathway.</div>
-  </a>
-  <a class="card" href="post_rosc.html">
-    <div class="card-title">Post-ROSC</div>
-    <div class="card-desc">Post-cardiac arrest care after return of spontaneous circulation.</div>
-  </a>
-  <a class="card" href="cardioversion.html">
-    <div class="card-title">Electrical Cardioversion</div>
-    <div class="card-desc">Synchronized cardioversion procedure.</div>
-  </a>
-  <a class="card" href="stroke_acute.html">
-    <div class="card-title">Acute Stroke</div>
-    <div class="card-desc">Suspected stroke assessment and management.</div>
-  </a>
-  <a class="card" href="anaphylaxis.html">
-    <div class="card-title">Anaphylaxis</div>
-    <div class="card-desc">Anaphylaxis recognition and treatment.</div>
-  </a>
-  <a class="card" href="hyperkalemia.html">
-    <div class="card-title">Hyperkalemia</div>
-    <div class="card-desc">Hyperkalemia emergency management.</div>
-  </a>
-  <a class="card" href="hypothermia.html">
-    <div class="card-title">Hypothermia</div>
-    <div class="card-desc">Hypothermia assessment and rewarming.</div>
-  </a>
-  <a class="card" href="opioid_toxicity.html">
-    <div class="card-title">Opioid Toxicity</div>
-    <div class="card-desc">Opioid toxicity and respiratory arrest management.</div>
-  </a>
+<p class="idx-subtitle">Advanced Cardiovascular Life Support algorithms and special situation pathways.</p>
+
+<div class="category">
+  <div class="category-label">Cardiac Arrest</div>
+  <div class="cards-grid">
+    <a class="card" href="shockable_vf_pvt.html">
+      <div class="card-title">Shockable — VF / pVT</div>
+      <div class="card-desc">Ventricular fibrillation and pulseless VT pathway.</div>
+    </a>
+    <a class="card" href="nonshockable_pea_asystole.html">
+      <div class="card-title">Non-shockable — PEA / Asystole</div>
+      <div class="card-desc">Pulseless electrical activity and asystole pathway.</div>
+    </a>
+    <a class="card" href="post_rosc.html">
+      <div class="card-title">Post-ROSC Care</div>
+      <div class="card-desc">Post-cardiac arrest management after return of spontaneous circulation.</div>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Arrhythmias</div>
+  <div class="cards-grid">
+    <a class="card" href="bradycardia.html">
+      <div class="card-title">Bradycardia</div>
+      <div class="card-desc">Bradycardia with pulse — symptomatic management pathway.</div>
+    </a>
+    <a class="card" href="tachycardia.html">
+      <div class="card-title">Tachycardia</div>
+      <div class="card-desc">Tachycardia with pulse — stable and unstable pathways.</div>
+    </a>
+    <a class="card" href="cardioversion.html">
+      <div class="card-title">Electrical Cardioversion</div>
+      <div class="card-desc">Synchronized cardioversion procedure and energy selection.</div>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Special Situations</div>
+  <div class="cards-grid">
+    <a class="card" href="acs_stemi.html">
+      <div class="card-title">ACS / STEMI</div>
+      <div class="card-desc">Acute coronary syndrome and STEMI recognition and pathway.</div>
+    </a>
+    <a class="card" href="stroke_acute.html">
+      <div class="card-title">Acute Stroke</div>
+      <div class="card-desc">Suspected stroke assessment, FAST screen, and management.</div>
+    </a>
+    <a class="card" href="anaphylaxis.html">
+      <div class="card-title">Anaphylaxis</div>
+      <div class="card-desc">Severe allergic reaction recognition and treatment.</div>
+    </a>
+    <a class="card" href="hyperkalemia.html">
+      <div class="card-title">Hyperkalemia</div>
+      <div class="card-desc">High potassium emergency — ECG changes and treatment pathway.</div>
+    </a>
+    <a class="card" href="hypothermia.html">
+      <div class="card-title">Hypothermia</div>
+      <div class="card-desc">Cold exposure assessment, rewarming, and arrest modifications.</div>
+    </a>
+    <a class="card" href="opioid_toxicity.html">
+      <div class="card-title">Opioid Toxicity</div>
+      <div class="card-desc">Opioid toxicity, respiratory depression, and arrest management.</div>
+    </a>
+  </div>
 </div>
 </body>
 </html>

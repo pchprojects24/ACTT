@@ -4,106 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Procedures References — ACTT Sick Bay</title>
-<style>
-:root {
-  --bg-primary: #0f172a;
-  --bg-card: #243044;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
-  --border: #334155;
-  --radius: 8px;
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--bg-primary); color: var(--text-primary); line-height: 1.6;
-  min-height: 100vh; padding: 0;
-}
-.top-bar {
-  background: #1a2332; border-bottom: 1px solid var(--border);
-  padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0; z-index: 10;
-}
-.top-bar h1 { font-size: 1.2rem; font-weight: 700; }
-.back-link {
-  color: var(--accent); text-decoration: none; font-size: 0.9rem; white-space: nowrap;
-}
-.back-link:hover { text-decoration: underline; }
-.subtitle { color: var(--text-secondary); font-size: 0.9rem; padding: 16px 20px 0; }
-.cards-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 14px; padding: 16px 20px 40px;
-}
-.card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 18px 20px; text-decoration: none; color: var(--text-primary);
-  transition: border-color 0.2s, box-shadow 0.2s; display: block;
-}
-.card:hover {
-  border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none;
-}
-.card-title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
-.card-desc { color: var(--text-secondary); font-size: 0.85rem; }
-</style>
+<link rel="stylesheet" href="../sickbay-shared.css">
 </head>
 <body>
-<div class="top-bar">
+<div class="idx-bar">
   <h1>Procedures References</h1>
   <a class="back-link" href="../../index.html#/sickbay">&larr; Back to Sick Bay</a>
 </div>
-<p class="subtitle">Step-by-step clinical procedure guides for emergency and critical care interventions.</p>
-<div class="cards-grid">
-  <a class="card" href="bvm_opa_npa.html">
-    <div class="card-title">BVM + OPA / NPA</div>
-    <div class="card-desc">Bag-valve mask ventilation with oral and nasal airways.</div>
-  </a>
-  <a class="card" href="supraglottic_airway.html">
-    <div class="card-title">Supraglottic Airway</div>
-    <div class="card-desc">i-gel / LMA insertion for airway management.</div>
-  </a>
-  <a class="card" href="ett_intubation.html">
-    <div class="card-title">Endotracheal Intubation</div>
-    <div class="card-desc">ETT intubation procedure and confirmation.</div>
-  </a>
-  <a class="card" href="cricothyrotomy_cico.html">
-    <div class="card-title">Cricothyrotomy (CICO)</div>
-    <div class="card-desc">Surgical airway as a last-resort intervention.</div>
-  </a>
-  <a class="card" href="needle_decompression.html">
-    <div class="card-title">Needle Decompression</div>
-    <div class="card-desc">Tension pneumothorax needle thoracostomy.</div>
-  </a>
-  <a class="card" href="chest_seal.html">
-    <div class="card-title">Chest Seal</div>
-    <div class="card-desc">Open pneumothorax chest seal application.</div>
-  </a>
-  <a class="card" href="chest_tube.html">
-    <div class="card-title">Chest Tube</div>
-    <div class="card-desc">Tube thoracostomy insertion procedure.</div>
-  </a>
-  <a class="card" href="iv_access.html">
-    <div class="card-title">IV Access</div>
-    <div class="card-desc">Peripheral intravenous access procedure.</div>
-  </a>
-  <a class="card" href="io_access.html">
-    <div class="card-title">IO Access</div>
-    <div class="card-desc">Intraosseous access for emergency vascular access.</div>
-  </a>
-  <a class="card" href="tourniquet.html">
-    <div class="card-title">Tourniquet</div>
-    <div class="card-desc">Tourniquet application for hemorrhage control.</div>
-  </a>
-  <a class="card" href="wound_packing.html">
-    <div class="card-title">Wound Packing</div>
-    <div class="card-desc">Hemostatic dressing and wound packing technique.</div>
-  </a>
-  <a class="card" href="txa.html">
-    <div class="card-title">TXA Administration</div>
-    <div class="card-desc">Tranexamic acid administration for trauma.</div>
-  </a>
+<p class="idx-subtitle">Step-by-step clinical procedure guides for emergency and critical care interventions.</p>
+
+<div class="category">
+  <div class="category-label">Airway</div>
+  <div class="cards-grid">
+    <a class="card" href="bvm_opa_npa.html">
+      <div class="card-title">BVM + OPA / NPA</div>
+      <div class="card-desc">Bag-valve mask ventilation with oral and nasal airway adjuncts.</div>
+    </a>
+    <a class="card" href="supraglottic_airway.html">
+      <div class="card-title">Supraglottic Airway</div>
+      <div class="card-desc">i-gel / LMA insertion for definitive airway management.</div>
+    </a>
+    <a class="card" href="ett_intubation.html">
+      <div class="card-title">Endotracheal Intubation</div>
+      <div class="card-desc">ETT intubation procedure, confirmation, and securing.</div>
+    </a>
+    <a class="card" href="cricothyrotomy_cico.html">
+      <div class="card-title">Cricothyrotomy (CICO)</div>
+      <div class="card-desc">Surgical airway — cannot intubate, cannot oxygenate.</div>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Thoracic</div>
+  <div class="cards-grid">
+    <a class="card" href="needle_decompression.html">
+      <div class="card-title">Needle Decompression</div>
+      <div class="card-desc">Tension pneumothorax needle thoracostomy.</div>
+    </a>
+    <a class="card" href="chest_seal.html">
+      <div class="card-title">Chest Seal</div>
+      <div class="card-desc">Open pneumothorax chest seal application.</div>
+    </a>
+    <a class="card" href="chest_tube.html">
+      <div class="card-title">Chest Tube</div>
+      <div class="card-desc">Tube thoracostomy insertion procedure.</div>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Vascular Access</div>
+  <div class="cards-grid">
+    <a class="card" href="iv_access.html">
+      <div class="card-title">IV Access</div>
+      <div class="card-desc">Peripheral intravenous access — site selection and technique.</div>
+    </a>
+    <a class="card" href="io_access.html">
+      <div class="card-title">IO Access</div>
+      <div class="card-desc">Intraosseous access for emergency vascular access.</div>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Hemorrhage Control</div>
+  <div class="cards-grid">
+    <a class="card" href="tourniquet.html">
+      <div class="card-title">Tourniquet</div>
+      <div class="card-desc">Tourniquet application for extremity hemorrhage control.</div>
+    </a>
+    <a class="card" href="wound_packing.html">
+      <div class="card-title">Wound Packing</div>
+      <div class="card-desc">Hemostatic dressing and wound packing technique.</div>
+    </a>
+    <a class="card" href="txa.html">
+      <div class="card-title">TXA Administration</div>
+      <div class="card-desc">Tranexamic acid dosing and administration for trauma.</div>
+    </a>
+  </div>
 </div>
 </body>
 </html>

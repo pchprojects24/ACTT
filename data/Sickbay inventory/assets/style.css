@@ -38,6 +38,29 @@ body {
   align-items: stretch;
 }
 
+.top-bar .title-row {
+  align-items: center;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 2px;
+}
+
+.app-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1d1d1f;
+  flex: 1;
+}
+
+.back-to-sickbay {
+  font-size: 0.82rem;
+  color: #3b82f6;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.back-to-sickbay:hover { text-decoration: underline; }
+
 .top-bar .search-row {
   position: relative;
 }
