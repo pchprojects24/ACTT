@@ -1,910 +1,423 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ACTT Reference</title>
-  <style>
-    :root{
-      --bg:#0b1220;
-      --panel:#121b2e;
-      --panel2:#0f172a;
-      --text:#e7eefc;
-      --muted:#a9b7d6;
-      --border:rgba(231,238,252,.12);
-      --accent:#5aa7ff;
-      --accent2:#7cdaff;
-      --danger:#ff6b6b;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:14px;
-      --radius2:10px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family:var(--sans);
-      background: radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.20), transparent 55%),
-                  radial-gradient(900px 600px at 100% 20%, rgba(124,218,255,.14), transparent 60%),
-                  var(--bg);
-      color:var(--text);
-      min-height: 100vh;
-    }
-
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(11,18,32,.92), rgba(11,18,32,.72));
-      border-bottom: 1px solid var(--border);
-    }
-    .wrap{ max-width: 1100px; margin: 0 auto; padding: 14px 14px; }
-    .topbar{
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
-      flex-wrap: wrap;
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center;
-      min-width: 220px;
-      cursor: pointer;
-    }
-    .logo{
-      width: 38px; height: 38px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: var(--shadow);
-    }
-    .titleblock{ display:flex; flex-direction:column; line-height:1.1; }
-    .titleblock .title{ font-weight: 800; letter-spacing: .2px; }
-    .titleblock .subtitle{ color: var(--muted); font-size: 12.5px; margin-top: 3px; }
-
-    .search{
-      flex: 1;
-      min-width: 220px;
-      display:flex; gap:10px; align-items:center; justify-content:flex-end;
-    }
-    .search input{
-      width: min(520px, 100%);
-      padding: 10px 12px;
-      background: rgba(18,27,46,.8);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      outline: none;
-    }
-    .search input::placeholder{ color: rgba(169,183,214,.75); }
-    .btn{
-      border: 1px solid var(--border);
-      background: rgba(18,27,46,.85);
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 12px;
-      cursor:pointer;
-      touch-action: manipulation;
-    }
-    .btn:active{ transform: translateY(1px); }
-
-    main .wrap{ padding-top: 16px; padding-bottom: 26px; }
-
-    .panel{
-      background: rgba(18,27,46,.72);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .panel h2{
-      margin:0;
-      padding: 14px 14px 8px;
-      font-size: 16px;
-      letter-spacing: .2px;
-    }
-    .panel .meta{
-      padding: 0 14px 14px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* HOME VIEW - Large Section Buttons */
-    .homeView{
-      display: block;
-    }
-    .homeGrid{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-      padding: 14px;
-    }
-    .sectionBtn{
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 20px;
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(15,23,42,.8), rgba(18,27,46,.9));
-      border-radius: var(--radius);
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: border-color 0.15s, transform 0.1s;
-      text-align: left;
-      min-height: 100px;
-    }
-    .sectionBtn:hover{
-      border-color: rgba(90,167,255,.55);
-    }
-    .sectionBtn:active{
-      transform: translateY(2px);
-    }
-    .sectionBtn .sectionLabel{
-      font-weight: 800;
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-    .sectionBtn .sectionDesc{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .sectionBtn .topicCount{
-      margin-top: 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(90,167,255,.15);
-      color: var(--accent2);
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .sectionBtn.hidden{
-      display: none;
-    }
-
-    /* SECTION VIEW - Sub-buttons */
-    .sectionView{
-      display: none;
-    }
-    .sectionView.active{
-      display: block;
-    }
-    .sectionHeader{
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px;
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-    .backBtn{
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      background: rgba(15,23,42,.7);
-      border-radius: 12px;
-      color: var(--text);
-      cursor: pointer;
-      touch-action: manipulation;
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .backBtn:hover{
-      border-color: rgba(90,167,255,.55);
-    }
-    .backBtn:active{
-      transform: translateY(1px);
-    }
-    .sectionViewTitle{
-      font-weight: 800;
-      font-size: 18px;
-      flex: 1;
-    }
-    .topicBtns{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 14px;
-    }
-    .topic{
-      border: 1px solid var(--border);
-      background: rgba(15,23,42,.62);
-      color: var(--text);
-      padding: 12px 14px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-size: 14px;
-      line-height: 1.2;
-      touch-action: manipulation;
-      text-align: left;
-      max-width: 100%;
-    }
-    .topic:hover{ border-color: rgba(90,167,255,.55); }
-    .topic.active{
-      background: linear-gradient(135deg, rgba(90,167,255,.28), rgba(124,218,255,.18));
-      border-color: rgba(90,167,255,.65);
-    }
-    .topic.hidden{
-      display: none;
-    }
-
-    /* TOPIC VIEW - Viewer Panel */
-    .topicView{
-      display: none;
-    }
-    .topicView.active{
-      display: block;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items:start;
-    }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-      .viewer{ position: static !important; }
-    }
-    .viewer{
-      position: sticky;
-      top: 88px;
-    }
-    .viewerHeader{
-      padding: 14px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(15,23,42,.55);
-    }
-    .viewerNav{
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .crumb{
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-    .viewerTitle{
-      margin-top: 6px;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-    .viewerBody{
-      padding: 14px;
-    }
-    .hint{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .callout{
-      margin-top: 12px;
-      border: 1px dashed rgba(90,167,255,.45);
-      background: rgba(90,167,255,.08);
-      border-radius: var(--radius2);
-      padding: 12px;
-    }
-    .codehint{
-      margin-top: 10px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px;
-      font-family: var(--mono);
-      font-size: 12px;
-      overflow:auto;
-      color: rgba(231,238,252,.95);
-      white-space: pre;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* Accordion */
-    details{
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(15,23,42,.55);
-      margin-top: 10px;
-      overflow:hidden;
-    }
-    summary{
-      cursor:pointer;
-      padding: 11px 12px;
-      font-weight: 700;
-      list-style: none;
-      outline: none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    details[open] summary{
-      border-bottom: 1px solid var(--border);
-      background: rgba(90,167,255,.10);
-    }
-    .accBody{
-      padding: 10px 12px 12px;
-      color: rgba(231,238,252,.95);
-      font-size: 13.5px;
-      line-height: 1.45;
-    }
-    .accBody ul{ margin: 8px 0 0 18px; padding:0; }
-    .accBody li{ margin: 4px 0; }
-    .mutedSmall{
-      color: var(--muted);
-      font-size: 12.5px;
-      margin-top: 10px;
-    }
-
-    /* Topic list panel in topic view */
-    .topicListPanel{
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-    .topicListPanel .topicBtns{
-      padding: 10px;
-    }
-    .topicListPanel .topic{
-      width: 100%;
-    }
-
-    footer{
-      color: rgba(169,183,214,.8);
-      font-size: 12.5px;
-      padding: 14px 14px 24px;
-      text-align:center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Reference - RCN Physician Assistant</title>
+<meta name="description" content="Acute Casualty Care Team Training Reference for Royal Canadian Navy Physician Assistants">
+<meta name="theme-color" content="#1a2332">
+<link rel="manifest" href="manifest.json">
+<style>
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-surface: #1a2332;
+  --bg-card: #243044;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-dim: #1e3a5f;
+  --border: #334155;
+  --border-light: #475569;
+  --severity-red: #dc2626;
+  --severity-red-bg: #450a0a;
+  --severity-amber: #d97706;
+  --severity-amber-bg: #451a03;
+  --severity-green: #16a34a;
+  --severity-green-bg: #052e16;
+  --shipboard-bg: #1e3a5f;
+  --shipboard-border: #2563eb;
+  --sidebar-w: 280px;
+  --header-h: 56px;
+  --font-base: 16px;
+  --font-scale: 1;
+  --radius: 6px;
+  --transition: 0.2s ease;
+}
+body.light-mode {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-dim: #dbeafe;
+  --border: #e2e8f0;
+  --border-light: #cbd5e1;
+  --severity-red-bg: #fef2f2;
+  --severity-amber-bg: #fffbeb;
+  --severity-green-bg: #f0fdf4;
+  --shipboard-bg: #eff6ff;
+  --shipboard-border: #3b82f6;
+  --bg-card: #f8fafc;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: calc(var(--font-base) * var(--font-scale)); scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+.app-header {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+  background: var(--bg-surface); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 16px; gap: 12px; z-index: 100;
+}
+.menu-toggle {
+  display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
+  border-radius: var(--radius); font-size: 20px;
+}
+.menu-toggle:hover { background: var(--bg-tertiary); }
+.app-brand { font-weight: 700; font-size: 1.1rem; color: var(--accent); white-space: nowrap; letter-spacing: 0.5px; }
+.app-brand span { color: var(--text-secondary); font-weight: 400; font-size: 0.85rem; margin-left: 8px; }
+.search-container { flex: 1; max-width: 480px; position: relative; }
+.search-input {
+  width: 100%; padding: 8px 12px 8px 36px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);
+  font-size: 0.9rem; outline: none; transition: border var(--transition);
+}
+.search-input:focus { border-color: var(--accent); }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; pointer-events: none; }
+.search-results {
+  position: absolute; top: 100%; left: 0; right: 0; max-height: 400px; overflow-y: auto;
+  background: var(--bg-surface); border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius); display: none; z-index: 200;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.search-results.active { display: block; }
+.search-result-item { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background var(--transition); }
+.search-result-item:hover { background: var(--bg-tertiary); }
+.search-result-item .sr-section { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.search-result-item .sr-title { font-weight: 600; margin: 2px 0; }
+.search-result-item .sr-snippet { font-size: 0.85rem; color: var(--text-secondary); }
+.search-result-item .sr-snippet mark { background: var(--accent-dim); color: var(--accent); padding: 0 2px; border-radius: 2px; }
+.header-actions { display: flex; align-items: center; gap: 4px; }
+.header-btn {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius); font-size: 16px; transition: background var(--transition); position: relative;
+}
+.header-btn:hover { background: var(--bg-tertiary); }
+.header-btn.active { color: var(--accent); }
+.font-controls { display: flex; align-items: center; gap: 2px; }
+.font-btn { font-size: 13px; font-weight: 700; width: 32px; height: 32px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+.font-btn:hover { background: var(--bg-tertiary); }
+.app-sidebar {
+  position: fixed; top: var(--header-h); left: 0; bottom: 0; width: var(--sidebar-w);
+  background: var(--bg-surface); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 90; transition: transform 0.3s ease;
+}
+.sidebar-nav { padding: 8px 0; }
+.nav-section-header {
+  display: flex; align-items: center; padding: 10px 16px; gap: 10px;
+  cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--text-primary);
+  transition: background var(--transition); user-select: none;
+}
+.nav-section-header:hover { background: var(--bg-tertiary); }
+.nav-section-header.active { color: var(--accent); background: var(--accent-dim); }
+.nav-section-header .nav-icon { width: 20px; text-align: center; font-size: 14px; flex-shrink: 0; }
+.nav-section-header .nav-chevron { margin-left: auto; font-size: 12px; transition: transform var(--transition); color: var(--text-muted); }
+.nav-section-header.expanded .nav-chevron { transform: rotate(90deg); }
+.nav-section-items { display: none; padding: 0 0 4px 0; }
+.nav-section-items.expanded { display: block; }
+.nav-item {
+  display: block; padding: 6px 16px 6px 46px; font-size: 0.85rem;
+  color: var(--text-secondary); cursor: pointer; transition: all var(--transition);
+  text-decoration: none; border-left: 2px solid transparent;
+}
+.nav-item:hover { background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; }
+.nav-item.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-dim); }
+.nav-divider { height: 1px; background: var(--border); margin: 8px 16px; }
+.app-main {
+  margin-left: var(--sidebar-w); margin-top: var(--header-h);
+  height: calc(100vh - var(--header-h)); overflow-y: auto;
+  padding: 24px 32px; max-width: 100%;
+}
+.breadcrumbs { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; flex-wrap: wrap; }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .bc-sep { color: var(--text-muted); }
+.breadcrumbs .bc-current { color: var(--text-secondary); font-weight: 500; }
+.section-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.section-title { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+.section-subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-top: 4px; }
+.section-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.btn { padding: 8px 16px; border-radius: var(--radius); font-size: 0.85rem; font-weight: 500; transition: all var(--transition); display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-outline { border: 1px solid var(--border); color: var(--text-secondary); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+.content-section { margin-bottom: 32px; }
+.content-section h2 { font-size: 1.4rem; margin-bottom: 12px; color: var(--text-primary); }
+.content-section h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--text-primary); }
+.content-section h4 { font-size: 1rem; margin-bottom: 6px; color: var(--text-secondary); font-weight: 600; }
+.content-section p { margin-bottom: 12px; color: var(--text-secondary); line-height: 1.7; }
+.content-section ul, .content-section ol { margin: 0 0 12px 20px; color: var(--text-secondary); }
+.content-section li { margin-bottom: 6px; line-height: 1.6; }
+.accordion { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+.accordion-header {
+  padding: 14px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+  font-weight: 600; font-size: 0.95rem; background: var(--bg-card);
+  transition: background var(--transition); user-select: none;
+}
+.accordion-header:hover { background: var(--bg-tertiary); }
+.accordion-header .acc-chevron { margin-left: auto; font-size: 12px; transition: transform var(--transition); color: var(--text-muted); }
+.accordion-header.expanded .acc-chevron { transform: rotate(90deg); }
+.accordion-body { display: none; padding: 16px; border-top: 1px solid var(--border); }
+.accordion-body.expanded { display: block; }
+.expand-collapse-btns { display: flex; gap: 8px; margin-bottom: 12px; }
+.severity-card { border-left: 4px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; background: var(--bg-card); }
+.severity-card.red { border-left-color: var(--severity-red); background: var(--severity-red-bg); }
+.severity-card.amber { border-left-color: var(--severity-amber); background: var(--severity-amber-bg); }
+.severity-card.green { border-left-color: var(--severity-green); background: var(--severity-green-bg); }
+.severity-card .sc-title { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.severity-card .sc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; padding: 2px 6px; border-radius: 3px; font-weight: 700; }
+.severity-card.red .sc-label { background: var(--severity-red); color: #fff; }
+.severity-card.amber .sc-label { background: var(--severity-amber); color: #000; }
+.severity-card.green .sc-label { background: var(--severity-green); color: #fff; }
+.shipboard-callout { border: 1px solid var(--shipboard-border); border-radius: var(--radius); margin: 12px 0; overflow: hidden; }
+.shipboard-callout-header {
+  padding: 10px 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  background: var(--shipboard-bg); font-size: 0.9rem; font-weight: 600; color: var(--accent); user-select: none;
+}
+.shipboard-callout-header .sc-chevron { margin-left: auto; font-size: 12px; transition: transform var(--transition); }
+.shipboard-callout-header.expanded .sc-chevron { transform: rotate(90deg); }
+.shipboard-callout-body { display: none; padding: 12px 14px; background: var(--shipboard-bg); border-top: 1px solid var(--shipboard-border); }
+.shipboard-callout-body.expanded { display: block; }
+.shipboard-callout-body p { color: var(--text-secondary); }
+.table-wrapper { overflow-x: auto; margin: 12px 0; border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--bg-card); border: 1px solid var(--border); }
+th { background: var(--bg-tertiary); padding: 10px 12px; text-align: left; font-weight: 600; border: 1px solid var(--border); white-space: nowrap; }
+td { padding: 10px 12px; border: 1px solid var(--border); color: var(--text-secondary); }
+tr:hover td { background: var(--bg-secondary); }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+.quick-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; cursor: pointer; transition: all var(--transition); text-decoration: none; display: block; color: inherit;
+}
+.quick-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); text-decoration: none; color: inherit; }
+.quick-card .qc-icon { font-size: 28px; margin-bottom: 10px; }
+.quick-card .qc-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+.quick-card .qc-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+.related-content { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+.related-content h3 { font-size: 1rem; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.related-link {
+  padding: 6px 12px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 0.85rem; color: var(--accent); cursor: pointer; transition: all var(--transition); text-decoration: none;
+}
+.related-link:hover { border-color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.tool-container { max-width: 800px; }
+.tool-input-group { margin-bottom: 16px; }
+.tool-input-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+.tool-input {
+  width: 100%; max-width: 300px; padding: 10px 14px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem;
+}
+.tool-input:focus { outline: none; border-color: var(--accent); }
+.tool-result { padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; }
+.tool-result .tr-label { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+.tool-result .tr-value { font-size: 1.8rem; font-weight: 700; color: var(--accent); margin: 4px 0; font-family: 'SF Mono', 'Fira Code', monospace; }
+.tool-result .tr-note { font-size: 0.85rem; color: var(--text-secondary); }
+.tool-alert { padding: 12px 16px; border-radius: var(--radius); margin: 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.tool-alert.red { background: var(--severity-red-bg); border: 1px solid var(--severity-red); color: var(--severity-red); }
+.tool-alert.amber { background: var(--severity-amber-bg); border: 1px solid var(--severity-amber); color: var(--severity-amber); }
+.tool-alert.green { background: var(--severity-green-bg); border: 1px solid var(--severity-green); color: var(--severity-green); }
+.gcs-component { margin-bottom: 16px; }
+.gcs-component h4 { margin-bottom: 8px; }
+.gcs-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+.gcs-btn {
+  padding: 8px 14px; border: 2px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-card); cursor: pointer; transition: all var(--transition); font-size: 0.85rem; min-width: 44px; text-align: center;
+}
+.gcs-btn:hover { border-color: var(--accent); }
+.gcs-btn.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+.gcs-total { font-size: 3rem; font-weight: 800; text-align: center; margin: 16px 0; font-family: 'SF Mono', 'Fira Code', monospace; }
+.gcs-total.critical { color: var(--severity-red); }
+.gcs-total.moderate { color: var(--severity-amber); }
+.gcs-total.mild { color: var(--severity-green); }
+.timer-patient { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
+.timer-patient .tp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.timer-patient .tp-name { font-weight: 700; font-size: 1.1rem; }
+.timer-checks { display: flex; flex-direction: column; gap: 8px; }
+.timer-check {
+  padding: 10px 14px; border-radius: var(--radius); display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--border); background: var(--bg-secondary);
+}
+.timer-check.due { border-color: var(--severity-red); background: var(--severity-red-bg); animation: pulse 2s infinite; }
+.timer-check.completed { opacity: 0.6; }
+.timer-check .tc-time { font-weight: 700; min-width: 80px; font-family: monospace; }
+.timer-check .tc-status { margin-left: auto; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.drug-select-grid { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.drug-select-btn {
+  padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 0.85rem; cursor: pointer; transition: all var(--transition); background: var(--bg-card);
+}
+.drug-select-btn:hover { border-color: var(--accent); }
+.drug-select-btn.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+.symptom-grid { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.symptom-btn {
+  padding: 8px 14px; border: 1px solid var(--border); border-radius: 20px;
+  font-size: 0.85rem; cursor: pointer; transition: all var(--transition); background: var(--bg-card);
+}
+.symptom-btn:hover { border-color: var(--accent); }
+.symptom-btn.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+.ddx-result { padding: 12px 16px; border-left: 4px solid var(--border); margin: 8px 0; background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0; }
+.ddx-result.high-priority { border-left-color: var(--severity-red); }
+.ddx-result .ddx-title { font-weight: 700; }
+.ddx-result .ddx-desc { font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px; }
+.dose-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin: 16px 0; }
+.dose-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.dose-card .dc-drug { font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.dose-card .dc-dose { font-size: 1.2rem; font-weight: 700; font-family: monospace; margin-bottom: 4px; }
+.dose-card .dc-route { font-size: 0.85rem; color: var(--text-muted); }
+.dose-card .dc-note { font-size: 0.85rem; color: var(--severity-amber); margin-top: 6px; }
+.procedure-step { display: flex; gap: 12px; margin-bottom: 12px; padding: 10px; background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); }
+.procedure-step .ps-num { width: 28px; height: 28px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+.procedure-step .ps-text { color: var(--text-secondary); line-height: 1.6; }
+@media (max-width: 1024px) { .threshold-card { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  .app-sidebar { transform: translateX(-100%); width: 280px; }
+  .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
+  .app-main { margin-left: 0; padding: 16px; }
+  .app-brand span { display: none; }
+  .section-title { font-size: 1.4rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .dose-results { grid-template-columns: 1fr; }
+}
+.sidebar-overlay { display: none; position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 85; }
+.sidebar-overlay.active { display: block; }
+@media print {
+  .app-header, .app-sidebar, .sidebar-overlay, .section-actions, .expand-collapse-btns { display: none !important; }
+  .app-main { margin-left: 0 !important; padding: 20px !important; overflow: visible !important; height: auto !important; }
+  body { overflow: visible !important; height: auto !important; background: #fff !important; color: #000 !important; }
+  .accordion-body, .shipboard-callout-body { display: block !important; }
+  .severity-card { border-left-width: 4px !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  a { color: #000 !important; }
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+.loading { display: flex; justify-content: center; padding: 40px; color: var(--text-muted); }
+</style>
 </head>
-
 <body>
-<header>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand" id="brandHome">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="titleblock">
-          <div class="title">ACTT Reference</div>
-          <div class="subtitle">Offline field reference (structure first; content added topic-by-topic)</div>
-        </div>
-      </div>
-
-      <div class="search">
-        <input id="searchInput" type="search" placeholder="Search..." aria-label="Search" />
-        <button class="btn" id="clearBtn" type="button">Clear</button>
-      </div>
+<header class="app-header">
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">&#9776;</button>
+  <div class="app-brand">ACTT<span>Reference v1.0</span></div>
+  <div class="search-container">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" class="search-input" placeholder="Search all content..." oninput="handleSearch(this.value)" onfocus="showSearchResults()" id="searchInput">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <div class="header-actions">
+    <div class="font-controls">
+      <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size">A-</button>
+      <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size">A+</button>
     </div>
+    <button class="header-btn" onclick="toggleBookmark()" id="bookmarkBtn" title="Bookmark this section">&#9734;</button>
+    <button class="header-btn" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark/light mode">&#9789;</button>
+    <button class="header-btn" onclick="printSection()" title="Print this section">&#128424;</button>
   </div>
 </header>
-
-<main>
-  <div class="wrap">
-    <!-- HOME VIEW: 7 Large Section Buttons -->
-    <div id="homeView" class="homeView">
-      <section class="panel" aria-label="ACTT sections">
-        <h2>Select a Section</h2>
-        <div class="meta">
-          Tap a section to see its topics. Content is added topic-by-topic via NotebookLM extractions.
-        </div>
-        <div id="homeGrid" class="homeGrid"></div>
-      </section>
-    </div>
-
-    <!-- SECTION VIEW: Sub-buttons for a section -->
-    <div id="sectionView" class="sectionView">
-      <section class="panel" aria-label="Section topics">
-        <div class="sectionHeader">
-          <button class="backBtn" id="backToHome" type="button">← Back to Home</button>
-          <div class="sectionViewTitle" id="sectionViewTitle">Section</div>
-        </div>
-        <div id="topicBtnsContainer" class="topicBtns"></div>
-      </section>
-    </div>
-
-    <!-- TOPIC VIEW: Viewer panel -->
-    <div id="topicView" class="topicView">
-      <div class="grid">
-        <!-- LEFT: Topic list for this section -->
-        <section class="panel topicListPanel" aria-label="Topic list">
-          <div class="sectionHeader">
-            <button class="backBtn" id="backToSection" type="button">← Back</button>
-            <div class="sectionViewTitle" id="topicListTitle">Topics</div>
-          </div>
-          <div id="topicListBtns" class="topicBtns"></div>
-        </section>
-
-        <!-- RIGHT: Viewer -->
-        <aside class="panel viewer" aria-label="Topic viewer">
-          <div class="viewerHeader">
-            <div class="viewerNav">
-              <button class="backBtn" id="backToHome2" type="button">← Home</button>
-            </div>
-            <div class="crumb" id="crumb">Section</div>
-            <div class="viewerTitle" id="viewerTitle">Topic</div>
-          </div>
-          <div class="viewerBody" id="viewerBody">
-            <div class="hint">Select a topic to view its content.</div>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<aside class="app-sidebar" id="appSidebar">
+  <nav class="sidebar-nav" id="sidebarNav"></nav>
+</aside>
+<main class="app-main" id="appMain">
+  <div class="loading">Loading ACTT Reference...</div>
 </main>
-
-<footer>
-  ACTT Reference • Single-file offline shell • Version 0.2
-</footer>
-
+<script src="data/chapters-1-2.js"></script>
+<script src="data/domains.js"></script>
+<script src="data/algorithms.js"></script>
+<script src="data/procedures.js"></script>
+<script src="data/medications.js"></script>
+<script src="data/prolonged-holding.js"></script>
+<script src="data/thresholds.js"></script>
+<script src="data/pitfalls.js"></script>
+<script src="data/shipboard.js"></script>
+<script src="data/team.js"></script>
+<script src="data/study.js"></script>
+<script src="data/appendices.js"></script>
+<script src="data/tools.js"></script>
+<script src="data/cross-links.js"></script>
 <script>
-  /******************************************************************
-   * BUTTON MAP (embedded; no file loading)
-   * Structure: sections -> topics (sub-buttons)
-   ******************************************************************/
-  const MAP = {
-    appTitle: "ACTT Reference",
-    version: "0.2",
-    sections: [
-      {
-        id: "airway_breathing",
-        label: "Airway & Breathing",
-        description: "Airway decisions, RSI, failed airway, ventilation/oxygenation, thoracic interventions.",
-        topics: [
-          { id: "airway_assessment_plan", label: "Airway assessment & airway plan" },
-          { id: "rsi_intubation_workflow", label: "RSI / intubation workflow" },
-          { id: "failed_airway_rescue", label: "Failed airway & rescue pathway (SGA → cannot intubate/cannot ventilate)" },
-          { id: "surgical_airway_fona", label: "Surgical airway (FONA / cric)" },
-          { id: "ventilation_management", label: "Ventilation management (setup + ongoing)" },
-          { id: "oxygenation_strategy", label: "Oxygenation strategy (FiO₂/PEEP; context-dependent targets)" },
-          { id: "thoracic_trauma_interventions", label: "Thoracic trauma interventions (needle decompression, chest tube)" }
-        ]
-      },
-      {
-        id: "shock_resuscitation",
-        label: "Shock & Resuscitation",
-        description: "Perfusion assessment, fluid strategy, vasopressors, condition-specific targets.",
-        topics: [
-          { id: "shock_recognition_perfusion", label: "Shock recognition & perfusion assessment" },
-          { id: "fluid_responsiveness", label: "Fluid responsiveness (dynamic assessments)" },
-          { id: "sepsis_resuscitation", label: "Sepsis resuscitation (fluids → pressors decision framework)" },
-          { id: "burn_resuscitation", label: "Burn resuscitation (avoid \"fluid creep\")" },
-          { id: "vasopressors", label: "Vasopressors (selection, administration, safety)" },
-          { id: "targets_by_condition", label: "Targets by condition (e.g., sepsis vs TBI)" }
-        ]
-      },
-      {
-        id: "neuro_burns_environmental",
-        label: "Neurotrauma, Burns & Environmental",
-        description: "TBI priorities, burns assessment/resus, hypothermia, ortho reductions, complications.",
-        topics: [
-          { id: "tbi_secondary_injury", label: "TBI: secondary injury prevention bundle" },
-          { id: "tbi_elevated_icp", label: "TBI: elevated ICP concern (recognition + management options)" },
-          { id: "tbi_seizure", label: "TBI: seizure prevention/treatment" },
-          { id: "burns_assessment", label: "Burns: assessment (TBSA/severity)" },
-          { id: "burns_wound_care", label: "Burns: wound care & dressings" },
-          { id: "burns_escharotomy", label: "Burns: escharotomy (indications)" },
-          { id: "hypothermia_rewarming", label: "Hypothermia: staging & rewarming" },
-          { id: "ortho_compartment", label: "Ortho: reductions & compartment syndrome watch" }
-        ]
-      },
-      {
-        id: "sepsis_infectious",
-        label: "Sepsis & Infectious Syndromes",
-        description: "Recognition, key differentials, antimicrobials, source control in austere context.",
-        topics: [
-          { id: "sepsis_recognition", label: "Sepsis recognition & initial actions" },
-          { id: "differentials_tropical", label: "Key differentials in austere/tropical context (malaria, dengue patterns)" },
-          { id: "antibiotics_empiric", label: "Antibiotics: empiric selection & timing" },
-          { id: "source_control", label: "Source control (what to identify, what's feasible)" },
-          { id: "scoring_early_warning", label: "Scoring / early warning tools (qSOFA/adapted tools)" }
-        ]
-      },
-      {
-        id: "analgesia_sedation",
-        label: "Analgesia, Sedation & High-Risk Meds",
-        description: "PSA, pain strategies, core drug profiles, reversals, fibrinolysis package.",
-        topics: [
-          { id: "procedural_sedation", label: "Procedural sedation: setup & safety" },
-          { id: "ketamine_use", label: "Ketamine use (sedation/analgesia roles)" },
-          { id: "multimodal_pain", label: "Multimodal pain management" },
-          { id: "core_drug_profiles", label: "Core drug profiles & contraindications (ACTT set)" },
-          { id: "reversal_rescue", label: "Reversal/rescue agents" },
-          { id: "stemi_fibrinolysis", label: "STEMI: fibrinolysis package (screen + adjuncts)" }
-        ]
-      },
-      {
-        id: "monitoring_diagnostics",
-        label: "Monitoring & Diagnostics",
-        description: "ECG, POCT, access, output monitoring for trending/resus.",
-        topics: [
-          { id: "ecg_interpretation", label: "ECG interpretation (ACTT-relevant)" },
-          { id: "stemi_recognition", label: "STEMI recognition" },
-          { id: "poct_interpretation", label: "POCT interpretation (lactate/acid-base, glucose, electrolytes)" },
-          { id: "vascular_access", label: "Vascular access (IV/IO ± central)" },
-          { id: "urine_output_monitoring", label: "Urine output monitoring (Foley, trending)" }
-        ]
-      },
-      {
-        id: "operations_pfc_team",
-        label: "Operations / PFC / Team",
-        description: "Resource-limited decisions, documentation, telemedicine, agitation control, team behaviors.",
-        topics: [
-          { id: "resource_limited_ethics", label: "Resource-limited decision-making & ethics (triage/termination)" },
-          { id: "pfc_documentation", label: "Prolonged field care documentation (flowsheets, trending 24–72h)" },
-          { id: "telemedicine_consult", label: "Telemedicine / remote consult workflow" },
-          { id: "agitation_management", label: "Agitation/combative patient management (de-escalation → restraint → chemical)" },
-          { id: "adapting_guidelines", label: "Adapting guidelines to constraints (vent, pressors, RRT availability)" }
-        ]
-      }
-    ]
-  };
-
-  /******************************************************************
-   * CONTENT STORE (intentionally empty at start)
-   * Add NotebookLM extractions here later, keyed by topic id.
-   ******************************************************************/
-  const CONTENT = {
-    // Example (leave commented until you paste real content):
-    // "airway_assessment_plan": {
-    //   "Quick actions": ["..."],
-    //   "Indications / triggers": ["..."],
-    //   "Decision points": ["..."],
-    //   "Pitfalls": ["..."],
-    //   "Source anchors": ["Doc — slide/page ..."]
-    // }
-  };
-
-  /******************************************************************
-   * UI STATE & ELEMENTS
-   ******************************************************************/
-  // Views
-  const homeView = document.getElementById("homeView");
-  const sectionView = document.getElementById("sectionView");
-  const topicView = document.getElementById("topicView");
-
-  // Home view elements
-  const homeGrid = document.getElementById("homeGrid");
-
-  // Section view elements
-  const backToHomeBtn = document.getElementById("backToHome");
-  const sectionViewTitle = document.getElementById("sectionViewTitle");
-  const topicBtnsContainer = document.getElementById("topicBtnsContainer");
-
-  // Topic view elements
-  const backToSectionBtn = document.getElementById("backToSection");
-  const backToHome2Btn = document.getElementById("backToHome2");
-  const topicListTitle = document.getElementById("topicListTitle");
-  const topicListBtns = document.getElementById("topicListBtns");
-  const crumbEl = document.getElementById("crumb");
-  const titleEl = document.getElementById("viewerTitle");
-  const bodyEl = document.getElementById("viewerBody");
-
-  // Search elements
-  const searchInput = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearBtn");
-  const brandHome = document.getElementById("brandHome");
-
-  // State
-  let currentView = "home"; // "home" | "section" | "topic"
-  let currentSectionId = null;
-  let currentTopicId = null;
-
-  /******************************************************************
-   * UTILITY FUNCTIONS
-   ******************************************************************/
-  function normalize(s) {
-    return (s || "").toLowerCase().trim();
-  }
-
-  function escapeHtml(str) {
-    return str
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function getSection(sectionId) {
-    return MAP.sections.find(s => s.id === sectionId);
-  }
-
-  function getTopic(sectionId, topicId) {
-    const section = getSection(sectionId);
-    if (!section) return null;
-    return section.topics.find(t => t.id === topicId);
-  }
-
-  /******************************************************************
-   * VIEW MANAGEMENT
-   ******************************************************************/
-  function showView(view) {
-    currentView = view;
-    homeView.style.display = view === "home" ? "block" : "none";
-    sectionView.className = view === "section" ? "sectionView active" : "sectionView";
-    topicView.className = view === "topic" ? "topicView active" : "topicView";
-
-    // Update search placeholder
-    if (view === "home") {
-      searchInput.placeholder = "Search sections...";
-    } else if (view === "section") {
-      searchInput.placeholder = "Search topics in this section...";
-    } else {
-      searchInput.placeholder = "Search topics...";
-    }
-
-    // Clear search when switching views
-    searchInput.value = "";
-    applySearch("");
-  }
-
-  /******************************************************************
-   * HOME VIEW RENDERING
-   ******************************************************************/
-  function renderHomeView() {
-    homeGrid.innerHTML = "";
-
-    MAP.sections.forEach(sec => {
-      const btn = document.createElement("button");
-      btn.className = "sectionBtn";
-      btn.type = "button";
-      btn.dataset.sectionId = sec.id;
-
-      btn.innerHTML = `
-        <div class="sectionLabel">${escapeHtml(sec.label)}</div>
-        <div class="sectionDesc">${escapeHtml(sec.description)}</div>
-        <div class="topicCount">${sec.topics.length} topics</div>
-      `;
-
-      btn.addEventListener("click", () => {
-        currentSectionId = sec.id;
-        renderSectionView(sec.id);
-        showView("section");
-      });
-
-      homeGrid.appendChild(btn);
-    });
-  }
-
-  /******************************************************************
-   * SECTION VIEW RENDERING
-   ******************************************************************/
-  function renderSectionView(sectionId) {
-    const section = getSection(sectionId);
-    if (!section) return;
-
-    sectionViewTitle.textContent = section.label;
-    topicBtnsContainer.innerHTML = "";
-
-    section.topics.forEach(topic => {
-      const btn = document.createElement("button");
-      btn.className = "topic";
-      btn.type = "button";
-      btn.textContent = topic.label;
-      btn.dataset.topicId = topic.id;
-
-      btn.addEventListener("click", () => {
-        currentTopicId = topic.id;
-        renderTopicView(sectionId, topic.id);
-        showView("topic");
-      });
-
-      topicBtnsContainer.appendChild(btn);
-    });
-  }
-
-  /******************************************************************
-   * TOPIC VIEW RENDERING
-   ******************************************************************/
-  function renderTopicView(sectionId, topicId) {
-    const section = getSection(sectionId);
-    const topic = getTopic(sectionId, topicId);
-    if (!section || !topic) return;
-
-    // Update header
-    topicListTitle.textContent = section.label;
-    crumbEl.textContent = section.label;
-    titleEl.textContent = topic.label;
-
-    // Render topic list (left side)
-    topicListBtns.innerHTML = "";
-    section.topics.forEach(t => {
-      const btn = document.createElement("button");
-      btn.className = "topic" + (t.id === topicId ? " active" : "");
-      btn.type = "button";
-      btn.textContent = t.label;
-      btn.dataset.topicId = t.id;
-
-      btn.addEventListener("click", () => {
-        currentTopicId = t.id;
-        renderTopicView(sectionId, t.id);
-      });
-
-      topicListBtns.appendChild(btn);
-    });
-
-    // Render viewer content (right side)
-    renderViewerContent(topicId, topic.label);
-  }
-
-  function renderViewerContent(topicId, topicLabel) {
-    const data = CONTENT[topicId];
-
-    // Empty state
-    if (!data) {
-      bodyEl.innerHTML = `
-        <div class="hint">
-          <div style="font-weight:800;margin-bottom:6px;">No content added yet</div>
-          <div>
-            This topic is ready for your first NotebookLM extraction.
-            When you paste it, we'll format it into standard sections (Quick actions, Indications, Decision points, etc.)
-            and store it under <span class="pill">${escapeHtml(topicId)}</span>.
-          </div>
-        </div>
-
-        <div class="callout">
-          <div style="font-weight:800;margin-bottom:6px;">Next action (for you)</div>
-          <div class="hint">
-            Run one NotebookLM extraction for:
-            <span class="pill">${escapeHtml(topicLabel)}</span>
-            and paste the output back into this chat.
-          </div>
-          <div class="mutedSmall">
-            I'll then give you the exact content block to paste into this file—only for this single topic.
-          </div>
-        </div>
-
-        <div class="callout">
-          <div style="font-weight:800;margin-bottom:6px;">Content structure example</div>
-          <div class="codehint" aria-label="Content placeholder example">
-CONTENT["${escapeHtml(topicId)}"] = {
-  "Quick actions": [
-    "…",
-    "…"
-  ],
-  "Indications / triggers": [
-    "…"
-  ],
-  "Decision points": [
-    "…"
-  ],
-  "Pitfalls": [
-    "…"
-  ],
-  "Source anchors": [
-    "Doc — slide/page …",
-    "Doc — slide/page …"
-  ]
-};
-          </div>
-        </div>
-      `;
-      return;
-    }
-
-    // Render filled topic as accordions
-    const keys = Object.keys(data);
-    const acc = keys.map(k => {
-      const items = Array.isArray(data[k]) ? data[k] : [String(data[k])];
-      const lis = items.map(x => `<li>${escapeHtml(String(x))}</li>`).join("");
-      return `
-        <details open>
-          <summary>${escapeHtml(k)}</summary>
-          <div class="accBody"><ul>${lis}</ul></div>
-        </details>
-      `;
-    }).join("");
-
-    bodyEl.innerHTML = `
-      <div class="hint">
-        Content loaded from embedded <span class="pill">CONTENT</span> store.
-      </div>
-      ${acc}
-    `;
-  }
-
-  /******************************************************************
-   * SEARCH FUNCTIONALITY
-   ******************************************************************/
-  function applySearch(query) {
-    const q = normalize(query);
-
-    if (currentView === "home") {
-      // Filter section buttons on home view
-      const sectionBtns = homeGrid.querySelectorAll(".sectionBtn");
-      sectionBtns.forEach(btn => {
-        const sectionId = btn.dataset.sectionId;
-        const section = getSection(sectionId);
-        if (!section) return;
-
-        const hay = normalize(section.label + " " + section.description);
-        const topicMatch = section.topics.some(t => normalize(t.label).includes(q));
-
-        if (!q || hay.includes(q) || topicMatch) {
-          btn.classList.remove("hidden");
-        } else {
-          btn.classList.add("hidden");
-        }
-      });
-    } else if (currentView === "section") {
-      // Filter topic buttons within current section
-      const topicBtns = topicBtnsContainer.querySelectorAll(".topic");
-      topicBtns.forEach(btn => {
-        const label = btn.textContent;
-        if (!q || normalize(label).includes(q)) {
-          btn.classList.remove("hidden");
-        } else {
-          btn.classList.add("hidden");
-        }
-      });
-    } else if (currentView === "topic") {
-      // Filter topic buttons in the left panel
-      const topicBtns = topicListBtns.querySelectorAll(".topic");
-      topicBtns.forEach(btn => {
-        const label = btn.textContent;
-        if (!q || normalize(label).includes(q)) {
-          btn.classList.remove("hidden");
-        } else {
-          btn.classList.add("hidden");
-        }
-      });
-    }
-  }
-
-  /******************************************************************
-   * EVENT LISTENERS
-   ******************************************************************/
-  // Search
-  searchInput.addEventListener("input", () => {
-    applySearch(searchInput.value);
-  });
-
-  clearBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    applySearch("");
-    searchInput.focus();
-  });
-
-  // Navigation
-  brandHome.addEventListener("click", () => {
-    showView("home");
-    renderHomeView();
-  });
-
-  backToHomeBtn.addEventListener("click", () => {
-    showView("home");
-    renderHomeView();
-  });
-
-  backToSectionBtn.addEventListener("click", () => {
-    if (currentSectionId) {
-      renderSectionView(currentSectionId);
-      showView("section");
-    } else {
-      showView("home");
-      renderHomeView();
-    }
-  });
-
-  backToHome2Btn.addEventListener("click", () => {
-    showView("home");
-    renderHomeView();
-  });
-
-  /******************************************************************
-   * INITIAL RENDER
-   ******************************************************************/
-  renderHomeView();
-  showView("home");
+window.ACTT=window.ACTT||{};
+const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{}};
+function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
+function getNavSections(){return[
+{id:'home',title:'Dashboard',icon:'&#9776;',path:'#/'},
+{id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
+{id:'algorithms',title:'Algorithms',icon:'&#9881;',path:'#/algorithms',items:ACTT.algorithms?ACTT.algorithms.sections.map(s=>({id:s.id,title:s.title,path:'#/algorithms/'+s.id})):[]},
+{id:'procedures',title:'Procedures',icon:'&#9874;',path:'#/procedures',items:ACTT.procedures?ACTT.procedures.sections.map(s=>({id:s.id,title:s.title,path:'#/procedures/'+s.id})):[]},
+{id:'medications',title:'Medication Reference',icon:'&#128138;',path:'#/medications',items:ACTT.medications?ACTT.medications.sections.map(s=>({id:s.id,title:s.title,path:'#/medications/'+s.id})):[]},
+{id:'prolonged-holding',title:'Prolonged Holding',icon:'&#9201;',path:'#/prolonged-holding',items:ACTT.prolongedHolding?ACTT.prolongedHolding.sections.map(s=>({id:s.id,title:s.title,path:'#/prolonged-holding/'+s.id})):[]},
+{id:'thresholds',title:'Critical Numbers',icon:'&#128200;',path:'#/thresholds',items:ACTT.thresholds?ACTT.thresholds.sections.map(s=>({id:s.id,title:s.title,path:'#/thresholds/'+s.id})):[]},
+{id:'pitfalls',title:'Pitfalls & Errors',icon:'&#9888;',path:'#/pitfalls',items:ACTT.pitfalls?ACTT.pitfalls.sections.map(s=>({id:s.id,title:s.title,path:'#/pitfalls/'+s.id})):[]},
+{id:'shipboard',title:'Shipboard Application',icon:'&#9875;',path:'#/shipboard',items:ACTT.shipboard?ACTT.shipboard.sections.map(s=>({id:s.id,title:s.title,path:'#/shipboard/'+s.id})):[]},
+{id:'team',title:'Team & Communication',icon:'&#128101;',path:'#/team',items:ACTT.team?ACTT.team.sections.map(s=>({id:s.id,title:s.title,path:'#/team/'+s.id})):[]},
+{id:'study',title:'Study & Review',icon:'&#128214;',path:'#/study',items:ACTT.study?ACTT.study.sections.map(s=>({id:s.id,title:s.title,path:'#/study/'+s.id})):[]},
+{id:'appendices',title:'Quick Reference',icon:'&#128203;',path:'#/appendices',items:ACTT.appendices?ACTT.appendices.sections.map(s=>({id:s.id,title:s.title,path:'#/appendices/'+s.id})):[]},
+{id:'tools',title:'Clinical Tools',icon:'&#128295;',path:'#/tools',items:[
+{id:'gcs',title:'GCS Calculator',path:'#/tools/gcs'},
+{id:'burn',title:'Burn Calculator',path:'#/tools/burn'},
+{id:'dosecalc',title:'Dose Calculator',path:'#/tools/dosecalc'},
+{id:'timer',title:'Reassessment Timer',path:'#/tools/timer'},
+{id:'interactions',title:'Drug Interactions',path:'#/tools/interactions'},
+{id:'ddx',title:'Differential Diagnosis',path:'#/tools/ddx'}
+]}
+];}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';sections.forEach(sec=>{const hasItems=sec.items&&sec.items.length>0;html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`}" data-path="${sec.path}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
+function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
+function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)toggleSidebar();}
+function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
+function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
+function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
+function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
+function renderAccordion(id,title,content,severity,defaultOpen){const expanded=defaultOpen?' expanded':'';let sevLabel='';if(severity){sevLabel=`<span class="sc-label" style="background:var(--severity-${severity});color:${severity==='amber'?'#000':'#fff'}">${severity.toUpperCase()}</span>`;}return`<div class="accordion"><div class="accordion-header${expanded}" onclick="toggleAccordion(this)">${sevLabel}${title}<span class="acc-chevron">&#9654;</span></div><div class="accordion-body${expanded}">${content}</div></div>`;}
+function toggleAccordion(el){el.classList.toggle('expanded');el.nextElementSibling.classList.toggle('expanded');}
+function expandAll(c){c.querySelectorAll('.accordion-header,.shipboard-callout-header').forEach(h=>{h.classList.add('expanded');h.nextElementSibling?.classList.add('expanded');});}
+function collapseAll(c){c.querySelectorAll('.accordion-header,.shipboard-callout-header').forEach(h=>{h.classList.remove('expanded');h.nextElementSibling?.classList.remove('expanded');});}
+function renderShipboardCallout(text){return`<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle('expanded');this.nextElementSibling.classList.toggle('expanded')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>${text}</p></div></div>`;}
+function renderRelatedContent(links){if(!links||links.length===0)return'';const cl=ACTT.crossLinks||{};let html='<div class="related-content"><h3>Related Content</h3><div class="related-links">';links.forEach(l=>{const info=cl[l]||{title:l.replace(/[-\/]/g,' '),path:'#/'+l};html+=`<a class="related-link" href="${info.path}">${info.title}</a>`;});html+='</div></div>';return html;}
+function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Casualty Care Team Training \u2014 Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
+html+=`<div class="content-section"><p>This application is a complete clinical reference and study tool for ACTT preparation. It contains all content from Chapters 1\u201313 of the ACTT Preparation Manual, organized for rapid retrieval and practical bedside use.</p><p>Use the sidebar navigation to access any section. Use the search bar to find specific content across all chapters. Clinical tools are available for bedside calculations and decision support.</p></div>`;
+html+='<h2 style="margin-bottom:16px">Quick Access</h2><div class="cards-grid">';
+[{icon:'&#9881;',title:'Algorithms',desc:'Major decision pathways for airway, TBI, burns, sepsis, STEMI, and more',path:'#/algorithms'},{icon:'&#128138;',title:'Drug Reference',desc:'Complete medication cards with dosing, preparation, monitoring, and cautions',path:'#/medications'},{icon:'&#128200;',title:'Critical Numbers',desc:'Key thresholds, targets, and trigger values that drive clinical action',path:'#/thresholds'},{icon:'&#9874;',title:'Procedures',desc:'Step-by-step procedural guides for RSI, chest tube, IO, cricothyroidotomy, and more',path:'#/procedures'},{icon:'&#9201;',title:'Prolonged Holding',desc:'24\u201372 hour management framework for delayed MEDEVAC scenarios',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Critical errors to avoid across airway, resuscitation, neuro, burns, and medications',path:'#/pitfalls'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div><h2 style="margin:24px 0 16px">Clinical Tools</h2><div class="cards-grid">';
+[{icon:'&#129504;',title:'GCS Calculator',desc:'Calculate Glasgow Coma Scale with automatic airway threshold alerts',path:'#/tools/gcs'},{icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate calculator with adjustment guidance',path:'#/tools/burn'},{icon:'&#9878;',title:'Dose Calculator',desc:'Weight-based dose calculations for all major ACTT medications',path:'#/tools/dosecalc'},{icon:'&#9201;',title:'Reassessment Timer',desc:'Configurable interval reminders with context-specific reassessment checklists',path:'#/tools/timer'},{icon:'&#9763;',title:'Drug Interactions',desc:'Check for known cautions and compounding risks between selected medications',path:'#/tools/interactions'},{icon:'&#128270;',title:'Differential Diagnosis',desc:'Symptom-based differential diagnosis helper with prioritized causes',path:'#/tools/ddx'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div>';main.innerHTML=html;}
+function renderSection(main,data,sectionId,parentTitle,parentPath){if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}if(sectionId){const sec=data.sections.find(s=>s.id===sectionId);if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Section not found</div></div>';return;}let html=renderSectionHeader(sec.title,sec.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';html+='<div class="content-section">'+(sec.content||'')+'</div>';if(sec.relatedLinks)html+=renderRelatedContent(sec.relatedLinks);main.innerHTML=html;}else{let html=renderSectionHeader(data.title,data.subtitle||('Chapter '+data.chapter),[{title:'Home',path:'#/'},{title:data.title,path:parentPath}]);if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';data.sections.forEach(sec=>{const preview=(sec.content||'').replace(/<[^>]+>/g,' ').substring(0,200).trim();html+=renderAccordion(sec.id,sec.title,`<div class="content-section">${preview}...</div><p><a href="${parentPath}/${sec.id}">View full section &#8250;</a></p>`,sec.severity);});main.innerHTML=html;}}
+function renderTools(main,toolId){if(!toolId){let html=renderSectionHeader('Clinical Tools','Bedside calculators and decision support tools',[{title:'Home',path:'#/'},{title:'Clinical Tools',path:'#/tools'}]);html+='<div class="cards-grid">';[{id:'gcs',icon:'&#129504;',title:'GCS Calculator',desc:'Glasgow Coma Scale with airway threshold alerts'},{id:'burn',icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate'},{id:'dosecalc',icon:'&#9878;',title:'Medication Dose Calculator',desc:'Weight-based dose calculations'},{id:'timer',icon:'&#9201;',title:'Reassessment Timer',desc:'Interval reminders with checklists'},{id:'interactions',icon:'&#9763;',title:'Drug Interaction Checker',desc:'Check medication combinations'},{id:'ddx',icon:'&#128270;',title:'Differential Diagnosis Helper',desc:'Symptom-based differential'}].forEach(t=>{html+=`<a class="quick-card" href="#/tools/${t.id}"><div class="qc-icon">${t.icon}</div><div class="qc-title">${t.title}</div><div class="qc-desc">${t.desc}</div></a>`;});html+='</div>';main.innerHTML=html;return;}const toolFns=ACTT.toolRenderers||{};if(toolFns[toolId]){toolFns[toolId](main);}else{main.innerHTML=`<div class="severity-card amber"><div class="sc-title">Tool not found: ${toolId}</div></div>`;}}
+function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,study:ACTT.study,appendices:ACTT.appendices};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity});});});}
+function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');return;}const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);let matches=state.searchIndex.filter(item=>{const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');return;}results.innerHTML=matches.map(m=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<div class="search-result-item" onclick="window.location.hash='${m.path.replace('#','')}';document.getElementById('searchResults').classList.remove('active');document.getElementById('searchInput').value='';"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></div>`;}).join('');results.classList.add('active');}
+function showSearchResults(){const val=document.getElementById('searchInput').value;if(val&&val.length>=2)document.getElementById('searchResults').classList.add('active');}
+document.addEventListener('click',e=>{if(!e.target.closest('.search-container'))document.getElementById('searchResults').classList.remove('active');});
+function toggleDarkMode(){state.darkMode=!state.darkMode;document.body.classList.toggle('light-mode',!state.darkMode);localStorage.setItem('actt-darkmode',state.darkMode?'dark':'light');document.getElementById('darkModeBtn').innerHTML=state.darkMode?'&#9789;':'&#9788;';}
+function changeFontSize(dir){state.fontScale=Math.max(0.8,Math.min(1.4,state.fontScale+dir*0.1));document.documentElement.style.setProperty('--font-scale',state.fontScale);localStorage.setItem('actt-fontscale',state.fontScale);}
+function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.bookmarks.indexOf(route);if(idx>=0)state.bookmarks.splice(idx,1);else state.bookmarks.push(route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
+function updateBookmarkBtn(){const btn=document.getElementById('bookmarkBtn');const isB=state.bookmarks.includes(state.currentRoute);btn.innerHTML=isB?'&#9733;':'&#9734;';btn.classList.toggle('active',isB);}
+function updateBookmarksPanel(){const panel=document.getElementById('bookmarksPanel');if(!panel)return;if(state.bookmarks.length===0){panel.innerHTML='<div style="padding:8px 16px;font-size:0.85rem;color:var(--text-muted)">No bookmarks yet</div>';return;}panel.innerHTML=state.bookmarks.map(b=>{const title=b.replace('#/','').replace(/\//g,' > ')||'Home';return`<div class="bookmark-item" style="display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:0.85rem;color:var(--text-secondary);cursor:pointer" onclick="window.location.hash='${b.replace('#','')}'"><span>${title}</span><span style="color:var(--severity-red);font-size:12px;margin-left:auto;opacity:0.5;cursor:pointer" onclick="event.stopPropagation();removeBookmark('${b}')">&#10005;</span></div>`;}).join('');}
+function removeBookmark(route){state.bookmarks=state.bookmarks.filter(b=>b!==route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
+function toggleSidebar(){state.sidebarOpen=!state.sidebarOpen;document.getElementById('appSidebar').classList.toggle('open',state.sidebarOpen);document.getElementById('sidebarOverlay').classList.toggle('active',state.sidebarOpen);}
+function printSection(){window.print();}
+document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
