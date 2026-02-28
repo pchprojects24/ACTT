@@ -1,8 +1,21 @@
-const CACHE_NAME = 'actt-reference-v2';
+const CACHE_NAME = 'actt-reference-v3';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './scenarios/index.html',
+  './scenarios/actt_scenario_01_head_injury.html',
+  './scenarios/actt_scenario_02_tension_pneumothorax.html',
+  './scenarios/actt_scenario_03_burn_inhalation.html',
+  './scenarios/actt_scenario_04_septic_shock.html',
+  './scenarios/actt_scenario_05_combative_casualty.html',
+  './scenarios/actt_scenario_06_stemi.html',
+  './scenarios/actt_scenario_07_hypothermia.html',
+  './scenarios/actt_scenario_08_polytrauma.html',
+  './scenarios/actt_scenario_09_failed_airway.html',
+  './scenarios/actt_scenario_10_shoulder_dislocation.html',
+  './scenarios/actt_scenario_11_pressor_shock.html',
+  './scenarios/actt_scenario_12_chest_tube_redeteriorates.html',
   './data/chapters-1-2.js',
   './data/domains.js',
   './data/algorithms.js',
