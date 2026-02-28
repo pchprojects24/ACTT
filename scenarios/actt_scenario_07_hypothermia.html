@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 07 — Hypothermic Casualty Recovered From Cold Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 7 — Hypothermia</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 07 of 12</p>
+<h1>Hypothermic Casualty Recovered From Cold Water</h1>
+<div class="tags">
+<span class="tag tag--red">Hypothermia</span>
+<span class="tag tag--orange">Altered Arrest Logic</span>
+<span class="tag tag--purple">Rewarming</span>
+<span class="tag tag--cyan">Staging</span>
+<span class="tag tag--accent">Evacuation Threshold</span>
+</div>
+<p class="hero-summary">A sailor is recovered after unplanned cold-water exposure during upper-deck operations. The casualty is wet, cold, confused, and at risk of rapid deterioration. The team must prevent further heat loss, stage hypothermia clinically, choose an appropriate rewarming strategy, manage a potential transition into hypothermic cardiac arrest with altered arrest logic, and decide between helicopter hoist, jetty transfer, or prolonged shipboard holding.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize and stage accidental hypothermia (HT I–IV) after cold-water recovery.</li>
+<li>Prioritize on-scene actions that prevent further heat loss while preserving airway, breathing, and circulation.</li>
+<li>Decide what treatment must occur at the recovery point versus what can safely wait until movement to Sick Bay.</li>
+<li>Apply modified arrest logic and rewarming priorities for severe hypothermia.</li>
+<li>Choose between hoist extraction, jetty transfer, or shipboard holding based on physiology, location, and available support.</li>
+<li>Anticipate deterioration during transport, rewarming, and prolonged holding.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Recovery — Cold Water Casualty</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">The ship is at sea in cold weather. A sailor has been recovered after an unplanned cold-water exposure during upper-deck operations. The helicopter cannot land on deck, so any aviation evacuation requires hoist. Sea state is moderate, wind chill is significant, and the recovered casualty is wet, cold, and at risk of rapid deterioration. First contact occurs at the recovery point on deck near the rescue area.</p>
+
+<p class="narrative">The casualty is conscious but confused and slowed after cold-water recovery. He is shivering initially, speech is slurred, and he is not reliably following complex commands. He is pale, soaked, and intermittently combative when handled. Respirations are spontaneous. Pulse is present but slow. He complains of exhaustion, chest tightness, and severe cold.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial On-Scene Findings</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--warn">Confused / Slowed</span></div>
+<div class="vital"><span class="vital-label">Speech</span><span class="vital-value vital-value--warn">Slurred</span></div>
+<div class="vital"><span class="vital-label">Skin</span><span class="vital-value vital-value--danger">Cold, Pale, Wet</span></div>
+<div class="vital"><span class="vital-label">Pulse</span><span class="vital-value vital-value--warn">Bradycardic</span></div>
+<div class="vital"><span class="vital-label">Respirations</span><span class="vital-value vital-value--warn">Spontaneous, Shallow</span></div>
+<div class="vital"><span class="vital-label">Core Temp</span><span class="vital-value vital-value--danger">Not yet confirmed</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — Hypothermia Staging</div>
+Clinical staging guides treatment intensity:<br>
+<strong>HT I (Mild):</strong> Conscious, shivering, oriented — core temp typically 32–35 °C.<br>
+<strong>HT II (Moderate):</strong> Impaired consciousness, reduced or absent shivering, slowed function — core temp typically 28–32 °C.<br>
+<strong>HT III (Severe):</strong> Unconscious or near-unconscious, vital signs still present — core temp typically 24–28 °C.<br>
+<strong>HT IV (Arrest):</strong> Absent vital signs / cardiac arrest — core temp typically &lt; 24 °C.<br>
+In this primary version, the casualty most likely fits <strong>HT II</strong> initially: altered mental status, cold exposure, preserved but impaired spontaneous function.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+The recovery point on deck is exposed to wind, spray, and cold. It is medically inferior but operationally unavoidable for initial care. Do only what improves immediate safety there. Available immediate equipment: blankets, heat-conserving wraps, oxygen, monitor, suction, bag-valve-mask, IV/IO supplies, warmed fluids if preparation time allows, Stokes litter, medsled.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to On-Scene Priorities →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">On-Scene Priorities &amp; First Contact</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">The casualty has been safely recovered and is no longer exposed to ongoing water. The team must now perform controlled first contact. Rough movement can worsen instability and may precipitate ventricular arrhythmias in significant hypothermia. The immediate priority is protection from further cooling plus ongoing ABC support.</p>
+
+<ul class="action-list">
+<li>Confirm the casualty is safely recovered and no longer exposed to ongoing water or spray.</li>
+<li>Minimize handling — rough movement can precipitate ventricular arrhythmias in significant hypothermia.</li>
+<li>Perform a focused ABC assessment at the recovery point.</li>
+<li>Remove the patient from wind; strip wet outer layers only if practical without creating more exposure time.</li>
+<li>Dry and insulate quickly with blankets, wraps, or an improvised warming package — prioritize torso insulation.</li>
+<li>Keep the patient horizontal if possible.</li>
+<li>Apply oxygen if indicated and if this can be done without delaying more important heat-conservation steps.</li>
+</ul>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Note</div>
+Cold, altered patients can look near-arrested. Do not assume bradycardia equals arrest. In profound hypothermia, pulse checks may need to be deliberate and prolonged. Slow does not equal dead — avoid premature termination logic.
+</div>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">The casualty is conscious but confused, shivering, bradycardic, soaked, and exposed to wind on the recovery deck. What is your immediate priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Gentle handling, remove from wind/water exposure, focused ABC assessment, strip wet layers and insulate with dry wraps prioritizing the torso, apply oxygen, keep patient horizontal.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Perform a basic assessment with some heat-loss prevention — apply blankets over wet clothing and begin moving toward Sick Bay.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Rapidly and aggressively move the casualty to Sick Bay immediately — speed is the priority over everything else.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Start aggressive active warming at the recovery point with direct heat application before any assessment.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. The first thermal win is preventing additional heat loss. Gentle handling prevents arrhythmia risk. A focused ABC assessment ensures no immediate life threat is missed, while insulation and wind protection stop further cooling. Rewarming starts by stopping further cooling, not by chasing complex warming interventions before the basics are done.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Some heat-loss prevention is better than none, but insulating over wet clothing is far less effective than replacing wet layers with dry insulation. Skipping a focused assessment risks missing airway or perfusion problems that could worsen during movement.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Rushing movement without controlling heat loss or assessing airway and perfusion first is the wrong instinct in hypothermia. Rough, rapid movement can precipitate ventricular arrhythmias. The transfer itself is a physiologic event — secure, brief, deliberate movement is safer than rushed improvised movement.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Aggressive direct external heat application before assessment is inappropriate. Do not apply aggressive direct external heat in severe hypothermia, especially at the recovery point without monitoring. The immediate priority is preventing further heat loss and performing an ABC assessment, not chasing complex warming interventions.
+</div>
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Staging Assessment →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Staging Assessment &amp; Movement Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">The casualty is now insulated and shielded from wind. ABC assessment shows spontaneous breathing and a palpable pulse. The team must determine the hypothermia stage and plan movement to Sick Bay. In hypothermia, the move itself is a physiologic event. The method, speed, and handling during transfer all matter.</p>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — Movement Principles</div>
+Use a movement method that protects the casualty from further exposure and minimizes jostling. A Stokes litter is appropriate for controlled deck-to-Sick Bay movement. A medsled may be useful where dragging or constrained movement is safer than repeated lifting through awkward passageways. Assign one person to watch airway/consciousness, one to watch lines and monitoring, and one to coordinate route and movement.
+</div>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">The casualty is insulated with spontaneous breathing and pulse. You suspect HT II (moderate hypothermia). How do you plan staging and movement?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Stage clinically as HT II based on altered consciousness and impaired function. Plan deliberate, controlled movement to Sick Bay using Stokes litter with minimal handling, assigned roles for airway and monitoring, and continued insulation throughout transfer.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Recognize the severity and rush movement to Sick Bay as fast as possible to begin rewarming — speed matters more than gentle handling at this point.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Treat all hypothermia the same — wrap the patient and move when convenient; staging doesn't change management.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Delay movement for an extended on-scene workup including IV access, detailed physical exam, and temperature measurement before considering transfer.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Clinical staging drives treatment intensity. Deliberate, controlled movement with assigned roles minimizes arrhythmia risk from rough handling while getting the patient to a better treatment environment. Insulation must be maintained throughout the transfer — the move itself is a physiologic event.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+The urgency to reach Sick Bay is understandable, but rushing movement and handling roughly creates avoidable arrhythmia risk in a hypothermic patient. Secure, brief, deliberate movement is safer than rushed improvised movement. Speed matters less than control.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Staging absolutely changes management. HT I requires different intensity than HT III or IV. Treating all hypothermia the same risks under-treating severe cases and over-treating mild ones. Clinical staging is the framework that drives every subsequent decision.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Extended on-scene workup at an exposed recovery point delays reaching a better treatment environment while heat loss continues. IV access and detailed exam can happen in Sick Bay. Do essential stabilization at scene, then move — do not stay for nonessential tasks.
+</div>
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Sick Bay Rewarming →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Sick Bay Rewarming &amp; Deterioration</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">The casualty arrives in Sick Bay. The team repeats the primary survey: mental status remains altered, pulse is bradycardic, blood pressure is low, and oxygen saturation is borderline. Core temperature is obtained and confirms moderate hypothermia. The team must now initiate stage-appropriate rewarming while maintaining close monitoring.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Sick Bay Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--warn">Altered, Sluggish</span></div>
+<div class="vital"><span class="vital-label">Core Temp</span><span class="vital-value vital-value--danger">~30 °C (HT II)</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">48 bpm, Bradycardic</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">88/56 mmHg</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--warn">91%</span></div>
+<div class="vital"><span class="vital-label">Respirations</span><span class="vital-value vital-value--warn">10/min, Shallow</span></div>
+</div>
+</div>
+
+<ul class="action-list">
+<li>Repeat primary survey immediately on arrival — do not assume the scene assessment remains valid.</li>
+<li>Obtain core temperature if available.</li>
+<li>Reassess mental status, pulse, blood pressure, respiratory pattern, oxygen requirement, and aspiration concerns.</li>
+<li>Begin controlled active rewarming appropriate to stage.</li>
+<li>Establish IV access if practical; consider IO if the patient is deteriorating and access is urgently needed.</li>
+<li>Administer warmed IV fluids (~38–42 °C) if IV fluids are indicated and can be given safely.</li>
+</ul>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — Rewarming Strategy</div>
+<strong>Mild–Moderate (HT I–II) with preserved circulation:</strong> Continue external insulation and active external warming as available. Use warmed IV fluids (~38–42 °C) if indicated.<br>
+<strong>Severe (HT III):</strong> Continue gentle handling, escalate monitoring. More invasive rewarming adjuncts may be needed depending on capability and consultant guidance.<br>
+<strong>Caution:</strong> Do not over-treat a stable, perfusing casualty with unnecessary aggressive interventions simply because the temperature is low. Match treatment intensity to physiology, not anxiety.
+</div>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">Core temperature confirms moderate hypothermia (~30 °C) with preserved circulation. What is your rewarming approach?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Stage-appropriate rewarming: continue external insulation, active external warming, warmed IV fluids (~38–42 °C), continuous cardiac monitoring, gentle handling, and serial reassessment of mental status and vitals.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Generic warming — apply blankets, warm the room, give IV fluids at room temperature, and monitor periodically.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Aggressive rapid internal rewarming — begin invasive rewarming procedures immediately for this mild-to-moderate case.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Passive rewarming only — remove wet clothing, provide blankets, and let the body rewarm itself without any active warming measures.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. For moderate hypothermia with preserved circulation, active external rewarming with insulation, warmed IV fluids, and continuous monitoring is the appropriate approach. The key is matching treatment intensity to the clinical stage while maintaining vigilance for deterioration. Gentle handling remains essential throughout.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Basic warming is better than nothing, but room-temperature IV fluids miss the opportunity for safe thermal benefit. Periodic monitoring may miss a rapid transition to severe hypothermia or arrhythmia. Active external warming and warmed fluids are readily achievable and should be used.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Aggressive invasive rewarming is not indicated for moderate hypothermia with preserved circulation. Over-treating a stable, perfusing casualty with unnecessary aggressive interventions risks complications. Match treatment intensity to physiology, not anxiety. Invasive methods are reserved for severe or arrest scenarios.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Passive rewarming alone is insufficient for moderate hypothermia. At HT II, the body's own heat-generating capacity is already impaired. Active external warming and warmed IV fluids are needed to support recovery. Passive measures alone risk prolonged hypothermia and further deterioration.
+</div>
+</div>
+
+<p class="narrative" style="margin-top:16px">
+<strong>Scenario branch:</strong> While being rewarmed, the casualty becomes less responsive. Pulse becomes extremely difficult to detect. Respirations become agonal. The team reassesses carefully — if absent vital signs are confirmed and severe hypothermia is the leading cause, this is now an HT IV / hypothermic arrest scenario.
+</p>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Inflection Point — Hypothermic Arrest</div>
+The casualty has transitioned from moderate to severe hypothermia or arrest. Standard warm-patient arrest assumptions no longer apply. Severe hypothermia changes arrest logic: prolonged resuscitation is justified, epinephrine and defibrillation are limited, and gentle handling remains critical. Do not terminate resuscitation prematurely — "they're too cold" is not a reason to stop.
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">The casualty deteriorates into cardiac arrest during rewarming. Core temperature is severely hypothermic. How do you manage this arrest?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Modified hypothermic arrest management: begin CPR, limit epinephrine and defibrillation to up to three attempts before meaningful rewarming, continue gentle handling, commit to prolonged resuscitation, and pursue active rewarming and evacuation simultaneously.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Begin standard arrest protocol (CPR, epinephrine, defibrillation) with some modifications for temperature — limit defibrillation attempts but otherwise follow normal ACLS timing.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Run a standard warm-patient arrest protocol without modification — ACLS is ACLS regardless of temperature.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Terminate resuscitation early — the patient is too cold and too far gone for meaningful recovery.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Severe hypothermia justifies prolonged resuscitative effort, especially if advanced rewarming or meaningful evacuation options remain possible. Limiting epinephrine and defibrillation to up to three doses/attempts before meaningful rewarming follows hypothermia-specific arrest logic. The heart may not respond to standard pharmacology until rewarmed.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Starting CPR and limiting defibrillation is reasonable, but following standard ACLS epinephrine timing without temperature consideration risks medication stacking in a heart that cannot respond until rewarmed. The hypothermic arrest framework specifically modifies drug timing and delivery.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Standard warm-patient arrest protocols do not account for the unique physiology of hypothermic arrest. Repeated defibrillation and epinephrine in a profoundly cold heart is ineffective and may worsen outcome. Hypothermia changes arrest logic — treatment must reflect the temperature.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Premature termination of resuscitation in hypothermic arrest is a critical error. "No one is dead until they are warm and dead" is the guiding principle. Profound hypothermia can be neuroprotective, and patients have survived with good neurologic outcomes after prolonged hypothermic arrest with appropriate rewarming.
+</div>
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Evacuation Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Evacuation Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">The team must now decide on the evacuation strategy. The ship is at sea with helicopter hoist available but conditions are challenging. The casualty is either in severe hypothermia with ongoing resuscitation or has achieved return of circulation but remains critically unstable. The decision must balance physiology, weather, distance, and the ship's ability to sustain safe care.</p>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — Evacuation Options</div>
+<strong>Jetty ambulance (if alongside):</strong> Best for a perfusing casualty who needs hospital evaluation but can tolerate a short transfer. Fast handoff to local EMS, but only possible if alongside or able to offload safely.<br>
+<strong>Helicopter hoist (at sea):</strong> Best for an unstable or high-risk casualty needing faster higher-level care. Shortens time to advanced rewarming and ICU support, but hoist prep is manpower-intensive and movement/packaging create added risk.<br>
+<strong>Hold up to 72 hours:</strong> Best when the casualty has relative physiologic stability with a manageable rewarming and monitoring burden. Avoids dangerous transfer if extraction conditions are poor, but requires disciplined reassessment — deterioration can be gradual.
+</div>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">The casualty is in hypothermic arrest with ongoing CPR, or has achieved ROSC but remains critically unstable. You are at sea with helicopter hoist available but conditions are marginal. What is your evacuation strategy?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Request helicopter extraction early, begin teleconsultation, coordinate packaging and timing with the clinical team, continue rewarming and resuscitation during preparation, and communicate full clinical picture including exposure history, rewarming measures, and vital-sign trends.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Establish organized holding with disciplined reassessment every 15 minutes, continue active rewarming, and request evacuation as soon as weather and conditions improve.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Continue to hold and manage onboard indefinitely — the patient is being rewarmed and there's no benefit to moving a hypothermic patient.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Stop resuscitative efforts and cancel evacuation request — the patient arrested and the prognosis is too poor to justify extraction resources.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. A critically unstable hypothermic casualty — especially one who has arrested — needs advanced rewarming capability and ICU support that cannot be provided onboard. Early extraction request should go in immediately; it can be cancelled if conditions are impossible, but you cannot recover time lost by waiting. Packaging and timing should be coordinated early so the clinical team does not lose time after the decision is made.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+If weather truly prevents extraction, organized holding with structured reassessment and continued rewarming is the correct bridge. But this should be treated as a bridge, not a final plan. Continue pressing for extraction — a patient who survives initial recovery can still deteriorate later. Repeated reassessment is the real safety net.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Holding indefinitely underestimates the monitoring burden and the limitations of shipboard rewarming for severe hypothermia. Deterioration can be gradual and insidious. The ship's ability to sustain safe intensive care is limited — definitive rewarming and ICU support require higher-level care.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Terminating resuscitation in hypothermic arrest based on perceived poor prognosis is a critical error. Severe hypothermia can justify prolonged resuscitative effort. Advanced rewarming at a receiving facility may still restore circulation. No one is dead until they are warm and dead.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Progressive decline in mental status leading to airway loss. Ventricular dysrhythmia triggered by rough movement or worsening physiology. Delayed recognition that the casualty has transitioned from moderate to severe hypothermia. False reassurance after initial warming response while the patient still drifts hemodynamically. Underestimating the monitoring burden if prolonged holding becomes necessary.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Rushing movement without controlling heat loss or assessing airway and perfusion first.</li>
+<li>Rough handling that precipitates ventricular arrhythmias in a hypothermic patient.</li>
+<li>Treating all hypothermia the same regardless of clinical stage.</li>
+<li>Aggressive invasive rewarming for mild-to-moderate hypothermia with preserved circulation.</li>
+<li>Passive rewarming only for severe hypothermia — insufficient when the body cannot generate its own heat.</li>
+<li>Applying standard warm-patient arrest protocols without modification for hypothermia.</li>
+<li>Terminating resuscitation prematurely because the patient "is too cold."</li>
+<li>False reassurance after initial warming response while the patient still drifts hemodynamically.</li>
+<li>Underestimating the monitoring burden during prolonged shipboard holding.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>In cold-water recovery, stop further heat loss first while preserving ABC priorities.</span></li>
+<li><span class="takeaway-num">02</span><span>Handle the casualty gently and move deliberately — the transfer itself can worsen the patient.</span></li>
+<li><span class="takeaway-num">03</span><span>Stage hypothermia clinically (HT I–IV) and let the stage drive the intensity of care.</span></li>
+<li><span class="takeaway-num">04</span><span>Severe hypothermia changes arrest logic — do not apply routine warm-patient assumptions blindly.</span></li>
+<li><span class="takeaway-num">05</span><span>Evacuation choice must balance physiology, weather, distance, and the ship's ability to sustain safe care.</span></li>
+<li><span class="takeaway-num">06</span><span>A patient who survives initial recovery can still deteriorate later — repeated reassessment is the real safety net.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Notes</div>
+<p style="margin-bottom:8px">There is no single hypothermia drug that fixes the problem; care is primarily supportive — thermal, airway, and circulatory. Any sedating medication must be used cautiously because hypothermic patients can deteriorate quickly and may need airway support.</p>
+<p style="margin-bottom:8px">IV access may be difficult in cold, vasoconstricted patients — plan early if access is likely to matter. If cardiac arrest occurs, resuscitation and movement must be organized around hypothermic arrest principles, not routine warm-arrest assumptions.</p>
+<p style="margin-bottom:8px">If consulting remotely, communicate: exposure history, recovery timeline, core temperature if known, current mental status, pulse/respiratory status, rewarming measures, and whether the patient is improving or drifting.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>
