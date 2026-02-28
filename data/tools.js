@@ -273,17 +273,20 @@ function updateTimerDisplay() {
     const elapsed = Math.floor((now - timer.startTime) / 60000);
     html += `<div class="timer-patient"><div class="tp-header"><span class="tp-name">${timer.name}</span><span style="color:var(--text-muted)">Started ${elapsed} min ago | Interval: ${timer.interval} min</span><button class="btn btn-outline btn-sm" onclick="removeTimer(${timer.id})">Stop</button></div>`;
     html += `<div class="timer-checks">`;
-    const visibleChecks = timer.checks.filter(c => c.time <= now + timer.interval * 60000 * 2).slice(0, 10);
-    visibleChecks.forEach((check, idx) => {
-      const isDue = !check.completed && check.time <= now;
-      const isUpcoming = !check.completed && check.time > now;
+    const visibleChecks = timer.checks
+      .map((check, index) => ({ check, index }))
+      .filter(({ check }) => !check.completed && check.time <= now + timer.interval * 60000 * 2)
+      .slice(0, 10);
+    visibleChecks.forEach(({ check, index }) => {
+      const isDue = check.time <= now;
+      const isUpcoming = check.time > now;
       const timeLeft = Math.max(0, Math.ceil((check.time - now) / 60000));
       html += `<div class="timer-check ${isDue ? 'due' : ''} ${check.completed ? 'completed' : ''}">`;
       html += `<span class="tc-time">${check.label}</span>`;
       html += `<span>${isDue ? 'REASSESSMENT DUE NOW' : isUpcoming ? `In ${timeLeft} min` : 'Completed'}</span>`;
       html += `<span class="tc-status">`;
       if (isDue) {
-        html += `<button class="btn btn-primary btn-sm" onclick="completeCheck(${timer.id},${idx})">Complete</button>`;
+        html += `<button class="btn btn-primary btn-sm" onclick="completeCheck(${timer.id},${index})">Complete</button>`;
       } else if (check.completed) {
         html += '\u2713';
       } else {
