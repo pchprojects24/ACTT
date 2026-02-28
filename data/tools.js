@@ -98,15 +98,26 @@ interactions: function(main) {
   const crumbs = [{title:'Home',path:'#/'},{title:'Clinical Tools',path:'#/tools'},{title:'Drug Interactions',path:'#/tools/interactions'}];
   let html = '';
   html += `<div class="breadcrumbs">${crumbs.map((c,i)=>i===crumbs.length-1?`<span class="bc-current">${c.title}</span>`:`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`).join('')}</div>`;
-  html += `<div class="section-header"><div><div class="section-title">Drug Interaction Checker</div><div class="section-subtitle">Check for known cautions and compounding risks between ACTT medications</div></div></div>`;
+  html += `<div class="section-header"><div><div class="section-title">Drug Interaction Checker</div><div class="section-subtitle">Check for known cautions and compounding risks between ACTT, Sick Bay, and common chronic medications</div></div></div>`;
   html += `<div class="tool-container">`;
-  html += `<p style="color:var(--text-secondary);margin-bottom:12px">Select two or more medications to check for interactions:</p>`;
+  html += `<p style="color:var(--text-secondary);margin-bottom:12px">Select common medications below and/or type two medication names from the onboard + common medication bank:</p>`;
   html += `<div class="drug-select-grid" id="drugSelectGrid">`;
-  const drugs = ['Ketamine','Midazolam','Morphine','Fentanyl','Hydromorphone','Succinylcholine','Rocuronium','Norepinephrine','Epinephrine','Phenylephrine','Mannitol','Hypertonic Saline 3%','Levetiracetam','Tenecteplase','Enoxaparin','Heparin','Clopidogrel','ASA','Naloxone','Flumazenil','Protamine','Ceftriaxone','Metronidazole','Azithromycin','Ondansetron','Diphenhydramine','Acetaminophen'];
-  drugs.forEach(d => {
+  const quickDrugs = ['Ketamine','Midazolam','Morphine','Fentanyl','Hydromorphone','Succinylcholine','Rocuronium','Norepinephrine','Epinephrine','Phenylephrine','Mannitol','Hypertonic Saline 3%','Levetiracetam','Tenecteplase','Enoxaparin','Heparin','Clopidogrel','ASA','Naloxone','Flumazenil','Protamine','Ceftriaxone','Metronidazole','Azithromycin','Ondansetron','Diphenhydramine','Acetaminophen','Atorvastatin','Lisinopril','Amlodipine','Sertraline'];
+  const sickbayDrugs = (window.ACTT?.sickbayMeds?.sections || []).map(s => s.title);
+  const commonChronicDrugs = ['Atorvastatin','Rosuvastatin','Simvastatin','Lisinopril','Ramipril','Losartan','Amlodipine','Hydrochlorothiazide','Metoprolol','Sertraline','Venlafaxine','Bupropion'];
+  const allDrugBank = Array.from(new Set([...quickDrugs, ...sickbayDrugs, ...commonChronicDrugs])).sort((a,b)=>a.localeCompare(b));
+  window._interactionDrugBank = allDrugBank;
+  quickDrugs.forEach(d => {
     html += `<button class="drug-select-btn" onclick="toggleDrugSelect(this)" data-drug="${d}">${d}</button>`;
   });
   html += `</div>`;
+  html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">`;
+  html += `<input class="tool-input" id="interactionDrugA" list="interactionDrugBank" placeholder="Medication 1 (type to search)">`;
+  html += `<input class="tool-input" id="interactionDrugB" list="interactionDrugBank" placeholder="Medication 2 (type to search)">`;
+  html += `</div>`;
+  html += `<datalist id="interactionDrugBank">`;
+  allDrugBank.forEach(d => { html += `<option value="${d}"></option>`; });
+  html += `</datalist>`;
   html += `<button class="btn btn-primary" style="margin-top:12px" onclick="checkInteractions()">Check Interactions</button>`;
   html += `<div id="interactionResults" style="margin-top:16px"></div>`;
   html += `</div>`;
@@ -341,12 +352,22 @@ function playAlert() {
 
 // Drug Interaction Checker
 function toggleDrugSelect(btn) { btn.classList.toggle('selected'); }
+function normalizeDrugName(name) {
+  const raw = (name || '').trim().toLowerCase();
+  const aliases = {'asa':'aspirin','hctz':'hydrochlorothiazide','3% hypertonic saline':'hypertonic saline 3%'};
+  return aliases[raw] || raw;
+}
 function checkInteractions() {
-  const selected = Array.from(document.querySelectorAll('.drug-select-btn.selected')).map(b => b.dataset.drug);
+  const selectedButtons = Array.from(document.querySelectorAll('.drug-select-btn.selected')).map(b => b.dataset.drug);
+  const typed = [document.getElementById('interactionDrugA')?.value || '', document.getElementById('interactionDrugB')?.value || '']
+    .map(v => v.trim())
+    .filter(Boolean);
+  const selected = Array.from(new Set([...selectedButtons, ...typed]));
   if (selected.length < 2) {
     document.getElementById('interactionResults').innerHTML = '<div class="tool-alert amber">Select at least 2 medications to check interactions.</div>';
     return;
   }
+  const selectedNormalized = selected.map(normalizeDrugName);
   const interactions = [
     {drugs:['Ketamine','Midazolam'],severity:'amber',title:'Sedation Stacking',desc:'Combined sedation risk. Both agents contribute to respiratory depression and oversedation. Monitor airway closely. Consider reduced doses when using together.',monitoring:'Continuous SpO2, respiratory rate, airway patency, level of consciousness'},
     {drugs:['Ketamine','Morphine'],severity:'amber',title:'Sedation + Analgesia Stacking',desc:'Ketamine and opioids together increase sedation depth and respiratory depression risk. Cumulative effect over time in prolonged holding.',monitoring:'Respiratory rate, SpO2, level of consciousness, cumulative dose tracking'},
@@ -368,16 +389,23 @@ function checkInteractions() {
     {drugs:['Flumazenil','Midazolam'],severity:'amber',title:'Benzodiazepine Reversal',desc:'Flumazenil reverses midazolam. AVOID in chronic benzodiazepine users (seizure risk). Use only for iatrogenic oversedation.',monitoring:'Seizure watch, re-sedation risk, respiratory status'},
     {drugs:['Mannitol','Norepinephrine'],severity:'amber',title:'Hemodynamic Conflict',desc:'Mannitol can worsen hypotension through osmotic diuresis. If patient requires vasopressor support, prefer hypertonic saline 3% over mannitol for ICP management.',monitoring:'Blood pressure, urine output, sodium levels, volume status'},
     {drugs:['Succinylcholine','Rocuronium'],severity:'amber',title:'Dual Paralytic',desc:'Do not combine. Choose one paralytic agent. If succinylcholine fails, consider rocuronium as rescue or move to surgical airway.',monitoring:'Duration of paralysis, ventilation adequacy'},
+    {drugs:['Sertraline','Tramadol'],severity:'red',title:'HIGH RISK: Serotonin Syndrome',desc:'SSRI + tramadol increases serotonin toxicity and seizure risk. For ACTT scenarios this can present as agitation, hyperthermia, clonus, and autonomic instability.',monitoring:'Mental status, temperature, neuromuscular findings, heart rate, blood pressure'},
+    {drugs:['Venlafaxine','Tramadol'],severity:'red',title:'HIGH RISK: Serotonin Syndrome',desc:'SNRI + tramadol increases serotonin toxicity risk and can trigger severe agitation, tremor, clonus, and hyperthermia.',monitoring:'Mental status, temperature, neuromuscular findings, cardiorespiratory status'},
+    {drugs:['Citalopram','Ondansetron'],severity:'amber',title:'QT Prolongation Risk',desc:'Combined QT-prolonging agents can increase risk of torsades, especially with electrolyte abnormalities or baseline prolonged QT.',monitoring:'ECG if available, potassium/magnesium correction, syncope/palpitations'},
+    {drugs:['Escitalopram','Ondansetron'],severity:'amber',title:'QT Prolongation Risk',desc:'Combined QT-prolonging agents can increase dysrhythmia risk. Avoid repeated doses together when alternatives exist.',monitoring:'ECG if available, electrolyte status, rhythm monitoring'},
+    {drugs:['Atorvastatin','Azithromycin'],severity:'amber',title:'Statin Toxicity Risk',desc:'Macrolides can increase statin exposure. During prolonged holding this may increase myalgia/rhabdomyolysis risk.',monitoring:'Muscle pain/weakness, dark urine, CK/labs if available'},
+    {drugs:['Simvastatin','Azithromycin'],severity:'red',title:'HIGH RISK: Statin Toxicity',desc:'Simvastatin exposure can increase with macrolides; risk of severe myopathy/rhabdomyolysis is higher than with lower-risk statins.',monitoring:'Hold statin if possible during antibiotic course, monitor muscle symptoms and urine color'},
+    {drugs:['Lisinopril','Valsartan'],severity:'red',title:'HIGH RISK: Dual RAAS Blockade',desc:'ACE inhibitor + ARB combination increases hypotension, hyperkalemia, and kidney injury risk without clear acute benefit in most scenarios.',monitoring:'Blood pressure, urine output, potassium, renal function if available'},
   ];
 
   let found = [];
   interactions.forEach(ix => {
-    const match = ix.drugs.every(d => selected.includes(d));
+    const match = ix.drugs.every(d => selectedNormalized.includes(normalizeDrugName(d)));
     if (match) found.push(ix);
   });
 
   // Check for general sedation stacking
-  const sedatives = selected.filter(d => ['Ketamine','Midazolam','Morphine','Fentanyl','Hydromorphone','Diphenhydramine'].includes(d));
+  const sedatives = selected.filter(d => ['ketamine','midazolam','morphine','fentanyl','hydromorphone','diphenhydramine'].includes(normalizeDrugName(d)));
   if (sedatives.length >= 3) {
     found.unshift({severity:'red',title:'CRITICAL: Multi-Agent Sedation Stacking',desc:`${sedatives.join(', ')} — Three or more sedating agents selected. Extreme risk of cumulative respiratory depression, airway loss, and hemodynamic compromise. Each additional sedating agent exponentially increases risk.`,monitoring:'Continuous airway monitoring, SpO2, respiratory rate, dedicated observer required, reversal agents immediately available'});
   }
