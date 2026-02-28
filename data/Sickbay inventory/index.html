@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Sickbay Master Inventory</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="row search-row">
+      <input type="search" id="search" placeholder="Search NSN, description, kit…" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Search inventory items">
+      <button id="search-clear" class="search-clear-btn hidden" aria-label="Clear search">&times;</button>
+      <button id="selected-btn" class="selected-btn" aria-label="View selected items">Selected (0)</button>
+    </div>
+    <div class="row">
+      <select id="kit-filter" aria-label="Filter by kit">
+        <option value="">All Kits</option>
+      </select>
+      <select id="sort-select" aria-label="Sort items">
+        <option value="nsn-asc">NSN A→Z</option>
+        <option value="nsn-desc">NSN Z→A</option>
+        <option value="description-asc">Desc A→Z</option>
+        <option value="description-desc">Desc Z→A</option>
+        <option value="qty-asc">Qty Low→High</option>
+        <option value="qty-desc">Qty High→Low</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="status-bar" id="status-bar">Loading…</div>
+
+  <div class="card-list" id="item-list"></div>
+
+  <div class="footer">Data source: Data/master_inventory.csv</div>
+
+  <div id="sel-overlay" class="sel-overlay hidden"></div>
+  <div id="sel-drawer" class="sel-drawer hidden">
+    <div class="sel-header">
+      <span id="sel-title">Selected (0)</span>
+      <button id="sel-close" class="sel-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="sel-actions">
+      <button id="sel-export" class="sel-action-btn">Export CSV</button>
+      <button id="sel-clear" class="sel-action-btn sel-clear-btn">Clear list</button>
+    </div>
+    <div id="sel-list" class="sel-list"></div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
