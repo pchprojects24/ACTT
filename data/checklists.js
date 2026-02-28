@@ -245,7 +245,131 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
     {id:'equipment-daily',type:'placeholder',title:'Equipment Daily Check',badge:'Operational \u00b7 Equipment',desc:'Daily medical equipment inspection checklist. PDF version pending.',icon:'&#9881;'},
     {id:'equipment-weekly',type:'placeholder',title:'Equipment Weekly Check',badge:'Operational \u00b7 Equipment',desc:'Weekly medical equipment inspection and inventory. PDF version pending.',icon:'&#9881;'},
     {id:'controlled-substances',type:'placeholder',title:'Controlled Substance Count',badge:'Operational \u00b7 Administrative',desc:'Controlled substance accountability checklist. PDF version pending.',icon:'&#128274;'},
-    {id:'galley-inspection',type:'placeholder',title:'Galley Inspection',badge:'Operational \u00b7 Env Health',desc:'Galley and food service area inspection checklist. Official form pending.',icon:'&#127859;'},
+    {
+      id:'pmed-inspection',
+      type:'inspection',
+      title:'HMCS PA PMED Inspection',
+      badge:'Operational \u00b7 Env Health',
+      desc:'PA-led environmental health inspection of galley, serveries, mess areas, fridges, accommodations, heads, and laundry. Complete 30 days prior to sailing or when requested by Ship CoC.',
+      icon:'&#128270;',
+      preamble:'To be completed by the PA of a ship 30 days prior to sailing to allow ships staff to correct problems, and whenever requested by Ship CoC. The goal is to do random, unannounced, serial evaluations of the facilities under normal conditions of use. A copy is to be forwarded to Fleet Surg and Fleet Sr PA when complete.',
+      groups:[
+        {
+          id:'galley',
+          title:'Galley',
+          section:'GALLEY',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'g1',serial:1,label:'General cleanliness of work surfaces. Check cleaning agent used.'},
+            {id:'g2',serial:2,label:'Fridges are correct temperature (2 to 3\u00b0C), Freezer temp (\u221218 to \u221215\u00b0C). Logs outside each filled in correctly, thermometers are inside fridges.'},
+            {id:'g3',serial:3,label:'All previously prepared food is correctly labeled, to include date prepared or when it will expire.'},
+            {id:'g4',serial:4,label:'Hand washing station is identified and properly supplied.'},
+            {id:'g5',serial:5,label:'Random water testing is done. When?'},
+            {id:'g6',serial:6,label:'Grease traps have been cleaned out. When?'},
+            {id:'g7',serial:7,label:'When was the last time the galley was professionally steam cleaned?'},
+            {id:'g8',serial:8,label:'Baking area containers covered when not being used.'},
+            {id:'g9',serial:9,label:'Food being thawed is being thawed properly. Either in food safe bins in the fridge, or in cold running water just prior to cooking.'},
+            {id:'g10',serial:10,label:'Steam line maintains food at 60\u00b0C or higher, clean work surfaces. Water changed frequently.'},
+            {id:'g11',serial:11,label:'Garbage removed frequently.'}
+          ]
+        },
+        {
+          id:'serveries',
+          title:'Serveries',
+          section:'SERVERIES',
+          columns:[
+            {id:'mainCrew',label:'Main Crew'},
+            {id:'cPos',label:'C & POs'},
+            {id:'captSO',label:'Capt & SO'},
+            {id:'wrdm',label:'Wrdm'}
+          ],
+          items:[
+            {id:'s12',serial:12,label:'Dishwasher has correct solutions attached to the correct lines (many are mislabelled or not connected). Solutions are being consumed in the machine. A dishwasher needs three things: soap, sanitizer, and rinse agent. (Sanitizer can be substituted with very high temp water if you can measure a temp of 165\u00b0F / 74\u00b0C on a plate just removed. On CPFs the dishwashers should have a water temp booster. Check temp on a plate after a wash cycle.)'},
+            {id:'s13',serial:13,label:'Grease traps cleaned. When?'},
+            {id:'s14',serial:14,label:'Food prep surfaces cleaned with approved cleaner that is properly labeled. Not vinegar and water!'},
+            {id:'s15',serial:15,label:'Check under sink areas for broken pipes and water collection under the sink. Backed up sewage water can collect here.'},
+            {id:'s16',serial:16,label:'Fridges are correct temperature (2 to 3\u00b0C), logs outside each filled in correctly, thermometers are inside fridges.'},
+            {id:'s17',serial:17,label:'Counter surfaces are cleaned with approved cleaner in properly labelled container.'},
+            {id:'s18',serial:18,label:'Hand wash station available with appropriate hand cleaner.'},
+            {id:'s19',serial:19,label:'Steam line maintains food at 60\u00b0C or higher, clean work surfaces. Water changed frequently.'},
+            {id:'s20',serial:20,label:'Check Galley AC Plant in C and POs Servery for cleanliness/grease/mould.'}
+          ]
+        },
+        {
+          id:'eating-mess',
+          title:'Eating Mess Area',
+          section:'EATING MESS AREA',
+          columns:[
+            {id:'cafe',label:'Caf\u00e9'},
+            {id:'cPos',label:'C & POs'},
+            {id:'wrdm',label:'Wrdm'}
+          ],
+          items:[
+            {id:'e21',serial:21,label:'General cleanliness.'},
+            {id:'e22',serial:22,label:'Counter surfaces cleaned with appropriate cleaner.'},
+            {id:'e23',serial:23,label:'Fridges are correct temperature (2 to 3\u00b0C), logs outside each filled in correctly, thermometers are inside fridges (2 of them, one at front and one at back).'},
+            {id:'e24',serial:24,label:'Food stored appropriately. Condiments requiring refrigeration are being stored in the fridge. No food stored directly on decks. Covers or containers for cereal.'},
+            {id:'e25',serial:25,label:'Hand washing is available prior to entering steam line.'},
+            {id:'e26',serial:26,label:'Silverware stored handle up.'},
+            {id:'e27',serial:27,label:'Milk dispensers (2 to 3\u00b0C) need fridge logs, and should be free of milk debris around the nozzles and the seals of the container should be inspected for debris and cracking.'}
+          ]
+        },
+        {
+          id:'fridge-flats',
+          title:'Fridge Flats (Fridges/Freezers/Cool Storage and Dry Stores)',
+          section:'FRIDGE FLATS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'f28',serial:28,label:'Food stored off the deck (air needs to flow under) and secure for sea.'},
+            {id:'f29',serial:29,label:'Thawing, if present, is being done correctly.'},
+            {id:'f30',serial:30,label:'Fridges are correct temperature (2 to 3\u00b0C), logs outside each filled in correctly, thermometers are inside fridges. Stores safely secured for sea.'},
+            {id:'f31',serial:31,label:'Freezers are correct temperature (\u221218\u00b0C to \u221215\u00b0C), logs outside each filled in correctly, thermometers are inside fridges. Stores safely secured for sea.'},
+            {id:'f32',serial:32,label:'Check that food is being rotated (first stuff in is first stuff out).'}
+          ]
+        },
+        {
+          id:'messes-cabins',
+          title:'Messes (Accommodation) and Cabins',
+          section:'MESSES (ACCOMMODATION) AND CABINS',
+          columns:[
+            {id:'messes',label:'Messes'},
+            {id:'cabins',label:'Cabins'}
+          ],
+          items:[
+            {id:'m33',serial:33,label:'Beds made, linen clean.'},
+            {id:'m34',serial:34,label:'General cleanliness, odour, and mold, paying particular attention to mattresses below Fan Coil Units.'},
+            {id:'m35',serial:35,label:'No food in accommodations.'},
+            {id:'m36',serial:36,label:'Floors clear of debris, and excess footwear.'},
+            {id:'m37',serial:37,label:'Filters clean in heating and cooling units.'},
+            {id:'m38',serial:38,label:'Random check of mattresses for mold.'}
+          ]
+        },
+        {
+          id:'heads-washplaces',
+          title:'Heads and Washplaces',
+          section:'HEADS AND WASHPLACES',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'h39',serial:39,label:'Surfaces cleaned with approved cleaners.'},
+            {id:'h40',serial:40,label:'Showers clean, no soap scum, mold.'},
+            {id:'h41',serial:41,label:'Check for dripping taps/faucets.'},
+            {id:'h42',serial:42,label:'Check lint traps in trunking around laundry units as well as the lint trap in the dryer itself.'},
+            {id:'h43',serial:43,label:'Soap dispensers and paper towels full.'},
+            {id:'h44',serial:44,label:'Garbage removed frequently.'}
+          ]
+        },
+        {
+          id:'laundry-linen',
+          title:'Laundry and Linen Stores',
+          section:'LAUNDRY AND LINEN STORES',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'l45',serial:45,label:'Clean and organized. Clean laundry physically separated from dirty. Clean laundry kept off the deck.'},
+            {id:'l46',serial:46,label:'No bad odour in washer, seals clean.'}
+          ]
+        }
+      ]
+    },
     {id:'habitability',type:'placeholder',title:'Habitability Rounds',badge:'Operational \u00b7 Env Health',desc:'Habitability and berthing inspection checklist. Official form pending.',icon:'&#127968;'}
   ]
 };

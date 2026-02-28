@@ -19,6 +19,7 @@ const ASSETS = [
   './data/appendices.js',
   './data/tools.js',
   './data/cross-links.js',
+  './data/checklists.js',
   './data/Meds/acetaminophen.html',
   './data/Meds/acetaminophen_with_codeine.html',
   './data/Meds/acyclovir.html',
