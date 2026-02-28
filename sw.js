@@ -18,6 +18,7 @@ const ASSETS = [
   './data/study.js',
   './data/appendices.js',
   './data/tools.js',
+  './data/checklists.js',
   './data/cross-links.js',
   './data/Meds/acetaminophen.html',
   './data/Meds/acetaminophen_with_codeine.html',
