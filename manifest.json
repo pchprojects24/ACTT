@@ -1,7 +1,7 @@
 {
   "name": "ACTT Reference",
   "short_name": "ACTT",
-  "description": "Acute Casualty Care Team Training Reference for Royal Canadian Navy Physician Assistants",
+  "description": "Acute Care Team Training Reference for Royal Canadian Navy Physician Assistants",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1a2332",
