@@ -104,8 +104,8 @@ interactions: function(main) {
   html += `<div class="drug-select-grid" id="drugSelectGrid">`;
   const quickDrugs = ['Ketamine','Midazolam','Morphine','Fentanyl','Hydromorphone','Succinylcholine','Rocuronium','Norepinephrine','Epinephrine','Phenylephrine','Mannitol','Hypertonic Saline 3%','Levetiracetam','Tenecteplase','Enoxaparin','Heparin','Clopidogrel','ASA','Naloxone','Flumazenil','Protamine','Ceftriaxone','Metronidazole','Azithromycin','Ondansetron','Diphenhydramine','Acetaminophen','Atorvastatin','Lisinopril','Amlodipine','Sertraline'];
   const sickbayDrugs = (window.ACTT?.sickbayMeds?.sections || []).map(s => s.title);
-  const commonChronicDrugs = ['Atorvastatin','Rosuvastatin','Simvastatin','Lisinopril','Ramipril','Losartan','Amlodipine','Hydrochlorothiazide','Metoprolol','Sertraline','Venlafaxine','Bupropion'];
-  const allDrugBank = Array.from(new Set([...quickDrugs, ...sickbayDrugs, ...commonChronicDrugs])).sort((a,b)=>a.localeCompare(b));
+  const chronicMedicationBank = ['Atorvastatin','Rosuvastatin','Simvastatin','Lisinopril','Ramipril','Losartan','Amlodipine','Hydrochlorothiazide','Metoprolol','Sertraline','Venlafaxine','Bupropion'];
+  const allDrugBank = Array.from(new Set([...quickDrugs, ...sickbayDrugs, ...chronicMedicationBank])).sort((a,b)=>a.localeCompare(b));
   window._interactionDrugBank = allDrugBank;
   quickDrugs.forEach(d => {
     html += `<button class="drug-select-btn" onclick="toggleDrugSelect(this)" data-drug="${d}">${d}</button>`;
@@ -354,7 +354,7 @@ function playAlert() {
 function toggleDrugSelect(btn) { btn.classList.toggle('selected'); }
 function normalizeDrugName(name) {
   const raw = (name || '').trim().toLowerCase();
-  const aliases = {'asa':'aspirin','hctz':'hydrochlorothiazide','3% hypertonic saline':'hypertonic saline 3%'};
+  const aliases = {'aspirin':'asa','hctz':'hydrochlorothiazide','3% hypertonic saline':'hypertonic saline 3%'};
   return aliases[raw] || raw;
 }
 function checkInteractions() {
