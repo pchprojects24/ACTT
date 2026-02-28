@@ -1,0 +1,22 @@
+{
+  "name": "ACTT Reference",
+  "short_name": "ACTT",
+  "description": "Acute Casualty Care Team Training Reference for Royal Canadian Navy Physician Assistants",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a2332",
+  "theme_color": "#1a2332",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='24' fill='%231a2332'/%3E%3Ctext x='96' y='120' font-family='Arial,sans-serif' font-size='80' font-weight='bold' fill='%233b82f6' text-anchor='middle'%3EA%3C/text%3E%3Ctext x='96' y='160' font-family='Arial,sans-serif' font-size='24' fill='%2394a3b8' text-anchor='middle'%3ECTT%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='64' fill='%231a2332'/%3E%3Ctext x='256' y='300' font-family='Arial,sans-serif' font-size='200' font-weight='bold' fill='%233b82f6' text-anchor='middle'%3EA%3C/text%3E%3Ctext x='256' y='410' font-family='Arial,sans-serif' font-size='64' fill='%2394a3b8' text-anchor='middle'%3ECTT%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
