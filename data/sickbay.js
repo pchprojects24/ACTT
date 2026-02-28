@@ -39,6 +39,11 @@ window.ACTT.sickbay={
       <div class="qc-title">Inventory</div>
       <div class="qc-desc">Master inventory of 900+ items — searchable by NSN, description, and kit membership. Export selected items as CSV.</div>
     </a>
+    <a class="quick-card" href="#/checklists">
+      <div class="qc-icon">&#9989;</div>
+      <div class="qc-title">Checklists</div>
+      <div class="qc-desc">Clinical cognitive aids (RSI, Anaphylaxis, Post-ROSC, MEDEVAC 9-Line, MASCAL) and operational readiness checklists.</div>
+    </a>
   </div>`,
   sections:[]
 };

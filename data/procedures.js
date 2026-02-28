@@ -105,7 +105,7 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>Airway procedures require the operator to think in phases: induction, paralysis, confirmation, then post-intubation sedation. The tube is not the endpoint; sedation and ventilator management begin immediately after placement.</p>',
-      relatedLinks:['algorithms/airway-failure','medications/ketamine','medications/succinylcholine']
+      relatedLinks:['algorithms/airway-failure','medications/ketamine','medications/succinylcholine','checklists/rsi']
     },
     {
       id:'surgical-cric',
