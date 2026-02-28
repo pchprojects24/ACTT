@@ -4,106 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Equipment References — ACTT Sick Bay</title>
-<style>
-:root {
-  --bg-primary: #0f172a;
-  --bg-card: #243044;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
-  --border: #334155;
-  --radius: 8px;
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--bg-primary); color: var(--text-primary); line-height: 1.6;
-  min-height: 100vh; padding: 0;
-}
-.top-bar {
-  background: #1a2332; border-bottom: 1px solid var(--border);
-  padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0; z-index: 10;
-}
-.top-bar h1 { font-size: 1.2rem; font-weight: 700; }
-.back-link {
-  color: var(--accent); text-decoration: none; font-size: 0.9rem; white-space: nowrap;
-}
-.back-link:hover { text-decoration: underline; }
-.subtitle { color: var(--text-secondary); font-size: 0.9rem; padding: 16px 20px 0; }
-.cards-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 14px; padding: 16px 20px 40px;
-}
-.card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 18px 20px; text-decoration: none; color: var(--text-primary);
-  transition: border-color 0.2s, box-shadow 0.2s; display: block;
-}
-.card:hover {
-  border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none;
-}
-.card-title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
-.card-desc { color: var(--text-secondary); font-size: 0.85rem; }
-</style>
+<link rel="stylesheet" href="../sickbay-shared.css">
 </head>
 <body>
-<div class="top-bar">
+<div class="idx-bar">
   <h1>Equipment References</h1>
   <a class="back-link" href="../../index.html#/sickbay">&larr; Back to Sick Bay</a>
 </div>
-<p class="subtitle">Onboard medical equipment manuals, setup guides, and troubleshooting references.</p>
-<div class="cards-grid">
-  <a class="card" href="i-stat.html">
-    <div class="card-title">i-STAT</div>
-    <div class="card-desc">Handheld blood analyzer overview and operation.</div>
-  </a>
-  <a class="card" href="patient-monitor-mindray-n1.html">
-    <div class="card-title">Patient Monitor — Mindray N1</div>
-    <div class="card-desc">Vital signs monitor setup and use.</div>
-  </a>
-  <a class="card" href="ecg-schiller-at102g2.html">
-    <div class="card-title">ECG — Schiller AT-102 G2</div>
-    <div class="card-desc">12-lead ECG machine operation.</div>
-  </a>
-  <a class="card" href="zoll-propaq-md.html">
-    <div class="card-title">Zoll Propaq MD</div>
-    <div class="card-desc">Monitor/defibrillator reference.</div>
-  </a>
-  <a class="card" href="zoll-emv-731.html">
-    <div class="card-title">Zoll EMV+ 731</div>
-    <div class="card-desc">Ventilator reference and setup.</div>
-  </a>
-  <a class="card" href="braun-infusomat.html">
-    <div class="card-title">Braun Infusomat</div>
-    <div class="card-desc">IV infusion pump operation.</div>
-  </a>
-  <a class="card" href="oxygen-invacare-platinum10.html">
-    <div class="card-title">Oxygen — Invacare Platinum 10</div>
-    <div class="card-desc">Oxygen concentrator setup and use.</div>
-  </a>
-  <a class="card" href="laerdal-suction-unit-lsu.html">
-    <div class="card-title">Laerdal Suction Unit (LSU)</div>
-    <div class="card-desc">Portable suction device reference.</div>
-  </a>
-  <a class="card" href="suction-laerdal-lsu.html">
-    <div class="card-title">Suction — Laerdal LSU</div>
-    <div class="card-desc">Suction unit operation and maintenance.</div>
-  </a>
-  <a class="card" href="cocoon-warming-device.html">
-    <div class="card-title">Cocoon Warming Device</div>
-    <div class="card-desc">Patient warming system reference.</div>
-  </a>
-  <a class="card" href="incubator-millipore-xx631.html">
-    <div class="card-title">Incubator — Millipore XX631</div>
-    <div class="card-desc">Laboratory incubator operation.</div>
-  </a>
-  <a class="card" href="water-colorimeter-hach-dr900.html">
-    <div class="card-title">Water Colorimeter — Hach DR900</div>
-    <div class="card-desc">Water quality testing device reference.</div>
-  </a>
+<p class="idx-subtitle">Onboard medical equipment guides, setup procedures, and troubleshooting references.</p>
+
+<div class="category">
+  <div class="category-label">Monitoring &amp; Diagnostics</div>
+  <div class="cards-grid">
+    <a class="card" href="i-stat.html">
+      <div class="card-title">i-STAT Analyzer</div>
+      <div class="card-desc">Handheld blood analyzer overview. Full cartridge and QC detail in Lab section.</div>
+    </a>
+    <a class="card" href="patient-monitor-mindray-n1.html">
+      <div class="card-title">Patient Monitor — Mindray N1</div>
+      <div class="card-desc">Vital signs monitor setup, alarms, and operation.</div>
+    </a>
+    <a class="card" href="ecg-schiller-at102g2.html">
+      <div class="card-title">ECG — Schiller AT-102 G2</div>
+      <div class="card-desc">12-lead ECG machine operation, filters, and troubleshooting.</div>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Resuscitation</div>
+  <div class="cards-grid">
+    <a class="card" href="zoll-propaq-md.html">
+      <div class="card-title">Zoll Propaq MD</div>
+      <div class="card-desc">Monitor/defibrillator — pacing, cardioversion, and monitoring.</div>
+      <span class="card-badge wip">In Development</span>
+    </a>
+    <a class="card" href="zoll-emv-731.html">
+      <div class="card-title">Zoll EMV+ 731</div>
+      <div class="card-desc">Portable ventilator setup, modes, and alarm management.</div>
+      <span class="card-badge wip">In Development</span>
+    </a>
+    <a class="card" href="braun-infusomat.html">
+      <div class="card-title">Braun Infusomat</div>
+      <div class="card-desc">IV infusion pump programming and rate management.</div>
+      <span class="card-badge wip">In Development</span>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Supportive Care</div>
+  <div class="cards-grid">
+    <a class="card" href="oxygen-invacare-platinum10.html">
+      <div class="card-title">Oxygen — Invacare Platinum 10</div>
+      <div class="card-desc">Oxygen concentrator setup, flow settings, and maintenance.</div>
+    </a>
+    <a class="card" href="suction-laerdal-lsu.html">
+      <div class="card-title">Suction — Laerdal LSU</div>
+      <div class="card-desc">Portable suction unit operation and maintenance.</div>
+    </a>
+    <a class="card" href="cocoon-warming-device.html">
+      <div class="card-title">Cocoon Warming Device</div>
+      <div class="card-desc">Patient warming system setup and operation.</div>
+      <span class="card-badge wip">In Development</span>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <div class="category-label">Laboratory &amp; Environmental</div>
+  <div class="cards-grid">
+    <a class="card" href="incubator-millipore-xx631.html">
+      <div class="card-title">Incubator — Millipore XX631</div>
+      <div class="card-desc">Laboratory incubator setup and temperature management.</div>
+    </a>
+    <a class="card" href="water-colorimeter-hach-dr900.html">
+      <div class="card-title">Water Colorimeter — Hach DR900</div>
+      <div class="card-desc">Water quality testing device operation and methods.</div>
+    </a>
+  </div>
 </div>
 </body>
 </html>
