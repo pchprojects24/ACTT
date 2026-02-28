@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 12 — Chest Tube Patient Who Re-Deteriorates During Holding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 12 — Chest Tube Re-Deterioration</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 12 of 12</p>
+<h1>Chest Tube Patient Who Re-Deteriorates During Holding</h1>
+<div class="tags">
+<span class="tag tag--red">Chest Tube</span>
+<span class="tag tag--orange">Device Maintenance</span>
+<span class="tag tag--purple">Recurrent Tension</span>
+<span class="tag tag--cyan">Trend Recognition</span>
+<span class="tag tag--accent">Prolonged Holding</span>
+</div>
+<p class="hero-summary">A sailor sustained blunt chest trauma earlier in the day. A tension pneumothorax was suspected, needle decompression was performed on scene, and a chest tube was inserted in Sick Bay. The patient initially improved. Three hours into the prolonged holding phase, the patient begins to deteriorate again — SpO₂ drifting down, rising tachycardia, worsening pain. The team must shift from maintenance mode back to acute reassessment and determine whether the chest tube has failed, the tension has recurred, bleeding has worsened, or another cause explains the deterioration.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize when a patient with an apparently functioning chest tube is becoming unstable again.</li>
+<li>Distinguish between recurrent tension physiology, tube obstruction, tube dislodgement, ongoing hemorrhage, and alternate causes of deterioration.</li>
+<li>Apply structured reassessment before repeating interventions.</li>
+<li>Manage chest tube troubleshooting in a shipboard environment with delayed evacuation and limited monitoring.</li>
+<li>Decide when local management is sufficient and when evacuation or urgent teleconsultation is required.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — Stable Post-Chest Tube Patient</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">The ship is at sea in moderate weather. A sailor sustained blunt chest trauma earlier in the day during a heavy-equipment mishap on the vehicle deck. A left-sided tension pneumothorax was suspected, needle decompression was performed on scene, and the casualty was moved to Sick Bay where a left chest tube was inserted. The patient initially improved and has been observed for the past three hours.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Baseline — 3 Hours Post-Chest Tube</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--ok">Alert but uncomfortable</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--ok">96% on supplemental O₂</span></div>
+<div class="vital"><span class="vital-label">HR</span><span class="vital-value vital-value--warn">108</span></div>
+<div class="vital"><span class="vital-label">BP</span><span class="vital-value vital-value--ok">112/72</span></div>
+<div class="vital"><span class="vital-label">RR</span><span class="vital-value vital-value--warn">24</span></div>
+<div class="vital"><span class="vital-label">Chest Tube</span><span class="vital-value vital-value--ok">Bubbling, draining, secured</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+This scenario teaches that initial improvement after chest tube placement does not remove the need for ongoing surveillance. A chest tube that was functioning earlier can fail later. Never treat initial improvement as proof of ongoing stability.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+Evacuation requested, but earliest likely extraction remains several hours away. Pain managed with titrated analgesia. Left chest tube connected to drainage system, secured and initially bubbling with improvement in breath sounds.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to Deterioration →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">Re-Deterioration — The Trigger</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">Three hours into observation, the monitor shows SpO₂ drifting down to 90–92% despite unchanged oxygen delivery. The patient becomes more tachycardic, more anxious, and reports worsening left chest pain and increasing shortness of breath. Blood pressure trends down to 96/60. The team must assume that the patient is no longer stable and shift from maintenance mode back to acute reassessment.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Deterioration Detected</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--danger">90–92% ↓</span></div>
+<div class="vital"><span class="vital-label">HR</span><span class="vital-value vital-value--danger">124 ↑</span></div>
+<div class="vital"><span class="vital-label">BP</span><span class="vital-value vital-value--danger">96/60 ↓</span></div>
+<div class="vital"><span class="vital-label">RR</span><span class="vital-value vital-value--danger">32 ↑</span></div>
+<div class="vital"><span class="vital-label">Pain</span><span class="vital-value vital-value--warn">Worsening left chest</span></div>
+<div class="vital"><span class="vital-label">Anxiety</span><span class="vital-value vital-value--warn">Increasing</span></div>
+</div>
+</div>
+
+<ul class="action-list">
+<li>Reassess airway, breathing, and circulation immediately — do not assume the chest tube is still solving the original problem.</li>
+<li>Increase observation intensity: pulse oximetry, cardiac monitor, repeat blood pressure, repeat focused respiratory exam.</li>
+<li>Assign explicit roles: one person reassesses the patient, one checks the chest tube system from patient to collection chamber, one prepares backup equipment.</li>
+<li>Call out the key concern: "Chest trauma patient with chest tube is re-deteriorating — reassessing for recurrent tension, blockage, dislodgement, hemorrhage, or alternate cause."</li>
+</ul>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">The patient's SpO₂ has dropped to 90%, HR is rising, and BP is falling — three hours after a functioning chest tube was placed. What is your first action?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Declare deterioration, convert from maintenance to active reassessment mode. Assign one person to reassess the patient, one to perform a complete chest tube system inspection from insertion site to collection chamber, and one to prepare backup equipment.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Increase oxygen delivery and recheck vitals in 10 minutes to see if this is a transient change.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The chest tube is in place — this is probably just pain or anxiety. Increase analgesia and reassess later.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Immediately perform needle decompression on the opposite side — this must be a new pneumothorax.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+A re-deteriorating chest trauma patient requires immediate structured reassessment of BOTH the patient and the entire drainage system. The key is not to assume the chest tube is still functioning just because it was working earlier.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Increasing oxygen is reasonable as an immediate measure, but waiting 10 minutes to reassess a deteriorating trauma patient with dropping saturation and falling blood pressure is too passive. The situation demands immediate investigation.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Attributing deterioration to pain or anxiety without ruling out mechanical failure, recurrent tension, or bleeding is a dangerous assumption. Initial improvement after chest tube placement does not guarantee ongoing stability.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Jumping to a new intervention without first checking the existing device is a common error. The existing tube may have failed — check it first before adding new procedures on the opposite side.
+</div>
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Systematic Check →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Chest Tube System Assessment</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">The team performs a structured assessment. On inspection, the chest tube dressing appears intact, but the tubing has a dependent loop that has collected fluid. There is no bubbling in the collection chamber. The tube marking at skin level appears unchanged. Breath sounds on the left are decreased compared to the post-insertion exam. The patient is becoming more tachypneic and agitated.</p>
+
+<ul class="action-list">
+<li>Trace the entire system from insertion site to collection device.</li>
+<li>Look for kinks, dependent loops, clamped tubing, disconnected segments, and drainage unit positioned incorrectly.</li>
+<li>Inspect for ongoing bubbling, loss of expected fluctuation, sudden cessation of output, or obvious clot burden.</li>
+<li>Confirm the tube is still well secured at the skin and has not partially migrated.</li>
+<li>Inspect for new subcutaneous emphysema, leakage around the tube, loose sutures, or dressing disruption.</li>
+<li>Check whether the tube marking at skin level has changed from the original documented depth.</li>
+</ul>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">You find a dependent loop in the tubing with collected fluid, no bubbling in the collection chamber, and worsening breath sounds on the left. What do you do?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Correct the dependent loop immediately — lift and straighten the tubing to restore drainage. Reassess within minutes for improvement in bubbling, breath sounds, and vitals.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Clamp the tube briefly, drain the dependent loop, unclamp, and observe for return of function.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The tube is in the right position — the loop isn't important. Increase oxygen and continue monitoring.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Remove the chest tube and insert a new one immediately — this tube has clearly failed.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+A dependent loop is a simple mechanical problem with an immediate fix. Correct it first and reassess — many tube "failures" are actually tube maintenance problems. If drainage and bubbling resume and the patient improves, you've solved the problem without a new procedure.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+This approach can work, but briefly clamping a chest tube in a patient with possible recurrent tension carries risk. The simpler approach is to lift and straighten the tubing without clamping.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+A dependent loop filled with fluid can obstruct drainage and allow recurrent pneumothorax or tension. This is not a benign finding — it is a correctable cause of the deterioration.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Removing a chest tube before attempting to correct a simple mechanical problem is premature escalation. Many tube problems can be fixed without replacement.
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+No procedure ends at placement. In delayed MEDEVAC situations, device maintenance becomes part of critical care. The procedure is not finished at insertion — chest tube function checks must be built into every reassessment cycle during prolonged holding.
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Response Assessment →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Response to Correction &amp; Continued Monitoring</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">After correcting the dependent loop, bubbling resumes in the collection chamber. Over the next 15 minutes, SpO₂ improves to 94% and the patient reports less dyspnea. However, blood pressure remains low at 98/62, heart rate is still 118, and the patient seems more pale than before. You notice the collection chamber now shows more bloody drainage than expected.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Post-Correction Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--warn">94% ↑</span></div>
+<div class="vital"><span class="vital-label">HR</span><span class="vital-value vital-value--warn">118</span></div>
+<div class="vital"><span class="vital-label">BP</span><span class="vital-value vital-value--danger">98/62</span></div>
+<div class="vital"><span class="vital-label">RR</span><span class="vital-value vital-value--warn">28</span></div>
+<div class="vital"><span class="vital-label">Drainage</span><span class="vital-value vital-value--danger">Increased bloody output</span></div>
+<div class="vital"><span class="vital-label">Skin</span><span class="vital-value vital-value--danger">Pale, cool</span></div>
+</div>
+</div>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">After correcting the tube, respiratory status improves but blood pressure remains low and bloody drainage has increased. What is your assessment?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>The patient may have both a corrected pneumothorax problem AND evolving hemothorax with ongoing blood loss. Start IV fluid resuscitation, monitor drainage volume closely, and reassess for hemorrhagic shock.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>The respiratory improvement confirms the tube is working. Continue observation with frequent vital sign checks.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Clamp the chest tube to stop the bloody drainage — the tube may be causing the bleeding.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>The blood in the drainage is old and expected — no need to change the management plan.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+A patient can have BOTH respiratory re-deterioration from tube obstruction AND worsening blood loss from hemothorax. Do not anchor on one explanation too early. The persistent hypotension with increased bloody drainage suggests the patient needs volume resuscitation and close hemorrhage monitoring.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+The tube correction helped the respiratory status, but ignoring the hemodynamic picture and increasing bloody output is dangerous. Both problems need to be addressed simultaneously.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Clamping a chest tube in a patient with pneumothorax risks recurrent tension. The bleeding is from the injury, not the tube. The tube is draining blood that needs to come out — clamping it traps it in the chest.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Increasing bloody drainage with falling blood pressure and pallor is not "expected old blood." This is a concerning finding that requires active hemodynamic management.
+</div>
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">One hour later, the patient has received fluids but remains hypotensive. Bloody drainage continues. SpO₂ is maintained at 93% but the patient is becoming increasingly confused. What is your decision?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Escalate evacuation urgency immediately. Contact command and teleconsultation — this patient has an evolving hemothorax with probable ongoing intrathoracic bleeding that cannot be definitively managed onboard. Local holding may no longer be safe.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Continue aggressive fluid resuscitation, prepare blood products if available, and intensify the monitoring plan while awaiting the scheduled extraction.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The chest tube is draining appropriately — the system is working as designed. Continue current management.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Remove the chest tube to stop the bleeding and apply a pressure dressing to the insertion site.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+A patient whose hemodynamic status is worsening despite fluid resuscitation with ongoing bloody chest tube output likely has intrathoracic hemorrhage requiring surgical intervention. This exceeds what can be managed onboard — escalate evacuation urgency NOW.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Continued resuscitation is correct management while awaiting transfer, but the critical action is escalating the evacuation priority. This is no longer a routine hold.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+The system is draining blood, but the patient is bleeding faster than they can be resuscitated. "Working as designed" does not mean the clinical situation is acceptable.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Removing the chest tube will trap blood and air in the pleural space, potentially causing tension physiology. The tube is draining a hemorrhagic collection — removing it makes the situation worse, not better.
+</div>
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Evacuation Escalation →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Evacuation Escalation &amp; Communication</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">The patient now requires continuous monitoring, ongoing fluid resuscitation, and possible pressor support. The chest tube is functioning but bloody drainage continues. Evacuation has been escalated to urgent priority. The team must prepare for transfer while maintaining care.</p>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">During preparation for urgent hoist extraction, what are your critical packaging and handover priorities for this chest tube patient?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Secure the drainage system for movement — assign one person specifically to protect the tube and tubing during transfer. Ensure the collection device cannot tip or pull. Prepare a structured handover: timing of original injury, needle decompression, chest tube insertion, re-deterioration event, correction, drainage volumes, current vitals, and fluid totals.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Focus on securing the patient and maintaining IV access during movement — the receiving team can assess the chest tube on arrival.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Clamp the chest tube for transport to prevent spillage from the drainage system.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Remove the chest tube before transport — it will be easier for the flight team to manage without it.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+During any casualty movement with a chest tube, one assigned person should protect the tube and tubing only. The drainage system must be secured against tipping, pulling, or kinking during ship movement and hoist transfer. The handover must include the full timeline and all interventions.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+IV access is important, but the chest tube is the higher-risk device during movement. If the tube dislodges or the system fails during hoist transfer, the patient can rapidly deteriorate. Both need explicit protection plans.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Clamping a chest tube during transport of a patient with both pneumothorax and hemothorax risks recurrent tension physiology. The tube should remain unclamped and the drainage system should be secured for movement.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Removing a functioning chest tube before transport in a patient with ongoing hemothorax and possible pneumothorax is extremely dangerous. The receiving team needs the tube in place.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Re-tension after temporary improvement. Progressive hemothorax with falling blood pressure. Tube dislodgement during hoist transfer. Sedation-related masking of worsening respiratory failure. Team assumes "the tube is in, so the chest problem is handled" and misses slow deterioration.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Assuming initial improvement after chest tube placement means the problem is permanently solved.</li>
+<li>Failing to perform regular chest tube system checks during prolonged holding.</li>
+<li>Attributing deterioration to pain or anxiety without investigating the drainage system.</li>
+<li>Anchoring on one explanation (pneumothorax OR bleeding) when both may be present.</li>
+<li>Clamping a chest tube during transport of a patient with ongoing pleural pathology.</li>
+<li>Reducing monitoring intensity because the patient was previously stable.</li>
+<li>Delaying evacuation escalation when the clinical trajectory clearly exceeds onboard capability.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>Initial improvement after chest tube placement does not remove the need for ongoing surveillance.</span></li>
+<li><span class="takeaway-num">02</span><span>A re-deteriorating chest trauma patient requires immediate reassessment of the patient AND the entire drainage system.</span></li>
+<li><span class="takeaway-num">03</span><span>If recurrent tension physiology is likely in an unstable patient, act clinically — do not delay because a chest tube is already present.</span></li>
+<li><span class="takeaway-num">04</span><span>At sea, device function and securement are part of life-saving care, not minor maintenance tasks.</span></li>
+<li><span class="takeaway-num">05</span><span>A patient can have BOTH respiratory and hemorrhagic deterioration simultaneously — do not anchor on one explanation.</span></li>
+<li><span class="takeaway-num">06</span><span>A deteriorating chest tube patient should trigger earlier escalation, tighter monitoring, and renewed evacuation planning.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Notes</div>
+<p style="margin-bottom:8px">A chest tube that was functioning earlier can fail later. In delayed MEDEVAC situations, device maintenance becomes part of critical care. The procedure is not finished at placement.</p>
+<p style="margin-bottom:8px">At sea, tube securement matters more than on land — movement, repositioning, stretcher transfers, and fatigue all increase dislodgement risk.</p>
+<p style="margin-bottom:8px">Build chest tube checks into every reassessment cycle during prolonged holding.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  // check all continue buttons that might depend on this dp
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  // if all answered, show score
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  // close current
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  // open next
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  // scroll
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  // reset all decision points
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  // disable continue buttons
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  // reset score panel
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  // close all stages, open stage 1
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 11 — Pressor-Dependent Shock With Resource Strain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 11 — Pressor-Dependent Shock</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 11 of 12</p>
+<h1>Pressor-Dependent Shock With Resource Strain</h1>
+<div class="tags">
+<span class="tag tag--red">Septic Shock</span>
+<span class="tag tag--orange">Vasopressors</span>
+<span class="tag tag--purple">Resource Strain</span>
+<span class="tag tag--cyan">Prolonged Holding</span>
+<span class="tag tag--accent">Sustainability</span>
+</div>
+<p class="hero-summary">A sailor in their 30s presents to Sick Bay with 24 hours of fever, rigors, weakness, and progressive hypotension. Initial fluid resuscitation improves blood pressure only briefly. As the patient transitions to pressor-dependent shock, the clinical challenge shifts from sepsis recognition to an operational problem — can the ship sustain the monitoring burden of a norepinephrine infusion with limited staffing, equipment, and delayed evacuation?</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize when persistent hypotension has progressed beyond simple fluid-responsive shock and requires vasopressor support.</li>
+<li>Apply bedside decision-making from first presentation through escalation, resource management, and evacuation planning.</li>
+<li>Practice safe norepinephrine preparation, initiation, monitoring, and reassessment in a shipboard environment.</li>
+<li>Identify when a plan is clinically correct but operationally unsustainable because of line security, infusion-pump limits, staffing strain, or delayed evacuation.</li>
+<li>Reinforce prolonged-holding principles: trend monitoring, device checks, explicit handover, early teleconsultation, and recognition of worsening pressor dependence.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — Sick Call Deterioration</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">A sailor in their 30s is brought to Sick Bay by a supervisor and a crewmate. Over the last 24 hours they have had fever, rigors, generalized weakness, and progressive shortness of breath. They now look pale, ill, and increasingly fatigued. They complain of dizziness when sitting up and say they feel "like I am going to pass out." On arrival: the patient is alert but slowed. Skin is warm with delayed capillary refill. There is a productive cough and pleuritic discomfort, making pneumonia one likely source.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial Sick Bay Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--warn">Alert but slowed</span></div>
+<div class="vital"><span class="vital-label">HR</span><span class="vital-value vital-value--warn">118</span></div>
+<div class="vital"><span class="vital-label">BP</span><span class="vital-value vital-value--danger">84/52</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--warn">93%</span></div>
+<div class="vital"><span class="vital-label">Temp</span><span class="vital-value vital-value--danger">39.4°C</span></div>
+<div class="vital"><span class="vital-label">RR</span><span class="vital-value vital-value--warn">26</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+At sea, moderate sea state. Helicopter available only by hoist, not deck landing. Estimated earliest extraction window is 6 to 8 hours if the weather holds. Available support: RCN PA, one assisting medic, one non-clinical helper, finite medication stock, limited infusion pumps, and standard monitoring — but not enough for ICU-style continuous one-to-one observation indefinitely.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+Place on monitor immediately. Establish IV access quickly — if peripheral IV is difficult, do not waste excessive time; escalate to IO if needed. Begin oxygen if saturation is falling. Obtain bedside data: glucose, temperature, focused lung exam.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to Initial Resuscitation →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">Initial Resuscitation &amp; Fluid Phase</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">The team initiates crystalloid resuscitation. After the first bolus, blood pressure briefly improves to 92/58 but then drifts back down. The patient remains tachycardic and reports worsening dizziness. Capillary refill is still delayed. Work of breathing has not changed significantly.</p>
+
+<ul class="action-list">
+<li>Give initial crystalloid bolus and reassess: BP, mental status, capillary refill, work of breathing, oxygen requirement.</li>
+<li>Start empiric antibiotics early — do not let "more data" delay treatment. Document exact time started.</li>
+<li>If crackles, rising oxygen need, or worsening respiratory distress appear after fluids, slow down and reassess rather than pushing more fluid automatically.</li>
+<li>Obtain cultures before antibiotics ONLY if doing so does not meaningfully delay antibiotics.</li>
+</ul>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">After initial crystalloid bolus, BP briefly improves to 92/58 then drifts back. The patient remains tachycardic with delayed capillary refill. What is your next priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Start empiric antibiotics within the sepsis treatment window, continue measured fluid resuscitation with reassessment after each bolus, and prepare to reassess for pressor need if hypotension persists.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Give a second large fluid bolus — the patient may still be volume-depleted and just needs more aggressive resuscitation.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Withhold antibiotics until a definitive source is identified — pneumonia is only suspected, not confirmed.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Start norepinephrine immediately — the first bolus didn't fix the blood pressure.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. Early antibiotics within the sepsis/septic shock treatment window is critical. Continued fluid resuscitation with reassessment prevents both under-resuscitation and fluid overload. Preparing for pressor need shows anticipatory planning.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. A second bolus may be appropriate, but reflexively giving repeated large volumes without reassessing respiratory cost is a common error. Watch for crackles, rising oxygen need, and worsening respiratory distress.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. In septic shock, delaying antibiotics for diagnostic certainty increases mortality. Use the source-appropriate empiric regimen and update later if the picture changes. Timing matters more than precision at this stage.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Starting a pressor after only one fluid bolus without adequate initial resuscitation is premature. Norepinephrine is indicated for persistent hypotension AFTER initial resuscitation, not as a first-line replacement for fluids.
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+Once severe sepsis or septic shock is suspected, antibiotics belong early in the sequence. The key teaching point is timing: do not let "more data" delay appropriate empiric treatment.
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Pressor Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Transition to Pressor-Dependent Shock</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">After the second fluid bolus, the patient remains hypotensive. MAP is still below 65 mmHg. Mentation is drifting — the patient answers questions but more slowly. Urine output is minimal. This is the key pivot point: the patient may require norepinephrine, but starting a pressor commits the team to a much heavier monitoring burden.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Post-Fluid Resuscitation</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">MAP</span><span class="vital-value vital-value--danger">58 mmHg</span></div>
+<div class="vital"><span class="vital-label">HR</span><span class="vital-value vital-value--danger">126</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--warn">91%</span></div>
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--warn">Drifting, slow responses</span></div>
+<div class="vital"><span class="vital-label">Urine Output</span><span class="vital-value vital-value--danger">Minimal</span></div>
+<div class="vital"><span class="vital-label">Cap Refill</span><span class="vital-value vital-value--danger">&gt; 4 sec</span></div>
+</div>
+</div>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">After adequate initial fluid resuscitation, the patient remains hypotensive with MAP below 65. Mentation is drifting and urine output is poor. What is your next step?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Start norepinephrine via infusion pump, titrate to MAP ≥ 65. Use peripheral IV if central access is not available — but the IV site now becomes a critical monitoring point. Assign monitoring responsibility explicitly.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Give one more fluid bolus before starting pressors — the patient may still respond to volume.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Start dopamine instead of norepinephrine — it's a better first-line agent for septic shock.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Hold off on pressors — the blood pressure will improve once the antibiotics take effect.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. Persistent hypotension after initial resuscitation with ongoing poor perfusion is the clear indication for norepinephrine. If central access is not available, peripheral administration is acceptable but the IV site must be monitored frequently for extravasation.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. One more bolus is reasonable if the respiratory cost is still manageable, but do not continue reflexive fluid loading when perfusion remains poor. At some point, persistent hypotension requires pressor support.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Norepinephrine is the recommended first-line vasopressor for septic shock. Dopamine has a higher rate of arrhythmias and is not preferred.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Antibiotics will not improve hemodynamics in the acute phase. The patient is failing to maintain pressure and perfusion NOW — waiting for antibiotics to work while the patient deteriorates is dangerous.
+</div>
+</div>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Inflection Point</div>
+This is where the scenario becomes a shipboard systems problem. Starting norepinephrine may be clinically appropriate, but you must immediately ask whether your line, pump, monitoring, and staffing plan are sustainable for the next several hours.
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Resource Management →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Resource Strain &amp; Monitoring Burden</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">Norepinephrine is running. MAP has improved to 67 mmHg. The patient is slightly more alert. But the team is now managing an infusion pump, frequent BP cycling, peripheral IV site checks, and ongoing assessment — with one PA, one medic, and one non-clinical helper. The earliest extraction is still 4-6 hours away.</p>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">Norepinephrine is running, MAP has improved to 67. The patient looks slightly better. But you notice the peripheral IV site is slightly swollen. What do you do?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Stop the infusion immediately, assess the site for extravasation, prepare phentolamine if available, and establish a new IV line before restarting the pressor.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Reduce the infusion rate, observe the site closely for 5 minutes, and prepare to restart in a new line if swelling worsens.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Continue the infusion — slight swelling is normal and expected with peripheral vasopressors.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Switch to oral vasopressors to avoid IV site complications.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. Any suspicion of extravasation with norepinephrine requires immediate action. Stop the infusion, assess the site, and prepare for rescue treatment. Tissue injury from pressor extravasation can occur quickly. Establish a new IV line before restarting.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable only if the swelling is truly minimal and you are actively preparing the backup. But "watching" an extravasating pressor while it continues to run is a recipe for tissue injury. The safer default is to stop first.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Extravasation of norepinephrine is a serious complication that can cause tissue necrosis. Slight swelling at a peripheral pressor site is not normal — it is a warning sign that demands immediate assessment.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. There are no oral vasopressors appropriate for acute septic shock management. This is not a viable alternative.
+</div>
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">The IV is resited and the pressor restarted. However, the medic reports fatigue after continuous monitoring, and the non-clinical helper is needed for other ship duties. The patient requires BP checks every 15 minutes, IV site checks, ongoing reassessment, and the extraction window is still 3-4 hours away. What do you decide?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Contact command about the staffing situation. Initiate teleconsultation to discuss sustainability. Request additional help from ship's company for non-clinical tasks. Document that the current level of care may not be sustainable and push for earlier extraction.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Extend BP check intervals to every 30 minutes to reduce monitoring burden, and continue with current staffing.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The patient is stable now — reduce monitoring to hourly checks and let the medic rest.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Stop the norepinephrine to eliminate the monitoring burden — the patient should be stable enough without it now.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. A correct clinical intervention can expose a weak operational system. The right plan is the plan that can be safely maintained by the actual team you have. Sometimes the most important decision is recognizing that the ship can no longer safely sustain the monitoring burden.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Extending intervals is a pragmatic compromise, but it increases the risk of missing rapid deterioration or extravasation. If chosen, it should be paired with clear escalation criteria and a push for additional support.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. A pressor-dependent patient is NOT stable — they are fragile. Reducing monitoring to hourly checks for a patient on norepinephrine creates unacceptable risk for unrecognized deterioration.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Stopping the pressor because of monitoring burden rather than clinical readiness will likely result in immediate hemodynamic collapse. The correct response to unsustainable care is to get more resources or evacuate — not to remove the treatment keeping the patient alive.
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+A patient who is temporarily supported by pressors is not "solved." They are often more fragile, not less, because the plan now depends on continuous maintenance. The blood pressure may look better while perfusion, oxygenation, and reserve still worsen.
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Evacuation Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Evacuation Decision &amp; Teleconsultation</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">The patient has been on norepinephrine for 2 hours. MAP is maintained at 66-68 with a gradually increasing dose. Urine output remains poor. The extraction window is now 2-3 hours away if weather holds. The team must decide whether to continue the hold or push harder for evacuation.</p>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">The patient's norepinephrine requirement is gradually increasing. Urine output remains poor. The extraction window is 2-3 hours away. During teleconsultation, what is your recommended plan?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>State clearly: pressor-dependent septic shock, increasing dose requirement, poor urine output, limited staffing, requesting earliest possible extraction. Package the patient for hoist preparation now rather than waiting.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Report the clinical situation and ask the consultant whether to increase the pressor dose further or add a second agent.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Report that the patient is hemodynamically stable on pressors and request routine evacuation at the next available window.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Report improvement since starting the pressor and recommend continuing to hold — the antibiotics should start working soon.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. Pressor dependence with increasing dose requirement should lower the threshold for early evacuation. State the clinical AND operational problem clearly: limited staff, limited pumps, at-sea constraint, and concern about sustainability. Package early rather than waiting for the patient to worsen.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Consulting about dose escalation is clinically appropriate, but the teleconsultation should also include the operational sustainability concern and evacuation planning — not just medication management.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Describing a patient with increasing pressor requirement and poor urine output as "stable" misrepresents the clinical trajectory. Pressor dependence should push toward urgency, not routine scheduling.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. An increasing pressor requirement is not improvement — it is the opposite. Antibiotics take time to work, but the patient's hemodynamic trajectory is worsening NOW. Continued holding without acknowledging deterioration is dangerous.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Increasing pressor requirement despite initial response. Peripheral IV extravasation with sudden loss of hemodynamic support. Progressive respiratory failure after fluids and ongoing sepsis. Worsening confusion indicating perfusion failure or sepsis progression. Missed antibiotic timing because the team became fixated on the blood pressure. Poor handover causing dose changes, missed site checks, or duplicated fluids.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Continuing reflexive fluid boluses after respiratory cost rises and benefit plateaus.</li>
+<li>Delaying antibiotics while waiting for diagnostic certainty.</li>
+<li>Starting a pressor without considering the monitoring and staffing burden it creates.</li>
+<li>Ignoring peripheral IV site changes during pressor infusion — extravasation can cause rapid tissue injury.</li>
+<li>Assuming a better blood pressure means the patient is truly improving — track perfusion and trend, not just numbers.</li>
+<li>Reducing monitoring intensity for a pressor-dependent patient because of staffing fatigue.</li>
+<li>Failing to communicate the operational sustainability problem to command and teleconsultation early.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>Persistent hypotension after initial fluid resuscitation should prompt deliberate reassessment for pressor-dependent shock.</span></li>
+<li><span class="takeaway-num">02</span><span>Starting norepinephrine is both a clinical decision and a systems decision — line security, pump availability, staffing, and reassessment burden all matter.</span></li>
+<li><span class="takeaway-num">03</span><span>A better blood pressure alone is not enough; perfusion and trend determine whether the patient is truly improving.</span></li>
+<li><span class="takeaway-num">04</span><span>Pressor dependence should lower the threshold for early evacuation planning and teleconsultation.</span></li>
+<li><span class="takeaway-num">05</span><span>If evacuation is delayed, convert immediately to a structured prolonged-hold plan with explicit monitoring, documentation, and handover rhythm.</span></li>
+<li><span class="takeaway-num">06</span><span>The right plan is the plan that can be safely maintained by the actual team you have.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Notes</div>
+<p style="margin-bottom:8px">A patient who is temporarily supported by pressors is not "solved." They are often more fragile, not less, because the plan now depends on continuous maintenance.</p>
+<p style="margin-bottom:8px">Peripheral norepinephrine may be necessary, but it creates a hidden second emergency risk: extravasation. If the line infiltrates and no one notices, tissue injury can occur quickly and the patient may abruptly lose hemodynamic support.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  // check all continue buttons that might depend on this dp
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  // if all answered, show score
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  // close current
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  // open next
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  // scroll
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  // reset all decision points
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  // disable continue buttons
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  // reset score panel
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  // close all stages, open stage 1
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>
