@@ -9,6 +9,7 @@ const ASSETS = [
   './data/procedures.js',
   './data/medications.js',
   './data/sickbay-meds.js',
+  './data/sickbay.js',
   './data/prolonged-holding.js',
   './data/thresholds.js',
   './data/pitfalls.js',
