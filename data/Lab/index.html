@@ -1,1 +1,117 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab References — ACTT Sick Bay</title>
+<style>
+:root {
+  --bg-primary: #0f172a;
+  --bg-card: #243044;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --border: #334155;
+  --radius: 8px;
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-primary); color: var(--text-primary); line-height: 1.6;
+  min-height: 100vh; padding: 0;
+}
+.top-bar {
+  background: #1a2332; border-bottom: 1px solid var(--border);
+  padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+}
+.top-bar h1 { font-size: 1.2rem; font-weight: 700; }
+.back-link {
+  color: var(--accent); text-decoration: none; font-size: 0.9rem; white-space: nowrap;
+}
+.back-link:hover { text-decoration: underline; }
+.subtitle { color: var(--text-secondary); font-size: 0.9rem; padding: 16px 20px 0; }
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px; padding: 16px 20px 40px;
+}
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; text-decoration: none; color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s; display: block;
+}
+.card:hover {
+  border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none;
+}
+.card-title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+.card-desc { color: var(--text-secondary); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <h1>Lab References</h1>
+  <a class="back-link" href="../../index.html#/sickbay">&larr; Back to Sick Bay</a>
+</div>
+<p class="subtitle">Point-of-care lab testing references for the i-STAT analyzer and onboard diagnostics.</p>
+<div class="cards-grid">
+  <a class="card" href="overview.html">
+    <div class="card-title">Overview</div>
+    <div class="card-desc">i-STAT analyzer overview, setup, and navigation basics.</div>
+  </a>
+  <a class="card" href="cartridges.html">
+    <div class="card-title">Cartridges</div>
+    <div class="card-desc">Available cartridge types, storage, and handling.</div>
+  </a>
+  <a class="card" href="cg4plus.html">
+    <div class="card-title">CG4+</div>
+    <div class="card-desc">Blood gas, lactate, and pH cartridge reference.</div>
+  </a>
+  <a class="card" href="chem8plus.html">
+    <div class="card-title">CHEM8+</div>
+    <div class="card-desc">Basic metabolic panel cartridge reference.</div>
+  </a>
+  <a class="card" href="ptinr.html">
+    <div class="card-title">PT/INR</div>
+    <div class="card-desc">Coagulation testing cartridge reference.</div>
+  </a>
+  <a class="card" href="troponin.html">
+    <div class="card-title">Troponin I</div>
+    <div class="card-desc">Cardiac marker testing cartridge reference.</div>
+  </a>
+  <a class="card" href="rapid-troponin.html">
+    <div class="card-title">Rapid Troponin</div>
+    <div class="card-desc">Rapid troponin point-of-care testing.</div>
+  </a>
+  <a class="card" href="monospot.html">
+    <div class="card-title">Monospot</div>
+    <div class="card-desc">Infectious mononucleosis rapid test.</div>
+  </a>
+  <a class="card" href="rapid-strep.html">
+    <div class="card-title">Rapid Strep</div>
+    <div class="card-desc">Group A streptococcus rapid antigen test.</div>
+  </a>
+  <a class="card" href="pregnancy-test.html">
+    <div class="card-title">Pregnancy Test</div>
+    <div class="card-desc">Urine hCG pregnancy test reference.</div>
+  </a>
+  <a class="card" href="qc.html">
+    <div class="card-title">Quality Control</div>
+    <div class="card-desc">QC procedures, lockouts, and liquid controls.</div>
+  </a>
+  <a class="card" href="daily-checks.html">
+    <div class="card-title">Daily Checks</div>
+    <div class="card-desc">Daily i-STAT verification and simulator checks.</div>
+  </a>
+  <a class="card" href="weekly-checks.html">
+    <div class="card-title">Weekly Checks</div>
+    <div class="card-desc">Weekly maintenance and calibration tasks.</div>
+  </a>
+  <a class="card" href="troubleshooting.html">
+    <div class="card-title">Troubleshooting</div>
+    <div class="card-desc">Common errors, fixes, and escalation steps.</div>
+  </a>
+</div>
+</body>
+</html>
