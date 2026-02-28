@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 10 — Shoulder Dislocation During Shipboard Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 10 — Shoulder Dislocation</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 10 of 12</p>
+<h1>Shoulder Dislocation During Shipboard Work</h1>
+<div class="tags">
+<span class="tag tag--orange">Orthopedic Injury</span>
+<span class="tag tag--purple">Procedural Sedation</span>
+<span class="tag tag--cyan">Neurovascular Exam</span>
+<span class="tag tag--red">Reduction</span>
+<span class="tag tag--accent">Operational Decision</span>
+</div>
+<p class="hero-summary">A 29-year-old sailor slips during upper-deck stores handling in moderate sea state, grabs awkwardly with the right arm, and is pulled forward against a rail. He immediately clutches his right shoulder, reports severe pain, and says &lsquo;it popped out.&rsquo; The team must assess an isolated but painful musculoskeletal injury without losing sight of hidden red flags, decide whether to reduce onboard or defer, and manage safe analgesia &mdash; all while remembering that not every casualty needs maximal intervention or urgent evacuation.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Run a shipboard scene assessment for an isolated but painful musculoskeletal injury without losing sight of hidden red flags.</li>
+<li>Decide what must be done on scene before movement and what can safely wait for Sick Bay.</li>
+<li>Perform and document the pre-reduction neurovascular examination and repeat it after every intervention.</li>
+<li>Choose between analgesia only, sedation-assisted reduction, or no reduction onboard.</li>
+<li>Select a reasonable reduction technique for a likely anterior shoulder dislocation and know when to stop.</li>
+<li>Build a safe onboard plan when immediate MEDEVAC is not required but follow-up still matters.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — Upper Deck Injury</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">At 1540 local, the ship is at sea, several hours from the next port. During routine upper-deck stores handling in moderate sea state, a 29-year-old sailor slips while controlling a load, grabs awkwardly with the right arm, and is pulled forward against a rail. There is no report of direct head strike, loss of consciousness, or chest trauma. He immediately clutches his right shoulder, reports severe pain, and says "it popped out."</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial On-Scene Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--ok">Alert, oriented</span></div>
+<div class="vital"><span class="vital-label">Airway/Breathing</span><span class="vital-value vital-value--ok">Normal speech, no distress</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">96</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--ok">138/82</span></div>
+<div class="vital"><span class="vital-label">Shoulder Contour</span><span class="vital-value vital-value--warn">Flattened — deformity</span></div>
+<div class="vital"><span class="vital-label">Distal Pulse</span><span class="vital-value vital-value--ok">Present</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+This scenario is intentionally different from the earlier high-acuity cases. Not every casualty needs helicopter hoist or urgent jetty transfer simply because the injury is painful. The teaching point is disciplined restraint — correct diagnosis framing, careful neurovascular checks, controlled analgesia, and safe technique selection.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+Confirm this is truly an isolated extremity injury and not part of a broader fall/trauma pattern. Control the environment first: prevent a second fall, clear loose gear. Do a fast ABC check before narrowing onto the shoulder.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to Scene Assessment →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">Scene Assessment &amp; Movement Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">The casualty is standing with assistance, pale and anxious, leaning forward slightly, with the right arm held adducted and protected against the body. He refuses to move the shoulder. There is visible flattening of the normal shoulder contour. No major bleeding is seen. He is breathing comfortably and speaking full sentences.</p>
+
+<ul class="action-list">
+<li>Check distal pulse, perfusion, capillary refill.</li>
+<li>Assess motor function: hand grip, finger extension.</li>
+<li>Assess sensation: light touch over deltoid patch and hand (axillary nerve distribution).</li>
+<li>Support the arm in position of comfort.</li>
+<li>Document initial neurovascular exam findings.</li>
+<li>Give simple analgesia if available and appropriate, without creating unnecessary monitoring burden.</li>
+</ul>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">The casualty has an obvious shoulder deformity, intact distal pulses, and preserved hand function. He is hemodynamically stable. What is your immediate plan?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Brief on-scene stabilization — support the arm, perform and document initial neurovascular exam, give simple analgesia, then controlled movement to Sick Bay for further assessment.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Move immediately to Sick Bay with arm supported — perform detailed assessment there.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Attempt shoulder reduction on the upper deck to relieve pain as quickly as possible.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Request urgent helicopter evacuation — this is a significant injury requiring immediate surgical intervention.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. For a stable patient with an isolated shoulder injury, brief on-scene stabilization followed by controlled movement to Sick Bay is the correct approach. The deck is a poor location for sedation or prolonged manipulation. Perform the initial neurovascular exam on scene — this is your baseline.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Getting to Sick Bay quickly is reasonable, but skipping the initial neurovascular exam on scene means you lose the pre-movement baseline. If the neurovascular status changes during transit, you won't know when it happened.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. The upper deck in moderate sea state is a poor environment for reduction attempts, which may require sedation and careful positioning. Move to a controlled environment first.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. An isolated shoulder dislocation with intact neurovascular status is not a helicopter evacuation case. This overreaction uses critical resources unnecessarily and is a key teaching point of this scenario.
+</div>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Note</div>
+The most important bedside actions for orthopedic injuries on a ship are: correct diagnosis framing, careful neurovascular checks, controlled analgesia, and safe technique selection. Do not overescalate for a lower-acuity case.
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Sick Bay Assessment →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Sick Bay Assessment &amp; Working Diagnosis</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">In Sick Bay, the team has a better environment for pain control, monitoring, and a fuller exam. The likely working diagnosis is anterior shoulder dislocation, but the scenario should be taught as a diagnostic checkpoint, not an automatic assumption.</p>
+
+<ul class="action-list">
+<li>Repeat ABCs and obtain baseline vitals.</li>
+<li>Inspect the shoulder for deformity, swelling, skin tenting, ecchymosis, or open injury.</li>
+<li>Palpate gently for clavicle, scapular, proximal humerus, and AC joint tenderness.</li>
+<li>Repeat the neurovascular exam: radial pulse, capillary refill, hand motor function, sensation in axillary nerve distribution and distally.</li>
+<li>Ask for prior dislocations, prior surgery, connective tissue history, and whether this has reduced spontaneously before.</li>
+</ul>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">Sick Bay assessment confirms classic anterior shoulder dislocation with intact neurovascular status. No fracture red flags are identified. What is your management approach?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Proceed with cautious onboard reduction attempt using adequate analgesia and, only if needed, light procedural sedation. The presentation is classic, neurovascular status is intact, and the team can monitor safely.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Provide analgesia, immobilize in a sling, and defer reduction until the ship reaches port for imaging and definitive care.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Proceed immediately with forceful Kocher maneuver to achieve rapid reduction.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Administer deep procedural sedation with ketamine dissociative dose before attempting any examination or reduction.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. A cautious onboard reduction is reasonable when the presentation is classic for uncomplicated anterior dislocation, neurovascular status is intact, the team can monitor safely, and the operator is comfortable with a gentle, lower-force technique.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Immobilization and deferral is a safe option, especially if diagnostic uncertainty remains, sedation risk outweighs benefit, or staffing is thin. The patient tolerating the deformity while awaiting shore assessment is a valid path.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. The Kocher maneuver is specifically rejected in this teaching scenario due to higher complication risk. Use a gentle technique with low complication risk such as external rotation.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Deep dissociative sedation creates a monitoring burden that may exceed what this low-acuity case actually needs. For an uncomplicated shoulder, oversedating the patient can create more risk than the dislocation itself.
+</div>
+</div>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Red-Flag Danger</div>
+Red flags that should push AWAY from routine onboard reduction: suspected fracture-dislocation, open injury, absent distal pulse, progressive neurologic deficit, unclear mechanism, or need for sedation that cannot be safely monitored with current staffing or sea conditions.
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Reduction Attempt →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Reduction Attempt &amp; Post-Reduction Care</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">The decision is made to attempt a cautious onboard reduction using external rotation technique. The patient is positioned supine with the elbow flexed to 90 degrees and the arm adducted. Slow, steady external rotation is applied without jerking. After careful, gradual movement, the patient reports sudden pain relief and a palpable relocation is felt.</p>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">After successful reduction, the patient reports significant pain relief. What is your immediate priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Repeat and document the full neurovascular examination immediately — radial pulse, motor function, sensation. Immobilize in a sling. Reassess pain and vitals.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Immobilize the shoulder in a sling and reassess in 30 minutes.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The reduction was successful — no further examination is needed. Apply a sling and return the sailor to light duties.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Begin full range-of-motion testing to confirm the reduction is complete.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. The post-reduction neurovascular exam is not optional — it must be performed and documented immediately. A new neurologic deficit after reduction is a critical complication. Also reassess for sedation effects if any medications were given.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Immobilization is correct, but delaying the neurovascular exam by 30 minutes risks missing an immediate complication. The exam should happen right after reduction.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Skipping the post-reduction neurovascular exam is a critical error. Return to duties after a dislocation without proper assessment and follow-up planning is unsafe.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Full range-of-motion testing immediately after reduction is painful, unnecessary, and risks re-dislocation. The priority is neurovascular exam, immobilization, and monitoring.
+</div>
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">The post-reduction neurovascular exam is intact. The patient is comfortable in a sling. During reduction, you gave titrated analgesia. What do you watch for now?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Monitor for medication effects (sedation, nausea, vasovagal response), confirm the patient is not quietly becoming more sedated, reassess vitals, and document the full procedure.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Continue pain management and plan for follow-up imaging at the next port.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The procedure is complete — the patient can return to berthing with a sling and follow up when convenient.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Administer prophylactic antibiotics to prevent infection from the reduction procedure.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. Post-procedure monitoring is essential — patients can become quietly more sedated, nauseated, or vasovagal after analgesia and the stress of reduction. Document timing, technique, medications given, and pre/post neurovascular findings.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Pain management and imaging planning are both appropriate, but the immediate priority is ensuring the patient is not having an adverse reaction to medications or the procedure itself.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Sending the patient away without proper monitoring after analgesia administration and a procedural intervention is unsafe. A lower-acuity case still needs a deliberate disposition decision.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. Closed reduction of a shoulder dislocation does not require prophylactic antibiotics. This would be an unnecessary intervention.
+</div>
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Disposition Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Disposition &amp; Follow-Up</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">The patient has had a successful reduction with intact post-procedure neurovascular status. Pain is controlled. The ship is several hours from port. The team must now make a deliberate disposition decision.</p>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">Successful reduction, intact neurovascular exam, pain controlled, stable vitals. The ship is several hours from the next port. What is your disposition plan?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Continue onboard care — sling immobilization, analgesic plan, scheduled reassessments, and arrange follow-up imaging and orthopedic review at the next port.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Request non-urgent transfer at the next port for imaging and specialist assessment.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Request urgent helicopter evacuation to ensure the patient gets imaging as soon as possible.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>No follow-up needed — the dislocation was reduced successfully and the patient is fine.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Optimal. A successfully reduced dislocation with intact neurovascular status does not require urgent evacuation. The correct plan is continued onboard care with a clear reassessment schedule and arranged follow-up at the next opportunity for imaging.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Acceptable. Requesting transfer at the next port is reasonable and may be appropriate if there is concern about associated fracture or if the patient has recurrent dislocations requiring specialist assessment.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. This is the key teaching point of this scenario: not every painful casualty needs urgent evacuation. An isolated, successfully reduced dislocation with intact neurovascular status does not warrant helicopter resources.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Suboptimal. All dislocations require follow-up imaging to rule out associated fractures and plan ongoing rehabilitation. Failing to arrange follow-up is a disposition error.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Re-dislocation during movement or sleep. Missed associated fracture causing delayed complications. Late-onset neurovascular compromise from swelling or positioning. Medication side effects from analgesia given during reduction. Team dismisses the case as &lsquo;minor&rsquo; and skips scheduled reassessments.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Assuming every deformed shoulder is a simple dislocation — failing to consider fracture-dislocation.</li>
+<li>Failing to document the neurovascular exam before trying to reduce.</li>
+<li>Using more sedation than the case requires, creating an avoidable airway-monitoring problem.</li>
+<li>Applying forceful or outdated reduction maneuvers that increase complication risk.</li>
+<li>Calling the case "minor" and skipping reassessment after the reduction attempt.</li>
+<li>Failing to recognize that a lower-acuity case still needs a deliberate onboard disposition decision.</li>
+<li>Requesting urgent evacuation for a stable, successfully reduced dislocation.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>This scenario teaches disciplined restraint — not every painful casualty needs maximal intervention or urgent evacuation.</span></li>
+<li><span class="takeaway-num">02</span><span>The most important bedside actions are correct diagnosis framing, careful neurovascular checks, controlled analgesia, and safe technique selection.</span></li>
+<li><span class="takeaway-num">03</span><span>On a ship, the environment determines whether an otherwise simple reduction is safe to attempt onboard.</span></li>
+<li><span class="takeaway-num">04</span><span>For isolated orthopedic problems, the shipboard decision is often about sustainable care and timing of follow-up, not only emergency extraction.</span></li>
+<li><span class="takeaway-num">05</span><span>Document the neurovascular exam before AND after every reduction attempt — this is not optional.</span></li>
+<li><span class="takeaway-num">06</span><span>A lower-acuity case still needs a deliberate disposition plan including reassessment schedule and follow-up arrangements.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Notes</div>
+<p style="margin-bottom:8px">This scenario is intentionally different from the earlier high-acuity cases. The answer is often NOT immediate MEDEVAC. That is the teaching point.</p>
+<p style="margin-bottom:8px">Not every casualty needs helicopter hoist or urgent jetty transfer simply because the injury is painful.</p>
+<p style="margin-bottom:8px">The most important bedside actions are correct diagnosis framing, careful neurovascular checks, controlled analgesia, and safe technique selection.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  // check all continue buttons that might depend on this dp
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  // if all answered, show score
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  // close current
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  // open next
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  // scroll
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  // reset all decision points
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  // disable continue buttons
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  // reset score panel
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  // close all stages, open stage 1
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>
