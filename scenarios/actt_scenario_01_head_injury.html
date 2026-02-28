@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 01 — Progressive Head Injury After Fall in a Machinery Space</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 1 — Head Injury</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 01 of 12</p>
+<h1>Progressive Head Injury After Fall in a Machinery Space</h1>
+<div class="tags">
+<span class="tag tag--red">TBI</span>
+<span class="tag tag--orange">Airway Risk</span>
+<span class="tag tag--purple">Neuro Monitoring</span>
+<span class="tag tag--cyan">Spinal Precautions</span>
+<span class="tag tag--accent">Evacuation Decision</span>
+</div>
+<p class="hero-summary">A sailor falls in a lower machinery space, striking the head against hard metal. The casualty is initially awake but confused with a bleeding scalp laceration, and the team must decide what to do at the scene, how to extract safely, and when a worsening neurologic trend becomes an airway emergency — all within a cramped, noisy, medically austere shipboard environment.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize a worsening head-injured casualty before complete decompensation occurs.</li>
+<li>Decide what must be done at scene before movement and what can wait until Sick Bay.</li>
+<li>Apply TBI priorities: oxygenation, ventilation, blood pressure protection, temperature control, and serial neurologic reassessment.</li>
+<li>Decide when declining mental status becomes an airway problem rather than a monitoring problem.</li>
+<li>Choose the appropriate evacuation pathway: immediate jetty transfer, hoist, or only a short bridging hold while extraction is arranged.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — The Fall</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">A sailor slips while descending a ladder in the machinery space, falls several feet, and strikes the right side of the head against hard metal. Witnesses report a brief loss of consciousness of a few seconds, followed by groaning and confused speech. When first found, the casualty is awake but disoriented, attempting to sit up, and asking repetitive questions. There is a scalp laceration with moderate bleeding. No obvious catastrophic external hemorrhage is seen. The casualty complains of severe headache and nausea.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial On-Scene Findings</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">GCS</span><span class="vital-value vital-value--warn">13–14</span></div>
+<div class="vital"><span class="vital-label">Speech</span><span class="vital-value vital-value--warn">Confused</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">Tachycardic</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--ok">Normal / Borderline ↑</span></div>
+<div class="vital"><span class="vital-label">Limbs</span><span class="vital-value vital-value--ok">No gross deformity</span></div>
+<div class="vital"><span class="vital-label">C-Spine</span><span class="vital-value vital-value--warn">Uncertain pain</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+The machinery space environment is intentionally chosen because it forces realistic shipboard thinking. The space is hot, noisy, cramped, with metal ladders and limited room to work. The patient cannot simply be wheeled directly into Sick Bay — extraction requires packaging, controlled movement, and role assignment.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+Ensure scene safety first: machinery hazards, heat, rotating equipment, slippery surfaces, and limited footing must be controlled before any clinical care begins. Assign a clinical lead immediately — one person maintains the plan, others perform tasks.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to Scene Priorities →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">Scene Priorities &amp; First Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">The scene is controlled and a clinical lead has been identified. The casualty remains awake but confused, with ongoing scalp bleeding and repetitive questioning. The team must now decide what to do at the scene and when to begin extraction toward Sick Bay.</p>
+
+<ul class="action-list">
+<li>Control scalp bleeding with direct pressure and dressing — do not let the visible laceration distract from intracranial risk.</li>
+<li>Perform a rapid primary survey: airway, breathing, circulation, disability, exposure.</li>
+<li>Take manual cervical spine control if feasible and clinically justified by mechanism plus altered mentation.</li>
+<li>Apply supplemental oxygen if SpO₂ is not clearly adequate or if monitoring is limited at the scene.</li>
+<li>Obtain a rapid neurologic baseline: GCS, pupils, gross limb movement, obvious seizure activity or vomiting.</li>
+<li>Quick glucose check if agitation seems disproportionate — do not let nonessential checks delay extraction.</li>
+</ul>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">The casualty is oxygenating and conscious but confused with GCS 13–14 and a bleeding scalp wound. What is your immediate priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Essential stabilization at scene — control scalp bleeding, apply C-spine precautions, quick neuro baseline, supplemental O₂, package and move to Sick Bay.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Move immediately to Sick Bay — minimal intervention at scene, bleeding control during transport.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Perform complete assessment and workup in the machinery space before any movement.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Focus primarily on controlling the scalp laceration — it's bleeding heavily and is the most visible injury.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+This is correct. The default in this scenario is NOT to fully manage the patient in the machinery space. Do essential interventions — bleeding control, spinal-aware handling, quick neuro baseline, oxygen if needed, packaging — then move toward a better treatment location.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Moving quickly is reasonable if the patient is stable, but skipping even basic stabilization risks missing a rapidly evolving problem. At minimum, control visible bleeding, get a quick neuro check, and provide spinal-aware handling before extraction.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+This is a common error. The machinery space is cramped, noisy, hot, and medically inferior. Prolonged scene time for non-essential tasks delays getting to a better treatment environment. The right answer is rarely to perform an elaborate ICU-style workup in a confined space.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Scalp wounds bleed dramatically and visually dominate the scene, but the laceration is not the main threat. The main threat is secondary brain injury from delayed recognition, hypoxia, hypotension, and unplanned airway loss. Don't let the visible wound distract from the intracranial risk.
+</div>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Note</div>
+The machinery space environment forces the distinction between two common errors: (1) staying too long at scene doing nonessential tasks, and (2) moving too early without addressing an immediately life-threatening deterioration. The right answer lives between these extremes.
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Movement &amp; Extraction →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Movement &amp; Clinical Evolution</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">The team prepares to extract the casualty from the machinery space via ladders and tight corridors to Sick Bay. Movement is a treatment decision — the transfer is not administrative but part of the clinical plan. The patient can worsen during movement, and the route may increase dislodgement, aspiration, or hemodynamic stress.</p>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+Movement is a treatment decision, not an administrative task. The transfer from scene to Sick Bay is part of the clinical plan. Reassess before movement starts and immediately after arrival — a patient who was stable at scene may have changed by the end of extraction.
+</div>
+
+<ul class="action-list">
+<li>Assign roles: one person at the head/airway, one to monitor and assist, one to carry or manage litter, one runner if available.</li>
+<li>Secure the casualty before movement — if spinal concern remains, minimize uncontrolled neck motion without creating dangerous delays.</li>
+<li>Bring immediate airway rescue basics during movement: suction if available, oxygen, BVM, and simple adjuncts.</li>
+<li>Package for movement using the safest available method — Stokes litter or medsled depending on access and vertical movement needs.</li>
+</ul>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">During extraction via ladders and tight corridors, the patient vomits and becomes more confused. What is your priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Pause movement, position for airway protection, suction if available, reassess GCS and airway patency, then continue extraction once airway is secured.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Continue movement quickly to reach Sick Bay faster while keeping the patient turned to side.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Stop extraction entirely and attempt to establish IV access in the current location.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Continue extraction without stopping — getting to Sick Bay is the priority over everything else.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Reassess before continuing. A patient who was stable at scene may have changed during extraction. Vomiting with declining consciousness is an aspiration risk. A brief, controlled pause is safer than rushing through a dangerous moment.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+The urgency to reach Sick Bay is understandable, but continuing movement through a difficult patient moment risks aspiration and further deterioration. A brief pause for airway protection is usually safer than rushing through the event.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+This delays reaching the treatment space for a low-priority intervention. IV access is not the immediate need — airway protection is. Don't confuse doing something medical with doing the right thing at the right time.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Movement is a treatment decision, not an administrative task. Ignoring a deteriorating airway during extraction can turn a manageable patient into a cardiac arrest in a stairwell.
+</div>
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Sick Bay Assessment →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Sick Bay Assessment &amp; TBI Management</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">Once in Sick Bay, the casualty becomes more lethargic. Speech is slower. The patient now opens eyes only to voice, obeys simple commands inconsistently, and localizes pain. One episode of vomiting occurs. Pupils are still reactive, but one may be slightly more sluggish than earlier.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Sick Bay Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">GCS</span><span class="vital-value vital-value--danger">10–11 ↓</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">128 bpm</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">98/64 mmHg</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--warn">92%</span></div>
+<div class="vital"><span class="vital-label">Pupils</span><span class="vital-value vital-value--warn">Sluggish (one side)</span></div>
+<div class="vital"><span class="vital-label">Vomiting</span><span class="vital-value vital-value--danger">Yes</span></div>
+</div>
+</div>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Inflection Point</div>
+This is the inflection point of the case. The issue is no longer just a head injury requiring observation. It is now a deteriorating neurologic casualty who may soon lose airway protection and who requires strict prevention of secondary brain injury.
+</div>
+
+<ul class="action-list">
+<li>Repeat the primary survey from the beginning — do not assume the scene assessment remains valid.</li>
+<li>Airway: determine whether the casualty can still protect the airway, especially after vomiting and declining GCS.</li>
+<li>Breathing: confirm oxygenation and ensure there is no secondary chest issue from the fall.</li>
+<li>Circulation: reassess blood pressure carefully — in TBI, avoiding hypotension is critical.</li>
+<li>Disability: repeat GCS, pupils, and any focal deficits that can be assessed.</li>
+<li>Exposure: look for other missed injuries once the immediate environment is controlled.</li>
+</ul>
+
+<div class="callout callout--teaching">
+<div class="callout-label">TBI Priorities</div>
+<strong>Prevent hypoxia</strong> — maintain oxygenation aggressively; avoid any prolonged desaturation.<br>
+<strong>Prevent hypotension</strong> — maintain SBP above neuroprotective threshold.<br>
+<strong>Avoid hypotonic fluids</strong> — do not worsen cerebral edema through poor fluid choice.<br>
+<strong>Avoid unnecessary hyperventilation</strong> — target controlled range, not driven down unless true herniation signs appear.<br>
+<strong>Elevate head of bed</strong> if feasible once spinal handling priorities are addressed.<br>
+<strong>Treat fever</strong> if present; avoid adding another secondary brain insult.
+</div>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">The patient's GCS has dropped to 10–11 with vomiting and one sluggish pupil. What is your primary management approach?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Apply full TBI bundle — aggressive oxygenation, maintain SBP above neuroprotective threshold, avoid hypotonic fluids, controlled ventilation, head elevation, prepare airway equipment for likely RSI.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Focus on monitoring and reassess in 15 minutes to see if the trend continues.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Administer IV fluids with normal saline bolus and sedate the patient to prevent further agitation.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Hyperventilate aggressively to reduce intracranial pressure immediately.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. This is no longer just a head injury requiring observation. It is a deteriorating neurologic casualty who may soon lose airway protection. Apply all TBI priorities: prevent hypoxia, prevent hypotension, avoid hypotonic fluids, controlled ventilation, and prepare for definitive airway control. Early preparation, not delayed reaction, is what this scenario rewards.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Monitoring is important but passive observation alone at this point risks missing the window for proactive intervention. The scenario is designed to reward early preparation. The question isn't whether to act, but what to prepare for while continuing to assess.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Do not sedate a deteriorating TBI patient casually — you may mistake drug effect for neurologic decline. Fluid choice must be deliberate (avoid hypotonic), and sedation decisions should only follow a clear airway plan, not precede it.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Routine aggressive hyperventilation is harmful. It causes cerebral vasoconstriction and can worsen brain ischemia. Brief rescue hyperventilation is only indicated as a temporizing measure if true herniation signs are present, not as a default treatment for declining GCS.
+</div>
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">The GCS continues to fall toward 8. The patient can no longer follow commands and has recurrent vomiting. What is your airway decision?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Transition to airway control — pre-oxygenate, set up RSI, state backup plan aloud, prepare suction, limit attempts, confirm with EtCO₂.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Place in recovery position, apply high-flow oxygen, and expedite evacuation without intubation.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Insert a simple oropharyngeal airway and continue monitoring — the patient may improve.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Wait for complete loss of consciousness before making any airway intervention.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. When GCS falls toward 8, the patient can no longer protect the airway, and vomiting recurs, this is no longer a monitor-and-transfer patient — it's an airway-control problem. The expected sequence is: pre-oxygenation, airway setup, suction readiness, RSI preparation, strict attempt planning, backup rescue plan stated aloud, and post-intubation confirmation with EtCO₂.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Temporizing measures may be acceptable if evacuation is truly imminent (minutes away), but if transport time is significant, relying on positioning alone with a GCS of 8 and active vomiting is precarious. The risk of uncontrolled aspiration during movement is high.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+A confused, talking casualty can still be on the edge of decompensation. Treating a brief improvement as proof of stability is a listed pitfall in this scenario. An OPA alone doesn't protect against aspiration in an actively vomiting patient with declining consciousness.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Watching a falling GCS without preparing the airway plan is a key pitfall. Waiting until complete decompensation turns a controlled situation into an emergency. This scenario rewards early preparation, not delayed reaction.
+</div>
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Evacuation Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Evacuation Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">The patient is now intubated and hemodynamically borderline. The team must decide on the evacuation strategy. The ship is at sea with helicopter hoist available but weather is marginal. Progressive intracranial deterioration usually pushes toward early transfer — but conditions may force a temporary hold. The airway is controlled, but the underlying intracranial process continues. Every hour matters in a deteriorating TBI.</p>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">The patient is intubated and hemodynamically borderline. You are at sea with helicopter hoist available but weather is marginal. What is your evacuation strategy?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Request immediate helicopter extraction, begin teleconsultation, package for hoist with all tubes and lines secured, prepare team for movement.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Establish organized holding with strict neuro monitoring every 15 minutes while requesting evacuation as soon as weather improves.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Continue to hold and manage onboard — the patient is intubated and currently stable.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Transfer to the jetty immediately if alongside, or hold indefinitely if at sea — there's no urgency since the airway is now controlled.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. A rapidly worsening neurologic casualty should trigger early teleconsultation and early extraction request rather than waiting until decompensation is complete. Even with marginal weather, the request should go in early — it can always be cancelled if conditions are impossible, but you can't get back time lost by waiting.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+If weather truly prevents extraction, organized holding with structured reassessment is the correct bridge. But the key word is "bridge" — this should not be treated as a comfortable long-term plan for a worsening TBI. Continue pressing for extraction.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Progressive intracranial deterioration usually pushes toward early transfer. A short hold may be unavoidable, but it should be treated as a bridge, not as stability. The patient needs definitive neurosurgical care that cannot be provided onboard.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Controlling the airway is not the end of management — it's a step. The underlying intracranial process continues. Delayed transfer for nonessential observation when definitive care is needed is a key error. Every hour matters in a deteriorating TBI.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Further drop in GCS with sudden airway loss. Recurrent vomiting with aspiration. Seizure activity. Pupil asymmetry and impending herniation. Unrecognized hypotension from associated occult injury or poor resuscitation strategy. Deterioration during movement because the team assumed the patient was stable.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Focusing on the scalp laceration and missing the worsening intracranial picture.</li>
+<li>Delaying movement because too many low-yield tasks are attempted in the machinery space.</li>
+<li>Moving too early without stabilizing the immediately dangerous issue first.</li>
+<li>Watching a falling GCS without preparing the airway plan.</li>
+<li>Allowing oxygenation or blood pressure to drift while concentrating only on transport logistics.</li>
+<li>Treating a brief improvement as proof that the patient is stable.</li>
+<li>Waiting too long to request evacuation support.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>A worsening head injury is a trend problem before it becomes a collapse problem.</span></li>
+<li><span class="takeaway-num">02</span><span>The scene goal is essential stabilization plus safe extraction, not prolonged compartment-based management.</span></li>
+<li><span class="takeaway-num">03</span><span>The patient should be moved early to the best treatment environment unless an immediate life threat must be addressed first.</span></li>
+<li><span class="takeaway-num">04</span><span>Falling GCS, vomiting, and worsening mentation convert this from observation to airway-risk management.</span></li>
+<li><span class="takeaway-num">05</span><span>If the patient is worsening, evacuation planning should start early — not after complete decompensation.</span></li>
+<li><span class="takeaway-num">06</span><span>In shipboard care, transport logistics, device security, and communication are part of the medical treatment plan.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Notes</div>
+<p style="margin-bottom:8px">Scalp wounds can bleed dramatically and visually dominate the scene. In this case, the laceration is important, but it is not the main threat. The main threat is secondary brain injury from delayed recognition, hypoxia, hypotension, and unplanned airway loss.</p>
+<p style="margin-bottom:8px">A confused, talking casualty can still be on the edge of decompensation. The team should not confuse the presence of speech with durable stability.</p>
+<p style="margin-bottom:8px">If the scenario is run alongside, the correct lesson is often early transfer. If run at sea, the correct lesson is often early extraction planning plus tight bridge care, not passive observation.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  // check all continue buttons that might depend on this dp
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  // if all answered, show score
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  // close current
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  // open next
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  // scroll
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  // reset all decision points
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  // disable continue buttons
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  // reset score panel
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  // close all stages, open stage 1
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 03 — Major Burn With Inhalation Risk in a Shipboard Fire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 3 — Burn &amp; Inhalation</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 03 of 12</p>
+<h1>Major Burn With Inhalation Risk in a Shipboard Fire</h1>
+<div class="tags">
+<span class="tag tag--red">Burns</span>
+<span class="tag tag--orange">Airway Burn Risk</span>
+<span class="tag tag--purple">Rule of 10s</span>
+<span class="tag tag--cyan">Fluid Titration</span>
+<span class="tag tag--accent">Prolonged Hold</span>
+</div>
+<p class="hero-summary">During a machinery-space fire at sea, a sailor suffers facial burns with soot inhalation, partial-thickness burns across the chest, neck, arms, and hands, and a rapidly worsening airway. The team must decide when to secure the airway before edema makes it impossible, initiate burn fluid resuscitation using the Rule of 10s, manage pain in a critically burned casualty, and plan evacuation or prolonged holding — all within a shipboard environment hours from definitive care.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize when initial fire-scene actions must happen before movement to Sick Bay.</li>
+<li>Identify airway warning signs that support early definitive airway planning in burns and smoke exposure.</li>
+<li>Use the Rule of 10s as an initial fluid starting point, then adjust using urine output and clinical response.</li>
+<li>Decide between immediate local transfer, hoist extraction, or prolonged shipboard holding.</li>
+<li>Anticipate the ongoing workload created by a burned, potentially intubated casualty over the next several hours.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — Shipboard Fire Casualty</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">The ship is at sea in cold conditions, several hours from a practical port diversion. During a small machinery-space fire, a sailor is exposed to heat and smoke while assisting with boundary cooling before the space is made safe. He is removed from the compartment and found sitting against a bulkhead, anxious, in pain, and coughing black-tinged sputum. A damage-control sailor and another crew member are already with him. You are called to the scene with a portable medical bag, oxygen, and radio support, but the full Sick Bay setup is not yet at the casualty location.</p>
+
+<p class="narrative">The casualty is alert but frightened, speaking in short sentences. Facial burns with singed nasal hairs and soot around the mouth are immediately visible. His voice is hoarse with a persistent cough and increasing throat discomfort. Partial-thickness burns are observed across the anterior chest, upper arms, neck, and scattered across both hands. He is progressively more restless and no obvious major external hemorrhage is seen.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial On-Scene Findings</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">122 bpm</span></div>
+<div class="vital"><span class="vital-label">Resp Rate</span><span class="vital-value vital-value--warn">28 /min</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">108/68 mmHg</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--danger">93% (room air)</span></div>
+<div class="vital"><span class="vital-label">Pain</span><span class="vital-value vital-value--danger">9/10</span></div>
+<div class="vital"><span class="vital-label">Voice</span><span class="vital-value vital-value--warn">Hoarse</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+At this stage, the wrong move is to focus on dressings first while underestimating the airway. Burn dressings matter, but in an airway-threatening burn casualty, airway trajectory is often the highest-risk problem. The combination of facial burns, soot, hoarseness, and cough strongly raises concern for inhalation injury. You are trying to answer one question early: is this a patient whose airway may be significantly worse by the time he reaches Sick Bay?
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+The fire scene environment limits sustained care. If the route to Sick Bay is practical and the patient can be moved with oxygen and monitoring support, the preferred approach is brief scene stabilization followed by prompt movement. Burned casualties lose temperature control quickly — expose only as needed for assessment, then protect from heat loss. Assign roles before moving: one at the airway/head, one managing oxygen/monitoring, one managing navigation, one additional helper if available.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to Early Airway Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">Early Airway Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">The team packages and begins moving the casualty toward Sick Bay with oxygen and airway access preserved. Halfway through the route, the patient becomes more hoarse, develops louder coughing, and now struggles to speak full phrases. SpO₂ drops to 91% despite supplemental oxygen. He is more agitated and repeatedly reaches toward his neck and mask.</p>
+
+<p class="narrative">On arrival in Sick Bay, the casualty is placed on the monitor and exposed for a more deliberate assessment. Estimated burn size is roughly 24% TBSA involving anterior chest, neck, bilateral upper arms, and both hands. He now has inspiratory noise, worsening hoarseness, and persistent soot-stained secretions.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Sick Bay Arrival Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">128 bpm</span></div>
+<div class="vital"><span class="vital-label">Resp Rate</span><span class="vital-value vital-value--danger">32 /min</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">104/66 mmHg</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--warn">94% on O₂</span></div>
+<div class="vital"><span class="vital-label">TBSA Burn</span><span class="vital-value vital-value--danger">~24%</span></div>
+<div class="vital"><span class="vital-label">Pain</span><span class="vital-value vital-value--danger">9/10</span></div>
+</div>
+</div>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Inflection Point</div>
+This is the central teaching decision. The patient is not yet in extremis, but the pattern strongly supports progressive airway edema risk: facial burns, soot inhalation, worsening hoarseness, increasing work of breathing, and expected delayed edema. In many burn casualties, the best time to intubate is before the airway becomes anatomically difficult. Waiting for obvious collapse is unsafe.
+</div>
+
+<ul class="action-list">
+<li>Reassess airway aggressively — this patient has progressive signs of inhalation injury.</li>
+<li>Establish vascular access early: large-bore IV preferred; IO acceptable if IV is delayed and patient is deteriorating.</li>
+<li>Begin analgesia cautiously — any sedative or opioid must be paired with airway monitoring readiness.</li>
+<li>Prepare full RSI setup: suction, oxygen, ETT, bougie, confirmation tools, backup airway devices, and surgical airway kit.</li>
+</ul>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">The patient has facial burns, soot inhalation, progressive hoarseness, inspiratory noise, and worsening work of breathing. Do you intubate now or continue to monitor?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Early intubation now — pre-brief the team, prepare RSI with full backup plan, pre-oxygenate, secure the tube with non-adhesive ties appropriate for burned skin, and begin post-intubation sedation immediately.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Prepare all intubation equipment at bedside and closely monitor for any further deterioration, with a low threshold to intervene within the next few minutes.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Wait and see — continue supplemental oxygen and observe. The patient is still conscious and oxygenating, so intubation is not yet indicated.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Focus on burn wound dressings and pain management first — the airway can be addressed once the burns are covered and the patient is more comfortable.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. The safer teaching answer is early intubation now, before swelling progresses. The supporting signs are facial burns, soot, hoarseness, worsening voice, increasing work of breathing, and expected delayed edema. The expected sequence is: pre-brief the team, prepare full RSI setup with backup plan stated aloud, pre-oxygenate, perform RSI, confirm placement with EtCO₂, secure the tube with cotton ties (standard adhesive tape is unreliable on burned tissue), and start post-intubation sedation immediately. A technically successful intubation without sustained sedation creates awareness, agitation, and high risk of accidental extubation.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Preparing all equipment and monitoring closely is reasonable as a very brief bridge, but the trajectory is already clear. The risk is that the airway worsens rapidly during the monitoring period, converting a controlled intubation into a crisis. If this approach is taken, the threshold to proceed must be extremely low and the team must be fully ready.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+In burn casualties, the airway can look acceptable just before it becomes difficult. Waiting for obvious collapse is the primary teaching hazard of this scenario. Trend and anticipation matter more than a single reassuring moment. By the time the patient visibly decompensates, the anatomy may already be too swollen for a safe intubation.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Burn dressings matter, but airway trajectory is the highest-risk problem. Dressings should not delay airway management. A patient with progressive inhalation injury can lose the airway while the team focuses on wounds. Airway before edema is the major procedural lesson.
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Intubation Walkthrough</div>
+<strong>Step 1:</strong> Pre-brief the team — state the indication is progressive airway threat, not current complete obstruction. Name operator, medication support, monitor/recorder, and backup plan.<br>
+<strong>Step 2:</strong> Full RSI setup — suction, O₂, ETT, bougie, confirmation tools, backup devices, surgical airway kit immediately available.<br>
+<strong>Step 3:</strong> Pre-oxygenate and monitor closely — use this oxygenation window.<br>
+<strong>Step 4:</strong> Perform RSI per protocol. If difficulty is encountered, do not burn through repeated attempts while swelling worsens.<br>
+<strong>Step 5:</strong> Confirm with EtCO₂ and clinical confirmation. Secure with cotton ties — not adhesive tape on burned skin.<br>
+<strong>Step 6:</strong> Start post-intubation sedation and analgesia immediately.
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Burn Fluid Resuscitation →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Burn Fluid Resuscitation</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">With the airway now addressed, the team turns to burn resuscitation. The estimated TBSA is 24%. The patient has been tachycardic and borderline hypotensive since the scene, and tissue edema is expected to worsen over the coming hours. Without adequate fluid resuscitation, burn shock will develop. But unmonitored over-resuscitation carries its own dangers — worsening edema, harder ventilation, and harder transfer.</p>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Rule of 10s — Quick Reference</div>
+The Rule of 10s provides a practical starting point for burn fluid resuscitation in adults 40–80 kg: <strong>TBSA% × 10 = initial mL/hr</strong>. For this patient: 24% × 10 = <strong>240 mL/hr</strong> of isotonic crystalloid as the starting rate. This is a starting point only, not a fixed order. The formula must be adjusted based on clinical response — primarily urine output.
+</div>
+
+<ul class="action-list">
+<li>Start isotonic crystalloid at the calculated initial rate (240 mL/hr for 24% TBSA).</li>
+<li>Place Foley catheter so urine output becomes the main bedside resuscitation guide.</li>
+<li>Target urine output of 30–50 mL/hr in an adult as the primary endpoint.</li>
+<li>Adjust rate in roughly 25% increments up or down if output is persistently low or high.</li>
+<li>Watch the neck and chest burns for progressive tightness — circumferential compromise becomes a procedural problem if missed early.</li>
+</ul>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">The patient has ~24% TBSA burns and is tachycardic with borderline hypotension. How do you initiate burn fluid resuscitation?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Apply Rule of 10s — start isotonic crystalloid at 240 mL/hr, place Foley catheter, titrate to urine output of 30–50 mL/hr, and reassess rate at regular intervals.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Start a generous IV fluid infusion of normal saline and monitor the patient clinically, adjusting based on general appearance and vitals.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Give aggressive wide-open IV fluid boluses to rapidly restore circulating volume — the patient is clearly in shock and needs maximal resuscitation.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Withhold IV fluids for now — the patient's blood pressure is still present, and excessive fluids could worsen tissue edema and complicate ventilation.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. The Rule of 10s gives a practical starting rate. Placing a Foley early is essential — without urine output data, fluid titration becomes much less reliable. The formula is a starting point, not a fixed rate. Titrate based on response: increase by ~25% if urine output is persistently low, decrease by ~25% if persistently high. Avoid fluid creep — burn casualties can become more edematous, harder to ventilate, and harder to transfer if fluid is poured in without repeated reassessment.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Starting fluids is correct, but without a calculated starting rate and a Foley for urine output monitoring, the risk of both under- and over-resuscitation increases. Clinical appearance alone is insufficient to guide burn fluid titration over hours. A structured approach with measurable endpoints is preferred.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Aggressive wide-open boluses without monitoring create fluid overload risk. Burn casualties can become progressively more edematous, harder to ventilate, and significantly harder to transfer. The Parkland formula and Rule of 10s exist specifically because uncontrolled resuscitation causes harm. Fluid creep is a recognized and dangerous complication.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Withholding fluids in a 24% TBSA burn is dangerous. Without resuscitation, burn shock will develop and compound the existing hemodynamic instability. The concern about edema is valid but is managed through titration, not fluid avoidance. Under-resuscitation is immediately life-threatening in major burns.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">Fluid Creep Warning</div>
+Burn casualties can become more edematous, harder to ventilate, and harder to transfer if fluid is poured in without repeated reassessment. Use urine output as your primary guide. The formula is a starting point — not a fixed order for the next several hours.
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Sick Bay Management →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Sick Bay Management — Pain, Sedation &amp; Prolonged Hold</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">The airway is secured and fluids are running at the calculated rate. However, the work is far from over. The patient requires continuous sedation and analgesia, the tube must remain secured on burned tissue, urine output needs repeated reassessment, and the team must plan for what may become a prolonged holding situation lasting up to 72 hours if weather or distance prevent timely evacuation.</p>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Medication Integration</div>
+<strong>Analgesia:</strong> Even intubated burn patients require ongoing analgesia — sedation alone is not pain control. Low-dose ketamine is often attractive for its analgesic properties without the same hypotension risk. Opioids may be used but their respiratory burden must be weighed if the airway were not yet secured.<br>
+<strong>Sedation:</strong> Post-intubation sedation should be continuous or deliberately re-dosed on schedule. Do not wait for severe agitation to restart sedation.<br>
+<strong>Supportive:</strong> Ondansetron for nausea. If soot and secretion burden are high, suction planning matters as much as drug choice.
+</div>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">The patient is intubated with a secured airway. How do you manage pain control, tube security, and ongoing monitoring in a burn casualty with damaged skin?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Start continuous or scheduled analgesia and sedation, secure the ETT with cotton ties (not adhesive tape on burned skin), maintain suction readiness, monitor urine output hourly, and reassess burns and ventilation at regular intervals.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Administer pain medication as needed and monitor the patient, checking the tube position when able and adjusting care based on how the patient appears.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The airway is secured, so focus entirely on wound care and dressings — the critical phase has passed and the patient now mainly needs burn treatment.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Provide heavy sedation to keep the patient deeply unconscious and minimize all movement — this reduces the risk of accidental extubation.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. A burn casualty who is intubated but poorly sedated is not stabilized — the plan is incomplete. Continuous or scheduled analgesia addresses pain, not just awareness. Tube securement with ties rather than adhesive is critical on weeping or burned skin. Hourly urine output guides ongoing fluid titration, and regular reassessment of ventilation and burn progression catches complications before they become emergencies.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+PRN pain management and intermittent monitoring are better than nothing, but a burn patient requires structured, scheduled care. Waiting for breakthrough pain or agitation before medicating creates cycles of distress and risk. Structured intervals for reassessment and medication dosing are more reliable.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Securing the airway is a step, not the end of management. The intubated burn patient has ongoing needs: sedation, analgesia, fluid titration, ventilation monitoring, tube security checks, temperature management, and complication surveillance. Focusing only on wound care neglects the most dangerous ongoing risks.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Deep unmonitored sedation carries its own dangers — hypotension, loss of protective reflexes, and masking of clinical changes. The goal is adequate, titrated sedation and analgesia, not chemical paralysis of all awareness. Sedation must be balanced against hemodynamic stability and the ability to detect clinical deterioration.
+</div>
+</div>
+
+<p class="narrative" style="margin-top:16px">Hours pass with no realistic evacuation window. Sea state and distance prevent helicopter hoist, and port diversion is not practical. The scenario converts into a prolonged-hold burn case — potentially up to 72 hours. This immediately raises the team's workload and forces structured planning.</p>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">Evacuation is delayed up to 72 hours. How does the team manage the prolonged holding burden for this critically burned, intubated casualty?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Establish a structured reassessment rhythm — hourly urine output, scheduled sedation/analgesia, regular vitals, device security checks, wound reassessment, temperature control, and early teleconsultation with a burn center.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Continue current management and check on the patient frequently, adjusting care as needed based on how things look at each visit.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>The patient is intubated and fluids are running — the team can maintain a watch and intervene only if something clearly changes.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Reduce monitoring frequency to conserve team resources — the next 72 hours is mainly about waiting for evacuation, not active management.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Prolonged holding of a major burn patient is survivable, but only if the team treats it as an active care plan, not a waiting period. Structured reassessment rhythm includes: urine-output-guided fluid titration, sedation and analgesia continuity, airway and device security checks, temperature control, wound reassessment, and teleconsultation for remote expert guidance. Document exact times and trends for handover.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Frequent checks and adjustments are better than passive observation, but without a structured schedule, critical tasks can be missed — especially across crew watch rotations. Explicit reassessment intervals and documented checklists reduce drift and omission during prolonged holding.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+A major burn patient's condition evolves continuously. Fluid needs change, sedation wears off, tubes can loosen on burned skin, edema progresses, and temperature regulation fails. Reactive management that waits for visible change misses the gradual drift that causes preventable deterioration.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Reducing monitoring is the opposite of what prolonged holding requires. The workload increases, not decreases, when evacuation is delayed. Crew fatigue is real, but the answer is structured watch rotations, not reduced vigilance. A burned, intubated casualty left under-monitored for hours will deteriorate.
+</div>
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Evacuation Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Evacuation &amp; Transfer Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">Weather has improved enough that helicopter hoist extraction is now feasible, though conditions remain demanding. The casualty is intubated, on IV fluids with Foley monitoring, and receiving continuous sedation and analgesia. The team must now decide on the evacuation strategy — considering that a hoist is not just a transport issue but increases the importance of tube security, sedation continuity, and concise handover.</p>
+
+<div class="callout callout--operational">
+<div class="callout-label">Evacuation Branches</div>
+<strong>Branch A — Alongside:</strong> If alongside with ambulance available, priority is early transfer after initial stabilization. Do not delay for low-yield onboard tasks.<br>
+<strong>Branch B — Helicopter Hoist:</strong> Hoist adds time, movement, and equipment-security demands. Package the casualty to tolerate movement with all devices secured. Sedation continuity and tube security become even more critical.<br>
+<strong>Branch C — Prolonged Hold (up to 72 hr):</strong> If extraction remains impossible, maintain the active care plan. This branch is survivable only if treated as an ongoing management problem, not a waiting period.
+</div>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">Helicopter extraction is now available. The patient is intubated with ongoing IV resuscitation and sedation. What is your evacuation strategy?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Package for hoist with all tubes, lines, and dressings secured. Ensure sedation is adequate for movement. Prepare a concise handover including TBSA, airway status, fluid rate, urine output trend, medications given, and vitals trajectory.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Request extraction and prepare the patient for transfer, focusing primarily on getting the patient off the ship as quickly as possible once the helicopter arrives.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Continue holding onboard — the patient is stable with the current management and helicopter hoist adds risk to a fragile patient.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Delay evacuation to complete further wound care and optimize the patient's condition before transfer — there's no rush now that the airway is controlled.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Hoist preparation requires deliberate packaging: all airway devices, oxygen, lines, and dressings must be secured for vertical and lateral movement. Sedation must be adequate to tolerate the stress of transfer. A concise handover with estimated TBSA, current airway status, current fluid rate, urine output trend, vitals, and realistic shipboard limits enables the receiving team to continue care seamlessly. Documentation of exact times, medications, and trend changes is essential.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Speed is important, but rushing transfer preparation risks device dislodgement, inadequate sedation during hoist, and a poor handover. A few extra minutes of deliberate packaging and structured handover significantly reduce complications during and after extraction.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+A major burn patient with inhalation injury needs definitive burn center care that cannot be provided onboard. Every additional hour of holding increases the cumulative risk of complications. When extraction becomes available, it should be used — the shipboard team's job is to stabilize and transfer, not to provide definitive burn management.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Controlling the airway is not the end of the urgency — it is a stabilization step. Wound care optimization before transfer is a low-yield reason to delay extraction in a major burn with inhalation injury. The patient needs a burn center, and the weather window may not last. Delaying for non-essential tasks risks losing the evacuation opportunity.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Delayed airway edema if the team waited too long to intubate. Accidental extubation if the tube is secured poorly on burned skin. Fluid overload with worsening edema and ventilation burden if the formula is treated as fixed. Under-resuscitation if urine output is not tracked or the Foley is nonfunctional. Pain and agitation causing device dislodgement or loss of team control. Heat loss and secondary physiologic deterioration if exposure is not managed.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Waiting too long to secure the airway — the airway can look acceptable just before it becomes impossible.</li>
+<li>Focusing on burn dressings while underestimating the progressive airway threat.</li>
+<li>Treating the Rule of 10s as a fixed fluid order rather than a starting point requiring titration.</li>
+<li>Fluid overload from unmonitored resuscitation, worsening edema and ventilation burden.</li>
+<li>Under-resuscitation because urine output is not tracked or the Foley is not placed.</li>
+<li>Securing the ETT with adhesive tape on burned or weeping skin, leading to accidental extubation.</li>
+<li>Providing sedation without analgesia — an intubated burn patient is not pain-free just because they are sedated.</li>
+<li>Treating prolonged holding as a waiting period rather than an active care plan.</li>
+<li>Delaying evacuation for low-yield wound care when a transfer window is available.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>Recognize inhalation injury early and decide on airway control before edema worsens — the best time to intubate is before the airway becomes anatomically difficult.</span></li>
+<li><span class="takeaway-num">02</span><span>Use rapid scene priorities, then move deliberately to the best treatment location without unnecessary delay.</span></li>
+<li><span class="takeaway-num">03</span><span>Start burn fluids with a formula (Rule of 10s), then let urine output and clinical response drive adjustments.</span></li>
+<li><span class="takeaway-num">04</span><span>Plan evacuation and prolonged holding early — the transport branch changes the workload immediately.</span></li>
+<li><span class="takeaway-num">05</span><span>In shipboard burn care, anticipation prevents the most dangerous failures. Trend matters more than any single reassuring moment.</span></li>
+<li><span class="takeaway-num">06</span><span>Movement on the ship should be thought of as a medical intervention with risks, not just a transport chore.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Teaching Pearls</div>
+<p style="margin-bottom:8px">In burn cases, the airway can look acceptable just before it becomes difficult. That is why trend and anticipation matter more than a single reassuring moment.</p>
+<p style="margin-bottom:8px">The Rule of 10s is a practical entry point, not a substitute for reassessment. A burn casualty who is intubated but poorly sedated is not stabilized — the plan is incomplete.</p>
+<p style="margin-bottom:8px">If consulting remotely, have ready: estimated TBSA, airway findings, current airway status, current fluid rate, urine output trend, vitals, and realistic shipboard limits.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>

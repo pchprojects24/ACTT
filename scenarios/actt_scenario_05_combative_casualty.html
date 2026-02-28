@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 05 — Combative Casualty With Possible Hypoxia, Hypoglycemia, or Head Injury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 5 — Combative Casualty</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 05 of 12</p>
+<h1>Combative Casualty With Possible Hypoxia, Hypoglycemia, or Head Injury</h1>
+<div class="tags">
+<span class="tag tag--red">Agitation</span>
+<span class="tag tag--orange">Safety First</span>
+<span class="tag tag--purple">Sedation</span>
+<span class="tag tag--cyan">Hidden Medical Causes</span>
+<span class="tag tag--accent">Differential Diagnosis</span>
+</div>
+<p class="hero-summary">A sailor is found violently agitated on a lower deck after a possible fall. He is diaphoretic, incoherent, and swatting at helpers. The team must safely control the scene, identify hidden medical causes of combative behaviour — including hypoglycemia, hypoxia, and traumatic brain injury — decide when chemical restraint is appropriate, and plan disposition in a cramped shipboard environment where moving an uncontrolled patient creates its own dangers.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize that agitation or violence may be the presenting sign of a medical emergency rather than a purely behavioral issue.</li>
+<li>Apply a safe sequence of verbal de-escalation, physical control, chemical restraint, reassessment, and escalation to airway control when required.</li>
+<li>Identify hidden causes of combative behavior, especially hypoxia, hypoglycemia, traumatic brain injury, sepsis, intoxication, or delirium.</li>
+<li>Decide what must be done at the scene, what can wait until movement to Sick Bay, and when transfer itself creates unacceptable risk.</li>
+<li>Integrate medication choice, monitoring burden, and shipboard manpower limits into the care plan.</li>
+<li>Plan evacuation or prolonged holding based on response to treatment, clinical drift, and the ability to monitor safely over time.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — Agitated Sailor</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">A 34-year-old sailor is reported to be "going wild" after being found sitting on the deck near a ladder well. Witnesses state he may have slipped earlier, but nobody saw the exact mechanism. He is diaphoretic, shouting incoherently, swatting at helpers, and trying to stand. One sailor reports he "hit his head" and seemed briefly dazed. Another reports he had complained of not feeling well during the watch. There is no clear history of intoxication.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial On-Scene Findings</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Appearance</span><span class="vital-value vital-value--danger">Pale, sweaty, aggressive</span></div>
+<div class="vital"><span class="vital-label">Speech</span><span class="vital-value vital-value--danger">Incoherent shouting</span></div>
+<div class="vital"><span class="vital-label">Cooperation</span><span class="vital-value vital-value--danger">Combative, striking out</span></div>
+<div class="vital"><span class="vital-label">Limbs</span><span class="vital-value vital-value--warn">Moving all, poorly cooperative</span></div>
+<div class="vital"><span class="vital-label">Scalp</span><span class="vital-value vital-value--warn">Abrasion R temple</span></div>
+<div class="vital"><span class="vital-label">Bleeding</span><span class="vital-value vital-value--ok">No massive external</span></div>
+</div>
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+The patient is in a machinery-adjacent compartment on a lower deck. Passageways are narrow, noise is significant, and the compartment is warm. Two sailors are trying to keep the patient from striking himself and others. The patient is unsafe where he is, but moving an uncontrolled patient through tight passageways can worsen injury and endanger the team.
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+This is a safety and medical control problem at the same time. The first task is to prevent immediate harm while rapidly identifying reversible causes that will change management within seconds to minutes. Combative behavior is a presentation, not a diagnosis — the dangerous behavior is often the entry condition, not the underlying problem.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to Safety &amp; Initial Approach →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">Safety &amp; Initial Approach</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">The clinical lead arrives on scene. The patient remains highly agitated, attempting to strike the team and lunge toward the hatch. Before any clinical assessment can begin, the team must establish control of the scene and the patient. A brief verbal de-escalation attempt is appropriate, but it must be short and realistic.</p>
+
+<ul class="action-list">
+<li>One clinical lead takes control and states immediate priorities: safety, quick reversible causes, controlled sedation if needed, then movement to Sick Bay.</li>
+<li>Assign two personnel to limb control and fall prevention.</li>
+<li>Assign one person to prepare oxygen, monitor, and glucometer.</li>
+<li>Assign one person to prepare ketamine and restraints.</li>
+<li>Attempt brief verbal de-escalation: calm, low-complexity statements — "Stay still. We are helping you. Do not stand up."</li>
+<li>Remove unnecessary noise and extra people from the immediate space.</li>
+</ul>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Safety Priority</div>
+Protect the patient from falls, strikes, and further head trauma. Protect the team from assault or uncontrolled movement. Do not pin the patient prone if it can be avoided. Do not compress the neck or obstruct the airway. Avoid positions that restrict chest excursion.
+</div>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">You arrive to find a violently agitated sailor in a cramped compartment. Two sailors are struggling to contain him. What is your immediate priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Ensure scene safety first — take control as clinical lead, organize the team with assigned roles (limb control, equipment preparation, restraint readiness), contain the patient safely, then begin rapid assessment.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Approach with partial safety measures — have nearby sailors help hold the patient while you attempt a quick focused assessment and glucose check simultaneously.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Rush in to physically restrain the patient immediately with whoever is available, without coordinating roles or establishing a team plan.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Attempt to perform a full medical assessment alone, approaching the combative patient without a safety plan or team coordination.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Scene control matters as much as medication choice. One clinical lead must take control and clearly assign roles before approaching the patient. Too many unassigned personnel in a tight compartment increase risk. The organized approach — safety first, then rapid assessment — prevents injury to both the team and the patient while enabling faster identification of reversible causes.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+This partially addresses safety, but without clear role assignment and team coordination, the scene can become chaotic. Getting a glucose check early is good thinking, but the approach is more likely to result in injury or failed assessment if the patient is truly violent. An organized team approach is safer and more efficient.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Uncoordinated physical restraint is dangerous for both the team and the patient. Without assigned roles, people get in each other's way, the patient's airway may be compromised by poor positioning, and the risk of secondary injury increases. Control requires coordination, not just force.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Approaching a violently combative patient alone and without a safety plan puts the clinician at serious risk of injury and prevents effective assessment. A combative patient will not cooperate with a solo examiner, and the clinician may become a casualty themselves. Team-based control must precede clinical assessment.
+</div>
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Identifying Hidden Causes →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Identifying Hidden Medical Causes</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">While the team has partial physical control, a rapid point check is performed. The airway is patent — the patient is shouting incoherently. Breathing is fast and shallow with no obvious cyanosis. Radial pulse is present and rapid. There is altered mental status and a scalp abrasion over the right temple. The critical finding: <strong>immediate glucose reads 2.8 mmol/L — the patient is hypoglycemic.</strong></p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Rapid Assessment Under Partial Control</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Airway</span><span class="vital-value vital-value--warn">Patent, shouting</span></div>
+<div class="vital"><span class="vital-label">Breathing</span><span class="vital-value vital-value--warn">Fast &amp; shallow</span></div>
+<div class="vital"><span class="vital-label">Pulse</span><span class="vital-value vital-value--warn">Radial present, rapid</span></div>
+<div class="vital"><span class="vital-label">Glucose</span><span class="vital-value vital-value--danger">2.8 mmol/L (LOW)</span></div>
+<div class="vital"><span class="vital-label">Mental Status</span><span class="vital-value vital-value--danger">Altered, incoherent</span></div>
+<div class="vital"><span class="vital-label">Scalp</span><span class="vital-value vital-value--warn">Abrasion R temple</span></div>
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note</div>
+This is the first major reveal. Hypoglycemia is a clearly treatable contributor — but it does not rule out concurrent head injury or another cause. The case should now be treated as altered mental status with combative behavior, not merely "behavioral agitation." The patient is too combative for safe oral intake and too uncontrolled for precise IV access right away. Oral glucose is not appropriate because the patient is altered, combative, and aspiration risk is significant.
+</div>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">You've gained partial physical control. The patient remains violently agitated with altered mental status. How do you approach differential diagnosis?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Systematic approach — check glucose, assess SpO₂ when possible, consider TBI given the scalp abrasion and witnessed fall, look for signs of sepsis or intoxication, and treat the agitation as a medical emergency with multiple possible causes requiring a structured differential.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Check glucose and SpO₂ quickly but defer the broader differential until the patient is sedated and in Sick Bay for a full workup.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Assume this is a psychiatric or behavioral crisis based on the violent presentation, and manage accordingly with restraint and observation.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Immediately sedate the patient to gain full control, then perform medical workup after sedation takes effect — reversible causes can wait.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Combative patients are easy to mislabel as behavioral problems. In naval practice, this can delay treatment of hypoxia, hypoglycemia, traumatic brain injury, sepsis, or intoxication. A systematic approach that checks for reversible causes — especially glucose and oxygenation — while considering the mechanism for head injury is the standard of care. The dangerous behavior is the entry condition, not the diagnosis.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Checking glucose and SpO₂ early is good prioritization of the most rapidly reversible causes. However, deferring the broader differential entirely risks missing the significance of the head injury mechanism and other contributors. A brief systematic screen even at scene improves early management.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+This is one of the key errors this scenario is designed to prevent. Assuming a psychiatric cause without medical workup delays treatment of potentially life-threatening reversible conditions. This patient has a scalp abrasion from a possible fall, a glucose of 2.8 mmol/L, and altered mental status. These are medical emergencies, not behavioral problems.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Sedating without first checking for rapidly reversible causes like hypoglycemia is dangerous. If the glucose is 2.8 mmol/L, sedation without correction may worsen brain injury from ongoing hypoglycemia. Additionally, sedation can obscure neurologic findings from a possible head injury, making subsequent assessment much harder. Check for reversible causes first.
+</div>
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Sedation Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Sedation &amp; Post-Sedation Monitoring</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">The patient has failed verbal de-escalation, remains dangerous, and is preventing essential treatment including IV access for glucose correction. Safe IV access is not achievable at scene due to violent movement. Chemical restraint is indicated — not for convenience, but because the patient remains dangerous, blocks essential treatment, and cannot be safely transported. The lead chooses ketamine IM for rapid control.</p>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Medication Notes</div>
+<strong>Ketamine IM</strong> is often useful in violent agitation because it acts quickly and generally preserves blood pressure better than many alternatives, but it still requires airway monitoring.<br>
+<strong>Midazolam</strong> may be used as an adjunct, but it increases respiratory depression risk and may obscure neurologic reassessment.<br>
+<strong>Any sedative</strong> given to a head-injured or metabolically abnormal patient should trigger a lower threshold for continuous observation.
+</div>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">The patient has failed verbal de-escalation, IV access is not possible due to violent movement, and you have confirmed hypoglycemia plus possible head injury. What is your chemical restraint approach?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Administer ketamine IM for rapid control, state aloud that the patient may have a head injury and that sedation must be followed by airway monitoring, then immediately move to gain IV/IO access for glucose correction once the patient is controllable.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Administer midazolam IM as chemical restraint, then attempt IV access for glucose correction once patient is calmer.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Continue physical restraint only, avoid all chemical sedation because of the possible head injury, and attempt glucose correction via oral route when the patient tires out.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Sedate heavily with multiple agents to ensure complete control, then address glucose and head injury workup later once the patient is fully unconscious.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Ketamine IM is a practical shipboard option — it works quickly, usually preserves blood pressure better than many alternatives, and avoids the delay of negotiating prolonged restraint in a tight compartment. Critically, the team states the airway monitoring requirement aloud before administration. Once the patient is controllable, the immediate next step is IV/IO access for glucose correction, which is the known reversible cause.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Midazolam is a reasonable alternative in some settings, but it adds more respiratory depression risk than ketamine and may be slower to resolve immediate violent agitation. It also makes subsequent neurologic reassessment harder. If used, even closer airway monitoring is needed, and the clinician must be prepared for deeper sedation than intended.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Prolonged physical restraint alone in a tight compartment is exhausting for the team, dangerous for the patient's airway if positioning is poor, and delays essential treatment. Oral glucose in an altered, combative patient with significant aspiration risk is contraindicated. Chemical restraint here is a medical intervention that enables life-saving care, not a convenience measure.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Heavy multi-agent sedation without addressing the known reversible cause (hypoglycemia) increases the risk of respiratory depression, airway loss, and worsened brain injury from ongoing metabolic insult. It also eliminates the ability to reassess neurologic status. Sedation should enable treatment, not replace it. The glucose must be corrected promptly.
+</div>
+</div>
+
+<p class="narrative" style="margin-top:16px">After ketamine takes effect, the patient becomes controllable. The team moves immediately to gain IV/IO access and begins glucose correction. The patient is packaged with restraints, suction, oxygen, monitor, and airway backup, then moved to Sick Bay.</p>
+
+<div class="callout callout--operational">
+<div class="callout-label">Movement Considerations</div>
+Before moving: secure the patient with appropriate restraints and enough personnel. Protect the cervical spine if there is concern for significant fall mechanism. Bring suction, oxygen, monitor, and airway backup with the patient — do not send these separately. Reassess immediately before movement and again on arrival. Brief the movement route before lifting.
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">The patient is now sedated with ketamine IM and has arrived in Sick Bay. Glucose has been corrected but mental status has not returned to baseline — he remains confused, has vomited once, and GCS is approximately 11–12. What is your monitoring and reassessment priority?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Place on continuous monitoring (SpO₂, HR, BP, rhythm), perform focused trauma exam with attention to head/neck/pupils/neuro status, document GCS trend, recheck glucose, actively reassess for hypoventilation, airway loss, and progressive TBI — recognize that persistent altered mental status after glucose correction means the reversible trigger was not the whole story.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Place on monitoring, confirm glucose normalized, and observe with GCS checks every 30 minutes while attributing the residual confusion to sedation effect.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Since glucose has been corrected and the patient is calmer, reduce monitoring and allow the patient to sleep off the sedation before further assessment.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Administer additional sedation to keep the patient fully controlled, and delay neurologic reassessment until the patient wakes naturally.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. This is a second major teaching point: a reversible trigger was present (hypoglycemia), but it was not the whole story. The patient has equal but sluggish pupils, has vomited, localizes pain, and has a GCS of 11–12 that may drift downward. The scalp abrasion and witness history keep head injury high on the differential. Sedation can improve behavior while hiding deterioration — a quieter patient is not necessarily a better patient. Active reassessment for progressive TBI and airway compromise is essential.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Monitoring and glucose recheck are correct, but attributing persistent altered mental status solely to sedation is risky. Ketamine's sedation effect should begin to wane, and if confusion persists or worsens, the clinician must consider progressive TBI or other causes. GCS checks every 30 minutes may be too infrequent for a patient with this clinical trajectory.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Reducing monitoring after sedation in a patient with possible head injury and persistent altered mental status is dangerous. Sedation can mask neurologic deterioration. The patient has vomited, has sluggish pupils, and did not normalize after glucose correction. This requires increased vigilance, not decreased monitoring. "Sleeping off sedation" can look identical to worsening brain injury.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Additional sedation without reassessing the underlying cause compounds the problem. If the patient has a progressive intracranial process, further sedation will mask all clinical signs of deterioration, delay recognition of herniation or airway loss, and eliminate the ability to track neurologic trends. Reassessment must precede any further sedation decision.
+</div>
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Disposition &amp; Evacuation →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Disposition &amp; Evacuation</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">The patient remains in Sick Bay with persistent altered mental status despite glucose correction. GCS is 11–12, pupils are equal but sluggish, and he has vomited once. He is not in immediate pre-arrest collapse, but he is not stable enough to dismiss. The ship is at sea with helicopter hoist available. The team must decide on disposition.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Sick Bay Status — Post Correction</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">GCS</span><span class="vital-value vital-value--warn">11–12 (not improving)</span></div>
+<div class="vital"><span class="vital-label">Glucose</span><span class="vital-value vital-value--ok">Corrected, normalized</span></div>
+<div class="vital"><span class="vital-label">Pupils</span><span class="vital-value vital-value--warn">Equal, sluggish</span></div>
+<div class="vital"><span class="vital-label">Vomiting</span><span class="vital-value vital-value--warn">One episode</span></div>
+<div class="vital"><span class="vital-label">Behaviour</span><span class="vital-value vital-value--warn">Confused, drowsy</span></div>
+<div class="vital"><span class="vital-label">Pain Response</span><span class="vital-value vital-value--warn">Localizes</span></div>
+</div>
+</div>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">The patient has persistent altered mental status after glucose correction, possible head injury, and GCS 11–12 that may drift downward. What is your disposition strategy?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Begin urgent evacuation planning — request hoist extraction early, initiate teleconsultation, package for transfer with restraints and airway equipment, set explicit neurologic reassessment and airway escalation triggers while preparing for transfer.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Establish organized holding with strict neuro checks every 15 minutes, prepare for possible evacuation, and escalate the request if the patient deteriorates further.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Continue onboard observation — the glucose is corrected and the patient is no longer combative, so the immediate crisis is resolved. Monitor and reassess in a few hours.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Wait for the patient to either improve or clearly deteriorate before making an evacuation decision — the current status is too ambiguous to act on.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Persistent altered mental status after glucose correction plus possible head injury requires urgent evacuation planning. The patient can remain in Sick Bay briefly while packaging and coordination occur, but the extraction request should go in early — it can always be cancelled, but you cannot get back time lost by waiting. Communicate early that this is a medically unstable altered patient, not just a discipline issue. Handover must include exact sedatives used, timing, glucose values, correction given, and the current neurologic trend.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Organized holding with frequent neuro checks is a reasonable bridge if operational constraints delay evacuation. However, the key word is "bridge" — this should not become a comfortable long-term plan. Persistent altered mental status after suspected head injury can deteriorate unpredictably, and waiting for clear deterioration before requesting extraction wastes critical time. Continue pressing for early evacuation.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+The glucose correction resolved one contributor, but the patient's mental status has not normalized. This is the central teaching point of this phase: if mental status does not normalize after treating a reversible trigger, keep searching for the true or additional cause. A quieter patient is not necessarily a better patient. Persistent altered mental status after possible head injury should push evacuation planning early, not passive observation.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Waiting for unambiguous deterioration before acting is a common error in these scenarios. Progressive TBI can be subtle before it becomes catastrophic. If the patient trends toward GCS 8 or lower, begins repeated vomiting, or loses airway protection, the clinical problem changes from "altered patient" to "airway-risk head injury." By then, evacuation may be much harder to arrange in time. Early planning is safer than late reaction.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">What Could Go Wrong Next</div>
+Rebound agitation as ketamine effect wanes. Progressive TBI that becomes more obvious only after hypoglycemia is corrected. Aspiration after vomiting in a sedated patient. Airway compromise from over-sedation or worsening neurologic decline. Unsafe movement if the patient re-escalates during transport. False reassurance because the patient is quieter but actually worsening.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Mislabeling combative behavior as a psychiatric or behavioral problem without medical workup.</li>
+<li>Approaching a violent patient alone or without an organized team plan.</li>
+<li>Sedating without first checking for rapidly reversible causes such as hypoglycemia and hypoxia.</li>
+<li>Assuming the patient is stable because they are quieter after sedation — sedation can mask deterioration.</li>
+<li>Treating glucose correction as the end of care and stopping reassessment once the number normalizes.</li>
+<li>Delaying evacuation planning because the patient "seems better" despite persistent altered mental status.</li>
+<li>Using prone positioning or neck compression during restraint, impairing breathing or airway.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>Combative behavior is a presentation, not a diagnosis. Look for the medical cause behind the dangerous behavior.</span></li>
+<li><span class="takeaway-num">02</span><span>Scene safety and medical stabilization may both need to happen before movement through the ship.</span></li>
+<li><span class="takeaway-num">03</span><span>Look early for reversible causes — especially hypoglycemia and hypoxia — before attributing agitation to behavior.</span></li>
+<li><span class="takeaway-num">04</span><span>Chemical restraint is appropriate when the patient is dangerous and preventing essential care. It is a medical intervention, not a convenience measure.</span></li>
+<li><span class="takeaway-num">05</span><span>A calmer patient after sedation still needs active reassessment. Sedation can improve behavior while hiding deterioration.</span></li>
+<li><span class="takeaway-num">06</span><span>If mental status does not normalize after treating a reversible trigger, keep searching for the true or additional cause.</span></li>
+<li><span class="takeaway-num">07</span><span>Persistent altered mental status after suspected head injury should push evacuation planning early.</span></li>
+<li><span class="takeaway-num">08</span><span>Shipboard care requires control, movement planning, equipment readiness, and explicit escalation thresholds.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Communication &amp; Handover</div>
+<p style="margin-bottom:8px">Communicate early that this is a medically unstable altered patient, not just a discipline issue. Update command on likely evacuation need and the manpower burden if the patient must be monitored for hours.</p>
+<p style="margin-bottom:8px">If speaking with outside medical support, give a concise summary: witnessed or possible fall, initial violent agitation, low glucose corrected, persistent altered mental status, possible head injury, current GCS trend, medications given, and current airway status.</p>
+<p>Handover must include exact sedatives used, timing of administration, glucose values, correction given, and the current neurologic trend.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  // check all continue buttons that might depend on this dp
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  // if all answered, show score
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  // close current
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  // open next
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  // scroll
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  // reset all decision points
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  // disable continue buttons
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  // reset score panel
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  // close all stages, open stage 1
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>

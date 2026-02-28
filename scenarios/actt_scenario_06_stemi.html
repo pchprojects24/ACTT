@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Scenario 06 — STEMI Alongside vs At Sea With Reperfusion Decision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* CONTAINER */
+.container{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+font-family:var(--mono);font-size:11px;font-weight:600;
+padding:3px 10px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:640px}
+
+/* PANELS */
+.panel{
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.panel--green{border-color:var(--green)}
+.panel-header{
+font-family:var(--mono);font-size:12px;font-weight:600;
+letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.panel-header--green{color:var(--green)}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.obj-list li{padding-left:20px;position:relative;color:var(--text);font-size:15px;line-height:1.55}
+.obj-list li::before{content:"▸";position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* STAGES */
+.stage{margin-top:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stage-header{
+display:flex;align-items:center;gap:12px;padding:16px 20px;
+cursor:pointer;user-select:none;background:var(--surface);
+border-bottom:1px solid transparent;transition:background .2s;
+}
+.stage-header:hover{background:var(--surface-raised)}
+.stage-header[aria-expanded="true"]{border-bottom-color:var(--border)}
+.stage-number{
+font-family:var(--mono);font-size:11px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;flex-shrink:0;
+}
+.stage-title{font-size:15px;font-weight:600;flex:1;min-width:0}
+.stage-chevron{
+width:20px;height:20px;flex-shrink:0;transition:transform .25s;
+color:var(--text-muted);
+}
+.stage-header[aria-expanded="true"] .stage-chevron{transform:rotate(180deg)}
+.stage-body{display:none;padding:20px 24px 24px}
+.stage-body.open{display:block}
+
+/* NARRATIVE */
+.narrative{font-size:15px;line-height:1.7;color:var(--text);margin-bottom:16px}
+
+/* VITALS */
+.vitals-box{
+background:var(--surface-raised);border:1px solid var(--border);
+border-radius:6px;padding:16px 20px;margin-bottom:16px;
+}
+.vitals-box-title{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:12px;
+}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px 16px}
+.vital{display:flex;flex-direction:column;gap:2px}
+.vital-label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.vital-value{font-family:var(--mono);font-size:14px;font-weight:600}
+.vital-value--ok{color:var(--green)}
+.vital-value--warn{color:var(--yellow)}
+.vital-value--danger{color:var(--red)}
+
+/* CALLOUTS */
+.callout{
+border-radius:6px;padding:14px 18px;margin-bottom:16px;
+font-size:14px;line-height:1.6;
+}
+.callout-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+}
+.callout--teaching{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.callout--teaching .callout-label{color:var(--accent)}
+.callout--operational{background:var(--yellow-dim);border-left:3px solid var(--yellow)}
+.callout--operational .callout-label{color:var(--yellow)}
+.callout--danger{background:var(--red-dim);border-left:3px solid var(--red)}
+.callout--danger .callout-label{color:var(--red)}
+.callout--warning{background:var(--orange-dim);border-left:3px solid var(--orange)}
+.callout--warning .callout-label{color:var(--orange)}
+.callout--side{background:var(--surface-raised);border-left:3px solid var(--text-dim)}
+.callout--side .callout-label{color:var(--text-dim)}
+
+/* ACTION LIST */
+.action-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.action-list li{padding-left:22px;position:relative;font-size:14px;line-height:1.55;color:var(--text)}
+.action-list li::before{
+content:"";position:absolute;left:4px;top:8px;
+width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;
+}
+
+/* DECISION POINT */
+.decision{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:20px 24px;margin-bottom:16px;
+}
+.decision-label{
+font-family:var(--mono);font-size:11px;font-weight:600;
+text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:6px;
+}
+.decision-prompt{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:16px;color:var(--text)}
+.decision-options{display:flex;flex-direction:column;gap:8px}
+.option-btn{
+display:flex;align-items:flex-start;gap:12px;width:100%;
+background:var(--surface);border:1px solid var(--border);
+border-radius:6px;padding:12px 16px;cursor:pointer;
+text-align:left;font-family:var(--sans);font-size:14px;
+color:var(--text);line-height:1.5;transition:border-color .2s,background .2s;
+}
+.option-btn:hover:not(.locked){border-color:var(--border-bright);background:var(--surface-raised)}
+.option-btn.locked{cursor:default}
+.option-letter{
+font-family:var(--mono);font-weight:600;font-size:13px;
+min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+border-radius:4px;background:var(--border);color:var(--text);flex-shrink:0;margin-top:1px;
+}
+.option-btn.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option-btn.correct-show{border-color:var(--green);background:var(--green-dim)}
+.option-btn.correct-show .option-letter{background:var(--green);color:var(--bg)}
+.option-btn.acceptable-show{border-color:var(--yellow);background:var(--yellow-dim)}
+.option-btn.acceptable-show .option-letter{background:var(--yellow);color:var(--bg)}
+.option-btn.incorrect-show{border-color:var(--red);background:var(--red-dim)}
+.option-btn.incorrect-show .option-letter{background:var(--red);color:var(--bg)}
+.feedback{
+display:none;margin-top:12px;padding:14px 18px;
+border-radius:6px;font-size:14px;line-height:1.6;
+}
+.feedback.visible{display:block}
+.feedback--correct{background:var(--green-dim);border-left:3px solid var(--green);color:var(--text)}
+.feedback--acceptable{background:var(--yellow-dim);border-left:3px solid var(--yellow);color:var(--text)}
+.feedback--incorrect{background:var(--red-dim);border-left:3px solid var(--red);color:var(--text)}
+.feedback-type{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.feedback--correct .feedback-type{color:var(--green)}
+.feedback--acceptable .feedback-type{color:var(--yellow)}
+.feedback--incorrect .feedback-type{color:var(--red)}
+
+/* CONTINUE BTN */
+.continue-btn{
+display:inline-flex;align-items:center;gap:8px;
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:var(--accent);color:var(--bg);
+padding:10px 24px;border-radius:6px;border:none;cursor:pointer;
+margin-top:8px;transition:opacity .2s,filter .2s;
+}
+.continue-btn:hover{filter:brightness(1.1)}
+.continue-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+
+/* PITFALLS & TAKEAWAYS */
+.pitfall-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pitfall-list li{padding-left:24px;position:relative;font-size:14px;line-height:1.55}
+.pitfall-list li::before{content:"✕";position:absolute;left:2px;color:var(--red);font-weight:700;font-size:14px}
+.takeaway-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.takeaway-list li{display:flex;gap:12px;font-size:14px;line-height:1.55}
+.takeaway-num{
+font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green);
+min-width:24px;flex-shrink:0;padding-top:2px;
+}
+
+/* SCORE PANEL */
+.score-panel{
+background:var(--surface-raised);border:1px solid var(--border-bright);
+border-radius:8px;padding:28px 24px;text-align:center;margin-top:24px;
+}
+.score-pct{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);line-height:1}
+.score-sub{font-size:14px;color:var(--text-muted);margin-top:8px}
+.score-breakdown{
+display:flex;justify-content:center;gap:24px;margin-top:20px;
+flex-wrap:wrap;
+}
+.score-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-stat-value{font-family:var(--mono);font-size:20px;font-weight:600}
+.score-stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim)}
+.score-stat--green .score-stat-value{color:var(--green)}
+.score-stat--yellow .score-stat-value{color:var(--yellow)}
+.score-stat--red .score-stat-value{color:var(--red)}
+.reset-btn{
+font-family:var(--sans);font-size:14px;font-weight:600;
+background:transparent;border:1px solid var(--border-bright);
+color:var(--text-muted);padding:10px 28px;border-radius:6px;
+cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
+}
+.reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* MED TABLE */
+.med-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:13px}
+.med-table th,.med-table td{padding:8px 10px;border:1px solid var(--border);text-align:left;line-height:1.45}
+.med-table th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);background:var(--surface)}
+.med-table td{color:var(--text)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.topbar-title{display:none}
+.hero{padding:36px 0 24px}
+.stage-body{padding:16px 16px 20px}
+.panel{padding:16px}
+.decision{padding:16px}
+.score-breakdown{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario progress">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Scenario 6 — STEMI</span>
+</div>
+<div class="topbar-right">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-label" id="progressLabel">0 / 5</span>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">Scenario 06 of 12</p>
+<h1>STEMI Alongside vs At Sea With Reperfusion Decision</h1>
+<div class="tags">
+<span class="tag tag--red">STEMI</span>
+<span class="tag tag--orange">ECG</span>
+<span class="tag tag--purple">Fibrinolysis</span>
+<span class="tag tag--cyan">Reperfusion</span>
+<span class="tag tag--accent">Transfer Planning</span>
+</div>
+<p class="hero-summary">A sailor develops crushing central chest pain with diaphoresis and nausea aboard ship. The 12-lead ECG confirms STEMI, forcing the team to choose the fastest realistic path to reperfusion — immediate jetty transfer for PCI if alongside, or onboard fibrinolysis with tenecteplase if at sea and PCI delay exceeds the effective window. The case teaches ECG-driven decision-making, structured contraindication screening, weight-based tenecteplase dosing, adjunctive therapy, post-reperfusion monitoring, and operationally adapted transfer planning.</p>
+</section>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="panel panel--green">
+<div class="panel-header panel-header--green">Learning Objectives</div>
+<ul class="obj-list">
+<li>Recognize an onboard presentation consistent with acute STEMI.</li>
+<li>Decide whether the patient should move directly to local ambulance transfer, receive onboard fibrinolysis first, or be managed at sea while hoist extraction is arranged.</li>
+<li>Apply the PCI delay threshold and screen for fibrinolysis contraindications.</li>
+<li>Prepare and administer tenecteplase and adjunctive medications when indicated.</li>
+<li>Monitor for reperfusion, bleeding, dysrhythmia, and ongoing instability during movement, transfer, or delayed evacuation.</li>
+</ul>
+</div>
+
+<!-- ===================== STAGE 1 ===================== -->
+<div class="stage" id="stage1">
+<div class="stage-header" aria-expanded="true" onclick="toggleStage(1)">
+<span class="stage-number">STAGE 1</span>
+<span class="stage-title">Initial Presentation — Chest Pain Aboard Ship</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body open" id="stage1Body">
+
+<p class="narrative">The ship is running normal operations when a sailor develops central chest pressure radiating to the left arm, with diaphoresis and nausea. Symptoms began approximately 35 minutes ago during duty. A shipmate escorts the casualty toward Sick Bay, but the patient becomes pale, anxious, and short of breath on the way. On first assessment the casualty is alert but distressed, clutching the chest, speaking in short sentences, and describing ongoing crushing substernal pain. Skin is cool and clammy.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Initial On-Scene Findings</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Consciousness</span><span class="vital-value vital-value--ok">Alert, distressed</span></div>
+<div class="vital"><span class="vital-label">Pain</span><span class="vital-value vital-value--danger">Crushing substernal</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">Tachycardic</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">Borderline ↑</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--ok">94–96%</span></div>
+<div class="vital"><span class="vital-label">Skin</span><span class="vital-value vital-value--warn">Cool, clammy, diaphoretic</span></div>
+</div>
+</div>
+
+<ul class="action-list">
+<li>Place the patient at rest immediately — minimize exertion.</li>
+<li>Attach cardiac monitor and obtain a 12-lead ECG as early as possible.</li>
+<li>Apply supplemental oxygen if SpO₂ is below 94%.</li>
+<li>Focused history: time of onset, nature of pain, prior cardiac history, known bleeding history, recent stroke, recent head trauma, anticoagulant use, and whether pain has lasted more than 20 minutes.</li>
+<li>Move toward Sick Bay — ECG, medications, and continuous reassessment are most sustainable there.</li>
+</ul>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — STEMI Recognition</div>
+Initial priorities at first contact are not a full cardiology workup. They are rapid confirmation of stability, rapid ECG acquisition, and early identification of whether this is time-sensitive coronary occlusion. Do not create harmful delay by stopping in an unsafe passageway to perform the ECG if Sick Bay is nearby.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Operational Note</div>
+If the casualty is hemodynamically stable enough to move, the default is rapid transfer to Sick Bay because that is where ECG, medications, and continuous reassessment are most sustainable. If the casualty is unstable at first contact — collapse, malignant dysrhythmia, severe hypotension — immediate resuscitative actions happen where the patient is found before any movement.
+</div>
+
+<button class="continue-btn" onclick="advanceStage(1)">Continue to STEMI Recognition →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 2 ===================== -->
+<div class="stage" id="stage2">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(2)">
+<span class="stage-number">STAGE 2</span>
+<span class="stage-title">STEMI Recognition &amp; ECG Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage2Body">
+
+<p class="narrative">In Sick Bay, the 12-lead ECG is obtained without delay. It shows ST-segment elevation greater than 1 mm in two or more contiguous leads in the correct symptom context. The patient has had ongoing crushing substernal pain for over 35 minutes. The case shifts immediately from diagnosis to reperfusion planning. The core question is no longer "Is this cardiac?" — it becomes "What is the fastest realistic path to reperfusion from this exact shipboard situation?"</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Sick Bay ECG &amp; Assessment</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">ECG</span><span class="vital-value vital-value--danger">ST elevation ≥1 mm in ≥2 contiguous leads</span></div>
+<div class="vital"><span class="vital-label">Symptom Duration</span><span class="vital-value vital-value--warn">&gt; 35 minutes</span></div>
+<div class="vital"><span class="vital-label">Pain</span><span class="vital-value vital-value--danger">Ongoing, 8/10</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">102 bpm</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">148/92 mmHg</span></div>
+<div class="vital"><span class="vital-label">SpO₂</span><span class="vital-value vital-value--ok">95%</span></div>
+</div>
+</div>
+
+<!-- DECISION 1 -->
+<div class="decision" id="dp1">
+<div class="decision-label">Decision Point 1 of 5</div>
+<div class="decision-prompt">The 12-lead ECG shows ST elevation in contiguous leads with ongoing ischemic symptoms lasting over 35 minutes. What is your immediate action?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="1" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Recognize ST-elevation criteria as STEMI — initiate STEMI protocol immediately, begin reperfusion pathway planning, and start continuous monitoring.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Recognize the ECG as abnormal and begin cardiac workup, but delay formally declaring STEMI pathway until a repeat ECG is obtained in 15 minutes.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Interpret the ECG as non-specific changes — wait for serial ECGs over the next hour before committing to a diagnosis.</span>
+</button>
+<button class="option-btn" data-dp="1" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Treat as non-cardiac chest pain — administer analgesics and reassess after the patient rests.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp1-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. With ST elevation greater than 1 mm in two or more contiguous leads plus ongoing ischemic symptoms lasting more than 20 minutes, this meets STEMI criteria. The case should shift immediately from diagnosis to reperfusion planning. The most common failure in STEMI care is losing time to indecision — that delay is itself harmful.
+</div>
+<div class="feedback feedback--acceptable" id="dp1-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Recognizing the ECG as abnormal is correct, but delaying formal STEMI pathway activation wastes critical time. In STEMI care, the decision threshold is clear: ST elevation in contiguous leads with appropriate symptoms. A repeat ECG for confirmation should not delay initiating the reperfusion pathway.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Waiting for serial ECGs over an hour when criteria are already met is a critical delay error. In STEMI, time is myocardium. The ECG pattern in context of ongoing crushing chest pain is diagnostic. Delaying ECG confirmation while collecting low-yield details is a listed pitfall in this scenario.
+</div>
+<div class="feedback feedback--incorrect" id="dp1-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Misinterpreting a clear STEMI presentation as non-cardiac chest pain is a dangerous error. The combination of crushing substernal pain, diaphoresis, radiation to the left arm, and ST elevation on ECG demands immediate activation of the STEMI pathway, not analgesics and rest.
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — ECG Threshold</div>
+The teaching threshold is ST elevation greater than 1 mm in two or more contiguous leads, in the correct symptom context, with symptoms ongoing for more than 20 minutes. Once the ECG supports STEMI, the case shifts immediately to reperfusion planning.
+</div>
+
+<button class="continue-btn" id="cont2" disabled onclick="advanceStage(2)">Continue to Reperfusion Decision →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 3 ===================== -->
+<div class="stage" id="stage3">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(3)">
+<span class="stage-number">STAGE 3</span>
+<span class="stage-title">Reperfusion Decision</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage3Body">
+
+<p class="narrative">With STEMI confirmed, the team must now determine the fastest realistic path to reperfusion. This case is taught in two operational branches using the same patient: (1) the ship is alongside and can transfer to the jetty, or (2) the ship is at sea and the helicopter can only hoist, not land. The reperfusion decision is an operational decision, not just a textbook cardiology decision. The same ECG may lead to a different immediate plan depending on whether the ship is alongside, how long real transfer will take, and whether extraction at sea is operationally complex.</p>
+
+<div class="callout callout--operational">
+<div class="callout-label">Branch A — Ship Alongside</div>
+If PCI-capable care can realistically be reached quickly via ambulance transfer, direct transfer may be the preferred path and fibrinolysis may not be needed onboard. However, if the real-world delay to PCI is expected to exceed about 90 minutes, then onboard fibrinolysis becomes reasonable if no absolute contraindication exists. The decision must be based on actual transfer reality, not optimistic assumptions.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">Branch B — Ship at Sea</div>
+If helicopter extraction requires hoist rather than landing, time to definitive PCI is often substantially longer and operationally less predictable. In that environment, fibrinolysis may become the most practical reperfusion strategy when the patient meets STEMI criteria and has no major contraindication.
+</div>
+
+<!-- DECISION 2 -->
+<div class="decision" id="dp2">
+<div class="decision-label">Decision Point 2 of 5</div>
+<div class="decision-prompt">You have confirmed STEMI. How do you approach the reperfusion strategy?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="2" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Calculate realistic time to PCI — if PCI can be achieved within ~90 minutes, prioritize transfer; if PCI delay exceeds threshold, screen for tenecteplase eligibility and prepare onboard fibrinolysis.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Default to transfer for PCI without calculating time thresholds — assume PCI is always the best option regardless of actual delay.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Administer fibrinolytics immediately without performing a contraindication screen — time is critical and screening takes too long.</span>
+</button>
+<button class="option-btn" data-dp="2" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Withhold both reperfusion options — manage pain and monitor, then transfer when convenient.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp2-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. The reperfusion decision must be based on actual transfer reality, not ideal assumptions. If PCI-capable care can be reached within approximately 90 minutes, transfer is preferred. If not, onboard fibrinolysis with tenecteplase becomes the most practical reperfusion strategy — but only after confirming no absolute contraindication exists.
+</div>
+<div class="feedback feedback--acceptable" id="dp2-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+PCI is generally the gold standard for STEMI, but assuming PCI is always reachable in time is a listed pitfall. Assuming "available" without calculating realistic delay from ship to definitive care can result in a patient spending hours without reperfusion. The time threshold calculation is essential.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Giving fibrinolysis without a structured contraindication screen is dangerous and explicitly identified as a common pitfall. The screen is rapid but essential: active bleeding, suspected aortic dissection, prior intracranial hemorrhage, ischemic stroke within 3 months, severe uncontrolled hypertension, or recent major facial/closed-head trauma must all be excluded.
+</div>
+<div class="feedback feedback--incorrect" id="dp2-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Withholding both reperfusion options means the patient receives no definitive treatment for an ongoing coronary occlusion. In STEMI, time is myocardium — every minute of delay increases infarct size and mortality risk. Pain management alone without reperfusion is not adequate treatment.
+</div>
+</div>
+
+<p class="narrative" style="margin-top:8px">The team determines that PCI cannot be reached within the effective window. The decision is made to proceed with onboard fibrinolysis. Before administering tenecteplase, a structured contraindication screen must be performed explicitly and spoken aloud to the team.</p>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Absolute Contraindications to Fibrinolysis</div>
+Active bleeding · Suspected aortic dissection · Prior intracranial hemorrhage · Ischemic stroke within the previous 3 months · Severe uncontrolled hypertension · Recent major facial or closed-head trauma. The team should hear the clinical lead explicitly confirm: "We have STEMI criteria, PCI delay is too long, we are now confirming there is no active bleed, no recent stroke, no ICH history, and no suspected dissection."
+</div>
+
+<!-- DECISION 3 -->
+<div class="decision" id="dp3">
+<div class="decision-label">Decision Point 3 of 5</div>
+<div class="decision-prompt">PCI is not reachable in time. You have decided to proceed with onboard fibrinolysis. How do you prepare and administer tenecteplase?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="3" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Perform explicit verbal contraindication screen, confirm patient weight, select correct tenecteplase dose band, reconstitute carefully without shaking, administer IV push over 5 seconds, and give adjunctive clopidogrel 300 mg PO plus enoxaparin as part of the reperfusion package.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Administer tenecteplase at the correct weight-based dose after contraindication screening, but delay adjunctive antiplatelet and anticoagulant therapy until after transfer.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Administer a standard fixed dose of tenecteplase without weighing the patient — all adults get the same dose.</span>
+</button>
+<button class="option-btn" data-dp="3" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Reconstitute tenecteplase by shaking vigorously to dissolve quickly, then administer via slow IV infusion over 30 minutes.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp3-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. Tenecteplase is weight-based: under 60 kg = 30 mg, 60–69 kg = 35 mg, 70–79 kg = 40 mg, 80–89 kg = 45 mg, ≥90 kg = 50 mg. It is given as IV push over 5 seconds after careful reconstitution without shaking. Adjunctive medications — clopidogrel and anticoagulation — are part of the reperfusion package and must not be treated as optional extras. Exact timing of all medications must be charted.
+</div>
+<div class="feedback feedback--acceptable" id="dp3-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Getting the tenecteplase dose right and screening for contraindications is the most critical step. However, adjunctive antiplatelet and anticoagulant therapy should be prepared and given as part of the same reperfusion package. Delaying them reduces the effectiveness of the fibrinolysis pathway and is a deviation from best practice.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Tenecteplase is strictly weight-based — choosing the wrong weight band is a listed pitfall. A fixed dose for all patients will result in either underdosing (reduced efficacy) or overdosing (increased bleeding risk). The weight bands must be confirmed before administration.
+</div>
+<div class="feedback feedback--incorrect" id="dp3-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Shaking the vial causes foaming and dosing error — it must be reconstituted carefully by gentle swirling. Tenecteplase is given as a single IV push over 5 seconds, not as a slow infusion. Both the preparation and the administration route are critical to safe execution.
+</div>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Quick Medication Reference</div>
+<table class="med-table">
+<thead><tr><th>Drug</th><th>Role</th><th>Dose</th><th>Route</th><th>Key Warning</th></tr></thead>
+<tbody>
+<tr><td>Tenecteplase</td><td>Fibrinolysis (PCI delay &gt;90 min)</td><td>30–50 mg by weight band</td><td>IV push over 5 sec</td><td>Bleeding, wrong weight band, shaking vial</td></tr>
+<tr><td>Clopidogrel</td><td>Adjunct antiplatelet</td><td>300 mg PO STAT</td><td>Oral</td><td>Bleeding risk; chart timing</td></tr>
+<tr><td>Enoxaparin</td><td>Adjunct anticoagulation</td><td>30 mg IV bolus then 1 mg/kg SQ q12h</td><td>IV + SQ</td><td>Bleeding; adjust for age/renal</td></tr>
+<tr><td>Heparin</td><td>Alternative anticoagulation</td><td>60 units/kg bolus then 12 units/kg/hr</td><td>IV infusion</td><td>Infusion/dose error and bleeding</td></tr>
+</tbody>
+</table>
+</div>
+
+<button class="continue-btn" id="cont3" disabled onclick="advanceStage(3)">Continue to Post-Reperfusion Management →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 4 ===================== -->
+<div class="stage" id="stage4">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(4)">
+<span class="stage-number">STAGE 4</span>
+<span class="stage-title">Post-Reperfusion Management</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage4Body">
+
+<p class="narrative">Tenecteplase has been administered along with adjunctive therapy. The patient is not "done." Once fibrinolysis is given, continuous reassessment must look for three major things: reperfusion, bleeding, and dysrhythmia. Reperfusion may show up as improving pain or resolving ECG changes. Harm may show up as hypotension, new bleeding, neurologic decline, or reperfusion arrhythmias. If no fibrinolysis was given because rapid PCI was feasible, the same monitoring still matters during transfer — a patient with confirmed STEMI can deteriorate during movement or while awaiting pickup.</p>
+
+<div class="vitals-box">
+<div class="vitals-box-title">Post-Fibrinolysis Monitoring</div>
+<div class="vitals-grid">
+<div class="vital"><span class="vital-label">Pain</span><span class="vital-value vital-value--warn">Reassess q5–10 min</span></div>
+<div class="vital"><span class="vital-label">ECG</span><span class="vital-value vital-value--warn">Watch for ST resolution</span></div>
+<div class="vital"><span class="vital-label">Heart Rate</span><span class="vital-value vital-value--warn">Continuous monitor</span></div>
+<div class="vital"><span class="vital-label">Blood Pressure</span><span class="vital-value vital-value--warn">Serial q5–15 min</span></div>
+<div class="vital"><span class="vital-label">Bleeding</span><span class="vital-value vital-value--danger">Active surveillance</span></div>
+<div class="vital"><span class="vital-label">Neuro Status</span><span class="vital-value vital-value--danger">Watch for decline</span></div>
+</div>
+</div>
+
+<div class="callout callout--danger">
+<div class="callout-label">⚠ Post-Fibrinolysis Complications</div>
+Reperfusion arrhythmias (VT, VF, accelerated idioventricular rhythm) can occur as the occluded vessel reopens. Bleeding — including intracranial hemorrhage — is the most feared complication. Neurologic decline, hypotension, or new bleeding at any site requires immediate escalation. Post-fibrinolysis bleeding and dysrhythmia surveillance is part of the treatment, not an optional extra.
+</div>
+
+<!-- DECISION 4 -->
+<div class="decision" id="dp4">
+<div class="decision-label">Decision Point 4 of 5</div>
+<div class="decision-prompt">Twenty minutes after tenecteplase administration, the patient's pain is improving and the ST segments appear to be resolving, but the cardiac monitor shows frequent runs of a wide-complex rhythm and the blood pressure drops to 92/58. What is your approach?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="4" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Recognize this as likely reperfusion arrhythmia — continue close monitoring, support blood pressure with IV fluids if needed, check all sites for active bleeding, perform a focused neuro check, and prepare for defibrillation if the rhythm deteriorates to unstable VT or VF.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Focus on blood pressure support and request urgent teleconsultation, but do not actively reassess for bleeding or neurologic changes.</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Assume the hypotension is from the tenecteplase itself — stop all monitoring and wait for it to "wear off."</span>
+</button>
+<button class="option-btn" data-dp="4" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Immediately administer a second dose of tenecteplase — the first dose may not have been enough.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp4-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. The improving pain and resolving ST elevation suggest successful reperfusion, and the wide-complex rhythm is likely a reperfusion arrhythmia (such as accelerated idioventricular rhythm). However, the hypotension requires active investigation — check all sites for bleeding, perform a neuro check for signs of intracranial hemorrhage, support circulation with IV fluids, and maintain defibrillation readiness in case the rhythm degrades to unstable VT or VF.
+</div>
+<div class="feedback feedback--acceptable" id="dp4-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+Blood pressure support and teleconsultation are appropriate actions, but failing to actively survey for bleeding and neurologic decline is a significant omission. After fibrinolysis, new hypotension could represent bleeding at any site, including intracranial. All post-reperfusion complications must be actively assessed, not passively observed.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Stopping monitoring after fibrinolytic administration is dangerous. Post-fibrinolysis hypotension may represent bleeding, cardiogenic shock, or other complications requiring immediate intervention. The treatment does not simply "wear off" — the patient needs continuous active surveillance.
+</div>
+<div class="feedback feedback--incorrect" id="dp4-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Administering a second dose of tenecteplase is not indicated and dramatically increases bleeding risk. Tenecteplase is given as a single bolus. If the ECG is resolving and pain is improving, the fibrinolytic is working. The clinical picture of improving ischemia with hypotension and rhythm changes demands monitoring and hemodynamic support, not re-dosing.
+</div>
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Teaching Note — Reperfusion Monitoring</div>
+"Stable STEMI" is often only temporarily stable. If the patient becomes hypotensive, develops pulmonary edema, has recurrent severe pain, or shows signs of bleeding or neurologic change, the team must re-declare deterioration and escalate immediately. Forgetting that post-fibrinolysis bleeding and dysrhythmia surveillance is part of the treatment is a key pitfall.
+</div>
+
+<button class="continue-btn" id="cont4" disabled onclick="advanceStage(4)">Continue to Transfer &amp; Disposition →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 5 ===================== -->
+<div class="stage" id="stage5">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(5)">
+<span class="stage-number">STAGE 5</span>
+<span class="stage-title">Transfer &amp; Disposition</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage5Body">
+
+<p class="narrative">With reperfusion therapy administered and the patient under continuous monitoring, the team must now plan definitive transfer. Whether alongside or at sea, every STEMI patient needs definitive cardiology care. The transfer plan and the treatment plan are not separate — the transfer plan should be built around the treatment decision, and the treatment decision must account for how long transfer will actually take.</p>
+
+<div class="callout callout--operational">
+<div class="callout-label">Alongside Transfer</div>
+Package for jetty transfer only after the immediate treatment plan is set. Ensure IV access is secure, monitor leads are maintained if possible, and the receiving team gets a concise handover: symptom onset time, ECG findings, drugs already given with exact timing, and whether fibrinolysis has been administered.
+</div>
+
+<div class="callout callout--operational">
+<div class="callout-label">At-Sea Transfer — Hoist Planning</div>
+If hoist is required, the team must decide whether the patient is safer being treated first in Sick Bay or moved immediately to the extraction point. In most cases, the patient should be stabilized enough to tolerate movement before hoist. All lines must be secured, monitoring simplified to what can be maintained, and the team should anticipate pain recurrence, dysrhythmia, or hypotension during the evolution.
+</div>
+
+<!-- DECISION 5 -->
+<div class="decision" id="dp5">
+<div class="decision-label">Decision Point 5 of 5</div>
+<div class="decision-prompt">The patient has received fibrinolysis and is showing signs of reperfusion but remains hemodynamically fragile. You are at sea with helicopter hoist available. Weather is adequate but the hoist evolution will take 30–45 minutes. What is your transfer strategy?</div>
+<div class="decision-options">
+<button class="option-btn" data-dp="5" data-choice="A" data-grade="correct" onclick="selectOption(this)">
+<span class="option-letter">A</span>
+<span>Stabilize in Sick Bay first — secure all IV lines, simplify monitoring for transport, prepare concise handover (onset time, ECG findings, all drugs with exact timing, current status), then move to extraction point with full anticipation of complications during the evolution.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="B" data-grade="acceptable" onclick="selectOption(this)">
+<span class="option-letter">B</span>
+<span>Move immediately to the extraction point to minimize total time — monitoring and line security can be handled en route.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="C" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">C</span>
+<span>Hold the patient indefinitely in Sick Bay until completely stable — delay the hoist request until the patient has had no rhythm changes for at least 6 hours.</span>
+</button>
+<button class="option-btn" data-dp="5" data-choice="D" data-grade="incorrect" onclick="selectOption(this)">
+<span class="option-letter">D</span>
+<span>Transfer the patient to the extraction point without securing lines or preparing a handover — speed is all that matters.</span>
+</button>
+</div>
+<div class="feedback feedback--correct" id="dp5-fb-A">
+<div class="feedback-type">✓ Optimal</div>
+Correct. The patient should be stabilized enough to tolerate movement before hoist. All lines must be secured, monitoring simplified to what can be maintained, and the team should anticipate pain recurrence, dysrhythmia, or hypotension during the evolution. The receiving team needs a concise handover: when pain started, what the ECG showed, whether tenecteplase was given, when antiplatelet and anticoagulant drugs were given, and what the patient is doing now.
+</div>
+<div class="feedback feedback--acceptable" id="dp5-fb-B">
+<div class="feedback-type">~ Acceptable</div>
+The urgency to transfer is appropriate — this patient needs definitive cardiology care. However, rushing to the extraction point without first securing lines and simplifying monitoring risks losing IV access or monitoring capability during the most dangerous phase of movement. A brief preparation step in Sick Bay typically makes the overall evolution safer.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-C">
+<div class="feedback-type">✕ Suboptimal</div>
+Waiting 6 hours for complete stability is not realistic for a post-fibrinolysis STEMI patient. "Stable STEMI" is often only temporarily stable. If transfer is delayed, the case becomes a prolonged holding problem requiring continuous cardiac monitoring, serial vital signs, repeat pain assessment, and readiness to manage deterioration. The patient needs definitive care, not indefinite observation.
+</div>
+<div class="feedback feedback--incorrect" id="dp5-fb-D">
+<div class="feedback-type">✕ Suboptimal</div>
+Moving without securing lines or preparing a handover is reckless. Lost IV access during a hoist evolution means no ability to manage acute deterioration. A missing handover means the receiving team operates blind on a patient who has received fibrinolytics and anticoagulants. Speed without preparation creates more risk than it solves.
+</div>
+</div>
+
+<div class="callout callout--warning">
+<div class="callout-label">If Evacuation Is Delayed</div>
+If weather, aircraft timing, or local coordination delays transfer, the case temporarily becomes a prolonged holding problem: continued cardiac monitoring, serial vital signs, repeat pain assessment, careful observation for bleeding, and readiness to manage dysrhythmia or shock. If the patient becomes hypotensive, develops pulmonary edema, has recurrent severe pain, or shows signs of bleeding or neurologic change, the team must re-declare deterioration and escalate immediately.
+</div>
+
+<div class="callout callout--teaching">
+<div class="callout-label">Communication &amp; Handover</div>
+The clinical lead should explicitly state: confirmed STEMI, symptom onset time, current hemodynamic status, chosen reperfusion strategy, drugs administered with exact timing, and what the next risk is. If teleconsultation is used, the ask should be precise: confirmation of fibrinolysis plan, support for contraindication assessment, or support for managing complications while awaiting evacuation.
+</div>
+
+<button class="continue-btn" id="cont5" disabled onclick="advanceStage(5)">Continue to Debrief →</button>
+
+</div>
+</div>
+
+<!-- ===================== STAGE 6 ===================== -->
+<div class="stage" id="stage6">
+<div class="stage-header" aria-expanded="false" onclick="toggleStage(6)">
+<span class="stage-number">DEBRIEF</span>
+<span class="stage-title">Pitfalls, Takeaways &amp; Score</span>
+<svg class="stage-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.09 1.03l-4.25 4.5a.75.75 0 01-1.09 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+</div>
+<div class="stage-body" id="stage6Body">
+
+<div class="panel" style="border-color:var(--red)">
+<div class="panel-header" style="color:var(--red)">Common Pitfalls</div>
+<ul class="pitfall-list">
+<li>Delaying ECG confirmation while collecting low-yield details.</li>
+<li>Assuming PCI is "available" without calculating realistic delay from ship to definitive care.</li>
+<li>Giving fibrinolysis without a structured contraindication screen.</li>
+<li>Choosing the wrong tenecteplase weight band or reconstituting it poorly by shaking.</li>
+<li>Failing to document exact symptom-onset time and exact medication times.</li>
+<li>Forgetting that post-fibrinolysis bleeding and dysrhythmia surveillance is part of the treatment, not an optional extra.</li>
+<li>Treating the transfer plan and the drug plan as separate rather than integrated decisions.</li>
+<li>Losing time to indecision — performing serial reassessments without committing to the reperfusion pathway.</li>
+</ul>
+</div>
+
+<div class="panel" style="border-color:var(--green)">
+<div class="panel-header" style="color:var(--green)">Key Takeaways</div>
+<ul class="takeaway-list">
+<li><span class="takeaway-num">01</span><span>In a shipboard STEMI, the critical skill is matching the reperfusion plan to real transport time, not ideal assumptions.</span></li>
+<li><span class="takeaway-num">02</span><span>Timely ECG confirmation, explicit contraindication screening, accurate tenecteplase dosing, and structured monitoring are the core execution steps.</span></li>
+<li><span class="takeaway-num">03</span><span>Alongside and at-sea cases may share the same diagnosis but require different immediate actions because the route to reperfusion is different.</span></li>
+<li><span class="takeaway-num">04</span><span>If transfer is delayed, the case immediately becomes a monitoring, complication-detection, and re-escalation problem.</span></li>
+<li><span class="takeaway-num">05</span><span>Reperfusion decisions are operational decisions — the same ECG may lead to a different immediate plan depending on ship location, real transfer time, and extraction complexity.</span></li>
+<li><span class="takeaway-num">06</span><span>The transfer plan should be built around the treatment decision, and the treatment decision must account for how long transfer will actually take.</span></li>
+</ul>
+</div>
+
+<div class="callout callout--side">
+<div class="callout-label">Side Notes</div>
+<p style="margin-bottom:8px">This scenario teaches that reperfusion decisions are operational decisions, not just textbook cardiology decisions. The most common failure is losing time to indecision — teams sometimes perform serial reassessments without committing to the reperfusion pathway. In STEMI care, that delay is itself harmful.</p>
+<p style="margin-bottom:8px">Another common failure is treating the transfer plan and the drug plan as separate. In reality, the transfer plan should be built around the treatment decision, and the treatment decision must account for how long transfer will actually take.</p>
+<p style="margin-bottom:8px">If the scenario is run alongside, the correct lesson may be early transfer for PCI. If run at sea, the correct lesson is often onboard fibrinolysis with disciplined monitoring and structured evacuation planning.</p>
+</div>
+
+<!-- SCORE -->
+<div class="score-panel" id="scorePanel">
+<div class="score-pct" id="scorePct">—</div>
+<div class="score-sub" id="scoreSub">Complete all 5 decision points to see your score</div>
+<div class="score-breakdown" id="scoreBreakdown" style="display:none">
+<div class="score-stat score-stat--green"><span class="score-stat-value" id="statOptimal">0</span><span class="score-stat-label">Optimal</span></div>
+<div class="score-stat score-stat--yellow"><span class="score-stat-value" id="statAcceptable">0</span><span class="score-stat-label">Acceptable</span></div>
+<div class="score-stat score-stat--red"><span class="score-stat-value" id="statSuboptimal">0</span><span class="score-stat-label">Suboptimal</span></div>
+</div>
+<button class="reset-btn" id="resetBtn" style="display:none" onclick="resetScenario()">Reset Scenario</button>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var TOTAL_DP = 5;
+var answers = {};
+var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
+var continueReqs = {2:["1"],3:["2","3"],4:["4"],5:["5"]};
+
+function updateProgress(){
+  var answered = Object.keys(answers).length;
+  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
+  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+}
+
+function checkContinue(stageNum){
+  if(stageNum === 1) return;
+  var btnId = "cont"+stageNum;
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var reqs = continueReqs[stageNum];
+  if(!reqs){btn.disabled=false;return;}
+  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
+  btn.disabled = !allMet;
+}
+
+window.selectOption = function(el){
+  if(el.classList.contains("locked")) return;
+  var dp = el.getAttribute("data-dp");
+  var choice = el.getAttribute("data-choice");
+  var grade = el.getAttribute("data-grade");
+  if(answers.hasOwnProperty(dp)) return;
+  answers[dp] = {choice:choice, grade:grade};
+
+  var container = document.getElementById("dp"+dp);
+  var btns = container.querySelectorAll(".option-btn");
+  btns.forEach(function(b){
+    b.classList.add("locked");
+    var g = b.getAttribute("data-grade");
+    if(g==="correct") b.classList.add("correct-show");
+    else if(g==="acceptable") b.classList.add("acceptable-show");
+    else b.classList.add("incorrect-show");
+    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+  });
+
+  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  if(fb) fb.classList.add("visible");
+
+  updateProgress();
+
+  for(var s=2;s<=5;s++) checkContinue(s);
+
+  if(Object.keys(answers).length === TOTAL_DP) showScore();
+};
+
+function showScore(){
+  var pts=0, optimal=0, acceptable=0, suboptimal=0;
+  for(var dp in answers){
+    var g = answers[dp].grade;
+    if(g==="correct"){pts+=2;optimal++;}
+    else if(g==="acceptable"){pts+=1;acceptable++;}
+    else{suboptimal++;}
+  }
+  var pct = Math.round(pts/(TOTAL_DP*2)*100);
+  document.getElementById("scorePct").textContent = pct+"%";
+  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
+  document.getElementById("statOptimal").textContent = optimal;
+  document.getElementById("statAcceptable").textContent = acceptable;
+  document.getElementById("statSuboptimal").textContent = suboptimal;
+  document.getElementById("scoreBreakdown").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "inline-block";
+}
+
+window.toggleStage = function(n){
+  var header = document.querySelector("#stage"+n+" .stage-header");
+  var body = document.getElementById("stage"+n+"Body");
+  var expanded = header.getAttribute("aria-expanded") === "true";
+  header.setAttribute("aria-expanded", expanded?"false":"true");
+  if(expanded){body.classList.remove("open");}
+  else{body.classList.add("open");}
+};
+
+window.advanceStage = function(current){
+  var next = current + 1;
+  if(next > 6) return;
+
+  var cHeader = document.querySelector("#stage"+current+" .stage-header");
+  var cBody = document.getElementById("stage"+current+"Body");
+  cHeader.setAttribute("aria-expanded","false");
+  cBody.classList.remove("open");
+
+  stageUnlocks[next] = true;
+  var nHeader = document.querySelector("#stage"+next+" .stage-header");
+  var nBody = document.getElementById("stage"+next+"Body");
+  nHeader.setAttribute("aria-expanded","true");
+  nBody.classList.add("open");
+
+  setTimeout(function(){
+    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
+  },80);
+};
+
+window.resetScenario = function(){
+  answers = {};
+  updateProgress();
+
+  for(var dp=1;dp<=TOTAL_DP;dp++){
+    var container = document.getElementById("dp"+dp);
+    if(!container) continue;
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+    });
+    var fbs = container.querySelectorAll(".feedback");
+    fbs.forEach(function(f){f.classList.remove("visible");});
+  }
+
+  for(var s=2;s<=5;s++){
+    var btn = document.getElementById("cont"+s);
+    if(btn) btn.disabled = true;
+  }
+
+  document.getElementById("scorePct").textContent = "—";
+  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreBreakdown").style.display = "none";
+  document.getElementById("resetBtn").style.display = "none";
+
+  for(var i=1;i<=6;i++){
+    var h = document.querySelector("#stage"+i+" .stage-header");
+    var b = document.getElementById("stage"+i+"Body");
+    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
+    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+})();
+</script>
+</body>
+</html>
