@@ -247,6 +247,18 @@ tr:hover td { background: var(--bg-secondary); }
   border-radius: 20px; font-size: 0.85rem; color: var(--accent); cursor: pointer; transition: all var(--transition); text-decoration: none;
 }
 .related-link:hover { border-color: var(--accent); background: var(--accent-dim); text-decoration: none; transform: translateY(-1px); }
+.sickbay-meds-layout { display: grid; grid-template-columns: minmax(260px, 320px) minmax(0, 1fr); gap: 18px; align-items: start; margin: 18px 0; }
+.sickbay-meds-nav { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); padding: 14px; position: sticky; top: 12px; max-height: calc(100vh - 160px); overflow-y: auto; }
+.sickbay-filter-label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+.sickbay-group .accordion-header { padding: 10px 12px; font-size: 0.84rem; }
+.sickbay-group .accordion-body { padding: 10px; }
+.sickbay-med-btn { width: 100%; text-align: left; padding: 8px 10px; margin-bottom: 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-secondary); color: var(--text-secondary); font-size: 0.84rem; transition: all var(--transition); }
+.sickbay-med-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-tertiary); }
+.sickbay-med-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); font-weight: 600; }
+.sickbay-meds-viewer { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); padding: 16px; min-width: 0; }
+.sickbay-meds-viewer-header { display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.sickbay-meds-viewer-header h2 { margin: 0; font-size: 1.2rem; }
+@media (max-width: 900px) { .sickbay-meds-layout { grid-template-columns: 1fr; } .sickbay-meds-nav { position: static; max-height: none; } }
 .med-monograph-frame {
   width: 100%;
   min-height: 70vh;
@@ -499,7 +511,44 @@ html+='<h2 style="margin-bottom:16px">Quick Access</h2><div class="cards-grid">'
 html+='</div><h2 style="margin:24px 0 16px">Clinical Tools</h2><div class="cards-grid">';
 [{icon:'&#129504;',title:'GCS Calculator',desc:'Calculate Glasgow Coma Scale with automatic airway threshold alerts',path:'#/tools/gcs'},{icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate calculator with adjustment guidance',path:'#/tools/burn'},{icon:'&#9878;',title:'Dose Calculator',desc:'Weight-based dose calculations for all major ACTT medications',path:'#/tools/dosecalc'},{icon:'&#9201;',title:'Reassessment Timer',desc:'Configurable interval reminders with context-specific reassessment checklists',path:'#/tools/timer'},{icon:'&#9763;',title:'Drug Interactions',desc:'Check for known cautions and compounding risks between selected medications',path:'#/tools/interactions'},{icon:'&#128270;',title:'Differential Diagnosis',desc:'Symptom-based differential diagnosis helper with prioritized causes',path:'#/tools/ddx'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div>';main.innerHTML=html;}
-function renderSection(main,data,sectionId,parentTitle,parentPath){if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}if(sectionId){const sec=data.sections.find(s=>s.id===sectionId);if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Section not found</div></div>';return;}let html=renderSectionHeader(sec.title,sec.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';html+='<div class="content-section">'+(sec.content||'')+'</div>';if(sec.relatedLinks)html+=renderRelatedContent(sec.relatedLinks);main.innerHTML=html;}else{let html=renderSectionHeader(data.title,data.subtitle||('Chapter '+data.chapter),[{title:'Home',path:'#/'},{title:data.title,path:parentPath}]);if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';data.sections.forEach(sec=>{const preview=(sec.content||'').replace(/<[^>]+>/g,' ').substring(0,200).trim();html+=renderAccordion(sec.id,sec.title,`<div class="content-section">${preview}...</div><p><a href="${parentPath}/${sec.id}">View full section &#8250;</a></p>`,sec.severity);});main.innerHTML=html;}}
+function renderSection(main,data,sectionId,parentTitle,parentPath){
+if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}
+if(parentPath==='#/sickbay-meds'&&!sectionId){renderSickBayMedLibrary(main,data,parentTitle,parentPath);return;}
+if(sectionId){
+const sec=data.sections.find(s=>s.id===sectionId);
+if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Section not found</div></div>';return;}
+let html=renderSectionHeader(sec.title,sec.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);
+html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';
+html+='<div class="content-section">'+(sec.content||'')+'</div>';
+if(sec.relatedLinks)html+=renderRelatedContent(sec.relatedLinks);
+main.innerHTML=html;
+}else{
+let html=renderSectionHeader(data.title,data.subtitle||('Chapter '+data.chapter),[{title:'Home',path:'#/'},{title:data.title,path:parentPath}]);
+if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;
+html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';
+data.sections.forEach(sec=>{const preview=(sec.content||'').replace(/<[^>]+>/g,' ').substring(0,200).trim();html+=renderAccordion(sec.id,sec.title,`<div class="content-section">${preview}...</div><p><a href="${parentPath}/${sec.id}">View full section &#8250;</a></p>`,sec.severity);});
+main.innerHTML=html;
+}}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function extractMonographSrc(content){const match=(content||'').match(/<iframe[^>]*src="([^"]+)"/i);return match?match[1]:'';}
+function renderSickBayMedLibrary(main,data,parentTitle,parentPath){
+const activeId=state.activeSickBayMed||((data.sections&&data.sections[0]&&data.sections[0].id)||'');
+const activeMed=data.sections.find(sec=>sec.id===activeId)||data.sections[0];
+const groups={};
+data.sections.forEach(sec=>{const letter=(sec.title||'#').charAt(0).toUpperCase();const key=/[A-Z]/.test(letter)?letter:'#';if(!groups[key])groups[key]=[];groups[key].push(sec);});
+const letters=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
+let html=renderSectionHeader(data.title,data.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath}]);
+if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;
+html+='<div class="severity-card green" style="margin-bottom:20px"><div class="sc-title">Interactive medication picker</div><p>Select a medication from the grouped list on the left to load its monograph in-place, without leaving this page.</p></div>';
+html+='<div class="sickbay-meds-layout"><aside class="sickbay-meds-nav"><label class="sickbay-filter-label" for="sickbayMedFilter">Filter medications</label><input id="sickbayMedFilter" class="tool-input" placeholder="Type a medication name..." oninput="filterSickBayMeds(this.value)" autocomplete="off">';
+letters.forEach(letter=>{html+=`<div class="accordion sickbay-group" data-letter="${letter}"><div class="accordion-header expanded" onclick="toggleAccordion(this)">${letter}<span class="acc-chevron">&#9654;</span></div><div class="accordion-body expanded">`;groups[letter].forEach(sec=>{html+=`<button class="sickbay-med-btn${activeMed&&activeMed.id===sec.id?' active':''}" data-med-title="${escapeHtml((sec.title||'').toLowerCase())}" onclick="selectSickBayMed('${sec.id}')">${sec.title}</button>`;});html+='</div></div>';});
+html+='</aside><section class="sickbay-meds-viewer">';
+if(activeMed){const src=extractMonographSrc(activeMed.content);html+=`<div class="sickbay-meds-viewer-header"><h2>${activeMed.title}</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-outline btn-sm" href="#/sickbay-meds/${activeMed.id}">Open as section</a>${src?`<a class="btn btn-outline btn-sm" href="${src}" target="_blank" rel="noopener">Open standalone page</a>`:''}</div></div><div class="content-section">${activeMed.content||''}</div>`;}else{html+='<div class="severity-card amber"><div class="sc-title">No medication entries available</div></div>';}
+html+='</section></div>';
+main.innerHTML=html;
+}
+function selectSickBayMed(id){state.activeSickBayMed=id;window.location.hash='#/sickbay-meds';handleRoute();}
+function filterSickBayMeds(query){const q=(query||'').trim().toLowerCase();document.querySelectorAll('.sickbay-med-btn').forEach(btn=>{const show=!q||btn.dataset.medTitle.includes(q);btn.style.display=show?'block':'none';});document.querySelectorAll('.sickbay-group').forEach(group=>{const hasVisible=[...group.querySelectorAll('.sickbay-med-btn')].some(btn=>btn.style.display!=='none');group.style.display=hasVisible?'block':'none';});}
 function renderTools(main,toolId){if(!toolId){let html=renderSectionHeader('Clinical Tools','Bedside calculators and decision support tools',[{title:'Home',path:'#/'},{title:'Clinical Tools',path:'#/tools'}]);html+='<div class="cards-grid">';[{id:'gcs',icon:'&#129504;',title:'GCS Calculator',desc:'Glasgow Coma Scale with airway threshold alerts'},{id:'burn',icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate'},{id:'dosecalc',icon:'&#9878;',title:'Medication Dose Calculator',desc:'Weight-based dose calculations'},{id:'timer',icon:'&#9201;',title:'Reassessment Timer',desc:'Interval reminders with checklists'},{id:'interactions',icon:'&#9763;',title:'Drug Interaction Checker',desc:'Check medication combinations'},{id:'ddx',icon:'&#128270;',title:'Differential Diagnosis Helper',desc:'Symptom-based differential'}].forEach(t=>{html+=`<a class="quick-card" href="#/tools/${t.id}"><div class="qc-icon">${t.icon}</div><div class="qc-title">${t.title}</div><div class="qc-desc">${t.desc}</div></a>`;});html+='</div>';main.innerHTML=html;return;}const toolFns=ACTT.toolRenderers||{};if(toolFns[toolId]){toolFns[toolId](main);}else{main.innerHTML=`<div class="severity-card amber"><div class="sc-title">Tool not found: ${toolId}</div></div>`;}}
 function opClKey(id){return'actt-opcl-'+id;}
 function getOpClState(id){try{return JSON.parse(localStorage.getItem(opClKey(id))||'{}');}catch(e){return{};}}
