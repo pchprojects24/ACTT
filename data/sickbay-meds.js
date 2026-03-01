@@ -3,7 +3,7 @@ window.ACTT.sickbayMeds={
   id:'sickbay-meds',
   title:'Sick Bay Medication Library',
   subtitle:'Onboard formulary references for at-sea care',
-  intro:'<p>This section contains the additional Sick Bay medication monographs from the <code>data/Meds</code> folder. These entries expand beyond the core ACTT chapter content and are intended as practical onboard references during deployments and prolonged holds.</p><p>Select any medication from the list to open its detailed monograph inline. Use the "Open standalone page" button if you prefer reading it as a full page.</p>',
+  intro:'<p>This section contains the additional Sick Bay medication monographs from the <code>data/Meds</code> folder. These entries expand beyond the core ACTT chapter content and are intended as practical onboard references during deployments and prolonged holds.</p><p>Select any medication from the list to open a dedicated medication page with the full interactive monograph. You can still use the "Open standalone page" button from there if needed.</p>',
   sections:[
     {
       id:'acetaminophen',
