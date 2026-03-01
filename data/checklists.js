@@ -242,9 +242,144 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         }
       ]
     },
-    {id:'equipment-daily',type:'placeholder',title:'Equipment Daily Check',badge:'Operational \u00b7 Equipment',desc:'Daily medical equipment inspection checklist. PDF version pending.',icon:'&#9881;'},
-    {id:'equipment-weekly',type:'placeholder',title:'Equipment Weekly Check',badge:'Operational \u00b7 Equipment',desc:'Weekly medical equipment inspection and inventory. PDF version pending.',icon:'&#9881;'},
-    {id:'controlled-substances',type:'placeholder',title:'Controlled Substance Count',badge:'Operational \u00b7 Administrative',desc:'Controlled substance accountability checklist. PDF version pending.',icon:'&#128274;'},
+    {
+      id:'equipment-daily',
+      type:'inspection',
+      title:'Equipment Daily Check',
+      badge:'Operational \u00b7 Equipment',
+      desc:'Daily readiness verification for critical sick bay equipment.',
+      icon:'&#9881;',
+      preamble:'Complete this quick check at start of day and prior to high-risk evolutions. Mark each item completed and document deficiencies in the watch log.',
+      groups:[
+        {
+          id:'life-support-daily',
+          title:'Life Support and Monitoring',
+          section:'LIFE SUPPORT AND MONITORING',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ed1',serial:1,label:'Defibrillator powers on, self-test passes, and spare pads are in date.'},
+            {id:'ed2',serial:2,label:'Suction unit tested with canister/tubing connected; backup suction available.'},
+            {id:'ed3',serial:3,label:'Oxygen delivery system pressure adequate; regulators and key present.'},
+            {id:'ed4',serial:4,label:'Pulse oximeter and NIBP monitor function check complete.'}
+          ]
+        },
+        {
+          id:'airway-daily',
+          title:'Airway and Procedure Readiness',
+          section:'AIRWAY AND PROCEDURE READINESS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ed5',serial:5,label:'BVM, masks, OPAs/NPAs, and ETCO2 supplies present and accessible.'},
+            {id:'ed6',serial:6,label:'Laryngoscope/video airway device checked and batteries charged.'},
+            {id:'ed7',serial:7,label:'IV/IO start kit stocked with flushes, dressings, and sharps container available.'},
+            {id:'ed8',serial:8,label:'Crash/response bag sealed or inventory spot-check completed.'}
+          ]
+        },
+        {
+          id:'environment-daily',
+          title:'Environment and Documentation',
+          section:'ENVIRONMENT AND DOCUMENTATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ed9',serial:9,label:'Fridge and ambient medication temperatures recorded and within range.'},
+            {id:'ed10',serial:10,label:'Biohazard and regular waste removed; cleaning supplies available.'},
+            {id:'ed11',serial:11,label:'Power cables, charging stations, and extension leads are safe and intact.'},
+            {id:'ed12',serial:12,label:'Deficiencies and corrective actions entered in the daily log.'}
+          ]
+        }
+      ]
+    },
+    {
+      id:'equipment-weekly',
+      type:'inspection',
+      title:'Equipment Weekly Check',
+      badge:'Operational \u00b7 Equipment',
+      desc:'Weekly in-depth inspection and inventory of clinical equipment and consumables.',
+      icon:'&#9881;',
+      preamble:'Conduct weekly with full drawer and locker verification. Record out-of-stock, expired, and unserviceable items for replenishment.',
+      groups:[
+        {
+          id:'inventory-weekly',
+          title:'Inventory and Expiry Control',
+          section:'INVENTORY AND EXPIRY CONTROL',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ew1',serial:1,label:'Emergency drug kit count completed; expiring items flagged for replacement.'},
+            {id:'ew2',serial:2,label:'Airway consumables (tubes, blades, filters, capnography supplies) restocked to par.'},
+            {id:'ew3',serial:3,label:'IV fluids and blood sampling supplies counted and reordered as required.'},
+            {id:'ew4',serial:4,label:'Dressings, splints, and burn care materials checked for quantity and integrity.'}
+          ]
+        },
+        {
+          id:'function-weekly',
+          title:'Functional Equipment Checks',
+          section:'FUNCTIONAL EQUIPMENT CHECKS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ew5',serial:5,label:'Defibrillator pacing/sync controls reviewed and ECG cable inspected.'},
+            {id:'ew6',serial:6,label:'Infusion pumps run self-test and alarm test with sample setup.'},
+            {id:'ew7',serial:7,label:'Portable oxygen cylinders inspected (hydro date/condition/pressure).'},
+            {id:'ew8',serial:8,label:'Portable diagnostic equipment (glucometer, thermometer, otoscope) calibrated or QC checked per policy.'}
+          ]
+        },
+        {
+          id:'readiness-weekly',
+          title:'Readiness and Safety',
+          section:'READINESS AND SAFETY',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ew9',serial:9,label:'Backup batteries and chargers labeled, charged, and rotation date updated.'},
+            {id:'ew10',serial:10,label:'Equipment cleaning/decontamination log up to date.'},
+            {id:'ew11',serial:11,label:'Medical gas and suction accessories secured for sea state.'},
+            {id:'ew12',serial:12,label:'Weekly discrepancies reported to Coxn/XO and supply chain task opened.'}
+          ]
+        }
+      ]
+    },
+    {
+      id:'controlled-substances',
+      type:'inspection',
+      title:'Controlled Substance Count',
+      badge:'Operational \u00b7 Administrative',
+      desc:'Shift or daily controlled medication accountability and security audit.',
+      icon:'&#128274;',
+      preamble:'Complete at every required handover and whenever seal integrity is in doubt. Any discrepancy triggers immediate escalation per ship protocol.',
+      groups:[
+        {
+          id:'vault-check',
+          title:'Security and Access',
+          section:'SECURITY AND ACCESS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'cs1',serial:1,label:'Controlled drug safe/locker physically secure with no evidence of tampering.'},
+            {id:'cs2',serial:2,label:'Access keys/accountability tokens present and signed to authorized custodian.'},
+            {id:'cs3',serial:3,label:'Witness present for count in accordance with local policy.'}
+          ]
+        },
+        {
+          id:'count-reconcile',
+          title:'Count and Reconciliation',
+          section:'COUNT AND RECONCILIATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'cs4',serial:4,label:'Each controlled medication physically counted and matched to running balance.'},
+            {id:'cs5',serial:5,label:'Partials, wastage, and breakages reconciled with witness signatures.'},
+            {id:'cs6',serial:6,label:'Expiry dates verified; near-expiry items isolated for replacement.'}
+          ]
+        },
+        {
+          id:'docs-escalation',
+          title:'Documentation and Escalation',
+          section:'DOCUMENTATION AND ESCALATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'cs7',serial:7,label:'Controlled drug register updated with date/time, both signatures, and totals.'},
+            {id:'cs8',serial:8,label:'Any discrepancy reported immediately to chain of command and medical authority.'},
+            {id:'cs9',serial:9,label:'Corrective action entry initiated and retained with watch turnover records.'}
+          ]
+        }
+      ]
+    },
     {
       id:'pmed-inspection',
       type:'inspection',
@@ -370,6 +505,50 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         }
       ]
     },
-    {id:'habitability',type:'placeholder',title:'Habitability Rounds',badge:'Operational \u00b7 Env Health',desc:'Habitability and berthing inspection checklist. Official form pending.',icon:'&#127968;'}
+    {
+      id:'habitability',
+      type:'inspection',
+      title:'Habitability Rounds',
+      badge:'Operational \u00b7 Env Health',
+      desc:'Routine ship habitability inspection for accommodations, hygiene, and environmental controls.',
+      icon:'&#127968;',
+      preamble:'Perform rounds at least weekly and after major weather/engineering events. Note deficiencies and assign corrective actions to responsible departments.',
+      groups:[
+        {
+          id:'berthing-habitability',
+          title:'Berthing and Accommodation',
+          section:'BERTHING AND ACCOMMODATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'hb1',serial:1,label:'Berthing decks clean, dry, and free of standing water or trip hazards.'},
+            {id:'hb2',serial:2,label:'Mattresses, linens, and lockers free from mould, pests, and foul odour.'},
+            {id:'hb3',serial:3,label:'Ventilation and fan-coil units operational with visible filters in acceptable condition.'}
+          ]
+        },
+        {
+          id:'sanitation-habitability',
+          title:'Heads, Showers, and Laundry',
+          section:'HEADS, SHOWERS, AND LAUNDRY',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'hb4',serial:4,label:'Heads and shower spaces cleaned with approved products; no sewage backup signs.'},
+            {id:'hb5',serial:5,label:'Soap, paper products, and hand hygiene stations stocked and functional.'},
+            {id:'hb6',serial:6,label:'Laundry spaces clean; lint management and machine condition checks complete.'}
+          ]
+        },
+        {
+          id:'environment-habitability',
+          title:'Environmental Health Controls',
+          section:'ENVIRONMENTAL HEALTH CONTROLS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'hb7',serial:7,label:'Potable water access points clean and protected from contamination.'},
+            {id:'hb8',serial:8,label:'Garbage handling areas secure, clean, and emptied on schedule.'},
+            {id:'hb9',serial:9,label:'Noise/heat complaints reviewed; high-risk spaces flagged for mitigation.'},
+            {id:'hb10',serial:10,label:'Habitability deficiencies logged with department owner and due date.'}
+          ]
+        }
+      ]
+    }
   ]
 };
