@@ -416,7 +416,7 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>If transfer is delayed after fibrinolysis, the shipboard team may have to monitor the early reperfusion phase longer than would occur ashore. That increases the value of repeated neurologic checks, bleeding surveillance, and rhythm monitoring.</p>' +
         '</div></div>',
-      relatedLinks:['medications/tenecteplase','medications/aspirin','medications/heparin','medications/clopidogrel','procedures/ecg-interpretation','thresholds/stemi-criteria','thresholds/door-to-needle','pitfalls/fibrinolysis-contraindications']
+      relatedLinks:['checklists/fibrinolysis-screening','medications/tenecteplase','medications/aspirin','medications/heparin','medications/clopidogrel','procedures/ecg-interpretation','thresholds/stemi-criteria','thresholds/door-to-needle','pitfalls/fibrinolysis-contraindications']
     },
     {
       id:'chest-decompression',

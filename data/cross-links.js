@@ -238,5 +238,6 @@ window.ACTT.crossLinks={
 'checklists/anaphylaxis':{title:'Anaphylaxis Cognitive Aid',path:'#/checklists/anaphylaxis'},
 'checklists/post-rosc':{title:'Post-ROSC Checklist',path:'#/checklists/post-rosc'},
 'checklists/medevac':{title:'MEDEVAC 9-Line',path:'#/checklists/medevac'},
+'checklists/fibrinolysis-screening':{title:'Fibrinolysis Screening (STEMI)',path:'#/checklists/fibrinolysis-screening'},
 'checklists/mascal':{title:'MASCAL Triage Checklist',path:'#/checklists/mascal'}
 };

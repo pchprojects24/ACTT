@@ -520,6 +520,7 @@ if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">
 let html=renderSectionHeader(sec.title,sec.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);
 html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';
 html+='<div class="content-section">'+(sec.content||'')+'</div>';
+if(parentPath==='#/algorithms')html+='<div style="margin:8px 0 18px"><a class="btn btn-outline" href="#/checklists">Open Checklists Folder &#8250;</a></div>';
 if(sec.relatedLinks)html+=renderRelatedContent(sec.relatedLinks);
 main.innerHTML=html;
 }else{
