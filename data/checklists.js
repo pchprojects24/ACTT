@@ -75,6 +75,28 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       ]
     },
     {
+      id:'fibrinolysis-screening',
+      type:'clinical',
+      title:'Fibrinolysis Screening (STEMI)',
+      badge:'Clinical · Cognitive Aid',
+      desc:'Rapid contraindication and readiness checklist before tenecteplase in STEMI.',
+      icon:'&#129516;',
+      crossLink:'#/algorithms/stemi',
+      crossLinkTitle:'STEMI & Fibrinolysis Algorithm',
+      items:[
+        'Confirm STEMI pattern and symptom onset timing are documented',
+        'Confirm PCI timeline exceeds target and fibrinolysis is the selected reperfusion strategy',
+        'Screen for absolute contraindications: prior intracranial hemorrhage, known intracranial neoplasm/AVM, recent ischemic stroke, suspected aortic dissection, active major bleeding, significant head/facial trauma within 3 months',
+        'Screen for major relative bleeding risks (severe uncontrolled HTN, recent surgery, anticoagulant use, bleeding diathesis)',
+        'Record baseline neuro status and focused bleeding assessment before administration',
+        'Two-person medication check completed for tenecteplase dose and preparation',
+        'Adjunctive therapy prepared/ordered: aspirin, P2Y12 agent, and anticoagulant per protocol',
+        'Defibrillator/monitor, IV access, and emergency hemorrhage response supplies are immediately available',
+        'Patient/family informed of indication, expected benefit, and major bleeding risk when feasible',
+        'Post-lysis monitoring plan assigned: rhythm checks, neurologic checks, bleeding surveillance, and transfer coordination'
+      ]
+    },
+    {
       id:'medevac',
       type:'clinical',
       title:'MEDEVAC 9-Line',
