@@ -3,7 +3,7 @@ window.ACTT.sickbayMeds={
   id:'sickbay-meds',
   title:'Sick Bay Medication Library',
   subtitle:'Onboard formulary references for at-sea care',
-  intro:'<p>This section contains the additional Sick Bay medication monographs from the <code>data/Meds</code> folder. These entries expand beyond the core ACTT chapter content and are intended as practical onboard references during deployments and prolonged holds.</p><p>Select any medication from the list to open a dedicated medication page with the full interactive monograph. You can still use the "Open standalone page" button from there if needed.</p>',
+  intro:'<p>This section contains the additional Sick Bay medication monographs from the <code>data/Meds</code> folder. These entries expand beyond the core ACTT chapter content and are intended as practical onboard references during deployments and prolonged holds.</p><p>Select any medication from the list to open a dedicated medication page with the full interactive monograph. You can still use the \"Open standalone page\" button from there if needed.</p>',
   sections:[
     {
       id:'acetaminophen',
@@ -13,9 +13,9 @@ window.ACTT.sickbayMeds={
     },
     {
       id:'acetaminophen_with_codeine',
-      title:'Acetaminophen with Codeine',
+      title:'Acetaminophen With Codeine',
       severity:'green',
-      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/acetaminophen_with_codeine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/acetaminophen_with_codeine.html" title="Acetaminophen with Codeine monograph" loading="lazy"></iframe>'
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/acetaminophen_with_codeine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/acetaminophen_with_codeine.html" title="Acetaminophen With Codeine monograph" loading="lazy"></iframe>'
     },
     {
       id:'acyclovir',
@@ -25,15 +25,15 @@ window.ACTT.sickbayMeds={
     },
     {
       id:'alginic_acid_with_aluminum',
-      title:'Alginic Acid with Aluminum',
+      title:'Alginic Acid With Aluminum',
       severity:'green',
-      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/alginic_acid_with_aluminum.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/alginic_acid_with_aluminum.html" title="Alginic Acid with Aluminum monograph" loading="lazy"></iframe>'
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/alginic_acid_with_aluminum.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/alginic_acid_with_aluminum.html" title="Alginic Acid With Aluminum monograph" loading="lazy"></iframe>'
     },
     {
       id:'aluminum_hydroxide_with_magnesium_hydroxide_and_simethicone_chewable',
-      title:'Aluminum Hydroxide with Magnesium Hydroxide and Simethicone Chewable',
+      title:'Aluminum Hydroxide With Magnesium Hydroxide And Simethicone Chewable',
       severity:'green',
-      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/aluminum_hydroxide_with_magnesium_hydroxide_and_simethicone_chewable.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/aluminum_hydroxide_with_magnesium_hydroxide_and_simethicone_chewable.html" title="Aluminum Hydroxide with Magnesium Hydroxide and Simethicone Chewable monograph" loading="lazy"></iframe>'
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/aluminum_hydroxide_with_magnesium_hydroxide_and_simethicone_chewable.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/aluminum_hydroxide_with_magnesium_hydroxide_and_simethicone_chewable.html" title="Aluminum Hydroxide With Magnesium Hydroxide And Simethicone Chewable monograph" loading="lazy"></iframe>'
     },
     {
       id:'amoxicillin',
@@ -55,9 +55,9 @@ window.ACTT.sickbayMeds={
     },
     {
       id:'antacid_with_simethicone',
-      title:'Antacid with Simethicone',
+      title:'Antacid With Simethicone',
       severity:'green',
-      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/antacid_with_simethicone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/antacid_with_simethicone.html" title="Antacid with Simethicone monograph" loading="lazy"></iframe>'
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/antacid_with_simethicone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/antacid_with_simethicone.html" title="Antacid With Simethicone monograph" loading="lazy"></iframe>'
     },
     {
       id:'aspirin',
@@ -174,6 +174,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/citalopram.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/citalopram.html" title="Citalopram monograph" loading="lazy"></iframe>'
     },
     {
+      id:'clarithromycin',
+      title:'Clarithromycin',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/clarithromycin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/clarithromycin.html" title="Clarithromycin monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'clindamycin',
       title:'Clindamycin',
       severity:'green',
@@ -192,10 +198,40 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/clotrimazole.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/clotrimazole.html" title="Clotrimazole monograph" loading="lazy"></iframe>'
     },
     {
+      id:'cloxacillin',
+      title:'Cloxacillin',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/cloxacillin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/cloxacillin.html" title="Cloxacillin monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'collodion',
+      title:'Collodion',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/collodion.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/collodion.html" title="Collodion monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'cyanide_antidote_kit',
       title:'Cyanide Antidote Kit',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/cyanide_antidote_kit.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/cyanide_antidote_kit.html" title="Cyanide Antidote Kit monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'cyclobenzaprine',
+      title:'Cyclobenzaprine',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/cyclobenzaprine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/cyclobenzaprine.html" title="Cyclobenzaprine monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'cyclopentolate',
+      title:'Cyclopentolate',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/cyclopentolate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/cyclopentolate.html" title="Cyclopentolate monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'desogestrel_ethinyl_estradiol',
+      title:'Desogestrel Ethinyl Estradiol',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/desogestrel_ethinyl_estradiol.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/desogestrel_ethinyl_estradiol.html" title="Desogestrel Ethinyl Estradiol monograph" loading="lazy"></iframe>'
     },
     {
       id:'dexamethasone',
@@ -208,6 +244,18 @@ window.ACTT.sickbayMeds={
       title:'Dextromethorphan',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/dextromethorphan.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/dextromethorphan.html" title="Dextromethorphan monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'diclofenac',
+      title:'Diclofenac',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/diclofenac.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/diclofenac.html" title="Diclofenac monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'dihydroergotamine',
+      title:'Dihydroergotamine',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/dihydroergotamine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/dihydroergotamine.html" title="Dihydroergotamine monograph" loading="lazy"></iframe>'
     },
     {
       id:'dimenhydrinate',
@@ -226,6 +274,12 @@ window.ACTT.sickbayMeds={
       title:'Doxycycline',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/doxycycline.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/doxycycline.html" title="Doxycycline monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'enoxaparin',
+      title:'Enoxaparin',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/enoxaparin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/enoxaparin.html" title="Enoxaparin monograph" loading="lazy"></iframe>'
     },
     {
       id:'epinephrine',
@@ -252,6 +306,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/eucerin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/eucerin.html" title="Eucerin monograph" loading="lazy"></iframe>'
     },
     {
+      id:'famciclovir',
+      title:'Famciclovir',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/famciclovir.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/famciclovir.html" title="Famciclovir monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'famotidine',
       title:'Famotidine',
       severity:'green',
@@ -262,6 +322,12 @@ window.ACTT.sickbayMeds={
       title:'Fluconazole',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/fluconazole.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/fluconazole.html" title="Fluconazole monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'fluorescein_sodium',
+      title:'Fluorescein Sodium',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/fluorescein_sodium.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/fluorescein_sodium.html" title="Fluorescein Sodium monograph" loading="lazy"></iframe>'
     },
     {
       id:'fluoxetine',
@@ -318,16 +384,40 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/hydromorphone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/hydromorphone.html" title="Hydromorphone monograph" loading="lazy"></iframe>'
     },
     {
+      id:'hydroxyzine',
+      title:'Hydroxyzine',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/hydroxyzine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/hydroxyzine.html" title="Hydroxyzine monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'hyoscine_butylbromide',
+      title:'Hyoscine Butylbromide',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/hyoscine_butylbromide.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/hyoscine_butylbromide.html" title="Hyoscine Butylbromide monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'ibuprofen',
       title:'Ibuprofen',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/ibuprofen.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/ibuprofen.html" title="Ibuprofen monograph" loading="lazy"></iframe>'
     },
     {
+      id:'index',
+      title:'Index',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/index.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/index.html" title="Index monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'insulin_regular',
       title:'Insulin Regular',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/insulin_regular.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/insulin_regular.html" title="Insulin Regular monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'isopropyl_alcohol',
+      title:'Isopropyl Alcohol',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/isopropyl_alcohol.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/isopropyl_alcohol.html" title="Isopropyl Alcohol monograph" loading="lazy"></iframe>'
     },
     {
       id:'ketorolac',
@@ -348,6 +438,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/levonorgestrel.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/levonorgestrel.html" title="Levonorgestrel monograph" loading="lazy"></iframe>'
     },
     {
+      id:'lidocaine',
+      title:'Lidocaine',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/lidocaine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/lidocaine.html" title="Lidocaine monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'loperamide',
       title:'Loperamide',
       severity:'green',
@@ -364,6 +460,12 @@ window.ACTT.sickbayMeds={
       title:'Magnesium Hydroxide',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/magnesium_hydroxide.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/magnesium_hydroxide.html" title="Magnesium Hydroxide monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'magnesium_sulfate',
+      title:'Magnesium Sulfate',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/magnesium_sulfate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/magnesium_sulfate.html" title="Magnesium Sulfate monograph" loading="lazy"></iframe>'
     },
     {
       id:'meclizine',
@@ -396,10 +498,22 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/metoprolol.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/metoprolol.html" title="Metoprolol monograph" loading="lazy"></iframe>'
     },
     {
+      id:'metronidazole',
+      title:'Metronidazole',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/metronidazole.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/metronidazole.html" title="Metronidazole monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'miconazole',
       title:'Miconazole',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/miconazole.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/miconazole.html" title="Miconazole monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'mineral_oil',
+      title:'Mineral Oil',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/mineral_oil.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/mineral_oil.html" title="Mineral Oil monograph" loading="lazy"></iframe>'
     },
     {
       id:'mometasone',
@@ -408,10 +522,22 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/mometasone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/mometasone.html" title="Mometasone monograph" loading="lazy"></iframe>'
     },
     {
+      id:'mupirocin',
+      title:'Mupirocin',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/mupirocin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/mupirocin.html" title="Mupirocin monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'naproxen',
       title:'Naproxen',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/naproxen.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/naproxen.html" title="Naproxen monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'nicotine',
+      title:'Nicotine',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/nicotine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/nicotine.html" title="Nicotine monograph" loading="lazy"></iframe>'
     },
     {
       id:'nitroglycerin',
@@ -438,6 +564,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/ondansetron.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/ondansetron.html" title="Ondansetron monograph" loading="lazy"></iframe>'
     },
     {
+      id:'ophthalmic_irrigation_solution',
+      title:'Ophthalmic Irrigation Solution',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/ophthalmic_irrigation_solution.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/ophthalmic_irrigation_solution.html" title="Ophthalmic Irrigation Solution monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'oxymetazoline',
       title:'Oxymetazoline',
       severity:'green',
@@ -450,10 +582,22 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/pantoprazole.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/pantoprazole.html" title="Pantoprazole monograph" loading="lazy"></iframe>'
     },
     {
+      id:'penicillin_vk',
+      title:'Penicillin VK',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/penicillin_vk.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/penicillin_vk.html" title="Penicillin VK monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'permethrin',
       title:'Permethrin',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/permethrin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/permethrin.html" title="Permethrin monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'petrolatum_white',
+      title:'Petrolatum White',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/petrolatum_white.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/petrolatum_white.html" title="Petrolatum White monograph" loading="lazy"></iframe>'
     },
     {
       id:'phenazopyridine',
@@ -480,6 +624,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/prednisone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/prednisone.html" title="Prednisone monograph" loading="lazy"></iframe>'
     },
     {
+      id:'protamine_sulfate',
+      title:'Protamine Sulfate',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/protamine_sulfate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/protamine_sulfate.html" title="Protamine Sulfate monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'pseudoephedrine',
       title:'Pseudoephedrine',
       severity:'green',
@@ -498,16 +648,46 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/salbutamol.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/salbutamol.html" title="Salbutamol monograph" loading="lazy"></iframe>'
     },
     {
+      id:'salicylic_acid',
+      title:'Salicylic Acid',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/salicylic_acid.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/salicylic_acid.html" title="Salicylic Acid monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'selenium_sulfide',
+      title:'Selenium Sulfide',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/selenium_sulfide.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/selenium_sulfide.html" title="Selenium Sulfide monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'senna',
       title:'Senna',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/senna.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/senna.html" title="Senna monograph" loading="lazy"></iframe>'
     },
     {
+      id:'silver_nitrate',
+      title:'Silver Nitrate',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/silver_nitrate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/silver_nitrate.html" title="Silver Nitrate monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'silver_sulfadiazine',
       title:'Silver Sulfadiazine',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/silver_sulfadiazine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/silver_sulfadiazine.html" title="Silver Sulfadiazine monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'simethicone',
+      title:'Simethicone',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/simethicone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/simethicone.html" title="Simethicone monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'skin_adhesive',
+      title:'Skin Adhesive',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/skin_adhesive.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/skin_adhesive.html" title="Skin Adhesive monograph" loading="lazy"></iframe>'
     },
     {
       id:'sodium_bicarbonate',
@@ -528,6 +708,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/sodium_phosphate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/sodium_phosphate.html" title="Sodium Phosphate monograph" loading="lazy"></iframe>'
     },
     {
+      id:'sodium_thiosulfate',
+      title:'Sodium Thiosulfate',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/sodium_thiosulfate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/sodium_thiosulfate.html" title="Sodium Thiosulfate monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'sulfamethoxazole_trimethoprim',
       title:'Sulfamethoxazole Trimethoprim',
       severity:'green',
@@ -540,10 +726,22 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/tetanus_diphtheria_vaccine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/tetanus_diphtheria_vaccine.html" title="Tetanus Diphtheria Vaccine monograph" loading="lazy"></iframe>'
     },
     {
+      id:'tetracaine',
+      title:'Tetracaine',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/tetracaine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/tetracaine.html" title="Tetracaine monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'thiamine',
       title:'Thiamine',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/thiamine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/thiamine.html" title="Thiamine monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'tobramycin',
+      title:'Tobramycin',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/tobramycin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/tobramycin.html" title="Tobramycin monograph" loading="lazy"></iframe>'
     },
     {
       id:'tramadol',
@@ -562,6 +760,18 @@ window.ACTT.sickbayMeds={
       title:'Triamcinolone',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/triamcinolone.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/triamcinolone.html" title="Triamcinolone monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'triquilar',
+      title:'Triquilar',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/triquilar.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/triquilar.html" title="Triquilar monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'tropicamide',
+      title:'Tropicamide',
+      severity:'green',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/tropicamide.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/tropicamide.html" title="Tropicamide monograph" loading="lazy"></iframe>'
     },
     {
       id:'valacyclovir',
