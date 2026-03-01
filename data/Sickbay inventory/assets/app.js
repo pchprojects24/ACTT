@@ -89,7 +89,7 @@
   function loadData() {
     listEl.innerHTML = '<div class="loading">Loading inventory\u2026</div>';
 
-    fetch("Data/master_inventory.csv")
+    fetch("../Data/master_inventory.csv")
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.text();
