@@ -319,19 +319,21 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       badge:'Clinical \u00b7 Procedure Safety',
       desc:'Safety bundle for procedural sedation, monitoring, and recovery.',
       icon:'&#128138;',
+      crossLink:'#/procedures/procedural-sedation',
+      crossLinkTitle:'Procedural Sedation Workflow',
       items:[
-        'Procedure indication confirmed; consent obtained per policy',
-        'Airway/sedation risk and aspiration risk reviewed (including fasting where relevant)',
-        'Allergies and medication history reviewed',
-        'Baseline vitals obtained',
-        'Monitoring applied (SpO\u2082, BP, ECG/ETCO\u2082 as indicated)',
-        'IV access confirmed if required',
-        'Oxygen, suction, BVM, airway rescue equipment, and reversal agents immediately available',
-        'Sedation medications prepared/labeled/checked',
-        'Sedation clinician and dedicated monitoring person identified if policy requires',
-        'Time-out completed before sedation starts',
-        'Incremental dosing/reassessment plan followed with continuous observation',
-        'Recovery criteria, post-sedation vitals, discharge/escort instructions, and documentation completed'
+        'Indication confirmed and consent obtained per directive; target sedation depth stated (anxiolysis, moderate, dissociative)',
+        'Pre-sedation risk review: airway difficulty, aspiration risk/fasting status, cardiorespiratory comorbidities, meds/allergies/intoxication',
+        'Two qualified personnel assigned (sedation/monitor + procedure); roles and backup plan verbalized',
+        'Weight recorded for dosing; baseline vitals documented; IV access established and patent',
+        'Monitoring on before first dose: SpO\u2082, BP, ECG; EtCO\u2082 if available (q1 min during, q5 min recovery)',
+        'Airway/oxygen equipment at bedside: suction tested, BVM with adjuncts, O\u2082 source, SGA/ETT rescue kit',
+        'Rescue/reversal meds available (naloxone, flumazenil per policy) and antiemetic considered',
+        'Sedation medications drawn up, diluted, labeled, and double-checked (ketamine weight-based; midazolam in small increments; opioid if needed)',
+        'Pre-oxygenate and position patient; suction ready; capnography confirmed if available',
+        'Dose deliberately with slow push and reassessment between increments; avoid mid-range ketamine (0.3\u20130.8 mg/kg) and dose stacking',
+        'Dedicated monitor observes airway, ventilation, and hemodynamics continuously; document times/doses/responses; manage secretions early',
+        'Recovery: monitor until awake with stable vitals and protective reflexes, nausea managed, escort/transport arranged; complications and discharge instructions documented'
       ]
     },
     {

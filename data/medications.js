@@ -126,7 +126,7 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Acetaminophen</div>'+
         '<p>Acetaminophen is confirmed in Sick Bay stock. Use as a baseline analgesic and antipyretic. Dose: 650&ndash;1000 mg PO every 6 hours. Maximum 4 g per 24 hours. Avoid cumulative overdose by accounting for acetaminophen hidden in combination products (e.g., acetaminophen with codeine).</p></div>'+
         '</div>',
-      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/rsi','medications/rsi-airway','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','shipboard/medication-shipboard','tools/dosecalc']
+      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/rsi','procedures/procedural-sedation','medications/rsi-airway','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','shipboard/medication-shipboard','tools/dosecalc']
     },
     {
       id:'rsi-airway',
