@@ -96,6 +96,8 @@ window.ACTT.crossLinks={
 'tools/timer':{title:'Reassessment Timer',path:'#/tools/timer'},
 'tools/interactions':{title:'Drug Interactions',path:'#/tools/interactions'},
 'tools/ddx':{title:'Differential Diagnosis',path:'#/tools/ddx'},
+// Equipment
+'equipment/zoll-emv-731':{title:'Ventilator — Zoll EMV+ 731',path:'data/Equipment/zoll-emv-731.html'},
 // Checklists
 'checklists/dka-hyperglycemia':{title:'DKA / Hyperglycemic Emergency Checklist',path:'#/checklists/dka-hyperglycemia'},
 'checklists/mental-health-behavioral-crisis':{title:'Mental Health / Behavioral Crisis Checklist',path:'#/checklists/mental-health-behavioral-crisis'},
