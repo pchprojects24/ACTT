@@ -642,7 +642,7 @@ window.ACTT.appendices={
         '<div class="table-wrapper"><table>' +
         '<thead><tr><th>Step</th><th>What to Look For</th><th>Why It Matters</th></tr></thead>' +
         '<tbody>' +
-        '<tr><td><strong>1. Rate</strong></td><td>Count QRS complexes over a standard 10-second strip and multiply by 6</td><td>Confirms whether the tracing fits a clinically important brady or tachy pattern</td></tr>' +
+        '<tr><td><strong>1. Rate</strong></td><td>If using a standard 10-second strip, count QRS complexes and multiply by 6; confirm the printed time span first</td><td>Confirms whether the tracing fits a clinically important brady or tachy pattern</td></tr>' +
         '<tr><td><strong>2. Rhythm</strong></td><td>Is it regular? Are P waves present? Is there a fixed relationship between P waves and QRS complexes?</td><td>Separates sinus rhythm from AV block, AF/flutter, SVT, or ventricular rhythm</td></tr>' +
         '<tr><td><strong>3. Width</strong></td><td>Narrow QRS is under 0.12 seconds; wide QRS is 0.12 seconds or more</td><td>Wide rhythms need higher concern for VT, conduction block, or hyperkalemia</td></tr>' +
         '<tr><td><strong>4. Ischemia</strong></td><td>Measure ST shift at the J point and compare contiguous leads</td><td>Supports STEMI recognition and helps localize the infarct territory</td></tr>' +
