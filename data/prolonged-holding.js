@@ -25,6 +25,55 @@ window.ACTT.prolongedHolding={
     '<p>Prolonged holding depends on trends. Blood pressure, neurologic status, oxygen requirement, urine output, chest tube output, temperature, sedation depth, and infusion needs all need repeated documentation. The aim is to detect drift early while it is still manageable.</p>',
   sections:[
     {
+      id:'critical-care-24h-hold',
+      title:'24-Hour Critical Care Hold',
+      content:'<h3>7.4 Critical Care 24-Hour Hold Snapshot</h3>'+
+        '<p>Use this as the practical overlay when a ventilated, sedated, or pressor-dependent casualty must be held for a full day at sea. It aligns the first 8 hours, the 8-hour burn check, and the medication/equipment footprint needed to keep the patient stable until MEDEVAC.</p>'+
+        '<h4>7.4.1 Minimum monitoring and reassessment</h4>'+
+        '<ul>'+
+          '<li>Airway/ventilation: continuous SpO<sub>2</sub>, respiratory rate, EtCO<sub>2</sub> if available; tube depth and securement check every move and every watch; suction plan for secretion load.</li>'+
+          '<li>Perfusion: MAP ≥65 mmHg goal (or per condition), heart rate trend, cap refill/skin, pulses, urine output tracked hourly when Foley in place.</li>'+
+          '<li>Neurologic: GCS/pupils at least every 1–2 hours when altered, intubated, or at TBI risk.</li>'+
+          '<li>Medication rhythm: sedation/analgesia effect and cumulative totals reviewed each watch; pressor dose trend documented with target MAP.</li>'+
+        '</ul>'+
+        '<h4>7.4.2 First 8 hours (burn-heavy phase)</h4>'+
+        '<ul>'+
+          '<li>Two large-bore IVs and Foley. Estimate TBSA early.</li>'+
+          '<li>Ringers Lactate 3 ml/kg/%TBSA with 50% of the calculated volume delivered in the first 8 hours from burn time.</li>'+
+          '<li>Urine output target 30–50 ml/hr (50–100 ml/hr for high-voltage electrical burns). Increase rate 20% if <30 ml/hr; decrease 20% if >50 ml/hr; reassess q1h.</li>'+
+          '<li>If ABCs unstable, MAP &lt;65 mmHg, or HR &gt;130 bpm despite fluids, escalate, reassess source (bleeding, inhalation injury, sepsis), and contact higher support early.</li>'+
+        '</ul>'+
+        '<h4>7.4.3 Eight-hour burn check</h4>'+
+        '<ul>'+
+          '<li>Calculate total fluid given since burn (A). Project 24-hour total as B = 2A. Calculate 6 ml/kg/%TBSA target (C).</li>'+
+          '<li>If B ≤ C: continue urine-output–guided titration. If B &gt; C: alert burn/ICU support, consider Albumin 5% at 1/3 current rate plus RL at 2/3, and start bladder pressure checks q4h.</li>'+
+          '<li>If urine output remains &gt;50 ml/hr, decrease rate 20% and recheck hourly.</li>'+
+        '</ul>'+
+        '<h4>7.4.4 24-hour medication and equipment footprint (worst-case agitated 100 kg ventilated patient)</h4>'+
+        '<ul>'+
+          '<li>Sedation/analgesia: midazolam 3 × 10 mL (5 mg/mL); fentanyl 3 × 20 mL (50 mcg/mL) or patches; hydromorphone stock for ~40 mg (e.g., ~10 ampules of 2 mg/2 mL or equivalent XP vials); ketamine 8 × 10 mL (50 mg/mL).</li>'+
+          '<li>Paralysis and airway: rocuronium 20 × 5 mL (10 mg/mL); lidocaine 2% and bupivacaine 0.5% (≈5 each) for blocks/procedures.</li>'+
+          '<li>Pressors and cardiovascular support: norepinephrine 8 × 4 mL (1 mg/mL); epinephrine 4 × 1 mL (1 mg/mL) for backup/ACLS; labetalol 5 × 20 mL (5 mg/mL) for hypertensive emergencies.</li>'+
+          '<li>Antibiotics: ertapenem 1 g × 4 vials; vancomycin 1 g × 4 vials.</li>'+
+          '<li>Adjuncts: magnesium sulphate 2 g × 4; calcium chloride 1 g × 10 (for transfusion/ionized calcium deficits); ondansetron 10 (4 mg/2 mL); haloperidol 5 (5 mg/1 mL).</li>'+
+          '<li>Fluids: Plasmalyte (or RL equivalent) 10 × 1000 mL bags; oxygen and suction supplies staged for a full watch turnover.</li>'+
+          '<li>Propofol intentionally omitted in this set because of hypotension risk and footprint—request case-by-case if needed.</li>'+
+        '</ul>'+
+        '<h4>7.4.5 Staffing and documentation rhythm</h4>'+
+        '<ul>'+
+          '<li>Assign watch-specific roles: airway/vent lead, circulation/pressor lead, medication recorder, and runner. Every watch confirms tube/line securement, pump settings, and medication totals.</li>'+
+          '<li>Maintain a bedside trend sheet with vitals, urine output, fluid totals, and medication times. Perform a structured watch-change handover with explicit next-failure concerns.</li>'+
+        '</ul>'+
+        '<h4>7.4.6 Escalation during the first 24 hours</h4>'+
+        '<ul>'+
+          '<li>Rising pressor need, worsening oxygenation/ventilation, uncontrolled agitation despite plan, or inability to maintain monitoring/device safety are triggers to re-contact higher support and elevate MEDEVAC priority.</li>'+
+          '<li>Burn resuscitation exceeding the 6 ml/kg/%TBSA projection or sustained oliguria despite rate changes should prompt teleconsultation and reconsideration of local holding.</li>'+
+          '<li>Falling medication/oxygen reserves to &lt;6–12 hours of projected need should be communicated to command with a clear timeline.</li>'+
+        '</ul>'+
+        '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>Stage drugs, fluids, suction, and backup oxygen where the team can reach them in heavy seas. Secure pumps, ventilator circuits, and tubing to survive ladder and passageway movement. Build medication conservation and watch-rotation plans early so the 24-hour hold does not exhaust limited stock before evacuation is possible.</p></div></div>',
+      relatedLinks:['prolonged-holding/reassessment-rhythm','prolonged-holding/sedation-pain','prolonged-holding/documentation-continuity','algorithms/burn-resuscitation','checklists/burn-8-hour-check','equipment/zoll-emv-731','team/handover']
+    },
+    {
       id:'stabilization-checklist',
       title:'Stabilization Checklist Before Holding',
       content:'<h3>7.4 Transition Into the Holding Phase</h3>'+
