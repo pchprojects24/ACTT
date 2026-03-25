@@ -91,7 +91,7 @@ window.ACTT.team={
 
         '<h4>11.9.1 Documentation Failure Patterns</h4>' +
         '<p>Common failures include missing times, undocumented reassessment, no running total of sedatives or opioids, no trend record, and notes that record what was done without stating what happened afterward. These gaps directly increase risk during shift change and prolonged holding.</p>',
-      relatedLinks:[]
+      relatedLinks:['appendices/appendix-m','prolonged-holding/documentation-continuity','team/handover']
     },
     {
       id:'handover',
