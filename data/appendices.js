@@ -889,5 +889,53 @@ window.ACTT.appendices={
         {title:'Med Tech Ketamine for Pain.pdf',file:'Med Tech Ketamine for Pain.pdf',note:'Ketamine analgesia dosing and monitoring.'}
       ]
     }
+    ,
+    {
+      id:'appendix-o',
+      title:'Appendix O — Oxygen Therapy Quick Reference',
+      content:
+        '<p>Point-of-care oxygen delivery guide built from the DL oxygen endurance chart and aligned with existing airway/respiratory support content. Use it to select the simplest device that meets the oxygenation goal and to plan endurance for transports or prolonged holds.</p>'+
+
+        '<h4>Common Oxygen Delivery Devices</h4>'+
+        '<div class="table-wrapper"><table>'+
+        '<thead><tr><th>Device</th><th>Flow (L/min)</th><th>Approx FiO<sub>2</sub></th><th>Use</th><th>Limits / Notes</th></tr></thead>'+
+        '<tbody>'+
+        '<tr><td><strong>Nasal cannula</strong></td><td>1&ndash;6</td><td>About 24&ndash;44%</td><td>Mild hypoxia; step-down after improvement</td><td>Drying at higher flows; mouth breathing reduces effect</td></tr>'+
+        '<tr><td><strong>Simple face mask</strong></td><td>6&ndash;10</td><td>About 35&ndash;60%</td><td>Moderate hypoxia when cannula insufficient</td><td>Always run at &ge;6 L/min to avoid CO<sub>2</sub> rebreathing</td></tr>'+
+        '<tr><td><strong>Non-rebreather</strong></td><td>10&ndash;15</td><td>About 60&ndash;90%</td><td>High-demand hypoxia or preoxygenation</td><td>Check reservoir inflation and seal; temporary measure</td></tr>'+
+        '<tr><td><strong>BVM with reservoir</strong></td><td>15</td><td>Near 100% with tight seal</td><td>Preoxygenation, peri-arrest support, transport with poor effort</td><td>Requires close monitoring and skilled seal; avoid gastric insufflation</td></tr>'+
+        '<tr><td><strong>CPAP/NIPPV</strong></td><td>8&ndash;15 (driving flow)</td><td>Device-dependent, often 30&ndash;100%</td><td>Respiratory distress with preserved drive (e.g., pulmonary edema)</td><td>Need tight mask, coaching, and backup airway plan; monitor for fatigue</td></tr>'+
+        '<tr><td><strong>Stationary concentrator</strong></td><td>0.5&ndash;10</td><td>About 87&ndash;96% depending on flow</td><td>Prolonged supplemental O<sub>2</sub> when power available</td><td>Confirm filter status and alarms; swap to cylinders for transport/power loss</td></tr>'+
+        '</tbody></table></div>'+
+
+        '<h4>Compressed Cylinder Endurance (DL oxygen chart)</h4>'+
+        '<div class="table-wrapper"><table>'+
+        '<thead><tr><th>Flow (L/min)</th><th>D (356 L)</th><th>E (622 L)</th><th>G (5260 L)</th><th>H (6900 L)</th></tr></thead>'+
+        '<tbody>'+
+        '<tr><td><strong>2</strong></td><td>178 min</td><td>311 min</td><td>2630 min</td><td>3450 min</td></tr>'+
+        '<tr><td><strong>4</strong></td><td>89 min</td><td>155 min</td><td>1315 min</td><td>1725 min</td></tr>'+
+        '<tr><td><strong>6</strong></td><td>59 min</td><td>104 min</td><td>876 min</td><td>1150 min</td></tr>'+
+        '<tr><td><strong>8</strong></td><td>44 min</td><td>78 min</td><td>658 min</td><td>862 min</td></tr>'+
+        '<tr><td><strong>10</strong></td><td>35 min</td><td>62 min</td><td>526 min</td><td>690 min</td></tr>'+
+        '<tr><td><strong>12</strong></td><td>30 min</td><td>52 min</td><td>438 min</td><td>575 min</td></tr>'+
+        '<tr><td><strong>15</strong></td><td>23 min</td><td>41 min</td><td>350 min</td><td>460 min</td></tr>'+
+        '</tbody></table></div>'+
+        '<p><strong>Cylinder factors:</strong> D 0.16, E 0.28, G 2.41, H/K 3.14. <strong>Duration (min) ≈ pressure (psi) × factor ÷ flow (L/min).</strong> MEDEVAC default cylinder noted as D size in DL material.</p>'+
+
+        '<h4>Practical Bedside Notes</h4>'+
+        '<ul>'+
+        '<li>Choose the lowest-complexity device that maintains target SpO<sub>2</sub>; step up for rising work of breathing or falling saturation.</li>'+
+        '<li>Preoxygenate before high-risk airway steps; pair with suction readiness and clear backup airway plan.</li>'+
+        '<li>Protect oxygen supply during prolonged holds and transport: secure cylinders, track pressures, and plan swaps before failure.</li>'+
+        '<li>Reassess after every change: mental status, work of breathing, SpO<sub>2</sub>, EtCO<sub>2</sub> if available, and device seal/fit.</li>'+
+        '<li>Fire safety applies to all sources: no open flames, smoking, or oil/grease near devices or tubing.</li>'+
+        '</ul>',
+      relatedLinks:['domains/domain-1-airway','procedures/rsi','algorithms/airway-failure','prolonged-holding/reassessment-rhythm','thresholds/airway-respiratory'],
+      sources:[
+        {title:'oxygen.pdf',file:'oxygen.pdf'},
+        {title:'Ventilator PERLs_Handout for Students.pdf',file:'Ventilator PERLs_Handout for Students.pdf'},
+        {title:'oxygen-invacare-platinum10.html',file:'oxygen-invacare-platinum10.html',note:'Stationary concentrator quick-use reference.'}
+      ]
+    }
   ]
 };
