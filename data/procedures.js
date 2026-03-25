@@ -108,6 +108,62 @@ window.ACTT.procedures={
       relatedLinks:['algorithms/airway-failure','medications/ketamine','medications/succinylcholine','checklists/rsi']
     },
     {
+      id:'procedural-sedation',
+      title:'Procedural Sedation and Analgesia',
+      content:'<p>Procedural sedation enables short, painful bedside interventions while preserving protective reflexes and hemodynamic stability. This workflow integrates the ACTT procedural sedation presentation and the PA medical directive so it can be run quickly and safely at the bedside.</p>'+
+      '<h4>Indications</h4>'+
+      '<ul>'+
+      '<li>Short painful procedures requiring immobility (fracture or joint reduction, complex laceration repair, abscess I&amp;D, tube thoracostomy, emergency airway support).</li>'+
+      '<li>Wound care or dressing changes that cannot be tolerated with local anesthesia alone.</li>'+
+      '<li>Combative or severely anxious patients who are interfering with necessary medical care.</li>'+
+      '</ul>'+
+      '<h4>Contraindications and Cautions</h4>'+
+      '<ul>'+
+      '<li>Age under 3 months or known/suspected schizophrenia (per directive).</li>'+
+      '<li>Predicted difficult airway, obstructive sleep apnea, or high aspiration risk without a rescue plan.</li>'+
+      '<li>Severe cardiorespiratory instability not yet addressed.</li>'+
+      '<li>Inability to provide continuous monitoring or immediate airway rescue.</li>'+
+      '</ul>'+
+      '<h4>Pre-Sedation Setup</h4>'+
+      '<ul>'+
+      '<li>Two qualified personnel (sedation/monitor and procedure operator) with roles and backup airway plan verbalized.</li>'+
+      '<li>Consent and time-out completed; weight recorded for dosing; baseline vitals and fasting/aspiration risk noted.</li>'+
+      '<li>IV access preferred and patent; oxygen source, suction, BVM with adjuncts, and SGA/ETT rescue equipment at bedside.</li>'+
+      '<li>Monitoring on before first dose: SpO\u2082, BP, ECG, and EtCO\u2082 if available (cycle frequently during sedation).</li>'+
+      '<li>Medications drawn up, diluted, labeled, and double-checked: ketamine (prepare 10 mg/mL syringes), optional midazolam in 0.5\u20132 mg IV increments, opioid analgesia only if needed, ondansetron prophylaxis considered.</li>'+
+      '<li>Reversal agents ready if applicable: naloxone for opioid-induced respiratory depression, flumazenil for selected benzodiazepine reversal.</li>'+
+      '</ul>'+
+      '<h4>Step-by-Step Technique</h4>'+
+      '<div class="procedure-step"><div class="ps-num">1</div><div class="ps-text">State the indication, target depth (anxiolysis, moderate, dissociative), and rescue plan. Assign a dedicated monitor separate from the proceduralist.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">2</div><div class="ps-text">Apply monitoring, record baseline vitals, position the patient, and pre-oxygenate. Confirm suction and BVM are within reach.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">3</div><div class="ps-text">Draw and label ketamine weight-based (1 mg/kg IV over 60 seconds or 4\u20135 mg/kg IM when IV delayed). Prepare small midazolam aliquots (0.5\u20132 mg IV) only as needed for anxiolysis or emergence reactions. Use opioid analgesia in small slow increments (for example, fentanyl 0.5\u20131 mcg/kg) if required.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">4</div><div class="ps-text">Start capnography if available. Deliver the first ketamine dose slowly; avoid the dysphoric mid-range (0.3\u20130.8 mg/kg). Allow full onset before redosing to prevent dose stacking.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">5</div><div class="ps-text">Maintain continuous observation: one person focuses on airway/ventilation, secretions, and hemodynamics while the procedure proceeds.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">6</div><div class="ps-text">If airway tone decreases, use jaw thrust, repositioning, and suction. Provide BVM support early rather than waiting for desaturation.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">7</div><div class="ps-text">Document times, doses, responses, and any rescue interventions. Stop dosing once the target depth is reached.</div></div>'+
+      '<div class="procedure-step"><div class="ps-num">8</div><div class="ps-text">Transition to recovery: stop procedural stimulus, continue monitoring, and reassess every few minutes until the patient meets recovery criteria.</div></div>'+
+      '<h4>Monitoring and Recovery</h4>'+
+      '<ul>'+
+      '<li>During sedation: continuous observation with SpO\u2082 and ECG, BP cycling, and EtCO\u2082 when available (capnography catches apnea before oximetry if on oxygen).</li>'+
+      '<li>Recovery: monitor at least every 5 minutes until awake, maintaining airway reflexes, stable vitals, controlled pain/nausea, and able to mobilize or has escort per policy.</li>'+
+      '<li>Document total doses, complications, and discharge/transport instructions.</li>'+
+      '</ul>'+
+      '<h4>Complications and Rescue</h4>'+
+      '<ul>'+
+      '<li><strong>Laryngospasm or apnea:</strong> suction, jaw thrust, BVM; consider paralytic and intubation if unresolved.</li>'+
+      '<li><strong>Hypotension:</strong> pause dosing, provide fluids; pressor support if clinically indicated.</li>'+
+      '<li><strong>Emergence reactions:</strong> small midazolam increments as needed.</li>'+
+      '<li><strong>Emesis/aspiration risk:</strong> suction promptly; place in lateral recovery position when feasible.</li>'+
+      '<li><strong>Hypersalivation:</strong> suction and positioning; rare need for anticholinergic adjunct.</li>'+
+      '</ul>'+
+      '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
+      '<p>Shipboard sedation demands disciplined documentation of doses, timings, and responses so watch turnover remains safe. Limited staffing means the monitor and airway rescue plan must be explicit before starting. During delayed evacuation, plan for repeated reassessments, antiemetic use, and medication supply tracking.</p>'+
+      '</div></div>'+
+      '<h4>Medication Notes</h4>'+
+      '<p>Ketamine is the primary agent because it preserves airway reflexes and hemodynamic stability. Administer slowly to reduce laryngospasm risk. Midazolam and opioids are synergistic; use small increments and avoid stacking. Ondansetron prophylaxis reduces vomiting during recovery. Keep naloxone and flumazenil available when benzodiazepines or opioids are used.</p>',
+      relatedLinks:['checklists/procedural-sedation','medications/analgesics','medications/sedatives','prolonged-holding/sedation-pain','algorithms/combative-patient','thresholds/medication-safety','pitfalls/medication-errors']
+    },
+    {
       id:'surgical-cric',
       title:'Surgical Cricothyroidotomy',
       content:'<p>Surgical cricothyroidotomy is the definitive rescue airway when oral access has failed or is not possible. In the ACTT context, this is the procedure that follows disciplined recognition of a true failed airway, not repeated ineffective laryngoscopy.</p>'+

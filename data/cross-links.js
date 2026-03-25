@@ -16,6 +16,7 @@ window.ACTT.crossLinks={
 'procedures/needle-cric':{title:'Needle Cricothyroidotomy',path:'#/procedures/needle-cric'},
 'procedures/needle-thoracostomy':{title:'Needle Thoracostomy',path:'#/procedures/needle-thoracostomy'},
 'procedures/chest-tube':{title:'Chest Tube Thoracostomy',path:'#/procedures/chest-tube'},
+'procedures/procedural-sedation':{title:'Procedural Sedation',path:'#/procedures/procedural-sedation'},
 'procedures/io-access':{title:'Intraosseous Access',path:'#/procedures/io-access'},
 'procedures/foley':{title:'Foley Catheter',path:'#/procedures/foley'},
 'procedures/pericardiocentesis':{title:'Pericardiocentesis',path:'#/procedures/pericardiocentesis'},
@@ -238,6 +239,7 @@ window.ACTT.crossLinks={
 'checklists/anaphylaxis':{title:'Anaphylaxis Cognitive Aid',path:'#/checklists/anaphylaxis'},
 'checklists/post-rosc':{title:'Post-ROSC Checklist',path:'#/checklists/post-rosc'},
 'checklists/medevac':{title:'MEDEVAC 9-Line',path:'#/checklists/medevac'},
+'checklists/procedural-sedation':{title:'Procedural Sedation Checklist',path:'#/checklists/procedural-sedation'},
 'checklists/fibrinolysis-screening':{title:'Fibrinolysis Screening (STEMI)',path:'#/checklists/fibrinolysis-screening'},
 'checklists/burn-8-hour-check':{title:'8-Hour Burn Reassessment Checklist',path:'#/checklists/burn-8-hour-check'},
 'checklists/mascal':{title:'MASCAL Triage Checklist',path:'#/checklists/mascal'}
