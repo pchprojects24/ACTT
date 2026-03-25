@@ -362,11 +362,75 @@ window.ACTT.algorithms={
       relatedLinks:['procedures/iv-io-access','medications/norepinephrine','medications/antibiotics','medications/crystalloid','thresholds/map','thresholds/lactate','thresholds/urine-output','pitfalls/fluid-overload']
     },
     {
+      id:'dka',
+      title:'DKA / Hyperglycemic Emergency',
+      severity:'red',
+      sectionNumber:'4.9',
+      content:'<h3>4.9 Diabetic Ketoacidosis / Hyperglycemic Emergency</h3>' +
+        '<p>This pathway covers DKA and hyperosmolar hyperglycemic state (HHS) at the point of care. It emphasizes early recognition, aggressive but structured fluid resuscitation, insulin only after potassium is known, tight electrolyte monitoring, and evacuation planning once stabilized.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
+        '<ul>' +
+        '<li>Symptomatic hyperglycemia with dehydration, vomiting, abdominal pain, tachypnea/Kussmaul pattern, or acetone breath.</li>' +
+        '<li>Altered mental status, shock signs, or profoundly dry mucosa/poor skin turgor with suspected missed insulin or infection trigger.</li>' +
+        '<li>Bedside or lab evidence of DKA (glucose typically &gt; 11 mmol/L with ketones/acidosis) or HHS (very high glucose/osmolality with altered sensorium, minimal ketosis).</li>' +
+        '</ul></div>' +
+
+        '<h4>Immediate Assessment Priorities</h4>' +
+        '<ul>' +
+        '<li>POC glucose and urine/serum ketones; obtain VBG/pH/bicarbonate, anion gap, corrected sodium, and osmolality when available.</li>' +
+        '<li>Check potassium before insulin; recognize total body potassium deficit even if initial K is normal or high.</li>' +
+        '<li>Assess perfusion, mental status, respiratory effort, and risk for airway loss. Avoid intubation if possible because matching pre-intubation minute ventilation is difficult.</li>' +
+        '<li>Search for precipitants: infection/sepsis, missed insulin, ischemia/ACS, medications (steroids, thiazides), or SGLT2 use.</li>' +
+        '</ul>' +
+
+        '<h4>Immediate Actions / Execution Sequence</h4>' +
+        '<ul>' +
+        '<li>Place two large-bore IVs, cardiac monitoring, and start isotonic crystalloid. Give roughly 15&ndash;20 mL/kg (~1&ndash;2 L) in the first hour unless clear overload risk, then continue 250&ndash;500 mL/hr guided by perfusion, urine output, and respiratory tolerance.</li>' +
+        '<li>Do not start insulin until potassium is known. If K &lt; 3.3 mmol/L, hold insulin and replace potassium (e.g., 40 mEq KCl per liter while resuscitating) until K is safe.</li>' +
+        '<li>If K &ge; 3.3 mmol/L, start regular insulin infusion at 0.1 units/kg/hr (no bolus). Continue potassium supplementation because intracellular shift will drop serum K.</li>' +
+        '<li>Add dextrose to the fluid when glucose falls below ~14 mmol/L so insulin can continue to clear ketones.</li>' +
+        '<li>Check glucose at least hourly and potassium about every 2 hours; repeat VBG/anion gap and osmolality when available to trend closure.</li>' +
+        '<li>Treat the precipitating cause (antibiotics for infection, ACS pathway if indicated) while resuscitation continues.</li>' +
+        '</ul>' +
+
+        '<h4>Decision Branches</h4>' +
+        '<p>If the patient is hypotensive or poorly perfused, prioritize initial crystalloid bolus while watching for respiratory compromise. If K remains below 3.3 mmol/L, continue potassium and defer insulin. If the anion gap is closing and the patient can take enteral intake, transition to basal/long-acting insulin before stopping the infusion to avoid rebound ketosis. If respiratory fatigue or airway threat develops, prepare for intubation but match pre-intubation minute ventilation and anticipate hemodynamic collapse.</p>' +
+
+        '<h4>Key Execution Points</h4>' +
+        '<ul>' +
+        '<li>Insulin without a potassium plan is unsafe; potassium will fall quickly once insulin starts.</li>' +
+        '<li>Dextrose is added to allow insulin to continue once glucose approaches the target, not to stop insulin.</li>' +
+        '<li>HHS is primarily a volume and osmolality problem; large fluid deficits are common, but reassess respiratory status to avoid overload.</li>' +
+        '<li>Document timing of glucose checks, potassium replacement, insulin adjustments, and fluid volumes.</li>' +
+        '</ul>' +
+
+        '<h4>Reassessment Points</h4>' +
+        '<p>Trend vital signs, mental status, respiratory pattern, urine output, and capillary refill. Recheck glucose hourly and potassium about every 2 hours. Repeat VBG/anion gap and osmolality when available to confirm resolution. Watch for pulmonary edema as fluids accumulate and for hypoglycemia when glucose drops faster than expected. Maintain evacuation planning and teleconsultation while stabilization continues.</p>' +
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Traps</div>' +
+        '<ul>' +
+        '<li>Starting insulin before knowing potassium, leading to sudden hypokalemia and arrhythmia risk.</li>' +
+        '<li>Stopping insulin when glucose normalizes but the anion gap remains open.</li>' +
+        '<li>Failing to add dextrose once glucose &lt; 14 mmol/L, causing hypoglycemia and early insulin stoppage.</li>' +
+        '<li>Fluid overload in older patients or HHS when reassessment is not frequent.</li>' +
+        '<li>Intubating without matching pre-intubation minute ventilation, worsening acidosis.</li>' +
+        '</ul></div>' +
+
+        '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
+        '<ul>' +
+        '<li>Limited lab access means relying on serial clinical exam, glucose trends, urine output, and careful potassium replacement tracking.</li>' +
+        '<li>Stock and power limits make insulin and fluid use a planning problem; calculate expected needs early.</li>' +
+        '<li>Delayed evacuation increases the importance of teleconsultation, documentation of trends, and a durable monitoring plan.</li>' +
+        '</ul></div></div>',
+      relatedLinks:['procedures/iv-io-access','sickbay-meds/insulin_regular','medications/crystalloid','thresholds/urine-output','prolonged-holding/reassessment-rhythm','pitfalls/fluid-overload','algorithms/sepsis','medications/antibiotics','checklists/dka-hyperglycemia']
+    },
+    {
       id:'stemi',
       title:'STEMI and Fibrinolysis',
       severity:'red',
-      sectionNumber:'4.9',
-      content:'<h3>4.9 STEMI and Fibrinolysis Pathway</h3>' +
+      sectionNumber:'4.10',
+      content:'<h3>4.10 STEMI and Fibrinolysis Pathway</h3>' +
         '<p>This pathway is a time-sensitive risk-benefit algorithm. The clinician must identify true ST-elevation myocardial infarction, determine whether timely PCI is unavailable, exclude major contraindications, and execute fibrinolysis and adjunctive therapy safely.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -422,8 +486,8 @@ window.ACTT.algorithms={
       id:'chest-decompression',
       title:'Needle/Chest Decompression (Tension Pneumothorax)',
       severity:'red',
-      sectionNumber:'4.10',
-      content:'<h3>4.10 Tension Pneumothorax Pathway</h3>' +
+      sectionNumber:'4.11',
+      content:'<h3>4.11 Tension Pneumothorax Pathway</h3>' +
         '<p>This pathway is built around rapid recognition and immediate decompression. The critical operational principle is that a suspected tension pneumothorax in an unstable patient is treated as a clinical emergency, not a radiology problem.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -475,8 +539,8 @@ window.ACTT.algorithms={
       id:'multi-system',
       title:'Integrated Multi-System Decision Pathways',
       severity:'red',
-      sectionNumber:'4.11',
-      content:'<h3>4.11 Integrated Multi-System Decision Pathways</h3>' +
+      sectionNumber:'4.12',
+      content:'<h3>4.12 Integrated Multi-System Decision Pathways</h3>' +
         '<p>Real casualties often fit more than one algorithm at the same time. The clinician must decide what kills first, what can wait, and how one treatment may worsen another problem. This is where the earlier domain framework becomes useful.</p>' +
 
         '<h4>Common Conflicted Scenarios</h4>' +
@@ -499,10 +563,10 @@ window.ACTT.algorithms={
         '<li>After the intervention, force a reassessment before moving on.</li>' +
         '</ol>' +
 
-        '<h3>4.12 Algorithm Execution in the RCN At-Sea Context</h3>' +
+        '<h3>4.13 Algorithm Execution in the RCN At-Sea Context</h3>' +
         '<p>Shipboard practice changes how algorithms are used. The sequence may be the same as ashore, but the practical limits are different: staffing may be thinner, evacuation may be delayed, diagnostics may be limited, and the patient may need to be maintained for many hours.</p>' +
 
-        '<h4>Practical Constraints</h4>' +
+        '<h4>Practical Constraints (4.13.1)</h4>' +
         '<ul>' +
         '<li>Limited personnel can force simpler task division and tighter prioritization.</li>' +
         '<li>Movement, noise, space limits, and lighting can degrade performance during airway and procedural tasks.</li>' +
@@ -510,7 +574,7 @@ window.ACTT.algorithms={
         '<li>Delayed evacuation means every acute pathway must eventually connect to a prolonged holding plan.</li>' +
         '</ul>' +
 
-        '<h4>Practical Adaptations</h4>' +
+        '<h4>Practical Adaptations (4.13.2)</h4>' +
         '<ul>' +
         '<li>Do the first lifesaving step early and decisively.</li>' +
         '<li>Choose interventions you can monitor and maintain.</li>' +
@@ -518,7 +582,7 @@ window.ACTT.algorithms={
         '<li>Use teleconsultation early when the next branch is uncertain or when competing priorities are difficult to balance.</li>' +
         '</ul>' +
 
-        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Errors in Algorithm Use (4.13)</div>' +
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Errors in Algorithm Use (4.14)</div>' +
         '<ul>' +
         '<li>Recognizing the problem but delaying the first treatment step.</li>' +
         '<li>Collecting data without acting on clear thresholds.</li>' +
@@ -528,10 +592,10 @@ window.ACTT.algorithms={
         '<li>Stopping at temporary improvement and missing the need for definitive management.</li>' +
         '</ul></div>' +
 
-        '<h4>End State for the Learner (4.14)</h4>' +
+        '<h4>End State for the Learner (4.15)</h4>' +
         '<p>After this chapter, the learner should be able to recognize the major ACTT-critical presentations, activate the correct pathway, carry out the first intervention sequence, identify when the current step has failed, and transition either to escalation or to prolonged holding. The aim is not memorization alone. The aim is to know what to do on the patient, in order, under pressure.</p>' +
 
-        '<h4>Bridge to the Next Chapter (4.15)</h4>' +
+        '<h4>Bridge to the Next Chapter (4.16)</h4>' +
         '<p>Chapter 5 moves from decision pathways to procedural execution. Where this chapter answers when to act and what branch comes next, the next chapter focuses on how to physically perform the core high-acuity procedures.</p>' +
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +

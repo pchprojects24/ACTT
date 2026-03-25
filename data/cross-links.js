@@ -7,6 +7,7 @@ window.ACTT.crossLinks={
 'algorithms/burn-resuscitation':{title:'Burn Resuscitation Algorithm',path:'#/algorithms/burn-resuscitation'},
 'algorithms/hypothermia':{title:'Hypothermia Algorithm',path:'#/algorithms/hypothermia'},
 'algorithms/sepsis':{title:'Sepsis Algorithm',path:'#/algorithms/sepsis'},
+'algorithms/dka':{title:'DKA / Hyperglycemic Emergency',path:'#/algorithms/dka'},
 'algorithms/stemi':{title:'STEMI Algorithm',path:'#/algorithms/stemi'},
 'algorithms/chest-decompression':{title:'Chest Decompression Algorithm',path:'#/algorithms/chest-decompression'},
 'algorithms/multi-system':{title:'Multi-System Pathways',path:'#/algorithms/multi-system'},
@@ -31,6 +32,7 @@ window.ACTT.crossLinks={
 'medications/reversal-agents':{title:'Reversal Agents',path:'#/medications/reversal-agents'},
 'medications/antibiotics':{title:'Antibiotics',path:'#/medications/antibiotics'},
 'medications/sedatives':{title:'Sedatives & Adjuncts',path:'#/medications/sedatives'},
+'sickbay-meds/insulin_regular':{title:'Insulin Regular',path:'#/sickbay-meds/insulin_regular'},
 // Domains
 'domains/domain-1-airway':{title:'Airway Domain',path:'#/domains/domain-1-airway'},
 'domains/domain-2-hemodynamics':{title:'Hemodynamics Domain',path:'#/domains/domain-2-hemodynamics'},
@@ -90,6 +92,8 @@ window.ACTT.crossLinks={
 'tools/timer':{title:'Reassessment Timer',path:'#/tools/timer'},
 'tools/interactions':{title:'Drug Interactions',path:'#/tools/interactions'},
 'tools/ddx':{title:'Differential Diagnosis',path:'#/tools/ddx'},
+// Checklists
+'checklists/dka-hyperglycemia':{title:'DKA / Hyperglycemic Emergency Checklist',path:'#/checklists/dka-hyperglycemia'},
 // Appendices
 'appendices/appendix-a':{title:'Algorithm Summary Cards',path:'#/appendices/appendix-a'},
 'appendices/appendix-b':{title:'Procedure Checklists',path:'#/appendices/appendix-b'},
