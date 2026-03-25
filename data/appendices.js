@@ -864,6 +864,30 @@ window.ACTT.appendices={
         {title:'Burn Fluid Resus Flowsheet.pdf',file:'Burn Fluid Resus Flowsheet.pdf'},
         {title:'Critical Care Requirements for 24hr Patient Hold.pdf',file:'Critical Care Requirements for 24hr Patient Hold.pdf'}
       ]
+    },
+    {
+      id:'appendix-n',
+      title:'Appendix N — Med Tech Simplified Protocols',
+      content:
+        '<p>Condensed Med Tech quick cards for airway, burn resuscitation, combative patient control, IO access, and ketamine analgesia. These are operational shortcuts; defer to the supervising PA/MO for scope changes.</p>'+
+        '<div class="table-wrapper"><table>'+
+        '<thead><tr><th>Protocol</th><th>When to Use</th><th>Immediate Actions</th><th>Dose / Device Cue</th><th>Watch / Escalate</th></tr></thead>'+
+        '<tbody>'+
+        '<tr><td><strong>Airway — i-gel®</strong></td><td>GCS ≤8, absent gag, or arrest when rapid supraglottic airway is appropriate</td><td>Position and suction; select correct size; insert gently; ventilate with low pressure</td><td>Keep peak pressure &lt;40 cm H<sub>2</sub>O; single-use only; remove within 4 hours</td><td>Does not protect from aspiration; secure well; convert to definitive airway if oxygenation/ventilation inadequate</td></tr>'+
+        '<tr><td><strong>Burn Fluids</strong></td><td>&gt;20% TBSA burn without hemorrhagic shock</td><td>Estimate TBSA; start LR using Rule of Ten (adult) or Parkland (peds); titrate hourly to urine output</td><td>Target UOP 30–50 ml/hr (adult); adjust fluids ±25% per hour; max 1500 ml/hr x2 hrs or 250 ml/kg/24h</td><td>If UOP &gt;50 ml/hr decrease 25%; if &lt;30 ml/hr increase 25%; oral rehydration acceptable &lt;30% TBSA when no IV</td></tr>'+
+        '<tr><td><strong>Combative Patient</strong></td><td>Unsafe agitation despite verbal control attempts</td><td>Assess reversible causes; verbal de-escalation; physical control if required; chemical restraint when still unsafe</td><td>Haloperidol 5 mg IM/IV/IO + Midazolam 2 mg IM/IV/IO; may repeat once after 10 minutes if still dangerous</td><td>Have 5-point team hold if sedating; monitor airway/respirations; treat dystonia with Diphenhydramine 50 mg IM/IV; notify PA/MO</td></tr>'+
+        '<tr><td><strong>IO Access</strong></td><td>Need rapid access after failed/delayed IV</td><td>Select site (sternal FAST1 or tibial/humeral); insert; flush brisk 10 ml to clear marrow; secure</td><td>Use through burns if bone intact; avoid sites with fracture, infection, prior IO &lt;48 hrs; device usable up to 24 hrs</td><td>Monitor for infiltration/compartment syndrome, especially peds; reassess stability with edema or movement</td></tr>'+
+        '<tr><td><strong>Ketamine for Pain</strong></td><td>Moderate–severe pain when opioid-sparing approach preferred</td><td>If no shock airway risk: IM/IN; if monitored access: IV/IO; reassess after each dose</td><td>IM/IN 50 mg q30 min x2 max; IV/IO 25 mg q20 min x4 within 2 hrs; endpoint pain control or nystagmus</td><td>Expect secretions; be ready to reposition/suction; manage laryngospasm with BVM; treat emergence/combative response with Midazolam 2 mg IM/IV/IO q10 min (max 4 doses)</td></tr>'+
+        '</tbody></table></div>'+
+        '<p><strong>Operational reminders:</strong> Document AVPU and staffing before sedation; haloperidol and midazolam are compatible when combined; IO meds run as IV equivalents after vigorous flush; contact PA/MO early if repeated sedation or fluid escalation is needed.</p>',
+      relatedLinks:['algorithms/airway-failure','algorithms/burn-resuscitation','algorithms/combative-patient','procedures/io-access','medications/analgesics','medications/sedatives','checklists/burn-8-hour-check','team/core-principles'],
+      sources:[
+        {title:'Med Tech Airway.pdf',file:'Med Tech Airway.pdf',note:'i-gel® insertion principles and cautions.'},
+        {title:'Med Tech Burn Protocol.pdf',file:'Med Tech Burn Protocol.pdf',note:'Burn fluid targets and adjustment rules.'},
+        {title:'Med Tech Combative patient.pdf',file:'Med Tech Combative patient.pdf',note:'Hostile/violent patient chemical restraint quick card.'},
+        {title:'Med Tech IO protocol.pdf',file:'Med Tech IO protocol.pdf',note:'IO indications, contraindications, and flush requirements.'},
+        {title:'Med Tech Ketamine for Pain.pdf',file:'Med Tech Ketamine for Pain.pdf',note:'Ketamine analgesia dosing and monitoring.'}
+      ]
     }
   ]
 };

@@ -118,6 +118,7 @@ window.ACTT.crossLinks={
 'appendices/appendix-k':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
 'appendices/appendix-l':{title:'IV Compatibility & Infusion Quick Reference',path:'#/appendices/appendix-l'},
 'appendices/appendix-m':{title:'Documentation Templates & Flow Sheets',path:'#/appendices/appendix-m'},
+'appendices/appendix-n':{title:'Med Tech Simplified Protocols',path:'#/appendices/appendix-n'},
 // Aliases to ensure related links resolve to existing content
 'procedures/surgical-airway':{title:'Surgical Airway (Cricothyroidotomy)',path:'#/procedures/surgical-cric'},
 'procedures/needle-decompression':{title:'Needle Decompression',path:'#/procedures/needle-thoracostomy'},
