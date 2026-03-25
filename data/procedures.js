@@ -318,8 +318,15 @@ window.ACTT.procedures={
       '</ul>'+
       '<h4>Required Equipment and Setup</h4>'+
       '<ul>'+
-      '<li>Chest tube of appropriate size, scalpel, blunt clamp, sterile supplies, local anesthetic or sedation when feasible, sutures or securement, and drainage device such as a Pleurivac.</li>'+
+      '<li>Chest tube of appropriate size, scalpel, blunt clamp, sterile supplies, local anesthetic or sedation when feasible, sutures or securement, and drainage device such as a Pleurovac.</li>'+
       '<li>Monitoring, suction setup if used, and a plan for output tracking after insertion.</li>'+
+      '</ul>'+
+      '<h4>Pleurovac Setup and Initial Checks</h4>'+
+      '<ul>'+
+      '<li>Connect the patient drainage tubing to the thoracic catheter, add sterile fluid to the air leak meter if the device requires it, and set suction only if ordered.</li>'+
+      '<li>When suction is used, confirm the prescribed dial setting and increase the source until the suction indicator or orange float is visible.</li>'+
+      '<li>Keep the drainage unit below chest level, avoid dependent loops or kinks, and leave the tube unclamped unless briefly changing the unit or specifically ordered.</li>'+
+      '<li>Document a starting system picture: output amount and character, tidaling or fluctuation, and the highest bubbling column if an air leak is present.</li>'+
       '</ul>'+
       '<h4>Step-by-Step Technique</h4>'+
       '<div class="procedure-step"><div class="ps-num">1</div><div class="ps-text">Position the patient and identify the fifth intercostal space at the mid-axillary line.</div></div>'+
@@ -331,13 +338,22 @@ window.ACTT.procedures={
       '<h4>Confirmation</h4>'+
       '<ul>'+
       '<li>Look for clinical improvement, expected tube output, and appropriate system behavior such as bubbling or fluid movement when relevant.</li>'+
+      '<li>Expected tidaling or fluctuation supports a functioning system unless the lung is fully re-expanded; in a ventilated patient the pattern reverses.</li>'+
+      '<li>Use the air leak meter at the bottom of the chamber and document the highest bubbling column if a leak is present.</li>'+
       '<li>Check securement, tube depth, drainage tubing alignment, and whether the system is functioning as intended.</li>'+
       '<li>Continue repeated reassessment because a technically placed tube can still fail later due to blockage or dislodgement.</li>'+
       '</ul>'+
+      '<h4>Pleurovac Interpretation and Troubleshooting</h4>'+
+      '<ul>'+
+      '<li>No tidaling or sudden loss of drainage may mean a kink, clot, dependent loop, clamp, or a fully re-expanded lung; correct simple mechanical problems first and reassess.</li>'+
+      '<li>Continuous or new bubbling should prompt tracing the system from insertion site to drain, tightening or taping loose connections, and distinguishing patient air leak from system leak.</li>'+
+      '<li>If the suction indicator or orange float is not visible when suction is ordered, increase source suction and check for occluded or disconnected tubing; replace the drainage unit if malfunction persists.</li>'+
+      '<li>Sudden increase in bloody drainage, abrupt character change, or patient deterioration despite system correction should trigger immediate escalation for hemorrhage, recurrent pneumothorax, or tube failure.</li>'+
+      '</ul>'+
       '<h4>Complications and Troubleshooting</h4>'+
       '<ul>'+
-      '<li>Misplacement, organ injury, persistent air leak, inadequate drainage, blocked tube, and accidental dislodgement are the major risks.</li>'+
-      '<li>If the patient remains unstable, reassess for tube position, tube patency, or an alternate diagnosis rather than assuming the procedure was sufficient.</li>'+
+      '<li>Misplacement, organ injury, persistent air leak, inadequate drainage, blocked tube, dependent loops, loss of suction, and accidental dislodgement are the major risks.</li>'+
+      '<li>If the patient remains unstable, reassess for tube position, tube patency, system function, or an alternate diagnosis rather than assuming the procedure was sufficient.</li>'+
       '</ul>'+
       '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
       '<p>A chest tube creates ongoing nursing-style tasks: monitor output volume and character, maintain tube position, protect the drainage system, and prevent accidental pulling during movement.</p>'+
@@ -345,7 +361,7 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>Lidocaine is useful for chest tube placement as local anesthesia. The goal is not full comfort at all costs; it is enough local control to improve tolerance without delaying a necessary intervention. Sedation with ketamine or other agents may be appropriate in stable patients. After any sedative or opioid, airway and respiratory reassessment is mandatory.</p>',
-      relatedLinks:['procedures/needle-thoracostomy','medications/lidocaine','medications/ketamine']
+      relatedLinks:['procedures/needle-thoracostomy','prolonged-holding/device-maintenance','pitfalls/thoracic-errors','medications/lidocaine','medications/ketamine']
     },
     {
       id:'io-access',
