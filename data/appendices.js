@@ -631,6 +631,82 @@ window.ACTT.appendices={
         '</tbody>' +
         '</table></div>',
       relatedLinks:[]
+    },
+    {
+      id:'appendix-k',
+      title:'Appendix K — ECG Interpretation Quick Reference',
+      content:
+        '<p>Use this appendix for fast pattern recognition at the bedside. It is built from the DL ECG cheat sheet and aligned to ACTT priorities: STEMI recognition, unstable bradycardia, unstable tachycardia, arrest rhythm routing, and hyperkalemia-pattern ECG change.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">FAST USE</span> Read Every ECG in This Order</div>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Step</th><th>What to Look For</th><th>Why It Matters</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>1. Rate</strong></td><td>Count QRS complexes over a standard 10-second strip and multiply by 6</td><td>Confirms whether the tracing fits a clinically important brady or tachy pattern</td></tr>' +
+        '<tr><td><strong>2. Rhythm</strong></td><td>Is it regular? Are P waves present? Is there a fixed relationship between P waves and QRS complexes?</td><td>Separates sinus rhythm from AV block, AF/flutter, SVT, or ventricular rhythm</td></tr>' +
+        '<tr><td><strong>3. Width</strong></td><td>Narrow QRS is under 0.12 seconds; wide QRS is 0.12 seconds or more</td><td>Wide rhythms need higher concern for VT, conduction block, or hyperkalemia</td></tr>' +
+        '<tr><td><strong>4. Ischemia</strong></td><td>Measure ST shift at the J point and compare contiguous leads</td><td>Supports STEMI recognition and helps localize the infarct territory</td></tr>' +
+        '<tr><td><strong>5. Electrolytes / Red flags</strong></td><td>Peaked T waves, PR prolongation, QRS widening, loss of P waves, sine-wave pattern</td><td>Suggests hyperkalemia and the need for immediate stabilization and potassium-lowering therapy</td></tr>' +
+        '</tbody>' +
+        '</table></div></div>' +
+
+        '<h4>Contiguous Leads and Infarct Territory</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Territory</th><th>Key Leads</th><th>Bedside Note</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Septal</strong></td><td>V1, V2</td><td>Often travels with anterior infarction</td></tr>' +
+        '<tr><td><strong>Anterior</strong></td><td>V3, V4</td><td>Think LAD territory; V1&ndash;V4 is the common anteroseptal pattern</td></tr>' +
+        '<tr><td><strong>Lateral</strong></td><td>I, aVL, V5, V6</td><td>I and aVL are high lateral; V5 and V6 are low lateral</td></tr>' +
+        '<tr><td><strong>Inferior</strong></td><td>II, III, aVF</td><td>RCA is common; watch for hypotension or right-sided involvement</td></tr>' +
+        '<tr><td><strong>Posterior clue</strong></td><td>V1, V2, V3</td><td>Dominant R waves with horizontal ST depression and upright tall T waves suggest posterior MI</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> STEMI Recognition Trigger</div>' +
+        '<p>ST elevation greater than 1 mm at the J point in 2 contiguous leads, in the right ischemic clinical context, should activate the STEMI pathway. Repeat ECGs if symptoms persist and the first tracing is nondiagnostic.</p></div>' +
+
+        '<h4>Bradycardia Patterns That Change Management</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Pattern</th><th>Typical ECG Features</th><th>Route in ACTT</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Sinus bradycardia / junctional slow rhythm</strong></td><td>Slow rate; sinus rhythm has a P before each QRS, junctional rhythm may not</td><td>If hypotension, shock, ischemic discomfort, acute heart failure, or AMS is present, move to the bradycardia pathway</td></tr>' +
+        '<tr><td><strong>High-grade AV block</strong></td><td>Dropped beats, AV dissociation, or a slow escape rhythm; wide QRS increases concern for infranodal disease</td><td>Expect atropine to work poorly; prepare pacing and vasoactive support early</td></tr>' +
+        '<tr><td><strong>Hyperkalemic brady / wide rhythm</strong></td><td>Peaked T waves progressing to PR prolongation, QRS widening, loss of P waves, then sine-wave appearance</td><td>Treat the potassium problem now; calcium and shifting therapy take priority alongside ACLS support</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Tachycardia Patterns That Change Management</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Pattern</th><th>Typical ECG Features</th><th>Route in ACTT</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Regular narrow-complex tachycardia</strong></td><td>QRS under 0.12 seconds and regular rhythm</td><td>If stable, vagal maneuvers then adenosine are reasonable for likely SVT; if unstable, synchronize early</td></tr>' +
+        '<tr><td><strong>Irregular narrow-complex tachycardia</strong></td><td>Often AF or flutter with variable block</td><td>Think rate control and underlying cause; do not default to adenosine as treatment for an irregular rhythm</td></tr>' +
+        '<tr><td><strong>Regular wide-complex tachycardia</strong></td><td>QRS 0.12 seconds or more with a regular rhythm</td><td>Treat as VT until proven otherwise; if unstable, synchronized cardioversion is the fast route</td></tr>' +
+        '<tr><td><strong>Irregular wide-complex tachycardia</strong></td><td>Consider polymorphic VT, AF with aberrancy, or pre-excited AF</td><td>High-risk rhythm; if the patient is deteriorating or pulseless, move immediately to the shock / arrest pathway</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Shockable vs Non-Shockable Arrest Rhythms</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Rhythm Group</th><th>Recognition</th><th>Immediate Route</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Shockable</strong></td><td>Ventricular fibrillation or pulseless ventricular tachycardia</td><td>Defibrillate and follow the shockable arrest sequence without delay</td></tr>' +
+        '<tr><td><strong>Non-shockable</strong></td><td>PEA or asystole</td><td>CPR, epinephrine, and aggressive search for reversible causes; do not waste time trying to sync or shock asystole</td></tr>' +
+        '<tr><td><strong>Organized rhythm with no pulse</strong></td><td>Electrical activity is present but there is no perfusing pulse</td><td>Treat as PEA, not ROSC</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>High-Yield Ischemia and Electrolyte Clues</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Finding</th><th>Why It Matters</th><th>Bedside Reminder</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>T-wave inversion in contiguous leads</strong></td><td>Supports ischemia when the clinical picture fits</td><td>Do not dismiss ongoing symptoms just because there is no obvious ST elevation</td></tr>' +
+        '<tr><td><strong>Peaked T waves</strong></td><td>Early hyperkalemia clue</td><td>Trend the tracing; worsening PR/QRS change means the patient is getting less electrically stable</td></tr>' +
+        '<tr><td><strong>QRS widening with disappearing P waves</strong></td><td>Late hyperkalemia warning</td><td>Think pre-arrest hyperkalemia and treat before the rhythm collapses</td></tr>' +
+        '<tr><td><strong>Posterior MI pattern</strong></td><td>Can be missed if only looking for obvious anterior ST elevation</td><td>In V1&ndash;V3, a dominant R wave plus ST depression and upright tall T waves is a posterior infarct clue</td></tr>' +
+        '</tbody>' +
+        '</table></div>',
+      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','checklists/fibrinolysis-screening','checklists/post-rosc','medications/tenecteplase']
     }
   ]
 };
