@@ -205,6 +205,28 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       ]
     },
     {
+      id:'dka-hyperglycemia',
+      type:'clinical',
+      title:'DKA / Hyperglycemic Emergency',
+      badge:'Clinical \u00b7 Cognitive Aid',
+      desc:'Recognition-to-evac sequence for DKA/HHS focusing on fluids, potassium, insulin, and monitoring.',
+      icon:'&#129514;',
+      crossLink:'#/algorithms/dka',
+      crossLinkTitle:'DKA Algorithm',
+      items:[
+        'POC glucose obtained; ketone assessment and VBG/pH/bicarbonate/anion gap/osmolality ordered if available',
+        'Two large-bore IVs and monitors in place; initial isotonic fluid bolus started (~15-20 mL/kg unless overload risk)',
+        'Potassium level reviewed before insulin; if K < 3.3 mmol/L hold insulin and begin potassium replacement',
+        'Regular insulin infusion prepared at 0.1 units/kg/hr (no bolus) once K is safe; potassium supplementation planned',
+        'Add dextrose to fluids once glucose < ~14 mmol/L so insulin can continue to clear ketones',
+        'Glucose checked at least hourly; potassium about every 2 hours; trend anion gap/venous pH when available',
+        'Urine output, mental status, respiratory pattern, and perfusion reassessed frequently; watch for pulmonary edema',
+        'Underlying cause addressed (infection/ACS/med changes); antibiotics/other treatments started if indicated',
+        'Airway risk reassessed; avoid intubation if possible but prepare to match pre-intubation minute ventilation if required',
+        'Teleconsultation and evacuation plan initiated early; document times, doses, fluids, and responses'
+      ]
+    },
+    {
       id:'stroke-screening',
       type:'clinical',
       title:'Stroke Screening',
