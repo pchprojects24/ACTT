@@ -248,6 +248,29 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       ]
     },
     {
+      id:'seizure-management',
+      type:'clinical',
+      title:'Seizure / Status Epilepticus',
+      badge:'Clinical \u00b7 Cognitive Aid',
+      desc:'Point-of-care seizure response: airway protection, glucose check, benzodiazepine rescue, escalation, and evacuation planning.',
+      icon:'&#9889;',
+      crossLink:'#/algorithms/seizure-management',
+      crossLinkTitle:'Seizure Algorithm',
+      items:[
+        'Seizure onset time recorded; witness description captured (focal vs generalized, repetitive events)',
+        'Airway protected: lateral position if possible, suction ready, oxygen applied, monitors on',
+        'Blood glucose checked immediately; hypoglycemia treated without delay',
+        'IV/IO access obtained if possible; first benzodiazepine drawn up before prolonged attempts',
+        'Midazolam 5 mg IV/IO/IM given; repeat every 5 minutes until seizure stops with airway vigilance',
+        'If no stop after two benzo doses or status likely, load levetiracetam 2 g IV/IO while preparing airway support',
+        'Consider reversible causes in parallel: trauma/TBI, infection/fever, hypoxia, electrolytes, toxins/withdrawal, pregnancy/eclampsia',
+        'Airway/ventilation reassessed continuously; BVM and RSI backup ready if GCS remains low or apneic',
+        'After convulsions stop: repeat neuro exam (GCS/pupils), consider non-convulsive status if not waking, maintain lateral positioning',
+        'Document seizure duration, all doses/times, response, and neurologic trend',
+        'Evacuation/teleconsultation arranged; maintenance antiepileptic plan and monitoring assigned'
+      ]
+    },
+    {
       id:'chest-pain-assessment',
       type:'clinical',
       title:'Chest Pain Assessment',
