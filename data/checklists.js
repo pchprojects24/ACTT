@@ -404,12 +404,38 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       ]
     },
     {
+      id:'mental-health-behavioral-crisis',
+      type:'clinical',
+      title:'Mental Health / Behavioral Crisis',
+      badge:'Clinical · Behavioral Health',
+      desc:'Recognition, scene safety, de-escalation, medical screen, and escalation checklist for agitation, psychosis, delirium, or suicidality.',
+      icon:'&#9888;',
+      crossLink:'#/algorithms/mental-health-behavioral-crisis',
+      crossLinkTitle:'Mental Health & Behavioral Crisis Pathway',
+      items:[
+        'Immediate safety assessed: remove obvious hazards/weapons, reduce crowding, keep exit route for staff, and assign one team lead',
+        'Agitation severity judged early (mild / moderate / severe); severe agitation or excited delirium treated as a medical emergency',
+        'Verbal de-escalation attempted when safe: one speaker, calm/low/slow voice, short phrases, clear limits, simple choices',
+        'Rapid medical screen started: airway/breathing, SpO₂, glucose, temperature, trauma clues, tox/withdrawal, infection, delirium',
+        'If danger persists or essential care is blocked, coordinated physical restraint used only as a temporary bridge; avoid prone restraint and neck/chest compression',
+        'Chemical sedation prepared/administered per local scope with airway equipment, suction, oxygen, and continuous monitoring ready',
+        'After every medication/restraint event: reassess airway, ventilation, circulation, temperature, and level of consciousness immediately',
+        'Direct suicide screen completed when engagement is possible: ideation, intent, plan, means access, past attempts, current stressors, protective factors',
+        'High-risk patient not left alone; means restricted; observation level and buddy/watch plan explicitly assigned',
+        'Command / Fleet Surgeon / duty physician notification completed early when suicidality, psychosis, or prolonged observation needs exceed local capacity',
+        'Evacuation / repatriation threshold reviewed: active plan, persistent psychosis, recurrent dangerous agitation, inability to monitor safely onboard',
+        'Documentation completed: trigger, differential considered, de-escalation steps, restraints/meds used, reassessment times, observation plan, handover details'
+      ]
+    },
+    {
       id:'mental-health-suicide-risk',
       type:'clinical',
       title:'Mental Health / Suicide Risk Screening',
       badge:'Clinical \u00b7 Behavioral Health',
       desc:'Structured suicide risk screen and immediate safety planning checklist.',
       icon:'&#129504;',
+      crossLink:'#/algorithms/mental-health-behavioral-crisis',
+      crossLinkTitle:'Mental Health & Behavioral Crisis Pathway',
       items:[
         'Immediate safety assessed; privacy provided where feasible',
         'Presenting concern documented; patient engaged in calm/direct conversation',
