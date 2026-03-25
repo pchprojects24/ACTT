@@ -74,7 +74,14 @@ window.ACTT.appendices={
         '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:[]
+      relatedLinks:[],
+      sources:[
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf'},
+        {title:'Burns - Dr Papp - AMTRP 0045.pdf',file:'Burns - Dr Papp - AMTRP 0045.pdf'},
+        {title:'Hypothermia and Drowning Jerome 2026-02.pdf',file:'Hypothermia and Drowning Jerome 2026-02.pdf'},
+        {title:'Sepsis ACTT feb 2026.pptx',file:'Sepsis ACTT feb 2026.pptx'},
+        {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf'}
+      ]
     },
     {
       id:'appendix-b',
@@ -131,7 +138,14 @@ window.ACTT.appendices={
         '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:[]
+      relatedLinks:[],
+      sources:[
+        {title:'RSI Check List and Intubation.pdf',file:'RSI Check List and Intubation.pdf'},
+        {title:'Cricothyroidotomy.pdf',file:'Cricothyroidotomy.pdf'},
+        {title:'ACTT 2026-01 Procedural Sedation.pdf',file:'ACTT 2026-01 Procedural Sedation.pdf'},
+        {title:'EZIO.pdf',file:'EZIO.pdf'},
+        {title:'Setup - Pleurevac.pdf',file:'Setup - Pleurevac.pdf'}
+      ]
     },
     {
       id:'appendix-c',
@@ -407,7 +421,13 @@ window.ACTT.appendices={
         '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-l','thresholds/hemodynamic','prolonged-holding/reassessment-rhythm']
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-l','thresholds/hemodynamic','prolonged-holding/reassessment-rhythm'],
+      sources:[
+        {title:'Med Tech Ketamine for Pain.pdf',file:'Med Tech Ketamine for Pain.pdf'},
+        {title:'Vasoactive Medication V2 Hnatiuk 2026.pdf',file:'Vasoactive Medication V2 Hnatiuk 2026 .pdf'},
+        {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf'},
+        {title:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf',file:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf'}
+      ]
     },
     {
       id:'appendix-d',
@@ -444,7 +464,14 @@ window.ACTT.appendices={
         '<tr><td><strong>IO switch rule</strong></td><td>After 2 failed IV attempts or more than 90 seconds in urgent need</td><td>Do not lose time pursuing failed peripheral access</td></tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:[]
+      relatedLinks:[],
+      sources:[
+        {title:'Burn Fluid Resus Flowsheet.pdf',file:'Burn Fluid Resus Flowsheet.pdf'},
+        {title:'Hypothermia and Drowning Jerome 2026-02.pdf',file:'Hypothermia and Drowning Jerome 2026-02.pdf'},
+        {title:'Sepsis ACTT feb 2026.pptx',file:'Sepsis ACTT feb 2026.pptx'},
+        {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf'},
+        {title:'EZIO.pdf',file:'EZIO.pdf'}
+      ]
     },
     {
       id:'appendix-e',

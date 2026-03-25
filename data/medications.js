@@ -126,7 +126,12 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Acetaminophen</div>'+
         '<p>Acetaminophen is confirmed in Sick Bay stock. Use as a baseline analgesic and antipyretic. Dose: 650&ndash;1000 mg PO every 6 hours. Maximum 4 g per 24 hours. Avoid cumulative overdose by accounting for acetaminophen hidden in combination products (e.g., acetaminophen with codeine).</p></div>'+
         '</div>',
-      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/rsi','procedures/procedural-sedation','medications/rsi-airway','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','shipboard/medication-shipboard','tools/dosecalc']
+      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/rsi','procedures/procedural-sedation','medications/rsi-airway','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','shipboard/medication-shipboard','tools/dosecalc'],
+      sources:[
+        {title:'Med Tech Ketamine for Pain.pdf',file:'Med Tech Ketamine for Pain.pdf',note:'Primary ACTT ketamine analgesia reference.'},
+        {title:'ACTT 2026-01 Procedural Sedation.pdf',file:'ACTT 2026-01 Procedural Sedation.pdf'},
+        {title:'Common IV Meds Cheat Sheet.pdf',file:'Common IV Meds Cheat Sheet.pdf'}
+      ]
     },
     {
       id:'rsi-airway',
@@ -186,7 +191,12 @@ window.ACTT.medications={
 
         '<p><strong>Monitoring after intubation rises significantly:</strong> sedation depth assessment, blood pressure, SpO2, EtCO2, tube position, and ongoing neurologic status must all be tracked continuously or at frequent intervals.</p>'+
         '</div>',
-      relatedLinks:['procedures/rsi','procedures/surgical-cric','algorithms/airway-failure','medications/analgesics','thresholds/airway-respiratory','pitfalls/airway-errors','shipboard/airway-at-sea','tools/dosecalc']
+      relatedLinks:['procedures/rsi','procedures/surgical-cric','algorithms/airway-failure','medications/analgesics','thresholds/airway-respiratory','pitfalls/airway-errors','shipboard/airway-at-sea','tools/dosecalc'],
+      sources:[
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf',note:'Primary ACTT RSI medication source.'},
+        {title:'RSI Check List and Intubation.pdf',file:'RSI Check List and Intubation.pdf'},
+        {title:'Ressource for RSI.pdf',file:'Ressource for RSI.pdf'}
+      ]
     },
     {
       id:'vasopressors',
@@ -274,7 +284,12 @@ window.ACTT.medications={
         '<h4>6.8.5 Other Vasoactive Notes</h4>'+
         '<p>Norepinephrine remains the default first-line vasopressor in ACTT for vasodilatory and septic shock. Epinephrine infusion is the most practical alternative when both pressure and pump support are needed. Vasopressin is an add-on rather than a rescue push. Dopamine and dobutamine can be useful in selected low-output states, but they demand tighter rhythm and blood pressure surveillance because their bedside effect is less predictable.</p>'+
         '</div>',
-      relatedLinks:['algorithms/sepsis','algorithms/stemi','thresholds/hemodynamic','procedures/io-access','medications/antibiotics','pitfalls/circulation-errors','prolonged-holding/reassessment-rhythm','shipboard/circulation-at-sea','appendices/appendix-c','appendices/appendix-l','tools/dosecalc']
+      relatedLinks:['algorithms/sepsis','algorithms/stemi','thresholds/hemodynamic','procedures/io-access','medications/antibiotics','pitfalls/circulation-errors','prolonged-holding/reassessment-rhythm','shipboard/circulation-at-sea','appendices/appendix-c','appendices/appendix-l','tools/dosecalc'],
+      sources:[
+        {title:'Vasoactive Medication V2 Hnatiuk 2026.pdf',file:'Vasoactive Medication V2 Hnatiuk 2026 .pdf',note:'Primary ACTT vasoactive medication reference.'},
+        {title:'Push Dose Pressor.pdf',file:'Push Dose Pressor.pdf'},
+        {title:'Inotrope comparison chart.pdf',file:'Inotrope comparison chart.pdf'}
+      ]
     },
     {
       id:'seizure-meds',
@@ -480,7 +495,12 @@ window.ACTT.medications={
 
         '<p><strong>Clinical Role:</strong> Antiplatelet agent. Used as part of the adjunctive therapy package in STEMI fibrinolysis. Timing of administration is important and should follow the fibrinolysis protocol sequence.</p>'+
         '</div>',
-      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','medications/reversal-agents','pitfalls/circulation-errors','pitfalls/medication-errors','shipboard/medication-shipboard','appendices/appendix-c']
+      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','medications/reversal-agents','pitfalls/circulation-errors','pitfalls/medication-errors','shipboard/medication-shipboard','appendices/appendix-c'],
+      sources:[
+        {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf',note:'Primary ACTT fibrinolysis medication reference.'},
+        {title:'Instructions for Use of Tenecteplase.pdf',file:'Instructions for Use of Tenecteplase.pdf'},
+        {title:'STEMI Fibrinolytic Therapy Orders_REGIONAL_651_dbl sd pg 1-1A_May 2019.pdf',file:'STEMI Fibrinolytic Therapy Orders_REGIONAL_651_dbl sd pg 1-1A_May 2019.pdf'}
+      ]
     },
     {
       id:'antibiotics',
@@ -550,7 +570,11 @@ window.ACTT.medications={
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">NOT CONFIRMED</span> Ertapenem and Moxifloxacin</div>'+
         '<p>Neither ertapenem nor moxifloxacin is confirmed in standard Sick Bay stock. These agents are preferred for open and penetrating TBI but may not be available. Ceftriaxone is the fallback if these agents are unavailable.</p></div>'+
         '</div>',
-      relatedLinks:['algorithms/sepsis','thresholds/sepsis-targets','medications/vasopressors','pitfalls/sepsis-errors','prolonged-holding/reassessment-rhythm','shipboard/medication-shipboard','appendices/appendix-c']
+      relatedLinks:['algorithms/sepsis','thresholds/sepsis-targets','medications/vasopressors','pitfalls/sepsis-errors','prolonged-holding/reassessment-rhythm','shipboard/medication-shipboard','appendices/appendix-c'],
+      sources:[
+        {title:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf',file:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf',note:'Primary ACTT sepsis antibiotic reference.'},
+        {title:'Med Formulary v1.2 approved 19 Sep 2021.pdf',file:'Med Formulary v1.2 approved 19 Sep 2021.pdf'}
+      ]
     },
     {
       id:'reversal-agents',
