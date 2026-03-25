@@ -226,9 +226,17 @@ window.ACTT.algorithms={
 
         '<h4>Immediate Actions / Execution Sequence</h4>' +
         '<ul>' +
-        '<li><strong>X &mdash; eXsanguination:</strong> control massive external hemorrhage immediately with direct pressure, wound packing, tourniquet, or junctional control. Tourniquet conversion is only for a casualty not in shock, with close monitoring available, and not for traumatic amputation. Aim to convert before 2 hours if bleeding can be controlled by other means; do not remove a tourniquet after 6 hours unless close monitoring and lab capability are available.</li>' +
+        '<li><strong>X &mdash; eXsanguination:</strong><ul>' +
+        '<li>Control massive external hemorrhage immediately with direct pressure, wound packing, tourniquet, or junctional control.</li>' +
+        '<li>Only attempt tourniquet conversion if the casualty is not in shock, close monitoring is available, and the tourniquet is not controlling a traumatic amputation.</li>' +
+        '<li>Aim to convert before 2 hours if bleeding can be controlled by other means; do not remove a tourniquet after 6 hours unless close monitoring and lab capability are available.</li>' +
+        '</ul></li>' +
         '<li><strong>A &mdash; Airway with C-spine protection:</strong> clear the airway, suction blood or vomit, give oxygen, position, and use adjuncts as needed. If the airway cannot be maintained or is likely to fail, move early to RSI or surgical airway.</li>' +
-        '<li><strong>B &mdash; Breathing:</strong> inspect, auscultate, and assess chest rise, oxygenation, and work of breathing. Treat tension pneumothorax clinically and decompress immediately when suspected in an unstable patient. If a surgical chest tube is placed, smaller bore 20&ndash;22 Fr is acceptable for trauma and all surgical chest tubes should receive one prophylactic antibiotic dose (ceftriaxone 2 g IV x1 in the ATLS deck).</li>' +
+        '<li><strong>B &mdash; Breathing:</strong><ul>' +
+        '<li>Inspect, auscultate, and assess chest rise, oxygenation, and work of breathing.</li>' +
+        '<li>Treat tension pneumothorax clinically and decompress immediately when suspected in an unstable patient.</li>' +
+        '<li>If a surgical chest tube is placed, smaller bore 20&ndash;22 Fr is acceptable for trauma and all surgical chest tubes should receive one prophylactic antibiotic dose (ceftriaxone 2 g IV x1 in the ATLS deck).</li>' +
+        '</ul></li>' +
         '<li><strong>C &mdash; Circulation:</strong> check pulses, blood pressure, skin signs, and obvious or internal bleeding sources. Gain IV/IO access, start resuscitation matched to the problem, and use shock index (HR/SBP) as an early warning that shock may be present; a shock index above 1 is concerning. If indicated by the trauma pattern, TXA 2 g slow IV push is the ACTT ATLS teaching point.</li>' +
         '<li><strong>D &mdash; Disability:</strong> document GCS, pupils, motor asymmetry, and glucose if altered. Worsening mental status, focal findings, or abnormal pupils should branch to the TBI pathway without delaying ABC stabilization.</li>' +
         '<li><strong>E &mdash; Exposure / Environment:</strong> fully expose long enough to find hidden injury, inspect the back when logistically safe, then cover and actively prevent hypothermia. Expose and keep warm, then transition to the secondary survey once immediate threats are addressed.</li>' +
