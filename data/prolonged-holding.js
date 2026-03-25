@@ -83,14 +83,14 @@ window.ACTT.prolongedHolding={
           '<li>Check tube depth after movement, transfers, or major patient repositioning.</li>'+
           '<li>Reconfirm bilateral breath sounds and appropriate chest rise when concern exists.</li>'+
           '<li>Use EtCO<sub>2</sub> trends when available; abrupt change can indicate displacement or obstruction.</li>'+
-          '<li>Anticipate secretion burden and suction before it becomes a crisis.</li>'+
+      '<li>Anticipate secretion burden and suction before it becomes a crisis.</li>'+
         '</ul>'+
         '<h4>7.6.3 Surgical and rescue airways</h4>'+
         '<p>Surgical or rescue airways carry an even higher maintenance burden. They are easier to dislodge, may bleed, and can become obstructed by secretions or clot. In a prolonged hold, the team must treat patency checks and securement as active tasks, not assumptions.</p>'+
         '<h4>7.6.4 Thoracic intervention follow-up</h4>'+
         '<p>Any needle decompression requires reassessment because it is a temporizing measure. Any chest tube requires ongoing function checks: drainage integrity, kinking, clotting, output trend, and recurrent tension signs. A procedure that worked once may fail later.</p>'+
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>Ship motion increases the risk of tube dislodgement and migration. Secure all airway devices with redundant fixation. During patient movement through narrow passageways, ladders, or between decks, assign one team member exclusively to airway and tube management. Chest tube drainage systems must be secured against tipping in heavy seas.</p></div></div>',
-      relatedLinks:['thresholds/airway','pitfalls/airway-loss']
+      relatedLinks:['thresholds/airway','pitfalls/airway-loss','equipment/zoll-emv-731']
     },
     {
       id:'circulation-fluids',
