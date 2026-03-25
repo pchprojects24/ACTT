@@ -105,7 +105,7 @@ window.ACTT.prolongedHolding={
         '<h4>7.7.4 Vasopressors over time</h4>'+
         '<p>A patient on vasopressors requires sustained attention. Continuous infusions demand pump reliability, exact concentration awareness, IV site surveillance, and clear target MAP. Pressor dependence is itself an indicator of severity and should lower the threshold for teleconsultation and escalation.</p>'+
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>Fluid supplies at sea are finite. Plan conservation early. Track cumulative fluid use against remaining stock and anticipated holding time. Burn resuscitation in particular can deplete IV fluid reserves rapidly on smaller platforms. Coordinate with the medical supply chain and command early if fluid needs may exceed available stock.</p></div></div>',
-      relatedLinks:['thresholds/circulation','pitfalls/fluid-overload']
+      relatedLinks:['thresholds/circulation','pitfalls/fluid-overload','checklists/burn-8-hour-check']
     },
     {
       id:'neurologic-care',
