@@ -105,7 +105,12 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>Airway procedures require the operator to think in phases: induction, paralysis, confirmation, then post-intubation sedation. The tube is not the endpoint; sedation and ventilator management begin immediately after placement.</p>',
-      relatedLinks:['algorithms/airway-failure','medications/ketamine','medications/succinylcholine','checklists/rsi']
+      relatedLinks:['algorithms/airway-failure','medications/ketamine','medications/succinylcholine','checklists/rsi'],
+      sources:[
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf',note:'Primary ACTT airway procedure source.'},
+        {title:'RSI Check List and Intubation.pdf',file:'RSI Check List and Intubation.pdf'},
+        {title:'Ressource for RSI.pdf',file:'Ressource for RSI.pdf'}
+      ]
     },
     {
       id:'procedural-sedation',
@@ -161,7 +166,11 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Notes</h4>'+
       '<p>Ketamine is the primary agent because it preserves airway reflexes and hemodynamic stability. Administer slowly to reduce laryngospasm risk. Midazolam and opioids are synergistic; use small increments and avoid stacking. Ondansetron prophylaxis reduces vomiting during recovery. Keep naloxone and flumazenil available when benzodiazepines or opioids are used.</p>',
-      relatedLinks:['checklists/procedural-sedation','medications/analgesics','medications/sedatives','prolonged-holding/sedation-pain','algorithms/combative-patient','thresholds/medication-safety','pitfalls/medication-errors']
+      relatedLinks:['checklists/procedural-sedation','medications/analgesics','medications/sedatives','prolonged-holding/sedation-pain','algorithms/combative-patient','thresholds/medication-safety','pitfalls/medication-errors'],
+      sources:[
+        {title:'ACTT 2026-01 Procedural Sedation.pdf',file:'ACTT 2026-01 Procedural Sedation.pdf',note:'Primary ACTT procedural sedation source.'},
+        {title:'PA_Procedural Sedation Med Directive (1).docx',file:'PA_Procedural Sedation Med Directive (1).docx'}
+      ]
     },
     {
       id:'surgical-cric',
@@ -212,7 +221,11 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>Local anesthesia may not be practical in a crashing patient. Post-procedure sedation and analgesia are required once the airway is secured. Rescue medications including fluids, vasopressors, suction, oxygen, and rescue airway equipment should be considered part of the setup, not optional extras.</p>',
-      relatedLinks:['algorithms/airway-failure','procedures/rsi','procedures/needle-cric']
+      relatedLinks:['algorithms/airway-failure','procedures/rsi','procedures/needle-cric'],
+      sources:[
+        {title:'Cricothyroidotomy.pdf',file:'Cricothyroidotomy.pdf',note:'Primary rescue airway procedure source.'},
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf'}
+      ]
     },
     {
       id:'needle-cric',
@@ -299,7 +312,11 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>In a crashing patient, this procedure typically proceeds without analgesia because delay is more dangerous than pain. Once the patient stabilizes, analgesia should be provided. Prepare for transition to chest tube thoracostomy and its associated sedation and local anesthesia needs.</p>',
-      relatedLinks:['procedures/chest-tube','algorithms/tension-pneumothorax']
+      relatedLinks:['procedures/chest-tube','algorithms/tension-pneumothorax'],
+      sources:[
+        {title:'ACTT 2026-01 ATLS.pdf',file:'ACTT 2026-01 ATLS.pdf',note:'Primary thoracic trauma source.'},
+        {title:'Setup - Pleurevac.pdf',file:'Setup - Pleurevac.pdf'}
+      ]
     },
     {
       id:'chest-tube',
@@ -361,7 +378,12 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>Lidocaine is useful for chest tube placement as local anesthesia. The goal is not full comfort at all costs; it is enough local control to improve tolerance without delaying a necessary intervention. Sedation with ketamine or other agents may be appropriate in stable patients. After any sedative or opioid, airway and respiratory reassessment is mandatory.</p>',
-      relatedLinks:['procedures/needle-thoracostomy','prolonged-holding/device-maintenance','pitfalls/thoracic-errors','medications/lidocaine','medications/ketamine']
+      relatedLinks:['procedures/needle-thoracostomy','prolonged-holding/device-maintenance','pitfalls/thoracic-errors','medications/lidocaine','medications/ketamine'],
+      sources:[
+        {title:'Setup - Pleurevac.pdf',file:'Setup - Pleurevac.pdf',note:'Primary chest drainage setup guide.'},
+        {title:'Pleurovac_Air Leak.pdf',file:'Pleurovac_Air Leak.pdf'},
+        {title:'SU_CST_S1100Setup_PO_MC000098.pdf',file:'SU_CST_S1100Setup_PO_MC000098.pdf'}
+      ]
     },
     {
       id:'io-access',
@@ -406,7 +428,12 @@ window.ACTT.procedures={
       '</div></div>'+
       '<h4>Medication Needs</h4>'+
       '<p>Preservative-free lidocaine should be administered through the IO in conscious patients before forceful flushing or infusion to reduce severe infusion pain. Most emergency medications can be delivered via IO access. Any invasive procedure can precipitate hypotension, hypoxia, or worsening pain. Fluids, vasopressors, suction, oxygen, and rescue airway equipment should be considered part of the setup, not optional extras.</p>',
-      relatedLinks:['medications/lidocaine','algorithms/vascular-access']
+      relatedLinks:['medications/lidocaine','algorithms/vascular-access'],
+      sources:[
+        {title:'EZIO.pdf',file:'EZIO.pdf',note:'Primary IO device guide.'},
+        {title:'5 Rights of IO Access.pdf',file:'5 Rights of IO Access.pdf'},
+        {title:'Med Tech IO protocol.pdf',file:'Med Tech IO protocol.pdf'}
+      ]
     },
     {
       id:'foley',

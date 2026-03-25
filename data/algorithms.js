@@ -67,7 +67,12 @@ window.ACTT.algorithms={
         '<li>Prepare for the possibility that the first successful airway must be maintained for hours, not minutes.</li>' +
         '<li>If evacuation is delayed, early attention to tube security, sedation continuity, suction planning, and ventilation reassessment is essential.</li>' +
         '</ul></div></div>',
-      relatedLinks:['procedures/rsi','procedures/cricothyroidotomy','medications/ketamine','medications/succinylcholine','medications/rocuronium','thresholds/spo2','thresholds/etco2','pitfalls/airway-fixation']
+      relatedLinks:['procedures/rsi','procedures/cricothyroidotomy','medications/ketamine','medications/succinylcholine','medications/rocuronium','thresholds/spo2','thresholds/etco2','pitfalls/airway-fixation'],
+      sources:[
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf',note:'Primary ACTT airway teaching package.'},
+        {title:'Airway ressources and Pearls.pdf',file:'Airway ressources and Pearls.pdf'},
+        {title:'RSI Check List and Intubation.pdf',file:'RSI Check List and Intubation.pdf'}
+      ]
     },
     {
       id:'combative-patient',
@@ -127,7 +132,12 @@ window.ACTT.algorithms={
         '<li>Movement, confined spaces, and limited escape routes increase staff injury risk during physical control.</li>' +
         '<li>Document what prompted restraint, what was used, how the patient responded, and when reassessments were performed, especially if prolonged holding follows.</li>' +
         '</ul></div></div>',
-      relatedLinks:['algorithms/mental-health-behavioral-crisis','algorithms/airway-failure','medications/ketamine','medications/midazolam','procedures/rsi','pitfalls/diagnostic-anchoring','thresholds/glucose','checklists/mental-health-behavioral-crisis']
+      relatedLinks:['algorithms/mental-health-behavioral-crisis','algorithms/airway-failure','medications/ketamine','medications/midazolam','procedures/rsi','pitfalls/diagnostic-anchoring','thresholds/glucose','checklists/mental-health-behavioral-crisis'],
+      sources:[
+        {title:'Combative patient.pdf',file:'Combative patient.pdf',note:'ACTT combative patient reference.'},
+        {title:'Agitation in the ED_1073_April 2019.pdf',file:'Agitation in the ED_1073_April 2019.pdf'},
+        {title:'MH Emergencies - ACTT 2026.pdf',file:'MH Emergencies - ACTT 2026.pdf'}
+      ]
     },
     {
       id:'mental-health-behavioral-crisis',
@@ -249,7 +259,11 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>Delayed evacuation means the clinician must think beyond the first intervention and plan for serial neurologic reassessment, repeat communication, and sustained hemodynamic and ventilation control.</p>' +
         '</div></div>',
-      relatedLinks:['algorithms/airway-failure','procedures/rsi','medications/hypertonic-saline','medications/mannitol','thresholds/sbp','thresholds/etco2','thresholds/icp','pitfalls/permissive-hypotension-with-tbi']
+      relatedLinks:['algorithms/airway-failure','procedures/rsi','medications/hypertonic-saline','medications/mannitol','thresholds/sbp','thresholds/etco2','thresholds/icp','pitfalls/permissive-hypotension-with-tbi'],
+      sources:[
+        {title:'ACTT 2026-01 ATLS.pdf',file:'ACTT 2026-01 ATLS.pdf',note:'Primary trauma/TBI course reference.'},
+        {title:'Trauma Acute Care Clinical Record.pdf',file:'Trauma Acute Care Clinical Record.pdf'}
+      ]
     },
     {
       id:'seizure-management',
@@ -372,7 +386,12 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>Delayed evacuation may convert a short burn resuscitation problem into a sustained critical-care problem. Plan for repeated fluid adjustments, ongoing urine measurement, tube security, analgesia continuity, and temperature preservation.</p>' +
         '</div></div>',
-      relatedLinks:['algorithms/airway-failure','procedures/rsi','procedures/escharotomy','procedures/foley-catheter','medications/ketamine','medications/morphine','thresholds/urine-output','thresholds/tbsa','pitfalls/burn-underestimation']
+      relatedLinks:['algorithms/airway-failure','procedures/rsi','procedures/escharotomy','procedures/foley-catheter','medications/ketamine','medications/morphine','thresholds/urine-output','thresholds/tbsa','pitfalls/burn-underestimation'],
+      sources:[
+        {title:'Burns - Dr Papp - AMTRP 0045.pdf',file:'Burns - Dr Papp - AMTRP 0045.pdf',note:'Primary ACTT burn teaching deck.'},
+        {title:'Burn Fluid Resus Flowsheet.pdf',file:'Burn Fluid Resus Flowsheet.pdf'},
+        {title:'TBSA__Burn_Estimation_Chart.pdf',file:'TBSA__Burn_Estimation_Chart.pdf'}
+      ]
     },
     {
       id:'hypothermia',
@@ -428,7 +447,11 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>Cold maritime operations make this especially relevant. Transport planning, packaging, and realistic destination choices matter as much as the initial arrest response.</p>' +
         '</div></div>',
-      relatedLinks:['procedures/cpr','medications/epinephrine','medications/amiodarone','thresholds/core-temperature','thresholds/hypothermia-stages','pitfalls/premature-death-declaration']
+      relatedLinks:['procedures/cpr','medications/epinephrine','medications/amiodarone','thresholds/core-temperature','thresholds/hypothermia-stages','pitfalls/premature-death-declaration'],
+      sources:[
+        {title:'Hypothermia and Drowning Jerome 2026-02.pdf',file:'Hypothermia and Drowning Jerome 2026-02.pdf',note:'Primary ACTT hypothermia source.'},
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
+      ]
     },
     {
       id:'sepsis',
@@ -486,7 +509,12 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>Limited diagnostics and delayed transfer increase the importance of serial clinical examination, practical source identification, and clear documentation of response to each intervention.</p>' +
         '</div></div>',
-      relatedLinks:['procedures/iv-io-access','medications/norepinephrine','medications/antibiotics','medications/crystalloid','appendices/appendix-l','thresholds/map','thresholds/lactate','thresholds/urine-output','pitfalls/fluid-overload']
+      relatedLinks:['procedures/iv-io-access','medications/norepinephrine','medications/antibiotics','medications/crystalloid','appendices/appendix-l','thresholds/map','thresholds/lactate','thresholds/urine-output','pitfalls/fluid-overload'],
+      sources:[
+        {title:'Sepsis ACTT feb 2026.pptx',file:'Sepsis ACTT feb 2026.pptx',note:'Primary ACTT sepsis teaching deck.'},
+        {title:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf',file:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf'},
+        {title:'Vasoactive Medication V2 Hnatiuk 2026.pdf',file:'Vasoactive Medication V2 Hnatiuk 2026 .pdf'}
+      ]
     },
     {
       id:'dka',
@@ -550,7 +578,12 @@ window.ACTT.algorithms={
         '<li>Stock and power limits make insulin and fluid use a planning problem; calculate expected needs early.</li>' +
         '<li>Delayed evacuation increases the importance of teleconsultation, documentation of trends, and a durable monitoring plan.</li>' +
         '</ul></div></div>',
-      relatedLinks:['procedures/iv-io-access','sickbay-meds/insulin_regular','medications/crystalloid','thresholds/urine-output','prolonged-holding/reassessment-rhythm','pitfalls/fluid-overload','algorithms/sepsis','medications/antibiotics','checklists/dka-hyperglycemia']
+      relatedLinks:['procedures/iv-io-access','sickbay-meds/insulin_regular','medications/crystalloid','thresholds/urine-output','prolonged-holding/reassessment-rhythm','pitfalls/fluid-overload','algorithms/sepsis','medications/antibiotics','checklists/dka-hyperglycemia'],
+      sources:[
+        {title:'DKA Protocol.pdf',file:'DKA Protocol.pdf',note:'Primary DKA protocol used for this pathway.'},
+        {title:'DKA Order Set_Treatment Protocol_TOH 2015.pdf',file:'DKA Order Set_Treatment Protocol_TOH 2015.pdf'},
+        {title:'Ch15_HyperglycemicEmergencies.pdf',file:'Ch15_HyperglycemicEmergencies.pdf'}
+      ]
     },
     {
       id:'stemi',
@@ -607,7 +640,12 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>If transfer is delayed after fibrinolysis, the shipboard team may have to monitor the early reperfusion phase longer than would occur ashore. That increases the value of repeated neurologic checks, bleeding surveillance, and rhythm monitoring.</p>' +
         '</div></div>',
-      relatedLinks:['checklists/fibrinolysis-screening','medications/tenecteplase','medications/aspirin','medications/heparin','medications/clopidogrel','procedures/ecg-interpretation','thresholds/stemi-criteria','thresholds/door-to-needle','pitfalls/fibrinolysis-contraindications']
+      relatedLinks:['checklists/fibrinolysis-screening','medications/tenecteplase','medications/aspirin','medications/heparin','medications/clopidogrel','procedures/ecg-interpretation','thresholds/stemi-criteria','thresholds/door-to-needle','pitfalls/fibrinolysis-contraindications'],
+      sources:[
+        {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf',note:'Primary ACTT chest pain/STEMI reference.'},
+        {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf'},
+        {title:'Instructions for Use of Tenecteplase.pdf',file:'Instructions for Use of Tenecteplase.pdf'}
+      ]
     },
     {
       id:'chest-decompression',
@@ -660,7 +698,12 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>In a moving platform with tight space, landmarking discipline matters. Equipment preparation before patient contact reduces delay if deterioration is sudden.</p>' +
         '</div></div>',
-      relatedLinks:['procedures/needle-decompression','procedures/chest-tube','procedures/finger-thoracostomy','thresholds/spo2','thresholds/sbp','pitfalls/needle-decompression-as-definitive']
+      relatedLinks:['procedures/needle-decompression','procedures/chest-tube','procedures/finger-thoracostomy','thresholds/spo2','thresholds/sbp','pitfalls/needle-decompression-as-definitive'],
+      sources:[
+        {title:'ACTT 2026-01 ATLS.pdf',file:'ACTT 2026-01 ATLS.pdf',note:'Primary thoracic trauma reference.'},
+        {title:'Setup - Pleurevac.pdf',file:'Setup - Pleurevac.pdf'},
+        {title:'Pleurovac_Air Leak.pdf',file:'Pleurovac_Air Leak.pdf'}
+      ]
     },
     {
       id:'multi-system',

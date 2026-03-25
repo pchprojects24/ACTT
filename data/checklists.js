@@ -25,6 +25,10 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Countdown/sequence verbalized before induction',
         'Tube placement confirmed with capnography immediately after placement',
         'Tube secured; post-intubation sedation/ventilation plan initiated; times documented'
+      ],
+      sources:[
+        {title:'RSI Check List and Intubation.pdf',file:'RSI Check List and Intubation.pdf'},
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf'}
       ]
     },
     {
@@ -49,6 +53,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Airway equipment brought to bedside; advanced airway escalation considered early',
         'Observation period planned due to recurrence risk (biphasic reaction)',
         'Event, timing, trigger, response, and transfer/evacuation decision documented'
+      ],
+      sources:[
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
       ]
     },
     {
@@ -73,6 +80,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Sedation and analgesia provided if ventilated or agitated',
         'Monitoring for recurrent arrest; treat dysrhythmias per ACLS',
         'MEDEVAC triggers reviewed; consultation initiated'
+      ],
+      sources:[
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
       ]
     },
     {
@@ -95,6 +105,11 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Defibrillator/monitor, IV access, and emergency hemorrhage response supplies are immediately available',
         'Patient/family informed of indication, expected benefit, and major bleeding risk when feasible',
         'Post-lysis monitoring plan assigned: rhythm checks, neurologic checks, bleeding surveillance, and transfer coordination'
+      ],
+      sources:[
+        {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf'},
+        {title:'Instructions for Use of Tenecteplase.pdf',file:'Instructions for Use of Tenecteplase.pdf'},
+        {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf'}
       ]
     },
     {
