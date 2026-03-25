@@ -274,7 +274,7 @@ window.ACTT.medications={
         '<h4>6.8.5 Other Vasoactive Notes</h4>'+
         '<p>Norepinephrine remains the default first-line vasopressor in ACTT for vasodilatory and septic shock. Epinephrine infusion is the most practical alternative when both pressure and pump support are needed. Vasopressin is an add-on rather than a rescue push. Dopamine and dobutamine can be useful in selected low-output states, but they demand tighter rhythm and blood pressure surveillance because their bedside effect is less predictable.</p>'+
         '</div>',
-      relatedLinks:['algorithms/sepsis','algorithms/stemi','thresholds/hemodynamic','procedures/io-access','medications/antibiotics','pitfalls/circulation-errors','prolonged-holding/reassessment-rhythm','shipboard/circulation-at-sea','appendices/appendix-c','tools/dosecalc']
+      relatedLinks:['algorithms/sepsis','algorithms/stemi','thresholds/hemodynamic','procedures/io-access','medications/antibiotics','pitfalls/circulation-errors','prolonged-holding/reassessment-rhythm','shipboard/circulation-at-sea','appendices/appendix-c','appendices/appendix-l','tools/dosecalc']
     },
     {
       id:'seizure-meds',

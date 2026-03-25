@@ -112,6 +112,7 @@ window.ACTT.crossLinks={
 'appendices/appendix-i':{title:'Study & Review Tools',path:'#/appendices/appendix-i'},
 'appendices/appendix-j':{title:'Stock Cross-Reference',path:'#/appendices/appendix-j'},
 'appendices/appendix-k':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
+'appendices/appendix-l':{title:'IV Compatibility & Infusion Quick Reference',path:'#/appendices/appendix-l'},
 // Aliases to ensure related links resolve to existing content
 'procedures/surgical-airway':{title:'Surgical Airway (Cricothyroidotomy)',path:'#/procedures/surgical-cric'},
 'procedures/needle-decompression':{title:'Needle Decompression',path:'#/procedures/needle-thoracostomy'},

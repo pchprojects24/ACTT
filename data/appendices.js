@@ -407,7 +407,7 @@ window.ACTT.appendices={
         '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:['medications/vasopressors','algorithms/sepsis','thresholds/hemodynamic','prolonged-holding/reassessment-rhythm']
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-l','thresholds/hemodynamic','prolonged-holding/reassessment-rhythm']
     },
     {
       id:'appendix-d',
@@ -742,6 +742,64 @@ window.ACTT.appendices={
         '</tbody>' +
         '</table></div>',
       relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','checklists/fibrinolysis-screening','checklists/post-rosc','medications/tenecteplase']
+    },
+    {
+      id:'appendix-l',
+      title:'Appendix L — IV Compatibility and Infusion Quick Reference',
+      content:
+        '<p>Use this appendix when multiple infusions must share limited access. It is intentionally narrow: only combinations and rates clearly supported by the DL June 2022 critical care Y-site chart and the TOH infusion sheet are included here. If a pair is not clearly supported below, use a separate lumen or line.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">FAST USE</span> Y-Site Legend</div>' +
+        '<ul>' +
+          '<li><strong>C</strong> = compatible at TOH standard concentrations.</li>' +
+          '<li><strong>C?</strong> = compatible only at lower-than-standard TOH concentrations; do not assume standard-concentration compatibility.</li>' +
+          '<li><strong>X</strong>, <strong>ND</strong>, or blank / unlisted pair = do not mix via Y-site.</li>' +
+          '<li><strong>Concentration-dependent entries</strong> in the full June 2022 chart should stay on a separate lumen unless pharmacy confirmation is available.</li>' +
+        '</ul></div>' +
+
+        '<h4>Common Vasoactive Infusions (TOH Standard Setup)</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Drug</th><th>TOH Mix / Concentration</th><th>Pump Units</th><th>Usual Bedside Rate</th><th>Operational Note</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Norepinephrine</strong></td><td>8 mg in 250 mL NS = 32 mcg/mL</td><td>mcg/min</td><td>Infusion 8&ndash;12 mcg/min; usual maintenance 2&ndash;4 mcg/min</td><td>Use large vein when peripheral; extravasation hazard.</td></tr>' +
+        '<tr><td><strong>Epinephrine</strong></td><td>1 mg in 250 mL D5W or NS = 4 mcg/mL</td><td>mcg/min</td><td>Infusion 2&ndash;10 mcg/min</td><td>TOH push-dose option: 1 mg in 100 mL NS = 10 mcg/mL.</td></tr>' +
+        '<tr><td><strong>Phenylephrine</strong></td><td>100 mg in 250 mL NS = 400 mcg/mL</td><td>mcg/min</td><td>Start 100&ndash;180 mcg/min</td><td>TOH push-dose option: 10 mg in 100 mL D5W or NS = 100 mcg/mL.</td></tr>' +
+        '<tr><td><strong>Dobutamine</strong></td><td>500 mg in 500 mL D5W or NS = 1 mg/mL</td><td>mcg/kg/min</td><td>Infusion 2&ndash;20 mcg/kg/min</td><td>Best when contractility support is needed and pressure is tolerable.</td></tr>' +
+        '<tr><td><strong>Dopamine</strong></td><td>Premixed 400 mg in 250 mL D5W = 1600 mcg/mL</td><td>mcg/kg/min</td><td>Initial 1&ndash;5 mcg/kg/min; titrate by 1&ndash;4 mcg/kg/min every 10&ndash;30 min up to 20&ndash;50 mcg/kg/min</td><td>More arrhythmogenic and less predictable than norepinephrine.</td></tr>' +
+        '<tr><td><strong>Vasopressin</strong></td><td>20 units in 250 mL D5W or NS = 0.1 unit/mL</td><td>unit/min</td><td>Infusion 0.01&ndash;0.1 units/min</td><td>Add-on agent rather than minute-to-minute titration drug.</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Continuous Sedation / Support Infusions (TOH Standard Setup)</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Drug</th><th>TOH Mix / Concentration</th><th>Pump Units</th><th>Usual Bedside Rate</th><th>Operational Note</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Fentanyl</strong></td><td>Premixed 5 mg in 100 mL = 50 mcg/mL</td><td>mcg/hr</td><td>Infusion 25&ndash;200 mcg/hr</td><td>Useful when fast titration and shorter duration are desired.</td></tr>' +
+        '<tr><td><strong>Hydromorphone</strong></td><td>20 mg in 100 mL D5W or NS = 200 mcg/mL</td><td>mcg/hr</td><td>Start 200 mcg/hr; usual 500&ndash;3000 mcg/hr</td><td>Track cumulative dose during long holds.</td></tr>' +
+        '<tr><td><strong>Midazolam</strong></td><td>100 mg in 100 mL D5W or NS = 1 mg/mL</td><td>mg/hr</td><td>Infusion 1&ndash;20 mg/hr</td><td>Upper hard limit 30 mg/hr on the TOH sheet.</td></tr>' +
+        '<tr><td><strong>Ketamine</strong></td><td>400 mg in 100 mL D5W or NS = 4 mg/mL</td><td>mg/hr</td><td>Analgesia / sedation infusion 0.05&ndash;1.2 mg/kg/hr</td><td>Convert weight-based order to mg/hr before starting the pump.</td></tr>' +
+        '<tr><td><strong>Propofol</strong></td><td>Ready-to-use 1000 mg / 100 mL = 10 mg/mL</td><td>mg/kg/hr</td><td>Infusion 0.3&ndash;3 mg/kg/hr</td><td>Use vented, non-filtered tubing; pair with an analgesia plan.</td></tr>' +
+        '<tr><td><strong>Insulin</strong></td><td>50 units in 50 mL NS = 1 unit/mL</td><td>units/hr</td><td>Usual starting dose 0.1 units/kg/hr (often 5&ndash;10 units/hr)</td><td>TOH notes dual sign-off.</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Critical Care Y-Site Quick Reference</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Drug / Group</th><th>Y-Site status supported by TOH bedside subset</th><th>Keep separate unless specifically confirmed</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Norepinephrine</strong></td><td>C with dobutamine, dopamine, epinephrine, fentanyl, hydromorphone, phenylephrine, propofol, and vasopressin</td><td>If another drug is not listed here, treat it as separate-line until confirmed in the full chart.</td></tr>' +
+        '<tr><td><strong>Hydromorphone</strong></td><td>C with dobutamine, dopamine, epinephrine, fentanyl, norepinephrine, phenylephrine, propofol, and vasopressin</td><td>Do not generalize beyond the TOH subset.</td></tr>' +
+        '<tr><td><strong>Fentanyl</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, and norepinephrine</td><td>Phenylephrine, propofol, and vasopressin are marked <strong>C?</strong> rather than standard-concentration compatible.</td></tr>' +
+        '<tr><td><strong>Midazolam</strong></td><td>C with dopamine, epinephrine, fentanyl, hydromorphone, norepinephrine, phenylephrine, and vasopressin</td><td><strong>X with dobutamine.</strong> Propofol is not clearly confirmed in the TOH subset shown.</td></tr>' +
+        '<tr><td><strong>Phenylephrine</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, midazolam, norepinephrine, and vasopressin</td><td>Fentanyl and propofol are marked <strong>C?</strong>.</td></tr>' +
+        '<tr><td><strong>Propofol</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, and norepinephrine</td><td>Fentanyl and phenylephrine are <strong>C?</strong>; <strong>ND with vasopressin.</strong></td></tr>' +
+        '<tr><td><strong>Vasopressin</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, midazolam, norepinephrine, and phenylephrine</td><td>Fentanyl is <strong>C?</strong>; <strong>ND with propofol.</strong></td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Bedside Line Rule</div>' +
+        '<p>When access is limited, keep the pressor on the most reliable line and avoid unsupported three-drug improvisation. If the pair is marked C?, X, ND, blank, or not listed here, separate the infusions and reassess whether current access is adequate for the care plan.</p></div>',
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-c','prolonged-holding/fluid-management','prolonged-holding/sedation-pain']
     }
   ]
 };
