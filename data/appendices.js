@@ -777,7 +777,7 @@ window.ACTT.appendices={
         '<tr><td><strong>Posterior MI pattern</strong></td><td>Can be missed if only looking for obvious anterior ST elevation</td><td>In V1&ndash;V3, a dominant R wave plus ST depression and upright tall T waves is a posterior infarct clue</td></tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','checklists/fibrinolysis-screening','checklists/post-rosc','medications/tenecteplase']
+      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','checklists/fibrinolysis-screening','checklists/post-fibrinolysis-monitoring','checklists/post-rosc','medications/tenecteplase']
     },
     {
       id:'appendix-l',

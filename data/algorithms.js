@@ -685,25 +685,27 @@ window.ACTT.algorithms={
 
         '<h4>Immediate Actions / Execution Sequence</h4>' +
         '<ul>' +
-        '<li>Recognize the STEMI pattern and declare the reperfusion decision point early.</li>' +
-        '<li>If PCI within the time target is not realistic, move to fibrinolysis screening without delay.</li>' +
-        '<li>Confirm there is no absolute contraindication to fibrinolysis.</li>' +
-        '<li>Prepare tenecteplase carefully using the correct weight-based dose and administration technique.</li>' +
-        '<li>Administer the associated antiplatelet and anticoagulant therapies required by the protocol.</li>' +
-        '<li>After treatment, monitor closely for reperfusion, bleeding, arrhythmia, and neurologic decline.</li>' +
+        '<li>Recognize the STEMI pattern, document symptom onset, and declare the reperfusion decision point early.</li>' +
+        '<li>If PCI within the time target is not realistic, move immediately to a structured fibrinolysis contraindication screen with baseline neuro and bleeding assessment.</li>' +
+        '<li>Prepare tenecteplase: clear dextrose from the IV line, reconstitute with 10 mL sterile water (gentle swirl, no shake), select the correct weight band (mg and mL), label the time if not given immediately.</li>' +
+        '<li>Administer tenecteplase as a single IV push over 5 seconds, then flush with normal saline. Do not re-dose.</li>' +
+        '<li>Start adjuncts without delay: aspirin if not already given, P2Y12 plan (clopidogrel 300 mg load if naive, 75 mg if on &gt; 7 days; defer load if age &gt; 75), and anticoagulant within 5 minutes (enoxaparin 30 mg IV then 1 mg/kg SC q12h if age &le; 75 and eGFR &ge; 30; otherwise unfractionated heparin using low-PTT target protocol).</li>' +
+        '<li>Apply bleeding precautions: avoid new punctures if possible for 24 hours, hold firm pressure if unavoidable.</li>' +
+        '<li>Continuous monitoring: rhythm, frequent neuro checks, and bleeding surveillance. Obtain a 12-lead ECG at ~75 minutes to look for &ge; 50% ST resolution.</li>' +
         '</ul>' +
 
         '<h4>Decision Branches</h4>' +
-        '<p>If PCI is available within the time target, arrange rapid transfer. If PCI is not realistic, move to fibrinolysis screening. If absolute contraindications to fibrinolysis exist, fibrinolysis cannot proceed. After fibrinolysis, monitor for reperfusion signs or complications including bleeding and arrhythmia.</p>' +
+        '<p>If PCI is available within the time target, arrange rapid transfer. If PCI is not realistic, move to fibrinolysis screening. If absolute contraindications to fibrinolysis exist, fibrinolysis cannot proceed. After fibrinolysis, watch for reperfusion or complications and define rescue PCI triggers (persistent ST elevation or ischemic pain at 75 minutes, cardiogenic shock/worsening heart failure, refractory ventricular arrhythmias).</p>' +
 
         '<h4>Key Execution Points</h4>' +
         '<ul>' +
-        '<li>This pathway depends on decisive screening, not prolonged indecision.</li>' +
-        '<li>The fibrinolytic is only one part of the reperfusion package. Adjunctive medications and monitoring are part of the execution.</li>' +
+        '<li>This pathway depends on decisive screening and precise dosing, not prolonged indecision.</li>' +
+        '<li>The fibrinolytic is only one part of the reperfusion package. Adjunctive medications, dosing adjustments for age/renal function, and monitoring are part of the execution.</li>' +
+        '<li>Incorrect reconstitution, wrong weight band, or failure to flush dextrose-containing lines can all cause treatment failure or harm.</li>' +
         '</ul>' +
 
         '<h4>Reassessment Points</h4>' +
-        '<p>After treatment, monitor closely for reperfusion, bleeding, arrhythmia, and neurologic decline. Perform repeated neurologic checks, bleeding surveillance, and rhythm monitoring, especially if transfer is delayed after fibrinolysis.</p>' +
+        '<p>After treatment, monitor closely for reperfusion, bleeding, arrhythmia, and neurologic decline. Perform repeated neurologic checks (hourly x 4, then every 4 hours in the first 24 hours), bleeding surveillance with line-site checks, and rhythm monitoring. Obtain the 75-minute ECG, define rescue triggers, and maintain evacuation planning.</p>' +
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Traps</div>' +
         '<ul>' +
@@ -716,7 +718,7 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>If transfer is delayed after fibrinolysis, the shipboard team may have to monitor the early reperfusion phase longer than would occur ashore. That increases the value of repeated neurologic checks, bleeding surveillance, and rhythm monitoring.</p>' +
         '</div></div>',
-      relatedLinks:['checklists/fibrinolysis-screening','medications/tenecteplase','medications/aspirin','medications/heparin','medications/clopidogrel','procedures/ecg-interpretation','thresholds/stemi-criteria','thresholds/door-to-needle','pitfalls/fibrinolysis-contraindications'],
+      relatedLinks:['checklists/fibrinolysis-screening','checklists/post-fibrinolysis-monitoring','medications/tenecteplase','medications/aspirin','medications/heparin','medications/clopidogrel','procedures/ecg-interpretation','thresholds/stemi-criteria','thresholds/door-to-needle','pitfalls/fibrinolysis-contraindications'],
       sources:[
         {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf',note:'Primary ACTT chest pain/STEMI reference.'},
         {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf'},

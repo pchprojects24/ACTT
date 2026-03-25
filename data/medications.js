@@ -428,44 +428,56 @@ window.ACTT.medications={
         '<div class="drug-card">'+
         '<h4>6.11.1 Tenecteplase</h4>'+
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> STEMI Fibrinolysis When PCI Is Not Available Within 90 Minutes</div>'+
-        '<p>Tenecteplase is a fibrinolytic agent used for STEMI reperfusion when percutaneous coronary intervention (PCI) cannot be achieved within 90 minutes. This is a high-stakes, irreversible intervention. The execution sequence must be followed precisely.</p></div>'+
+        '<p>Tenecteplase is a fibrinolytic agent used for STEMI reperfusion when percutaneous coronary intervention (PCI) cannot be achieved within 90 minutes. This is a high-stakes, irreversible intervention. Use a structured contraindication screen and precise dosing.</p></div>'+
 
-        '<h4>Execution Sequence</h4>'+
+        '<h4>Absolute Contraindications</h4>'+
+        '<ul>'+
+        '<li>Any history of intracranial hemorrhage; known intracranial AVM or neoplasm.</li>'+
+        '<li>Ischemic stroke within 3 months (except acute stroke within 4.5 hours).</li>'+
+        '<li>Suspected aortic dissection or active major bleeding/bleeding diathesis.</li>'+
+        '<li>Significant head or facial trauma within 3 months; intracranial or intraspinal surgery within 2 months.</li>'+
+        '<li>Severe uncontrolled hypertension despite emergency therapy.</li>'+
+        '</ul>'+
+
+        '<h4>Relative Risks</h4>'+
+        '<ul>'+
+        '<li>Severe uncontrolled hypertension on presentation (SBP &gt; 180 or DBP &gt; 110) until treated.</li>'+
+        '<li>Prior ischemic stroke &gt; 3 months, dementia, or other intracranial pathology not captured above.</li>'+
+        '<li>Traumatic or prolonged CPR (&gt; 10 minutes) or major surgery within 3 weeks.</li>'+
+        '<li>Recent internal bleeding within 2&ndash;4 weeks or non-compressible vascular puncture.</li>'+
+        '<li>Pregnancy, active peptic ulcer, or current anticoagulant use/elevated INR (bleeding risk rises with higher INR).</li>'+
+        '</ul>'+
+
+        '<h4>Preparation and Administration</h4>'+
         '<ol>'+
-        '<li><strong>Confirm ECG:</strong> Verify ST-elevation pattern consistent with acute STEMI.</li>'+
-        '<li><strong>Confirm symptom timing:</strong> Fibrinolysis is most effective within 12 hours of symptom onset.</li>'+
-        '<li><strong>Screen contraindications:</strong> Active bleeding, recent surgery, recent stroke, known bleeding disorder, uncontrolled hypertension, aortic dissection, and other absolute contraindications must be excluded.</li>'+
-        '<li><strong>Select weight band:</strong> Dose is determined by patient weight.</li>'+
-        '<li><strong>Prepare the vial:</strong> Do not shake. Reconstitute per manufacturer instructions.</li>'+
-        '<li><strong>Administer:</strong> Single IV push over 5 seconds.</li>'+
-        '<li><strong>Start adjuncts:</strong> Anticoagulant and antiplatelet therapy per protocol.</li>'+
-        '<li><strong>Monitor:</strong> Continuous rhythm monitoring, neurologic checks, bleeding surveillance.</li>'+
+        '<li>Confirm symptom onset, weight, and that aspirin/adjuncts are staged.</li>'+
+        '<li>If dextrose has been running in the IV, stop and flush with normal saline.</li>'+
+        '<li>Using the supplied device, withdraw 10 mL sterile water and inject into the vial; gentle swirl, do not shake. Final concentration is 5 mg/mL; label time and refrigerate up to 8 hours if delayed.</li>'+
+        '<li>Draw the exact volume for the weight band, recap the cannula safely, and discard unused solution.</li>'+
+        '<li>Administer as a single IV push over 5 seconds, then flush with normal saline.</li>'+
+        '<li>Start anticoagulant within 5 minutes (see below) and complete P2Y12 plan.</li>'+
         '</ol>'+
 
         '<h4>Weight-Based Dosing</h4>'+
-        '<div class="table-wrapper"><table><thead><tr><th>Patient Weight</th><th>Tenecteplase Dose</th></tr></thead><tbody>'+
-        '<tr><td>&lt; 60 kg</td><td>30 mg</td></tr>'+
-        '<tr><td>60&ndash;69 kg</td><td>35 mg</td></tr>'+
-        '<tr><td>70&ndash;79 kg</td><td>40 mg</td></tr>'+
-        '<tr><td>80&ndash;89 kg</td><td>45 mg</td></tr>'+
-        '<tr><td>&ge; 90 kg</td><td>50 mg</td></tr>'+
+        '<div class="table-wrapper"><table><thead><tr><th>Patient Weight</th><th>Tenecteplase Dose</th><th>Volume (5 mg/mL)</th></tr></thead><tbody>'+
+        '<tr><td>&lt; 60 kg</td><td>30 mg</td><td>6 mL</td></tr>'+
+        '<tr><td>60&ndash;69 kg</td><td>35 mg</td><td>7 mL</td></tr>'+
+        '<tr><td>70&ndash;79 kg</td><td>40 mg</td><td>8 mL</td></tr>'+
+        '<tr><td>80&ndash;89 kg</td><td>45 mg</td><td>9 mL</td></tr>'+
+        '<tr><td>&ge; 90 kg</td><td>50 mg</td><td>10 mL</td></tr>'+
         '</tbody></table></div>'+
 
-        '<p><strong>Administration:</strong> IV push over 5 seconds. Do not shake the vial during reconstitution.</p>'+
+        '<p><strong>Adjuncts:</strong> Anticoagulation within 5 minutes: enoxaparin 30 mg IV then 1 mg/kg SC q12h (max 100 mg) if age &le; 75 and eGFR &ge; 30; otherwise use unfractionated heparin with low-PTT target. Clopidogrel: 300 mg load if naive, 75 mg if on &gt; 7 days; defer loading if age &gt; 75.</p>'+
 
-        '<p><strong>Monitoring after administration:</strong></p>'+
-        '<ul>'+
-        '<li>Reperfusion arrhythmias: may indicate successful reperfusion but can be hemodynamically significant.</li>'+
-        '<li>Bleeding: check all access sites, mucous membranes, urine, and stool.</li>'+
-        '<li>Headache, confusion, neurologic decline: may indicate intracranial hemorrhage. This is the most feared complication.</li>'+
-        '</ul>'+
+        '<p><strong>Monitoring and Follow-Through:</strong> 12-lead at ~75 minutes for &ge; 50% ST resolution; continuous rhythm monitoring for reperfusion arrhythmias; neuro vital signs hourly x 4 then Q4H for the first 24 hours; bleeding surveillance with avoidance of new punctures for 24 hours. Define rescue PCI triggers (persistent ST elevation/pain, shock/worsening heart failure, refractory ventricular arrhythmia).</p>'+
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Common Tenecteplase Errors</div>'+
         '<ul>'+
-        '<li>Wrong weight band selection leading to incorrect dose.</li>'+
-        '<li>Missing an absolute contraindication during screening.</li>'+
-        '<li>Failing to administer adjunctive anticoagulant and antiplatelet therapy after the fibrinolytic.</li>'+
-        '<li>Failing to perform neurologic and bleeding surveillance after administration.</li>'+
+        '<li>Wrong weight band or volume selection.</li>'+
+        '<li>Incomplete contraindication screening or failure to treat severe hypertension first.</li>'+
+        '<li>Reconstituting in or flushing with dextrose solutions; shaking the vial.</li>'+
+        '<li>Skipping adjunctive anticoagulant/antiplatelet therapy or delaying it beyond 5 minutes.</li>'+
+        '<li>Missing neurologic decline, bleeding, or reperfusion arrhythmias after administration.</li>'+
         '</ul></div>'+
         '</div>'+
 
@@ -475,14 +487,14 @@ window.ACTT.medications={
         '<p>Enoxaparin is confirmed in Sick Bay stock.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Low-molecular-weight heparin. Anticoagulant adjunct in STEMI fibrinolysis and venous thromboembolism prophylaxis.</p>'+
-        '<p><strong>STEMI dosing:</strong> 30 mg IV bolus, then 1 mg/kg subcutaneous every 12 hours.</p>'+
-        '<p><strong>Modifications:</strong> Adjust for renal impairment (extend interval or reduce dose). Adjust for age &gt; 75 (reduce dose, omit IV bolus in some protocols).</p>'+
+        '<p><strong>STEMI dosing (age &le; 75 with eGFR &ge; 30):</strong> 30 mg IV bolus, then 1 mg/kg subcutaneous every 12 hours (max 100 mg per dose).</p>'+
+        '<p><strong>Modifications:</strong> Avoid enoxaparin when eGFR &lt; 30 or if age &gt; 75 (use unfractionated heparin instead). Renal impairment or low body weight may require extended interval or dose reduction.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>6.11.3 Heparin</h4>'+
         '<p><strong>Clinical Role:</strong> Infusion-based anticoagulation. Used when unfractionated heparin is the selected anticoagulant strategy.</p>'+
-        '<p><strong>Administration:</strong> Requires deliberate setup with clear concentration labeling, documented rate, and scheduled rate checks. Heparin infusions are high-risk for dosing errors if documentation and labeling are not meticulous.</p>'+
+        '<p><strong>Administration:</strong> Requires deliberate setup with clear concentration labeling, documented rate, and scheduled rate checks. Follow the low-PTT target protocol after fibrinolysis.</p>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Heparin Infusion Safety</div>'+
         '<p>Heparin infusions require clear labeling of concentration, documented infusion rate, and scheduled rate checks. Concentration errors and rate errors are among the most common high-risk medication mistakes. Use a standardized setup and read-back confirmation before starting.</p></div>'+
@@ -494,8 +506,9 @@ window.ACTT.medications={
         '<p>Clopidogrel is confirmed in Sick Bay stock.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Antiplatelet agent. Used as part of the adjunctive therapy package in STEMI fibrinolysis. Timing of administration is important and should follow the fibrinolysis protocol sequence.</p>'+
+        '<p><strong>Dosing cues:</strong> 300 mg load if not previously on clopidogrel; 75 mg if already taking for &gt; 7 days; consider deferring the load if age &gt; 75 and bleeding risk is high.</p>'+
         '</div>',
-      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','medications/reversal-agents','pitfalls/circulation-errors','pitfalls/medication-errors','shipboard/medication-shipboard','appendices/appendix-c'],
+      relatedLinks:['algorithms/stemi','checklists/fibrinolysis-screening','checklists/post-fibrinolysis-monitoring','thresholds/stemi-thresholds','medications/reversal-agents','pitfalls/circulation-errors','pitfalls/medication-errors','shipboard/medication-shipboard','appendices/appendix-c'],
       sources:[
         {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf',note:'Primary ACTT fibrinolysis medication reference.'},
         {title:'Instructions for Use of Tenecteplase.pdf',file:'Instructions for Use of Tenecteplase.pdf'},

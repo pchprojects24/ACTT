@@ -97,19 +97,44 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       items:[
         'Confirm STEMI pattern and symptom onset timing are documented',
         'Confirm PCI timeline exceeds target and fibrinolysis is the selected reperfusion strategy',
-        'Screen for absolute contraindications: prior intracranial hemorrhage, known intracranial neoplasm/AVM, recent ischemic stroke, suspected aortic dissection, active major bleeding, significant head/facial trauma within 3 months',
-        'Screen for major relative bleeding risks (severe uncontrolled HTN, recent surgery, anticoagulant use, bleeding diathesis)',
-        'Record baseline neuro status and focused bleeding assessment before administration',
-        'Two-person medication check completed for tenecteplase dose and preparation',
-        'Adjunctive therapy prepared/ordered: aspirin, P2Y12 agent, and anticoagulant per protocol',
+        'Absolute contraindications excluded: prior intracranial hemorrhage, ischemic stroke within 3 months (except acute stroke in the 4.5 h window), known intracranial AVM/neoplasm, suspected aortic dissection, active major bleeding/bleeding diathesis, significant head/facial trauma within 3 months, intracranial/intraspinal surgery within 2 months, severe uncontrolled hypertension despite therapy',
+        'Relative risks checked and mitigated: severe uncontrolled HTN (SBP > 180 or DBP > 110), prior stroke > 3 months/dementia/intracranial pathology, traumatic or prolonged CPR (>10 minutes), major surgery within 3 weeks, recent internal bleeding within 2–4 weeks, non-compressible punctures, pregnancy, active peptic ulcer, anticoagulant use/elevated INR',
+        'Baseline neuro status, bleeding survey, and exact weight documented',
+        'Two-person medication check: weight band, mg and mL dose, vial reconstituted with 10 mL sterile water (gentle swirl, no dextrose in line), label time if not given immediately',
+        'Tenecteplase administration planned: single IV push over 5 seconds via saline line, flush before and after',
+        'Adjunctive therapy staged: aspirin, P2Y12 plan (clopidogrel 300 mg load if naive, 75 mg if on > 7 days, hold load if age > 75), anticoagulant within 5 minutes (enoxaparin 30 mg IV then 1 mg/kg SC q12h if age ≤ 75 and eGFR ≥ 30; otherwise unfractionated heparin per protocol)',
         'Defibrillator/monitor, IV access, and emergency hemorrhage response supplies are immediately available',
         'Patient/family informed of indication, expected benefit, and major bleeding risk when feasible',
-        'Post-lysis monitoring plan assigned: rhythm checks, neurologic checks, bleeding surveillance, and transfer coordination'
+        'Post-lysis monitoring handoff assigned (see Post-Fibrinolysis Monitoring checklist) with rhythm, neurologic, bleeding, and rescue criteria covered'
       ],
       sources:[
         {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf'},
         {title:'Instructions for Use of Tenecteplase.pdf',file:'Instructions for Use of Tenecteplase.pdf'},
         {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf'}
+      ]
+    },
+    {
+      id:'post-fibrinolysis-monitoring',
+      type:'clinical',
+      title:'Post-Fibrinolysis Monitoring',
+      badge:'Clinical · Cognitive Aid',
+      desc:'Early surveillance and rescue triggers after tenecteplase.',
+      icon:'&#128150;',
+      crossLink:'#/algorithms/stemi',
+      crossLinkTitle:'STEMI & Fibrinolysis Algorithm',
+      items:[
+        'Tenecteplase dose, weight band (mg and mL), and time recorded; line flushed with normal saline and no dextrose infusions running through the access',
+        'Anticoagulant started within 5 minutes: enoxaparin 30 mg IV then 1 mg/kg SC q12h (max 100 mg) if age ≤ 75 and eGFR ≥ 30; otherwise unfractionated heparin low-PTT protocol; clopidogrel plan documented (300 mg load if naive, 75 mg if on > 7 days, hold load if age > 75)',
+        '12-lead ECG at ~75 minutes to assess ≥ 50% ST-segment resolution; rescue PCI/teleconsult triggers defined: persistent ST elevation or ischemic pain, cardiogenic shock/worsening heart failure, or refractory ventricular arrhythmias',
+        'Neurologic vital signs: hourly x 4, then Q4H for first 24 hours; reassess for headache, confusion, or focal deficit suggesting intracranial hemorrhage',
+        'Bleeding surveillance: check IV/arterial sites, gums, urine, stool; avoid new IV/arterial punctures for 24 hours; if venipuncture unavoidable, hold firm pressure (≥ 5 minutes for venous, ~30 minutes radial arterial)',
+        'Continuous cardiac monitoring for reperfusion arrhythmias; defibrillator accessible and ready; treat dysrhythmias per ACLS if instability develops',
+        'Transfer/evacuation plan and handover include symptom onset, ECG findings, tenecteplase dose/time, adjunct medications with exact timing, and current risks'
+      ],
+      sources:[
+        {title:'STEMI Fibrinolytic Therapy Orders_REGIONAL_651_dbl sd pg 1-1A_May 2019.pdf',file:'STEMI Fibrinolytic Therapy Orders_REGIONAL_651_dbl sd pg 1-1A_May 2019.pdf'},
+        {title:'Instructions for Use of Tenecteplase.pdf',file:'Instructions for Use of Tenecteplase.pdf'},
+        {title:'Fibrinolytic Checklist.pdf',file:'Fibrinolytic Checklist.pdf'}
       ]
     },
     {
