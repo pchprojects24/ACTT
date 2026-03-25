@@ -239,5 +239,6 @@ window.ACTT.crossLinks={
 'checklists/post-rosc':{title:'Post-ROSC Checklist',path:'#/checklists/post-rosc'},
 'checklists/medevac':{title:'MEDEVAC 9-Line',path:'#/checklists/medevac'},
 'checklists/fibrinolysis-screening':{title:'Fibrinolysis Screening (STEMI)',path:'#/checklists/fibrinolysis-screening'},
+'checklists/burn-8-hour-check':{title:'8-Hour Burn Reassessment Checklist',path:'#/checklists/burn-8-hour-check'},
 'checklists/mascal':{title:'MASCAL Triage Checklist',path:'#/checklists/mascal'}
 };

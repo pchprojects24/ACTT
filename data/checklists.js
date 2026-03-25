@@ -401,6 +401,28 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       ]
     },
     {
+      id:'burn-8-hour-check',
+      type:'clinical',
+      title:'8-Hour Burn Reassessment',
+      badge:'Clinical · Cognitive Aid',
+      desc:'Eight-hour fluid resuscitation check for major burns to prevent under- or over-resuscitation.',
+      icon:'&#128293;',
+      crossLink:'#/algorithms/burn-resuscitation',
+      crossLinkTitle:'Burn Resuscitation Algorithm',
+      items:[
+        'Confirm burn time and calculate total fluid delivered in the first 8 hours (A)',
+        'Project 24-hour total: multiply A x 2 to obtain B and document it',
+        'Calculate 6 ml/kg/%TBSA target volume (C) for 24-hour projection',
+        'Compare B to C and record whether the current course meets or exceeds the target',
+        'If B is at or below C: continue Major Burn CPG resuscitation with urine output-guided adjustments',
+        'If B exceeds C: alert burn/ICU physician and reassess the fluid plan',
+        'If B exceeds C: consider Albumin 5% at 1/3 current rate plus RL at 2/3 current rate',
+        'If B exceeds C: initiate bladder pressure monitoring every 4 hours',
+        'If urine output is >50 ml/hr, decrease IV fluid rate by 20% and recheck hourly',
+        'Document totals, rate changes, and reassessment times on the burn flowsheet'
+      ]
+    },
+    {
       id:'pre-sail',
       type:'operational',
       title:'RCN Pre-Sail Medical Equipment & Stores',
