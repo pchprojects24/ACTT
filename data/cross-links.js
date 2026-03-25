@@ -259,6 +259,7 @@ window.ACTT.crossLinks={
 'checklists/medevac':{title:'MEDEVAC 9-Line',path:'#/checklists/medevac'},
 'checklists/procedural-sedation':{title:'Procedural Sedation Checklist',path:'#/checklists/procedural-sedation'},
 'checklists/fibrinolysis-screening':{title:'Fibrinolysis Screening (STEMI)',path:'#/checklists/fibrinolysis-screening'},
+'checklists/post-fibrinolysis-monitoring':{title:'Post-Fibrinolysis Monitoring',path:'#/checklists/post-fibrinolysis-monitoring'},
 'checklists/burn-8-hour-check':{title:'8-Hour Burn Reassessment Checklist',path:'#/checklists/burn-8-hour-check'},
 'checklists/mascal':{title:'MASCAL Triage Checklist',path:'#/checklists/mascal'}
 };
