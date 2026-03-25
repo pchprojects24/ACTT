@@ -224,9 +224,33 @@ window.ACTT.appendices={
         '</tr>' +
         '<tr>' +
           '<td><strong>Epinephrine</strong></td>' +
-          '<td>Anaphylaxis, cardiac arrest, infusion for shock</td>' +
-          '<td>0.3\u20130.5 mg IM for anaphylaxis; 1 mg IV q3\u20135 min arrest; infusion per protocol</td>' +
-          '<td>Avoid concentration confusion; dosing changes by indication</td>' +
+          '<td>Anaphylaxis, cardiac arrest, infusion for shock, or push-dose bridge for sudden hypotension</td>' +
+          '<td>0.3\u20130.5 mg IM for anaphylaxis; 1 mg IV q3\u20135 min arrest; infusion 2\u201310 mcg/min; push-dose 5\u201320 mcg q2\u20135 min</td>' +
+          '<td>Avoid concentration confusion; say the indication out loud before giving any dose</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Vasopressin</strong></td>' +
+          '<td>Add-on in septic or vasodilatory shock when catecholamine needs are rising</td>' +
+          '<td>0.02\u20130.04 units/min</td>' +
+          '<td>Non-adrenergic vasoconstrictor; adjunct, not the fast titration drug</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Dopamine</strong></td>' +
+          '<td>Fallback mixed inotrope/pressor when preferred agents are unavailable</td>' +
+          '<td>2\u201310 mcg/kg/min, titrate up to 20 mcg/kg/min</td>' +
+          '<td>More arrhythmogenic and less predictable than norepinephrine</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Dobutamine</strong></td>' +
+          '<td>Low-output / cardiogenic picture when contractility support is needed</td>' +
+          '<td>2\u201310 mcg/kg/min, titrate to response</td>' +
+          '<td>Inotrope with mild vasodilation; hypotension may worsen if pressure is not already supported</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Push-dose epinephrine</strong></td>' +
+          '<td>Transient peri-intubation, RSI, or sedation-related hypotension while fixing the cause or preparing an infusion</td>' +
+          '<td>10 mcg/mL syringe; 0.5\u20132 mL IV push q2\u20135 min</td>' +
+          '<td>Bridge only. Do not give the 1 mg cardiac arrest dose to a patient with a pulse</td>' +
         '</tr>' +
         '<tr>' +
           '<td><strong>Phentolamine</strong></td>' +
@@ -234,6 +258,17 @@ window.ACTT.appendices={
           '<td>5\u201310 mg diluted for local infiltration</td>' +
           '<td>Use promptly if vasopressor extravasation occurs</td>' +
         '</tr>' +
+        '</tbody>' +
+        '</table></div>' +
+        '<p><strong>Bedside choice:</strong> vasodilated and hypotensive usually means norepinephrine first; weak pump with acceptable pressure points toward dobutamine; push-dose epinephrine is a temporary bridge, not a long-term shock plan.</p>' +
+        '<h4>Push-Dose Epinephrine Mixing Aid</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Step</th><th>Action</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td>1</td><td>Place 9 mL normal saline in a 10 mL syringe.</td></tr>' +
+        '<tr><td>2</td><td>Add 1 mL of cardiac epinephrine 0.1 mg/mL (1:10,000).</td></tr>' +
+        '<tr><td>3</td><td>Final concentration = 10 mcg/mL. Label the syringe.</td></tr>' +
+        '<tr><td>4</td><td>Give 0.5\u20132 mL (5\u201320 mcg) slow IV push every 2\u20135 min to effect, with reassessment after each dose.</td></tr>' +
         '</tbody>' +
         '</table></div>' +
 
@@ -372,7 +407,7 @@ window.ACTT.appendices={
         '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:[]
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-l','thresholds/hemodynamic','prolonged-holding/reassessment-rhythm']
     },
     {
       id:'appendix-d',
@@ -631,6 +666,140 @@ window.ACTT.appendices={
         '</tbody>' +
         '</table></div>',
       relatedLinks:[]
+    },
+    {
+      id:'appendix-k',
+      title:'Appendix K — ECG Interpretation Quick Reference',
+      content:
+        '<p>Use this appendix for fast pattern recognition at the bedside. It is built from the DL ECG cheat sheet and aligned to ACTT priorities: STEMI recognition, unstable bradycardia, unstable tachycardia, arrest rhythm routing, and hyperkalemia-pattern ECG change.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">FAST USE</span> Read Every ECG in This Order</div>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Step</th><th>What to Look For</th><th>Why It Matters</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>1. Rate</strong></td><td>If using a standard 10-second strip, count QRS complexes and multiply by 6; confirm the printed time span first</td><td>Confirms whether the tracing fits a clinically important brady or tachy pattern</td></tr>' +
+        '<tr><td><strong>2. Rhythm</strong></td><td>Is it regular? Are P waves present? Is there a fixed relationship between P waves and QRS complexes?</td><td>Separates sinus rhythm from AV block, AF/flutter, SVT, or ventricular rhythm</td></tr>' +
+        '<tr><td><strong>3. Width</strong></td><td>Narrow QRS is under 0.12 seconds; wide QRS is 0.12 seconds or more</td><td>Wide rhythms need higher concern for VT, conduction block, or hyperkalemia</td></tr>' +
+        '<tr><td><strong>4. Ischemia</strong></td><td>Measure ST shift at the J point and compare contiguous leads</td><td>Supports STEMI recognition and helps localize the infarct territory</td></tr>' +
+        '<tr><td><strong>5. Electrolytes / Red flags</strong></td><td>Peaked T waves, PR prolongation, QRS widening, loss of P waves, sine-wave pattern</td><td>Suggests hyperkalemia and the need for immediate stabilization and potassium-lowering therapy</td></tr>' +
+        '</tbody>' +
+        '</table></div></div>' +
+
+        '<h4>Contiguous Leads and Infarct Territory</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Territory</th><th>Key Leads</th><th>Bedside Note</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Septal</strong></td><td>V1, V2</td><td>Often travels with anterior infarction</td></tr>' +
+        '<tr><td><strong>Anterior</strong></td><td>V3, V4</td><td>Think LAD territory; V1&ndash;V4 is the common anteroseptal pattern</td></tr>' +
+        '<tr><td><strong>Lateral</strong></td><td>I, aVL, V5, V6</td><td>I and aVL are high lateral; V5 and V6 are low lateral</td></tr>' +
+        '<tr><td><strong>Inferior</strong></td><td>II, III, aVF</td><td>RCA is common; watch for hypotension or right-sided involvement</td></tr>' +
+        '<tr><td><strong>Posterior clue</strong></td><td>V1, V2, V3</td><td>Dominant R waves with horizontal ST depression and upright tall T waves suggest posterior MI</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> STEMI Recognition Trigger</div>' +
+        '<p>ST elevation greater than 1 mm at the J point in 2 contiguous leads, in the right ischemic clinical context, should activate the STEMI pathway. Repeat ECGs if symptoms persist and the first tracing is nondiagnostic.</p></div>' +
+
+        '<h4>Bradycardia Patterns That Change Management</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Pattern</th><th>Typical ECG Features</th><th>Route in ACTT</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Sinus bradycardia / junctional slow rhythm</strong></td><td>Slow rate; sinus rhythm has a P before each QRS, junctional rhythm may not</td><td>If hypotension, shock, ischemic discomfort, acute heart failure, or AMS is present, move to the bradycardia pathway</td></tr>' +
+        '<tr><td><strong>High-grade AV block</strong></td><td>Dropped beats, AV dissociation, or a slow escape rhythm; wide QRS increases concern for infranodal disease</td><td>Expect atropine to work poorly; prepare pacing and vasoactive support early</td></tr>' +
+        '<tr><td><strong>Hyperkalemic brady / wide rhythm</strong></td><td>Peaked T waves progressing to PR prolongation, QRS widening, loss of P waves, then sine-wave appearance</td><td>Treat the potassium problem now; calcium and shifting therapy take priority alongside ACLS support</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Tachycardia Patterns That Change Management</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Pattern</th><th>Typical ECG Features</th><th>Route in ACTT</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Regular narrow-complex tachycardia</strong></td><td>QRS under 0.12 seconds and regular rhythm</td><td>If stable, vagal maneuvers then adenosine are reasonable for likely SVT; if unstable, synchronize early</td></tr>' +
+        '<tr><td><strong>Irregular narrow-complex tachycardia</strong></td><td>Often AF or flutter with variable block</td><td>Think rate control and underlying cause; do not default to adenosine as treatment for an irregular rhythm</td></tr>' +
+        '<tr><td><strong>Regular wide-complex tachycardia</strong></td><td>QRS 0.12 seconds or more with a regular rhythm</td><td>Treat as VT until proven otherwise; if unstable, synchronized cardioversion is the fast route</td></tr>' +
+        '<tr><td><strong>Irregular wide-complex tachycardia</strong></td><td>Consider polymorphic VT, AF with aberrancy, or pre-excited AF</td><td>High-risk rhythm; if the patient is deteriorating or pulseless, move immediately to the shock / arrest pathway</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Shockable vs Non-Shockable Arrest Rhythms</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Rhythm Group</th><th>Recognition</th><th>Immediate Route</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Shockable</strong></td><td>Ventricular fibrillation or pulseless ventricular tachycardia</td><td>Defibrillate and follow the shockable arrest sequence without delay</td></tr>' +
+        '<tr><td><strong>Non-shockable</strong></td><td>PEA or asystole</td><td>CPR, epinephrine, and aggressive search for reversible causes; do not waste time trying to sync or shock asystole</td></tr>' +
+        '<tr><td><strong>Organized rhythm with no pulse</strong></td><td>Electrical activity is present but there is no perfusing pulse</td><td>Treat as PEA, not ROSC</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>High-Yield Ischemia and Electrolyte Clues</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Finding</th><th>Why It Matters</th><th>Bedside Reminder</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>T-wave inversion in contiguous leads</strong></td><td>Supports ischemia when the clinical picture fits</td><td>Do not dismiss ongoing symptoms just because there is no obvious ST elevation</td></tr>' +
+        '<tr><td><strong>Peaked T waves</strong></td><td>Early hyperkalemia clue</td><td>Trend the tracing; worsening PR/QRS change means the patient is getting less electrically stable</td></tr>' +
+        '<tr><td><strong>QRS widening with disappearing P waves</strong></td><td>Late hyperkalemia warning</td><td>Think pre-arrest hyperkalemia and treat before the rhythm collapses</td></tr>' +
+        '<tr><td><strong>Posterior MI pattern</strong></td><td>Can be missed if only looking for obvious anterior ST elevation</td><td>In V1&ndash;V3, a dominant R wave plus ST depression and upright tall T waves is a posterior infarct clue</td></tr>' +
+        '</tbody>' +
+        '</table></div>',
+      relatedLinks:['algorithms/stemi','thresholds/stemi-thresholds','checklists/fibrinolysis-screening','checklists/post-rosc','medications/tenecteplase']
+    },
+    {
+      id:'appendix-l',
+      title:'Appendix L — IV Compatibility and Infusion Quick Reference',
+      content:
+        '<p>Use this appendix when multiple infusions must share limited access. It is intentionally narrow: only combinations and rates clearly supported by the DL June 2022 critical care Y-site chart and the TOH infusion sheet are included here. If a pair is not clearly supported below, use a separate lumen or line.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">FAST USE</span> Y-Site Legend</div>' +
+        '<ul>' +
+          '<li><strong>C</strong> = compatible at TOH standard concentrations.</li>' +
+          '<li><strong>C?</strong> = compatible only at lower-than-standard TOH concentrations; do not assume standard-concentration compatibility.</li>' +
+          '<li><strong>X</strong>, <strong>ND</strong>, or blank / unlisted pair = do not mix via Y-site.</li>' +
+          '<li><strong>Concentration-dependent entries</strong> in the full June 2022 chart should stay on a separate lumen unless pharmacy confirmation is available.</li>' +
+        '</ul></div>' +
+
+        '<h4>Common Vasoactive Infusions (TOH Standard Setup)</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Drug</th><th>TOH Mix / Concentration</th><th>Pump Units</th><th>Usual Bedside Rate</th><th>Operational Note</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Norepinephrine</strong></td><td>8 mg in 250 mL NS = 32 mcg/mL</td><td>mcg/min</td><td>Infusion 8&ndash;12 mcg/min; usual maintenance 2&ndash;4 mcg/min</td><td>Use large vein when peripheral; extravasation hazard.</td></tr>' +
+        '<tr><td><strong>Epinephrine</strong></td><td>1 mg in 250 mL D5W or NS = 4 mcg/mL</td><td>mcg/min</td><td>Infusion 2&ndash;10 mcg/min</td><td>TOH push-dose option: 1 mg in 100 mL NS = 10 mcg/mL.</td></tr>' +
+        '<tr><td><strong>Phenylephrine</strong></td><td>100 mg in 250 mL NS = 400 mcg/mL</td><td>mcg/min</td><td>Start 100&ndash;180 mcg/min</td><td>TOH push-dose option: 10 mg in 100 mL D5W or NS = 100 mcg/mL.</td></tr>' +
+        '<tr><td><strong>Dobutamine</strong></td><td>500 mg in 500 mL D5W or NS = 1 mg/mL</td><td>mcg/kg/min</td><td>Infusion 2&ndash;20 mcg/kg/min</td><td>Best when contractility support is needed and pressure is tolerable.</td></tr>' +
+        '<tr><td><strong>Dopamine</strong></td><td>Premixed 400 mg in 250 mL D5W = 1600 mcg/mL</td><td>mcg/kg/min</td><td>Initial 1&ndash;5 mcg/kg/min; titrate by 1&ndash;4 mcg/kg/min every 10&ndash;30 min up to 20&ndash;50 mcg/kg/min</td><td>More arrhythmogenic and less predictable than norepinephrine.</td></tr>' +
+        '<tr><td><strong>Vasopressin</strong></td><td>20 units in 250 mL D5W or NS = 0.1 unit/mL</td><td>unit/min</td><td>Infusion 0.01&ndash;0.1 units/min</td><td>Add-on agent rather than minute-to-minute titration drug.</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Continuous Sedation / Support Infusions (TOH Standard Setup)</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Drug</th><th>TOH Mix / Concentration</th><th>Pump Units</th><th>Usual Bedside Rate</th><th>Operational Note</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Fentanyl</strong></td><td>Premixed 5 mg in 100 mL = 50 mcg/mL</td><td>mcg/hr</td><td>Infusion 25&ndash;200 mcg/hr</td><td>Useful when fast titration and shorter duration are desired.</td></tr>' +
+        '<tr><td><strong>Hydromorphone</strong></td><td>20 mg in 100 mL D5W or NS = 200 mcg/mL</td><td>mcg/hr</td><td>Start 200 mcg/hr; usual 500&ndash;3000 mcg/hr</td><td>Track cumulative dose during long holds.</td></tr>' +
+        '<tr><td><strong>Midazolam</strong></td><td>100 mg in 100 mL D5W or NS = 1 mg/mL</td><td>mg/hr</td><td>Infusion 1&ndash;20 mg/hr</td><td>Upper hard limit 30 mg/hr on the TOH sheet.</td></tr>' +
+        '<tr><td><strong>Ketamine</strong></td><td>400 mg in 100 mL D5W or NS = 4 mg/mL</td><td>mg/hr</td><td>Analgesia / sedation infusion 0.05&ndash;1.2 mg/kg/hr</td><td>Convert weight-based order to mg/hr before starting the pump.</td></tr>' +
+        '<tr><td><strong>Propofol</strong></td><td>Ready-to-use 1000 mg / 100 mL = 10 mg/mL</td><td>mg/kg/hr</td><td>Infusion 0.3&ndash;3 mg/kg/hr</td><td>Use vented, non-filtered tubing; pair with an analgesia plan.</td></tr>' +
+        '<tr><td><strong>Insulin</strong></td><td>50 units in 50 mL NS = 1 unit/mL</td><td>units/hr</td><td>Usual starting dose 0.1 units/kg/hr (often 5&ndash;10 units/hr)</td><td>TOH notes dual sign-off.</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Critical Care Y-Site Quick Reference</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Drug / Group</th><th>Y-Site status supported by TOH bedside subset</th><th>Keep separate unless specifically confirmed</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Norepinephrine</strong></td><td>C with dobutamine, dopamine, epinephrine, fentanyl, hydromorphone, phenylephrine, propofol, and vasopressin</td><td>If another drug is not listed here, treat it as separate-line until confirmed in the full chart.</td></tr>' +
+        '<tr><td><strong>Hydromorphone</strong></td><td>C with dobutamine, dopamine, epinephrine, fentanyl, norepinephrine, phenylephrine, propofol, and vasopressin</td><td>Do not generalize beyond the TOH subset.</td></tr>' +
+        '<tr><td><strong>Fentanyl</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, and norepinephrine</td><td>Phenylephrine, propofol, and vasopressin are marked <strong>C?</strong> rather than standard-concentration compatible.</td></tr>' +
+        '<tr><td><strong>Midazolam</strong></td><td>C with dopamine, epinephrine, fentanyl, hydromorphone, norepinephrine, phenylephrine, and vasopressin</td><td><strong>X with dobutamine.</strong> Propofol is not clearly confirmed in the TOH subset shown.</td></tr>' +
+        '<tr><td><strong>Phenylephrine</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, midazolam, norepinephrine, and vasopressin</td><td>Fentanyl and propofol are marked <strong>C?</strong>.</td></tr>' +
+        '<tr><td><strong>Propofol</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, and norepinephrine</td><td>Fentanyl and phenylephrine are <strong>C?</strong>; <strong>ND with vasopressin.</strong></td></tr>' +
+        '<tr><td><strong>Vasopressin</strong></td><td>C with dobutamine, dopamine, epinephrine, hydromorphone, midazolam, norepinephrine, and phenylephrine</td><td>Fentanyl is <strong>C?</strong>; <strong>ND with propofol.</strong></td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Bedside Line Rule</div>' +
+        '<p>When access is limited, keep the pressor on the most reliable line and avoid unsupported three-drug improvisation. If the pair is marked C?, X, ND, blank, or not listed here, separate the infusions and reassess whether current access is adequate for the care plan.</p></div>',
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-c','prolonged-holding/fluid-management','prolonged-holding/sedation-pain']
     }
   ]
 };

@@ -105,7 +105,7 @@ window.ACTT.prolongedHolding={
         '<h4>7.7.4 Vasopressors over time</h4>'+
         '<p>A patient on vasopressors requires sustained attention. Continuous infusions demand pump reliability, exact concentration awareness, IV site surveillance, and clear target MAP. Pressor dependence is itself an indicator of severity and should lower the threshold for teleconsultation and escalation.</p>'+
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>Fluid supplies at sea are finite. Plan conservation early. Track cumulative fluid use against remaining stock and anticipated holding time. Burn resuscitation in particular can deplete IV fluid reserves rapidly on smaller platforms. Coordinate with the medical supply chain and command early if fluid needs may exceed available stock.</p></div></div>',
-      relatedLinks:['thresholds/circulation','pitfalls/fluid-overload']
+      relatedLinks:['thresholds/circulation','appendices/appendix-l','pitfalls/fluid-overload','checklists/burn-8-hour-check']
     },
     {
       id:'neurologic-care',
@@ -140,8 +140,15 @@ window.ACTT.prolongedHolding={
         '</ul>'+
         '<h4>7.9.2 Common prolonged-care medication traps</h4>'+
         '<p>The most common medication failures in long holds are cumulative oversedation, respiratory depression after repeated doses, undocumented PRN dosing, and treating every agitation event as behavioural rather than physiologic. The answer is structured reassessment after every major medication change.</p>'+
+        '<h4>7.9.3 Behavioural crisis patients during holding</h4>'+
+        '<ul>'+
+          '<li>Any patient held for suicidality, psychosis, or recurrent dangerous agitation needs an explicit observation plan. "Check on him later" is not a plan.</li>'+
+          '<li>Remove obvious means, assign who is continuously observing the patient, and document what would trigger sedation, restraint, teleconsultation, or evacuation.</li>'+
+          '<li>Repeat suicide-risk assessment once intoxication, delirium, or severe agitation begins to clear. The history may become more concerning after the patient is calmer.</li>'+
+          '<li>If repeated sedation is needed to keep the patient or team safe, reassess whether holding onboard remains acceptable.</li>'+
+        '</ul>'+
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>Medication stocks at sea are limited. Plan sedation and analgesia conservation from the start. Track cumulative use against remaining supply and anticipated holding duration. If drug supply is running low, contact higher medical support early to discuss alternatives or arrange resupply.</p></div></div>',
-      relatedLinks:['thresholds/sedation','pitfalls/dose-stacking']
+      relatedLinks:['algorithms/mental-health-behavioral-crisis','checklists/mental-health-behavioral-crisis','checklists/mental-health-suicide-risk','appendices/appendix-l','thresholds/sedation','pitfalls/dose-stacking']
     },
     {
       id:'device-maintenance',

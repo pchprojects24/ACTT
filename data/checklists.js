@@ -13,18 +13,18 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       crossLink:'#/procedures/rsi',
       crossLinkTitle:'RSI Full Procedure',
       items:[
-        'Confirm indication; assign team roles; state failed airway plan aloud',
-        'Position patient (sniffing or ramp); pre-oxygenate with 100% O\u2082 \u00d7 3\u20135 min',
-        'Suction ready; clear blood, secretions, or vomit if present',
-        'Induction agent drawn, labeled, and immediately accessible',
-        'Paralytic drawn, labeled, and immediately accessible',
-        'Backup airway device confirmed ready (SGA at hand)',
-        'Cricothyrotomy kit open or at arm\u2019s reach before first attempt',
-        'Administer induction agent \u2192 wait for effect \u2192 administer paralytic',
-        'Laryngoscopy \u2192 advance tube through cords \u2192 inflate cuff \u2192 ventilate',
-        'Confirm placement: EtCO\u2082 waveform (primary confirmation)',
-        'Confirm: bilateral chest rise and breath sounds',
-        'Secure tube; document depth; begin post-intubation sedation'
+        'RSI indication confirmed; operator authorized/qualified per local policy',
+        'Backup airway clinician called if needed; team roles assigned',
+        'Difficult airway assessment completed; primary and backup airway plans verbalized',
+        'Suction tested; oxygen source confirmed; pre-oxygenation performed',
+        'Monitoring applied (ECG, SpO\u2082, BP, ETCO\u2082 if available)',
+        'IV access confirmed and patent',
+        'Intubation equipment checked, including tube sizes + backup, bougie/stylet, and rescue SGA',
+        'Drug doses calculated and double-checked; induction/paralytic labeled',
+        'Hemodynamic support plan ready (fluids/vasopressor as indicated)',
+        'Countdown/sequence verbalized before induction',
+        'Tube placement confirmed with capnography immediately after placement',
+        'Tube secured; post-intubation sedation/ventilation plan initiated; times documented'
       ]
     },
     {
@@ -37,17 +37,18 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       crossLink:'data/ACLS/anaphylaxis.html',
       crossLinkTitle:'Full Anaphylaxis Protocol',
       items:[
-        'Call for help; assign roles; prepare for rapid deterioration',
-        'Remove or stop trigger (stop infusion, remove stinger)',
-        'Position supine; elevate legs if hypotensive',
-        'Epinephrine IM: 0.5 mg into mid-anterolateral thigh (adult)',
-        'High-flow oxygen applied',
-        'IV access established; isotonic crystalloid running if hypotensive',
-        'Monitoring: continuous ECG, SpO\u2082, BP',
-        'Reassess at 5\u201315 min; repeat Epinephrine IM if ongoing airway or circulation compromise',
-        'Airway red flag check: stridor / voice change / progressive oropharyngeal swelling?',
-        'Bronchospasm present? \u2192 inhaled beta-agonist (salbutamol)',
-        'Document: time, Epi doses given, and clinical response'
+        'Immediate ABC assessment completed',
+        'Signs of airway compromise, wheeze/respiratory distress, and hypotension assessed',
+        'Call emergency assistance; activate local anaphylaxis protocol',
+        'Epinephrine prepared/administered per protocol and scope (do not delay)',
+        'Oxygen applied; patient positioned appropriately',
+        'IV access obtained if indicated; pulse oximetry/cardiac monitoring initiated',
+        'Repeat vital signs and reassessment performed at defined intervals',
+        'Need for repeat epinephrine assessed per protocol',
+        'Adjunct medications prepared/administered if ordered',
+        'Airway equipment brought to bedside; advanced airway escalation considered early',
+        'Observation period planned due to recurrence risk (biphasic reaction)',
+        'Event, timing, trigger, response, and transfer/evacuation decision documented'
       ]
     },
     {
@@ -72,6 +73,28 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Sedation and analgesia provided if ventilated or agitated',
         'Monitoring for recurrent arrest; treat dysrhythmias per ACLS',
         'MEDEVAC triggers reviewed; consultation initiated'
+      ]
+    },
+    {
+      id:'fibrinolysis-screening',
+      type:'clinical',
+      title:'Fibrinolysis Screening (STEMI)',
+      badge:'Clinical · Cognitive Aid',
+      desc:'Rapid contraindication and readiness checklist before tenecteplase in STEMI.',
+      icon:'&#129516;',
+      crossLink:'#/algorithms/stemi',
+      crossLinkTitle:'STEMI & Fibrinolysis Algorithm',
+      items:[
+        'Confirm STEMI pattern and symptom onset timing are documented',
+        'Confirm PCI timeline exceeds target and fibrinolysis is the selected reperfusion strategy',
+        'Screen for absolute contraindications: prior intracranial hemorrhage, known intracranial neoplasm/AVM, recent ischemic stroke, suspected aortic dissection, active major bleeding, significant head/facial trauma within 3 months',
+        'Screen for major relative bleeding risks (severe uncontrolled HTN, recent surgery, anticoagulant use, bleeding diathesis)',
+        'Record baseline neuro status and focused bleeding assessment before administration',
+        'Two-person medication check completed for tenecteplase dose and preparation',
+        'Adjunctive therapy prepared/ordered: aspirin, P2Y12 agent, and anticoagulant per protocol',
+        'Defibrillator/monitor, IV access, and emergency hemorrhage response supplies are immediately available',
+        'Patient/family informed of indication, expected benefit, and major bleeding risk when feasible',
+        'Post-lysis monitoring plan assigned: rhythm checks, neurologic checks, bleeding surveillance, and transfer coordination'
       ]
     },
     {
@@ -101,18 +124,375 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
       desc:'Scene management and triage tasks for a mass casualty incident.',
       icon:'&#128681;',
       items:[
-        'Call for help; request additional resources; establish incident command',
-        'Assign triage officer; designate triage, treatment, and transport roles',
-        'Perform START (adult) or JumpSTART (pediatric) triage on ALL patients before treating anyone',
-        'Red \u2014 Immediate: airway/life threat correctable now; treat first',
-        'Yellow \u2014 Delayed: serious but stable for 4\u20136 hours; treat after Immediate',
-        'Green \u2014 Minor: walking wounded; direct to self/buddy aid and hold',
-        'Black \u2014 Expectant/Deceased: unsurvivable or deceased; tag and document',
-        'Establish and mark Casualty Collection Point (CCP)',
-        'Begin treatment of Immediate patients with available resources',
-        'Initiate MEDEVAC 9-Line for Immediate and Urgent casualties',
-        'Reassess triage categories as resources and patient conditions change',
-        'Track and document all casualties: name, triage category, treatment, disposition'
+        'MCI recognized/declared; scene/facility safety confirmed',
+        'Incident command activated; roles assigned (command/triage/treatment/transport/logistics/documentation)',
+        'Communication channels established; entry/exit routes controlled',
+        'Triage and treatment areas established; casualty collection point identified',
+        'Minor/delayed/immediate/expectant areas designated per local triage system',
+        'Patient tracking process started and maintained',
+        'Resource inventory performed; staff recall/external support initiated as needed',
+        'Blood, oxygen, and key supply conservation plan started',
+        'Security/crowd control and decontamination needs managed if applicable',
+        'Ambulance flow and receiving facility coordination established',
+        'Regular command updates and staff welfare/rotation checks completed',
+        'Debrief and incident documentation completed after stabilization'
+      ]
+    },
+    {
+      id:'emergency-airway-equipment',
+      type:'clinical',
+      title:'Emergency Airway Equipment',
+      badge:'Clinical \u00b7 Readiness',
+      desc:'Pre-use airway equipment readiness check for emergency and difficult airway response.',
+      icon:'&#129463;',
+      items:[
+        'Airway cart/bag present and accessible; difficult airway backup co-located',
+        'Suction unit present, powered, and tested with Yankauer + flexible catheters',
+        'Oxygen source connected; adequate supply confirmed',
+        'Bag-valve-mask available (adult and pediatric if applicable)',
+        'Oropharyngeal and nasopharyngeal airways available in full size range',
+        'Laryngoscope handle functioning; direct blades in required sizes',
+        'Video laryngoscope present/charged/functioning (if used locally)',
+        'Endotracheal tubes in required sizes with backup size available',
+        'Bougie/introducer and stylets available',
+        'Syringe for cuff inflation and tube securing device/tape present',
+        'Capnography/ETCO\u2082 device present and functional',
+        'Rescue supraglottic airway devices and surgical airway kit available per policy'
+      ]
+    },
+    {
+      id:'defibrillator-monitor-function',
+      type:'clinical',
+      title:'Defibrillator / Monitor Function',
+      badge:'Clinical \u00b7 Readiness',
+      desc:'Shift-level functional checks for defibrillator and monitor capability.',
+      icon:'&#9889;',
+      items:[
+        'Defibrillator present in assigned location and powers on without fault',
+        'Self-test/status indicator normal; screen intact/readable',
+        'Battery installed/charged; spare battery available and charged',
+        'Power cord present and intact',
+        'Adult pads present/in date; pediatric pads available if required',
+        'ECG leads, SpO\u2082 probe, and NIBP cuffs present/intact (required sizes)',
+        'Alarm volume audible; sync mode functioning',
+        'Pacer mode functioning if supported by device',
+        'Cables/accessories free of damage and stored with device',
+        'Printer paper stocked where applicable',
+        'Shock delivery test completed per local policy',
+        'Daily/shift check documented'
+      ]
+    },
+    {
+      id:'sepsis-screening',
+      type:'clinical',
+      title:'Sepsis Screening',
+      badge:'Clinical \u00b7 Assessment',
+      desc:'Structured bedside sepsis screen with escalation and documentation prompts.',
+      icon:'&#129656;',
+      items:[
+        'Patient identified/triaged promptly; suspected infection considered',
+        'Vitals completed: temperature, HR, RR, BP, SpO\u2082',
+        'Mental status and perfusion (capillary refill) assessed',
+        'Sepsis red flags reviewed (altered LOC, hypotension, distress, poor perfusion)',
+        'Sepsis screening tool completed per local protocol',
+        'High-risk factors reviewed (age, immunocompromise, chronic illness, recent procedure)',
+        'Source of infection considered and documented',
+        'IV access obtained if indicated',
+        'Bloodwork/cultures and lactate requested if available/indicated',
+        'Fluid resuscitation need assessed per protocol',
+        'Antibiotic urgency escalated to clinician/prescriber',
+        'Reassessment interval, documentation, and transfer/evacuation plan established as needed'
+      ]
+    },
+    {
+      id:'dka-hyperglycemia',
+      type:'clinical',
+      title:'DKA / Hyperglycemic Emergency',
+      badge:'Clinical \u00b7 Cognitive Aid',
+      desc:'Recognition-to-evac sequence for DKA/HHS focusing on fluids, potassium, insulin, and monitoring.',
+      icon:'&#129514;',
+      crossLink:'#/algorithms/dka',
+      crossLinkTitle:'DKA Algorithm',
+      items:[
+        'POC glucose obtained; ketone assessment and VBG/pH/bicarbonate/anion gap/osmolality ordered if available',
+        'Two large-bore IVs and monitors in place; initial isotonic fluid bolus started (~15-20 mL/kg unless overload risk)',
+        'Potassium level reviewed before insulin; if K < 3.3 mmol/L hold insulin and begin potassium replacement',
+        'Regular insulin infusion prepared at 0.1 units/kg/hr (no bolus) once K is safe; potassium supplementation planned',
+        'Add dextrose to fluids once glucose < ~14 mmol/L so insulin can continue to clear ketones',
+        'Glucose checked at least hourly; potassium about every 2 hours; trend anion gap/venous pH when available',
+        'Urine output, mental status, respiratory pattern, and perfusion reassessed frequently; watch for pulmonary edema',
+        'Underlying cause addressed (infection/ACS/med changes); antibiotics/other treatments started if indicated',
+        'Airway risk reassessed; avoid intubation if possible but prepare to match pre-intubation minute ventilation if required',
+        'Teleconsultation and evacuation plan initiated early; document times, doses, fluids, and responses'
+      ]
+    },
+    {
+      id:'stroke-screening',
+      type:'clinical',
+      title:'Stroke Screening',
+      badge:'Clinical \u00b7 Assessment',
+      desc:'Time-critical stroke recognition and transfer activation checklist.',
+      icon:'&#129504;',
+      items:[
+        'Time last known well established; exact onset time documented if known',
+        'Immediate ABC assessment, blood glucose, vitals, and SpO\u2082 completed',
+        'Focused neuro exam and local stroke screen tool completed',
+        'Facial droop, arm drift/unilateral weakness, and speech abnormality assessed',
+        'Gaze/visual symptoms, severe headache, and seizure activity checked',
+        'Anticoagulant use and recent trauma/surgery reviewed',
+        'Stroke mimics considered (hypoglycemia, seizure, migraine, intoxication)',
+        'Urgent clinician notification completed',
+        'Stroke-capable facility/transfer pathway activated if indicated',
+        'Repeat neuro checks scheduled; airway protection risk assessed',
+        'Findings clearly documented with times'
+      ]
+    },
+    {
+      id:'seizure-management',
+      type:'clinical',
+      title:'Seizure / Status Epilepticus',
+      badge:'Clinical \u00b7 Cognitive Aid',
+      desc:'Point-of-care seizure response: airway protection, glucose check, benzodiazepine rescue, escalation, and evacuation planning.',
+      icon:'&#9889;',
+      crossLink:'#/algorithms/seizure-management',
+      crossLinkTitle:'Seizure Algorithm',
+      items:[
+        'Seizure onset time recorded; witness description captured (focal vs generalized, repetitive events)',
+        'Airway protected: lateral position if possible, suction ready, oxygen applied, monitors on',
+        'Blood glucose checked immediately; hypoglycemia treated without delay',
+        'IV/IO access obtained if possible; first benzodiazepine drawn up before prolonged attempts',
+        'Midazolam 5 mg IV/IO/IM given; repeat every 5 minutes until seizure stops with airway vigilance',
+        'If no stop after two benzo doses or status likely, load levetiracetam 2 g IV/IO while preparing airway support',
+        'Consider reversible causes in parallel: trauma/TBI, infection/fever, hypoxia, electrolytes, toxins/withdrawal, pregnancy/eclampsia',
+        'Airway/ventilation reassessed continuously; BVM and RSI backup ready if GCS remains low or apneic',
+        'After convulsions stop: repeat neuro exam (GCS/pupils), consider non-convulsive status if not waking, maintain lateral positioning',
+        'Document seizure duration, all doses/times, response, and neurologic trend',
+        'Evacuation/teleconsultation arranged; maintenance antiepileptic plan and monitoring assigned'
+      ]
+    },
+    {
+      id:'chest-pain-assessment',
+      type:'clinical',
+      title:'Chest Pain Assessment',
+      badge:'Clinical \u00b7 Assessment',
+      desc:'Rapid chest pain evaluation checklist to support ACS and alternate diagnosis pathways.',
+      icon:'&#128147;',
+      items:[
+        'Immediate ABC assessment and vital signs completed',
+        'Cardiac monitor applied; 12-lead ECG obtained if available',
+        'SpO\u2082 checked and oxygen needs assessed',
+        'Pain onset, character, location/radiation documented',
+        'Associated symptoms reviewed (dyspnea, diaphoresis, nausea, syncope)',
+        'Cardiac risk factors, past history, meds, and allergies reviewed',
+        'Red flags identified (instability, ECG changes, syncope, severe distress)',
+        'Differentials considered (ACS, PE, aortic process, pneumothorax, GI, MSK)',
+        'Clinician/prescriber notified; local chest pain pathway initiated',
+        'Urgent transfer/evacuation need assessed',
+        'Ongoing monitoring, repeat vitals, and documentation completed'
+      ]
+    },
+    {
+      id:'massive-hemorrhage-transfusion',
+      type:'clinical',
+      title:'Massive Hemorrhage / Transfusion',
+      badge:'Clinical \u00b7 Resuscitation',
+      desc:'Critical actions for major bleeding control and transfusion pathway activation.',
+      icon:'&#129656;',
+      items:[
+        'Scene/area safety confirmed; massive bleeding identified',
+        'Call for help; activate hemorrhage response/transfusion pathway',
+        'Direct pressure and hemostatic dressing applied as indicated',
+        'Tourniquet applied when indicated; application time documented',
+        'Airway/breathing assessed; high-flow oxygen considered per protocol',
+        'Large-bore IV/IO access obtained if indicated',
+        'Blood products requested/prepared where available',
+        'Warming/hypothermia prevention measures initiated',
+        'Repeat vitals and shock assessment ongoing',
+        'Bleeding source identified; urgent procedural/surgical escalation arranged as needed',
+        'Contributing medications reviewed (e.g., anticoagulants)',
+        'Products, timings, response, and transfer/evacuation plan documented'
+      ]
+    },
+    {
+      id:'cardiac-arrest-code-blue',
+      type:'clinical',
+      title:'Cardiac Arrest / Code Blue',
+      badge:'Clinical \u00b7 Resuscitation',
+      desc:'Role-based high-quality CPR and ACLS sequence checklist.',
+      icon:'&#10071;',
+      items:[
+        'Confirm unresponsiveness/arrest; activate code/emergency response',
+        'Start high-quality CPR immediately (firm surface/backboard if needed)',
+        'Attach defibrillator and assess rhythm as soon as available',
+        'Deliver shock when indicated per algorithm and resume CPR immediately',
+        'Assign roles: team leader, compressor, defibrillator operator, recorder/timekeeper, airway manager',
+        'Bring oxygen/ventilation equipment and code medication kit to bedside',
+        'Obtain IV/IO access',
+        'Use closed-loop communication',
+        'Review reversible causes systematically',
+        'Perform rhythm/pulse checks at protocol intervals',
+        'Use ETCO\u2082 if advanced airway is in place and available',
+        'Recognize ROSC promptly and initiate post-ROSC care pathway; debrief/document'
+      ]
+    },
+    {
+      id:'difficult-airway',
+      type:'clinical',
+      title:'Difficult Airway',
+      badge:'Clinical \u00b7 Airway',
+      desc:'Pre-intubation difficult airway preparation and contingency checklist.',
+      icon:'&#128167;',
+      items:[
+        'Airway difficulty predicted/recognized; experienced backup called',
+        'Difficult airway equipment brought to bedside',
+        'Suction checked and ready',
+        'Oxygenation strategy and patient positioning optimized',
+        'BVM and mask seal plan confirmed',
+        'Primary intubation plan verbalized',
+        'Backup supraglottic airway plan confirmed',
+        'Cannot intubate pathway reviewed; surgical airway contingency considered per policy',
+        'Capnography available; bougie/stylet ready',
+        'Video laryngoscope ready if available',
+        'Tube size selected with backup size available',
+        'Attempt limit, escalation trigger, and post-airway confirmation plan agreed'
+      ]
+    },
+    {
+      id:'procedural-sedation',
+      type:'clinical',
+      title:'Procedural Sedation',
+      badge:'Clinical \u00b7 Procedure Safety',
+      desc:'Safety bundle for procedural sedation, monitoring, and recovery.',
+      icon:'&#128138;',
+      crossLink:'#/procedures/procedural-sedation',
+      crossLinkTitle:'Procedural Sedation Workflow',
+      items:[
+        'Indication confirmed and consent obtained per directive; target sedation depth stated (anxiolysis, moderate, dissociative)',
+        'Pre-sedation risk review: airway difficulty, aspiration risk/fasting status, cardiorespiratory comorbidities, meds/allergies/intoxication',
+        'Two qualified personnel assigned (sedation/monitor + procedure); roles and backup plan verbalized',
+        'Weight recorded for dosing; baseline vitals documented; IV access established and patent',
+        'Monitoring on before first dose: SpO\u2082, BP, ECG; EtCO\u2082 if available (q1 min during, q5 min recovery)',
+        'Airway/oxygen equipment at bedside: suction tested, BVM with adjuncts, O\u2082 source, SGA/ETT rescue kit',
+        'Rescue/reversal meds available (naloxone, flumazenil per policy) and antiemetic considered',
+        'Sedation medications drawn up, diluted, labeled, and double-checked (ketamine weight-based; midazolam in small increments; opioid if needed)',
+        'Pre-oxygenate and position patient; suction ready; capnography confirmed if available',
+        'Dose deliberately with slow push and reassessment between increments; avoid mid-range ketamine (0.3\u20130.8 mg/kg) and dose stacking',
+        'Dedicated monitor observes airway, ventilation, and hemodynamics continuously; document times/doses/responses; manage secretions early',
+        'Recovery: monitor until awake with stable vitals and protective reflexes, nausea managed, escort/transport arranged; complications and discharge instructions documented'
+      ]
+    },
+    {
+      id:'transfer-evacuation',
+      type:'clinical',
+      title:'Transfer / Evacuation',
+      badge:'Clinical \u00b7 Handoff',
+      desc:'Structured transfer checklist for continuity of care and safe transport.',
+      icon:'&#128666;',
+      items:[
+        'Transfer decision made and documented; receiving facility contacted/accepted if required',
+        'Mode of transfer selected and urgency category assigned',
+        'Patient identification and working diagnosis confirmed',
+        'Current condition, stability, and latest vitals documented',
+        'Airway status, IV access, oxygen requirement, and monitoring requirements documented',
+        'Required medications/critical infusions prepared for transport',
+        'Immobilization performed if indicated',
+        'Chart/referral/ECG/labs/imaging copies sent when available',
+        'Allergy and code status/limitations included',
+        'Transport team briefed and escort level determined',
+        'Family/NOK/command notified per policy',
+        'Departure time and standardized handoff documented and confirmed'
+      ]
+    },
+    {
+      id:'mental-health-behavioral-crisis',
+      type:'clinical',
+      title:'Mental Health / Behavioral Crisis',
+      badge:'Clinical · Behavioral Health',
+      desc:'Recognition, scene safety, de-escalation, medical screen, and escalation checklist for agitation, psychosis, delirium, or suicidality.',
+      icon:'&#9888;',
+      crossLink:'#/algorithms/mental-health-behavioral-crisis',
+      crossLinkTitle:'Mental Health & Behavioral Crisis Pathway',
+      items:[
+        'Immediate safety assessed: remove obvious hazards/weapons, reduce crowding, keep exit route for staff, and assign one team lead',
+        'Agitation severity judged early (mild / moderate / severe); severe agitation or excited delirium treated as a medical emergency',
+        'Verbal de-escalation attempted when safe: one speaker, calm/low/slow voice, short phrases, clear limits, simple choices',
+        'Rapid medical screen started: airway/breathing, SpO₂, glucose, temperature, trauma clues, tox/withdrawal, infection, delirium',
+        'If danger persists or essential care is blocked, coordinated physical restraint used only as a temporary bridge; avoid prone restraint and neck/chest compression',
+        'Chemical sedation prepared/administered per local scope with airway equipment, suction, oxygen, and continuous monitoring ready',
+        'After every medication/restraint event: reassess airway, ventilation, circulation, temperature, and level of consciousness immediately',
+        'Direct suicide screen completed when engagement is possible: ideation, intent, plan, means access, past attempts, current stressors, protective factors',
+        'High-risk patient not left alone; means restricted; observation level and buddy/watch plan explicitly assigned',
+        'Command / Fleet Surgeon / duty physician notification completed early when suicidality, psychosis, or prolonged observation needs exceed local capacity',
+        'Evacuation / repatriation threshold reviewed: active plan, persistent psychosis, recurrent dangerous agitation, inability to monitor safely onboard',
+        'Documentation completed: trigger, differential considered, de-escalation steps, restraints/meds used, reassessment times, observation plan, handover details'
+      ]
+    },
+    {
+      id:'mental-health-suicide-risk',
+      type:'clinical',
+      title:'Mental Health / Suicide Risk Screening',
+      badge:'Clinical \u00b7 Behavioral Health',
+      desc:'Structured suicide risk screen and immediate safety planning checklist.',
+      icon:'&#129504;',
+      crossLink:'#/algorithms/mental-health-behavioral-crisis',
+      crossLinkTitle:'Mental Health & Behavioral Crisis Pathway',
+      items:[
+        'Immediate safety assessed; privacy provided where feasible',
+        'Presenting concern documented; patient engaged in calm/direct conversation',
+        'Suicidal thoughts asked directly; intent, plan, and access to means assessed',
+        'Past attempts/self-harm history and current stressors reviewed',
+        'Substance use and psychosis/severe agitation screened for',
+        'Protective factors and social support identified',
+        'Current mental health care and medications reviewed',
+        'Risk level determined per local tool',
+        'High-risk patients not left alone; dangerous items removed/environment made safer when indicated',
+        'Mental health/physician/duty clinician notified as required',
+        'Urgent transfer or emergency evaluation arranged when indicated',
+        'Safety plan, follow-up plan, and objective documentation completed'
+      ]
+    },
+    {
+      id:'burn-management',
+      type:'clinical',
+      title:'Burn Management',
+      badge:'Clinical \u00b7 Trauma',
+      desc:'Initial burn care and transfer decision checklist.',
+      icon:'&#128293;',
+      items:[
+        'Scene safety confirmed; burning process stopped',
+        'Immediate ABC assessment and airway injury risk assessment completed',
+        'Smoke/inhalation exposure assessed; oxygen provided if indicated',
+        'Burn cooled per local protocol and constricting items removed early where possible',
+        'Burn depth and size estimated; special area/circumferential burns identified',
+        'Pain assessed and managed per protocol',
+        'Hypothermia prevention initiated',
+        'Wound covered with clean appropriate dressing',
+        'IV access and fluid resuscitation need assessed for significant burns/shock risk',
+        'Tetanus status and associated trauma mechanism reviewed',
+        'Transfer/burn center criteria reviewed',
+        'Photos/documentation completed per policy; reassessment plan established'
+      ]
+    },
+    {
+      id:'burn-8-hour-check',
+      type:'clinical',
+      title:'8-Hour Burn Reassessment',
+      badge:'Clinical · Cognitive Aid',
+      desc:'Eight-hour fluid resuscitation check for major burns to prevent under- or over-resuscitation.',
+      icon:'&#128293;',
+      crossLink:'#/algorithms/burn-resuscitation',
+      crossLinkTitle:'Burn Resuscitation Algorithm',
+      items:[
+        'Confirm burn time and calculate total fluid delivered in the first 8 hours (A)',
+        'Project 24-hour total: multiply A x 2 to obtain B and document it',
+        'Calculate 6 ml/kg/%TBSA target volume (C) for 24-hour projection',
+        'Compare B to C and record whether the current course meets or exceeds the target',
+        'If B is at or below C: continue Major Burn CPG resuscitation with urine output-guided adjustments',
+        'If B exceeds C: alert burn/ICU physician and reassess the fluid plan',
+        'If B exceeds C: consider Albumin 5% at 1/3 current rate plus RL at 2/3 current rate',
+        'If B exceeds C: initiate bladder pressure monitoring every 4 hours',
+        'If urine output is >50 ml/hr, decrease IV fluid rate by 20% and recheck hourly',
+        'Document totals, rate changes, and reassessment times on the burn flowsheet'
       ]
     },
     {
@@ -242,9 +622,144 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         }
       ]
     },
-    {id:'equipment-daily',type:'placeholder',title:'Equipment Daily Check',badge:'Operational \u00b7 Equipment',desc:'Daily medical equipment inspection checklist. PDF version pending.',icon:'&#9881;'},
-    {id:'equipment-weekly',type:'placeholder',title:'Equipment Weekly Check',badge:'Operational \u00b7 Equipment',desc:'Weekly medical equipment inspection and inventory. PDF version pending.',icon:'&#9881;'},
-    {id:'controlled-substances',type:'placeholder',title:'Controlled Substance Count',badge:'Operational \u00b7 Administrative',desc:'Controlled substance accountability checklist. PDF version pending.',icon:'&#128274;'},
+    {
+      id:'equipment-daily',
+      type:'inspection',
+      title:'Equipment Daily Check',
+      badge:'Operational \u00b7 Equipment',
+      desc:'Daily readiness verification for critical sick bay equipment.',
+      icon:'&#9881;',
+      preamble:'Complete this quick check at start of day and prior to high-risk evolutions. Mark each item completed and document deficiencies in the watch log.',
+      groups:[
+        {
+          id:'life-support-daily',
+          title:'Life Support and Monitoring',
+          section:'LIFE SUPPORT AND MONITORING',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ed1',serial:1,label:'Defibrillator powers on, self-test passes, and spare pads are in date.'},
+            {id:'ed2',serial:2,label:'Suction unit tested with canister/tubing connected; backup suction available.'},
+            {id:'ed3',serial:3,label:'Oxygen delivery system pressure adequate; regulators and key present.'},
+            {id:'ed4',serial:4,label:'Pulse oximeter and NIBP monitor function check complete.'}
+          ]
+        },
+        {
+          id:'airway-daily',
+          title:'Airway and Procedure Readiness',
+          section:'AIRWAY AND PROCEDURE READINESS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ed5',serial:5,label:'BVM, masks, OPAs/NPAs, and ETCO2 supplies present and accessible.'},
+            {id:'ed6',serial:6,label:'Laryngoscope/video airway device checked and batteries charged.'},
+            {id:'ed7',serial:7,label:'IV/IO start kit stocked with flushes, dressings, and sharps container available.'},
+            {id:'ed8',serial:8,label:'Crash/response bag sealed or inventory spot-check completed.'}
+          ]
+        },
+        {
+          id:'environment-daily',
+          title:'Environment and Documentation',
+          section:'ENVIRONMENT AND DOCUMENTATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ed9',serial:9,label:'Fridge and ambient medication temperatures recorded and within range.'},
+            {id:'ed10',serial:10,label:'Biohazard and regular waste removed; cleaning supplies available.'},
+            {id:'ed11',serial:11,label:'Power cables, charging stations, and extension leads are safe and intact.'},
+            {id:'ed12',serial:12,label:'Deficiencies and corrective actions entered in the daily log.'}
+          ]
+        }
+      ]
+    },
+    {
+      id:'equipment-weekly',
+      type:'inspection',
+      title:'Equipment Weekly Check',
+      badge:'Operational \u00b7 Equipment',
+      desc:'Weekly in-depth inspection and inventory of clinical equipment and consumables.',
+      icon:'&#9881;',
+      preamble:'Conduct weekly with full drawer and locker verification. Record out-of-stock, expired, and unserviceable items for replenishment.',
+      groups:[
+        {
+          id:'inventory-weekly',
+          title:'Inventory and Expiry Control',
+          section:'INVENTORY AND EXPIRY CONTROL',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ew1',serial:1,label:'Emergency drug kit count completed; expiring items flagged for replacement.'},
+            {id:'ew2',serial:2,label:'Airway consumables (tubes, blades, filters, capnography supplies) restocked to par.'},
+            {id:'ew3',serial:3,label:'IV fluids and blood sampling supplies counted and reordered as required.'},
+            {id:'ew4',serial:4,label:'Dressings, splints, and burn care materials checked for quantity and integrity.'}
+          ]
+        },
+        {
+          id:'function-weekly',
+          title:'Functional Equipment Checks',
+          section:'FUNCTIONAL EQUIPMENT CHECKS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ew5',serial:5,label:'Defibrillator pacing/sync controls reviewed and ECG cable inspected.'},
+            {id:'ew6',serial:6,label:'Infusion pumps run self-test and alarm test with sample setup.'},
+            {id:'ew7',serial:7,label:'Portable oxygen cylinders inspected (hydro date/condition/pressure).'},
+            {id:'ew8',serial:8,label:'Portable diagnostic equipment (glucometer, thermometer, otoscope) calibrated or QC checked per policy.'}
+          ]
+        },
+        {
+          id:'readiness-weekly',
+          title:'Readiness and Safety',
+          section:'READINESS AND SAFETY',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'ew9',serial:9,label:'Backup batteries and chargers labeled, charged, and rotation date updated.'},
+            {id:'ew10',serial:10,label:'Equipment cleaning/decontamination log up to date.'},
+            {id:'ew11',serial:11,label:'Medical gas and suction accessories secured for sea state.'},
+            {id:'ew12',serial:12,label:'Weekly discrepancies reported to Coxn/XO and supply chain task opened.'}
+          ]
+        }
+      ]
+    },
+    {
+      id:'controlled-substances',
+      type:'inspection',
+      title:'Controlled Substance Count',
+      badge:'Operational \u00b7 Administrative',
+      desc:'Shift or daily controlled medication accountability and security audit.',
+      icon:'&#128274;',
+      preamble:'Complete at every required handover and whenever seal integrity is in doubt. Any discrepancy triggers immediate escalation per ship protocol.',
+      groups:[
+        {
+          id:'vault-check',
+          title:'Security and Access',
+          section:'SECURITY AND ACCESS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'cs1',serial:1,label:'Controlled drug safe/locker physically secure with no evidence of tampering.'},
+            {id:'cs2',serial:2,label:'Access keys/accountability tokens present and signed to authorized custodian.'},
+            {id:'cs3',serial:3,label:'Witness present for count in accordance with local policy.'}
+          ]
+        },
+        {
+          id:'count-reconcile',
+          title:'Count and Reconciliation',
+          section:'COUNT AND RECONCILIATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'cs4',serial:4,label:'Each controlled medication physically counted and matched to running balance.'},
+            {id:'cs5',serial:5,label:'Partials, wastage, and breakages reconciled with witness signatures.'},
+            {id:'cs6',serial:6,label:'Expiry dates verified; near-expiry items isolated for replacement.'}
+          ]
+        },
+        {
+          id:'docs-escalation',
+          title:'Documentation and Escalation',
+          section:'DOCUMENTATION AND ESCALATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'cs7',serial:7,label:'Controlled drug register updated with date/time, both signatures, and totals.'},
+            {id:'cs8',serial:8,label:'Any discrepancy reported immediately to chain of command and medical authority.'},
+            {id:'cs9',serial:9,label:'Corrective action entry initiated and retained with watch turnover records.'}
+          ]
+        }
+      ]
+    },
     {
       id:'pmed-inspection',
       type:'inspection',
@@ -370,6 +885,50 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         }
       ]
     },
-    {id:'habitability',type:'placeholder',title:'Habitability Rounds',badge:'Operational \u00b7 Env Health',desc:'Habitability and berthing inspection checklist. Official form pending.',icon:'&#127968;'}
+    {
+      id:'habitability',
+      type:'inspection',
+      title:'Habitability Rounds',
+      badge:'Operational \u00b7 Env Health',
+      desc:'Routine ship habitability inspection for accommodations, hygiene, and environmental controls.',
+      icon:'&#127968;',
+      preamble:'Perform rounds at least weekly and after major weather/engineering events. Note deficiencies and assign corrective actions to responsible departments.',
+      groups:[
+        {
+          id:'berthing-habitability',
+          title:'Berthing and Accommodation',
+          section:'BERTHING AND ACCOMMODATION',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'hb1',serial:1,label:'Berthing decks clean, dry, and free of standing water or trip hazards.'},
+            {id:'hb2',serial:2,label:'Mattresses, linens, and lockers free from mould, pests, and foul odour.'},
+            {id:'hb3',serial:3,label:'Ventilation and fan-coil units operational with visible filters in acceptable condition.'}
+          ]
+        },
+        {
+          id:'sanitation-habitability',
+          title:'Heads, Showers, and Laundry',
+          section:'HEADS, SHOWERS, AND LAUNDRY',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'hb4',serial:4,label:'Heads and shower spaces cleaned with approved products; no sewage backup signs.'},
+            {id:'hb5',serial:5,label:'Soap, paper products, and hand hygiene stations stocked and functional.'},
+            {id:'hb6',serial:6,label:'Laundry spaces clean; lint management and machine condition checks complete.'}
+          ]
+        },
+        {
+          id:'environment-habitability',
+          title:'Environmental Health Controls',
+          section:'ENVIRONMENTAL HEALTH CONTROLS',
+          columns:[{id:'completed',label:'Completed'}],
+          items:[
+            {id:'hb7',serial:7,label:'Potable water access points clean and protected from contamination.'},
+            {id:'hb8',serial:8,label:'Garbage handling areas secure, clean, and emptied on schedule.'},
+            {id:'hb9',serial:9,label:'Noise/heat complaints reviewed; high-risk spaces flagged for mitigation.'},
+            {id:'hb10',serial:10,label:'Habitability deficiencies logged with department owner and due date.'}
+          ]
+        }
+      ]
+    }
   ]
 };

@@ -3,10 +3,13 @@ window.ACTT.crossLinks={
 // Algorithms
 'algorithms/airway-failure':{title:'Airway Failure Algorithm',path:'#/algorithms/airway-failure'},
 'algorithms/combative-patient':{title:'Combative Patient Algorithm',path:'#/algorithms/combative-patient'},
+'algorithms/mental-health-behavioral-crisis':{title:'Mental Health & Behavioral Crisis',path:'#/algorithms/mental-health-behavioral-crisis'},
 'algorithms/tbi-management':{title:'TBI Management Algorithm',path:'#/algorithms/tbi-management'},
+'algorithms/seizure-management':{title:'Seizure Algorithm',path:'#/algorithms/seizure-management'},
 'algorithms/burn-resuscitation':{title:'Burn Resuscitation Algorithm',path:'#/algorithms/burn-resuscitation'},
 'algorithms/hypothermia':{title:'Hypothermia Algorithm',path:'#/algorithms/hypothermia'},
 'algorithms/sepsis':{title:'Sepsis Algorithm',path:'#/algorithms/sepsis'},
+'algorithms/dka':{title:'DKA / Hyperglycemic Emergency',path:'#/algorithms/dka'},
 'algorithms/stemi':{title:'STEMI Algorithm',path:'#/algorithms/stemi'},
 'algorithms/chest-decompression':{title:'Chest Decompression Algorithm',path:'#/algorithms/chest-decompression'},
 'algorithms/multi-system':{title:'Multi-System Pathways',path:'#/algorithms/multi-system'},
@@ -16,6 +19,7 @@ window.ACTT.crossLinks={
 'procedures/needle-cric':{title:'Needle Cricothyroidotomy',path:'#/procedures/needle-cric'},
 'procedures/needle-thoracostomy':{title:'Needle Thoracostomy',path:'#/procedures/needle-thoracostomy'},
 'procedures/chest-tube':{title:'Chest Tube Thoracostomy',path:'#/procedures/chest-tube'},
+'procedures/procedural-sedation':{title:'Procedural Sedation',path:'#/procedures/procedural-sedation'},
 'procedures/io-access':{title:'Intraosseous Access',path:'#/procedures/io-access'},
 'procedures/foley':{title:'Foley Catheter',path:'#/procedures/foley'},
 'procedures/pericardiocentesis':{title:'Pericardiocentesis',path:'#/procedures/pericardiocentesis'},
@@ -30,6 +34,9 @@ window.ACTT.crossLinks={
 'medications/reversal-agents':{title:'Reversal Agents',path:'#/medications/reversal-agents'},
 'medications/antibiotics':{title:'Antibiotics',path:'#/medications/antibiotics'},
 'medications/sedatives':{title:'Sedatives & Adjuncts',path:'#/medications/sedatives'},
+'sickbay-meds/insulin_regular':{title:'Insulin Regular',path:'#/sickbay-meds/insulin_regular'},
+'sickbay-meds/haloperidol':{title:'Haloperidol',path:'#/sickbay-meds/haloperidol'},
+'sickbay-meds/olanzapine':{title:'Olanzapine',path:'#/sickbay-meds/olanzapine'},
 // Domains
 'domains/domain-1-airway':{title:'Airway Domain',path:'#/domains/domain-1-airway'},
 'domains/domain-2-hemodynamics':{title:'Hemodynamics Domain',path:'#/domains/domain-2-hemodynamics'},
@@ -89,6 +96,10 @@ window.ACTT.crossLinks={
 'tools/timer':{title:'Reassessment Timer',path:'#/tools/timer'},
 'tools/interactions':{title:'Drug Interactions',path:'#/tools/interactions'},
 'tools/ddx':{title:'Differential Diagnosis',path:'#/tools/ddx'},
+// Checklists
+'checklists/dka-hyperglycemia':{title:'DKA / Hyperglycemic Emergency Checklist',path:'#/checklists/dka-hyperglycemia'},
+'checklists/mental-health-behavioral-crisis':{title:'Mental Health / Behavioral Crisis Checklist',path:'#/checklists/mental-health-behavioral-crisis'},
+'checklists/mental-health-suicide-risk':{title:'Mental Health / Suicide Risk Screening',path:'#/checklists/mental-health-suicide-risk'},
 // Appendices
 'appendices/appendix-a':{title:'Algorithm Summary Cards',path:'#/appendices/appendix-a'},
 'appendices/appendix-b':{title:'Procedure Checklists',path:'#/appendices/appendix-b'},
@@ -100,6 +111,8 @@ window.ACTT.crossLinks={
 'appendices/appendix-h':{title:'Team & Communication Tools',path:'#/appendices/appendix-h'},
 'appendices/appendix-i':{title:'Study & Review Tools',path:'#/appendices/appendix-i'},
 'appendices/appendix-j':{title:'Stock Cross-Reference',path:'#/appendices/appendix-j'},
+'appendices/appendix-k':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
+'appendices/appendix-l':{title:'IV Compatibility & Infusion Quick Reference',path:'#/appendices/appendix-l'},
 // Aliases to ensure related links resolve to existing content
 'procedures/surgical-airway':{title:'Surgical Airway (Cricothyroidotomy)',path:'#/procedures/surgical-cric'},
 'procedures/needle-decompression':{title:'Needle Decompression',path:'#/procedures/needle-thoracostomy'},
@@ -117,7 +130,7 @@ window.ACTT.crossLinks={
 'algorithms/stemi-management':{title:'STEMI Management',path:'#/algorithms/stemi'},
 'algorithms/fibrinolysis-decision':{title:'Fibrinolysis Decision',path:'#/algorithms/stemi'},
 'medications/anticoagulants':{title:'Anticoagulants',path:'#/medications/fibrinolytics'},
-'procedures/ecg-interpretation':{title:'ECG Interpretation',path:'#/thresholds/stemi-thresholds'},
+'procedures/ecg-interpretation':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
 'procedures/pocus':{title:'Point-of-Care Ultrasound',path:'#/domains/domain-7-diagnostics'},
 'procedures/abg-interpretation':{title:'ABG Interpretation',path:'#/domains/domain-7-diagnostics'},
 'algorithms/icp-assessment':{title:'ICP Assessment',path:'#/thresholds/neurologic-tbi'},
@@ -238,5 +251,8 @@ window.ACTT.crossLinks={
 'checklists/anaphylaxis':{title:'Anaphylaxis Cognitive Aid',path:'#/checklists/anaphylaxis'},
 'checklists/post-rosc':{title:'Post-ROSC Checklist',path:'#/checklists/post-rosc'},
 'checklists/medevac':{title:'MEDEVAC 9-Line',path:'#/checklists/medevac'},
+'checklists/procedural-sedation':{title:'Procedural Sedation Checklist',path:'#/checklists/procedural-sedation'},
+'checklists/fibrinolysis-screening':{title:'Fibrinolysis Screening (STEMI)',path:'#/checklists/fibrinolysis-screening'},
+'checklists/burn-8-hour-check':{title:'8-Hour Burn Reassessment Checklist',path:'#/checklists/burn-8-hour-check'},
 'checklists/mascal':{title:'MASCAL Triage Checklist',path:'#/checklists/mascal'}
 };

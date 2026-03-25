@@ -126,7 +126,7 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Acetaminophen</div>'+
         '<p>Acetaminophen is confirmed in Sick Bay stock. Use as a baseline analgesic and antipyretic. Dose: 650&ndash;1000 mg PO every 6 hours. Maximum 4 g per 24 hours. Avoid cumulative overdose by accounting for acetaminophen hidden in combination products (e.g., acetaminophen with codeine).</p></div>'+
         '</div>',
-      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/rsi','medications/rsi-airway','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','shipboard/medication-shipboard','tools/dosecalc']
+      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/rsi','procedures/procedural-sedation','medications/rsi-airway','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','shipboard/medication-shipboard','tools/dosecalc']
     },
     {
       id:'rsi-airway',
@@ -229,17 +229,52 @@ window.ACTT.medications={
         '<div class="table-wrapper"><table><thead><tr><th>Indication</th><th>Dose</th><th>Route</th><th>Concentration</th><th>Notes</th></tr></thead><tbody>'+
         '<tr><td>Anaphylaxis</td><td>0.3&ndash;0.5 mg</td><td>IM (lateral thigh)</td><td>1 mg/mL (1:1,000)</td><td>Repeat every 5 minutes if needed. IM into lateral thigh for fastest absorption.</td></tr>'+
         '<tr><td>Cardiac arrest</td><td>1 mg</td><td>IV</td><td>0.1 mg/mL (1:10,000)</td><td>Every 3&ndash;5 minutes during arrest. Do not use 1:1,000 concentration IV for arrest.</td></tr>'+
-        '<tr><td>Shock infusion</td><td>Low-dose continuous</td><td>IV infusion</td><td>Diluted per protocol</td><td>Requires pump and continuous monitoring. Second-line after norepinephrine in most ACTT shock scenarios.</td></tr>'+
+        '<tr><td>Shock infusion</td><td>2&ndash;10 mcg/min</td><td>IV infusion</td><td>Diluted per protocol</td><td>Requires pump and continuous monitoring. Useful when norepinephrine is unavailable or when added inotropic support is needed with hypotension.</td></tr>'+
+        '<tr><td>Push-dose bridge</td><td>5&ndash;20 mcg (0.5&ndash;2 mL)</td><td>Slow IV push every 2&ndash;5 min</td><td>10 mcg/mL</td><td>Short bridge for sudden peri-intubation / sedation-related hypotension or while an infusion is being prepared. Never give the 1 mg arrest dose to a patient with a pulse.</td></tr>'+
         '</tbody></table></div>'+
 
         '<p><strong>Execution rule:</strong> Before every dose of epinephrine, state the indication out loud and confirm the concentration. This verbal confirmation step prevents the single most dangerous epinephrine error.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
-        '<h4>6.8.3 Other Vasopressors</h4>'+
-        '<p>Dopamine and dobutamine may appear in some formularies or stock lists. However, norepinephrine remains the default first-line vasopressor in ACTT for vasodilatory and septic shock. If norepinephrine is unavailable, epinephrine infusion is the next option. Dopamine and dobutamine have more variable hemodynamic effects and require careful titration.</p>'+
+        '<h4>6.8.3 Vasoactive Bedside Comparison</h4>'+
+        '<div class="severity-card green"><div class="sc-title"><span class="sc-label">DECISION AID</span> Match the drug to the hemodynamic problem</div>'+
+        '<p>Use norepinephrine for vasodilatory shock, add vasopressin when catecholamine needs are climbing, choose dobutamine when the pump is weak and the blood pressure can tolerate it, and reserve push-dose epinephrine for short bridging during sudden hypotension.</p></div>'+
+        '<div class="table-wrapper"><table><thead><tr><th>Agent</th><th>When to consider</th><th>Typical ACTT reference dose</th><th>Point-of-care distinction</th></tr></thead><tbody>'+
+        '<tr><td><strong>Norepinephrine</strong></td><td>Persistent hypotension after initial resuscitation, especially septic or vasodilatory shock</td><td>2&ndash;4 mcg/min start; titrate to MAP &ge; 65 mmHg</td><td>Best default first-line pressor. Strong vasoconstrictor with some beta-1 support.</td></tr>'+
+        '<tr><td><strong>Epinephrine infusion</strong></td><td>Need both pressor and inotropic effect, or norepinephrine unavailable</td><td>2&ndash;10 mcg/min</td><td>Mixed alpha/beta effects. Higher arrhythmia and concentration-error risk; state the indication before use.</td></tr>'+
+        '<tr><td><strong>Vasopressin</strong></td><td>Adjunct for septic or vasodilatory shock when catecholamine requirements are escalating</td><td>0.02&ndash;0.04 units/min</td><td>Non-adrenergic vasoconstrictor. Add-on agent, not the minute-to-minute titration drug.</td></tr>'+
+        '<tr><td><strong>Dopamine</strong></td><td>When premixed stock is available and preferred agents are unavailable or impractical</td><td>2&ndash;10 mcg/kg/min, titrate up to 20 mcg/kg/min</td><td>Dose-dependent inotrope/pressor with more arrhythmias and less predictable bedside behavior than norepinephrine.</td></tr>'+
+        '<tr><td><strong>Dobutamine</strong></td><td>Low-output state or cardiogenic shock when contractility is the main problem and blood pressure is supported</td><td>2&ndash;10 mcg/kg/min, titrate up to 20 mcg/kg/min if needed</td><td>Inotrope with mild vasodilation. Can worsen hypotension if used without enough pressure reserve.</td></tr>'+
+        '<tr><td><strong>Push-dose epinephrine</strong></td><td>Sudden transient hypotension during RSI, peri-intubation, procedural sedation, or while an infusion is being mixed</td><td>5&ndash;20 mcg IV push every 2&ndash;5 min</td><td>Bridge only. Fast onset and short duration; fix the cause and transition to infusion if instability persists.</td></tr>'+
+        '</tbody></table></div>'+
+        '</div>'+
+
+        '<div class="drug-card">'+
+        '<h4>6.8.4 Push-Dose Epinephrine Preparation</h4>'+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Use only the dilute push-dose concentration for a patient with a pulse</div>'+
+        '<p>Push-dose epinephrine is a short bridge for sudden hypotension. It is not the 1 mg cardiac arrest dose, and it does not replace preparing a durable infusion plan when shock persists.</p></div>'+
+        '<ol>'+
+        '<li><strong>State the indication:</strong> sudden peri-intubation, RSI, or sedation-related hypotension, or immediate bridge while an infusion pressor is being prepared.</li>'+
+        '<li><strong>Prepare the syringe:</strong> place 9 mL of normal saline in a 10 mL syringe.</li>'+
+        '<li><strong>Add epinephrine:</strong> draw up 1 mL from the cardiac epinephrine ampule (0.1 mg/mL, 1:10,000) into that syringe.</li>'+
+        '<li><strong>Confirm the final concentration:</strong> 10 mL total at 10 mcg/mL. Label the syringe before bedside use.</li>'+
+        '<li><strong>Administer carefully:</strong> give 0.5&ndash;2 mL (5&ndash;20 mcg) slow IV push every 2&ndash;5 minutes to effect.</li>'+
+        '<li><strong>Reassess after each dose:</strong> blood pressure, heart rate/rhythm, perfusion, and whether an infusion or another intervention is now required.</li>'+
+        '</ol>'+
+        '<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Reference</th></tr></thead><tbody>'+
+        '<tr><td>Onset</td><td>About 1 minute</td></tr>'+
+        '<tr><td>Duration</td><td>About 5&ndash;10 minutes</td></tr>'+
+        '<tr><td>Best use</td><td>Bridge while treating the cause of hypotension or while an infusion is being mixed</td></tr>'+
+        '<tr><td>Do not do this</td><td>Do not give 1 mg arrest-dose epinephrine to a patient who still has a pulse</td></tr>'+
+        '</tbody></table></div>'+
+        '</div>'+
+
+        '<div class="drug-card">'+
+        '<h4>6.8.5 Other Vasoactive Notes</h4>'+
+        '<p>Norepinephrine remains the default first-line vasopressor in ACTT for vasodilatory and septic shock. Epinephrine infusion is the most practical alternative when both pressure and pump support are needed. Vasopressin is an add-on rather than a rescue push. Dopamine and dobutamine can be useful in selected low-output states, but they demand tighter rhythm and blood pressure surveillance because their bedside effect is less predictable.</p>'+
         '</div>',
-      relatedLinks:['algorithms/sepsis','algorithms/stemi','thresholds/hemodynamic','procedures/io-access','medications/antibiotics','pitfalls/circulation-errors','prolonged-holding/reassessment-rhythm','shipboard/circulation-at-sea','tools/dosecalc']
+      relatedLinks:['algorithms/sepsis','algorithms/stemi','thresholds/hemodynamic','procedures/io-access','medications/antibiotics','pitfalls/circulation-errors','prolonged-holding/reassessment-rhythm','shipboard/circulation-at-sea','appendices/appendix-c','appendices/appendix-l','tools/dosecalc']
     },
     {
       id:'seizure-meds',
@@ -276,7 +311,7 @@ window.ACTT.medications={
         '<p>Levetiracetam is not confirmed in standard Sick Bay stock. If unavailable, seizure prophylaxis may need to rely on repeated benzodiazepine dosing, which carries higher sedation and respiratory depression risk and creates a larger monitoring burden.</p>'+
         '</div></div>'+
         '</div>',
-      relatedLinks:['algorithms/tbi-management','medications/icp-meds','medications/analgesics','thresholds/neurologic-tbi','pitfalls/neurologic-errors','prolonged-holding/reassessment-rhythm','tools/gcs']
+      relatedLinks:['algorithms/seizure-management','algorithms/tbi-management','medications/icp-meds','medications/analgesics','thresholds/neurologic-tbi','pitfalls/neurologic-errors','prolonged-holding/reassessment-rhythm','tools/gcs']
     },
     {
       id:'icp-meds',

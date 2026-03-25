@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ACTT Reference - RCN Physician Assistant</title>
 <meta name="description" content="Acute Care Team Training Reference for Royal Canadian Navy Physician Assistants">
 <meta name="theme-color" content="#1a2332">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='24' fill='%231a2332'/%3E%3Ctext x='96' y='120' font-family='Arial,sans-serif' font-size='80' font-weight='bold' fill='%233b82f6' text-anchor='middle'%3EA%3C/text%3E%3Ctext x='96' y='160' font-family='Arial,sans-serif' font-size='24' fill='%2394a3b8' text-anchor='middle'%3ECTT%3C/text%3E%3C/svg%3E">
 <style>
 :root {
   --bg-primary: #0f172a;
@@ -74,6 +75,7 @@ body {
   line-height: 1.6;
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
 }
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-hover); text-decoration: underline; }
@@ -127,6 +129,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--bg-surface); border-right: 1px solid var(--border);
   overflow-y: auto; z-index: 90; transition: transform 0.3s ease;
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 .sidebar-nav { padding: 12px 0; }
 .nav-section-header {
@@ -152,8 +156,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav-divider { height: 1px; background: var(--border); margin: 8px 16px; }
 .app-main {
   margin-left: var(--sidebar-w); margin-top: var(--header-h);
-  height: calc(100vh - var(--header-h)); overflow-y: auto;
-  padding: 28px 36px; max-width: 100%;
+  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 28px 36px;
+  padding-bottom: max(28px, env(safe-area-inset-bottom));
+  max-width: 100%;
 }
 .breadcrumbs { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; flex-wrap: wrap; }
 .breadcrumbs a { color: var(--text-muted); transition: color var(--transition); }
@@ -238,6 +248,18 @@ tr:hover td { background: var(--bg-secondary); }
   border-radius: 20px; font-size: 0.85rem; color: var(--accent); cursor: pointer; transition: all var(--transition); text-decoration: none;
 }
 .related-link:hover { border-color: var(--accent); background: var(--accent-dim); text-decoration: none; transform: translateY(-1px); }
+.sickbay-meds-layout { display: grid; grid-template-columns: minmax(260px, 320px) minmax(0, 1fr); gap: 18px; align-items: start; margin: 18px 0; }
+.sickbay-meds-nav { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); padding: 14px; position: sticky; top: 12px; max-height: calc(100vh - 160px); overflow-y: auto; }
+.sickbay-filter-label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+.sickbay-group .accordion-header { padding: 10px 12px; font-size: 0.84rem; }
+.sickbay-group .accordion-body { padding: 10px; }
+.sickbay-med-btn { display: block; width: 100%; text-align: left; text-decoration: none; padding: 8px 10px; margin-bottom: 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-secondary); color: var(--text-secondary); font-size: 0.84rem; transition: all var(--transition); }
+.sickbay-med-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-tertiary); }
+.sickbay-med-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); font-weight: 600; }
+.sickbay-meds-viewer { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); padding: 16px; min-width: 0; }
+.sickbay-meds-viewer-header { display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.sickbay-meds-viewer-header h2 { margin: 0; font-size: 1.2rem; }
+@media (max-width: 900px) { .sickbay-meds-layout { grid-template-columns: 1fr; } .sickbay-meds-nav { position: static; max-height: none; } }
 .med-monograph-frame {
   width: 100%;
   min-height: 70vh;
@@ -321,7 +343,7 @@ tr:hover td { background: var(--bg-secondary); }
   .menu-toggle { display: flex; }
   .app-sidebar { transform: translateX(-100%); width: 280px; }
   .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
-  .app-main { margin-left: 0; padding: 16px; }
+  .app-main { margin-left: 0; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
   .app-brand span { display: none; }
   .section-title { font-size: 1.4rem; }
   .cards-grid { grid-template-columns: 1fr; }
@@ -467,9 +489,10 @@ function getNavSections(){return[
 {id:'timer',title:'Reassessment Timer',path:'#/tools/timer'},
 {id:'interactions',title:'Drug Interactions',path:'#/tools/interactions'},
 {id:'ddx',title:'Differential Diagnosis',path:'#/tools/ddx'}
-]}
+]},
+{id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html'}
 ];}
-function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';sections.forEach(sec=>{const hasItems=sec.items&&sec.items.length>0;const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`);html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';sections.forEach(sec=>{const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
 function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)toggleSidebar();}
 function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
@@ -485,11 +508,43 @@ function renderRelatedContent(links){if(!links||links.length===0)return'';const 
 function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training \u2014 Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
 html+=`<div class="content-section"><p>Use the sidebar navigation to access any section. Use the search bar to find specific content across all chapters. Clinical tools are available for bedside calculations and decision support.</p></div>`;
 html+='<h2 style="margin-bottom:16px">Quick Access</h2><div class="cards-grid">';
-[{icon:'&#9881;',title:'Algorithms',desc:'Major decision pathways for airway, TBI, burns, sepsis, STEMI, and more',path:'#/algorithms'},{icon:'&#128138;',title:'Drug Reference',desc:'Complete medication cards with dosing, preparation, monitoring, and cautions',path:'#/medications'},{icon:'&#129658;',title:'Sick Bay',desc:'Sick Bay dashboard with medication library and onboard reference links',path:'#/sickbay'},{icon:'&#128200;',title:'Critical Numbers',desc:'Key thresholds, targets, and trigger values that drive clinical action',path:'#/thresholds'},{icon:'&#9874;',title:'Procedures',desc:'Step-by-step procedural guides for RSI, chest tube, IO, cricothyroidotomy, and more',path:'#/procedures'},{icon:'&#9201;',title:'Prolonged Holding',desc:'24\u201372 hour management framework for delayed MEDEVAC scenarios',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Critical errors to avoid across airway, resuscitation, neuro, burns, and medications',path:'#/pitfalls'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+[{icon:'&#9881;',title:'Algorithms',desc:'Major decision pathways for airway, TBI, burns, sepsis, STEMI, and more',path:'#/algorithms'},{icon:'&#128138;',title:'Drug Reference',desc:'Complete medication cards with dosing, preparation, monitoring, and cautions',path:'#/medications'},{icon:'&#129658;',title:'Sick Bay',desc:'Sick Bay dashboard with medication library and onboard reference links',path:'#/sickbay'},{icon:'&#128200;',title:'Critical Numbers',desc:'Key thresholds, targets, and trigger values that drive clinical action',path:'#/thresholds'},{icon:'&#9874;',title:'Procedures',desc:'Step-by-step procedural guides for RSI, chest tube, IO, cricothyroidotomy, and more',path:'#/procedures'},{icon:'&#9201;',title:'Prolonged Holding',desc:'24\u201372 hour management framework for delayed MEDEVAC scenarios',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Critical errors to avoid across airway, resuscitation, neuro, burns, and medications',path:'#/pitfalls'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'12 scenario-based teaching cases with staged decision points and scored clinical decision-making',path:'scenarios/index.html'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div><h2 style="margin:24px 0 16px">Clinical Tools</h2><div class="cards-grid">';
 [{icon:'&#129504;',title:'GCS Calculator',desc:'Calculate Glasgow Coma Scale with automatic airway threshold alerts',path:'#/tools/gcs'},{icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate calculator with adjustment guidance',path:'#/tools/burn'},{icon:'&#9878;',title:'Dose Calculator',desc:'Weight-based dose calculations for all major ACTT medications',path:'#/tools/dosecalc'},{icon:'&#9201;',title:'Reassessment Timer',desc:'Configurable interval reminders with context-specific reassessment checklists',path:'#/tools/timer'},{icon:'&#9763;',title:'Drug Interactions',desc:'Check for known cautions and compounding risks between selected medications',path:'#/tools/interactions'},{icon:'&#128270;',title:'Differential Diagnosis',desc:'Symptom-based differential diagnosis helper with prioritized causes',path:'#/tools/ddx'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div>';main.innerHTML=html;}
-function renderSection(main,data,sectionId,parentTitle,parentPath){if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}if(sectionId){const sec=data.sections.find(s=>s.id===sectionId);if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Section not found</div></div>';return;}let html=renderSectionHeader(sec.title,sec.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';html+='<div class="content-section">'+(sec.content||'')+'</div>';if(sec.relatedLinks)html+=renderRelatedContent(sec.relatedLinks);main.innerHTML=html;}else{let html=renderSectionHeader(data.title,data.subtitle||('Chapter '+data.chapter),[{title:'Home',path:'#/'},{title:data.title,path:parentPath}]);if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';data.sections.forEach(sec=>{const preview=(sec.content||'').replace(/<[^>]+>/g,' ').substring(0,200).trim();html+=renderAccordion(sec.id,sec.title,`<div class="content-section">${preview}...</div><p><a href="${parentPath}/${sec.id}">View full section &#8250;</a></p>`,sec.severity);});main.innerHTML=html;}}
+function renderSection(main,data,sectionId,parentTitle,parentPath){
+if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}
+if(parentPath==='#/sickbay-meds'&&!sectionId){renderSickBayMedLibrary(main,data,parentTitle,parentPath);return;}
+if(sectionId){
+const sec=data.sections.find(s=>s.id===sectionId);
+if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Section not found</div></div>';return;}
+let html=renderSectionHeader(sec.title,sec.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);
+html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';
+html+='<div class="content-section">'+(sec.content||'')+'</div>';
+if(parentPath==='#/algorithms')html+='<div style="margin:8px 0 18px"><a class="btn btn-outline" href="#/checklists">Open Checklists Folder &#8250;</a></div>';
+if(sec.relatedLinks)html+=renderRelatedContent(sec.relatedLinks);
+main.innerHTML=html;
+}else{
+let html=renderSectionHeader(data.title,data.subtitle||('Chapter '+data.chapter),[{title:'Home',path:'#/'},{title:data.title,path:parentPath}]);
+if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;
+html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';
+data.sections.forEach(sec=>{const preview=(sec.content||'').replace(/<[^>]+>/g,' ').substring(0,200).trim();html+=renderAccordion(sec.id,sec.title,`<div class="content-section">${preview}...</div><p><a href="${parentPath}/${sec.id}">View full section &#8250;</a></p>`,sec.severity);});
+main.innerHTML=html;
+}}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function renderSickBayMedLibrary(main,data,parentTitle,parentPath){
+const groups={};
+data.sections.forEach(sec=>{const letter=(sec.title||'#').charAt(0).toUpperCase();const key=/[A-Z]/.test(letter)?letter:'#';if(!groups[key])groups[key]=[];groups[key].push(sec);});
+const letters=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
+let html=renderSectionHeader(data.title,data.subtitle||'',[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath}]);
+if(data.intro)html+=`<div class="content-section">${data.intro}</div>`;
+html+='<div class="severity-card green" style="margin-bottom:20px"><div class="sc-title">Medication directory</div><p>Select any medication to open its own full-page monograph.</p></div>';
+html+='<div class="sickbay-meds-layout"><aside class="sickbay-meds-nav" style="max-height:none"><label class="sickbay-filter-label" for="sickbayMedFilter">Filter medications</label><input id="sickbayMedFilter" class="tool-input" placeholder="Type a medication name..." oninput="filterSickBayMeds(this.value)" autocomplete="off">';
+letters.forEach(letter=>{html+=`<div class="accordion sickbay-group" data-letter="${letter}"><div class="accordion-header expanded" onclick="toggleAccordion(this)">${letter}<span class="acc-chevron">&#9654;</span></div><div class="accordion-body expanded">`;groups[letter].forEach(sec=>{html+=`<a class="sickbay-med-btn" data-med-title="${escapeHtml((sec.title||'').toLowerCase())}" href="#/sickbay-meds/${sec.id}">${sec.title}</a>`;});html+='</div></div>';});
+html+='</aside></div>';
+main.innerHTML=html;
+}
+function filterSickBayMeds(query){const q=(query||'').trim().toLowerCase();document.querySelectorAll('.sickbay-med-btn').forEach(btn=>{const show=!q||btn.dataset.medTitle.includes(q);btn.style.display=show?'block':'none';});document.querySelectorAll('.sickbay-group').forEach(group=>{const hasVisible=[...group.querySelectorAll('.sickbay-med-btn')].some(btn=>btn.style.display!=='none');group.style.display=hasVisible?'block':'none';});}
 function renderTools(main,toolId){if(!toolId){let html=renderSectionHeader('Clinical Tools','Bedside calculators and decision support tools',[{title:'Home',path:'#/'},{title:'Clinical Tools',path:'#/tools'}]);html+='<div class="cards-grid">';[{id:'gcs',icon:'&#129504;',title:'GCS Calculator',desc:'Glasgow Coma Scale with airway threshold alerts'},{id:'burn',icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate'},{id:'dosecalc',icon:'&#9878;',title:'Medication Dose Calculator',desc:'Weight-based dose calculations'},{id:'timer',icon:'&#9201;',title:'Reassessment Timer',desc:'Interval reminders with checklists'},{id:'interactions',icon:'&#9763;',title:'Drug Interaction Checker',desc:'Check medication combinations'},{id:'ddx',icon:'&#128270;',title:'Differential Diagnosis Helper',desc:'Symptom-based differential'}].forEach(t=>{html+=`<a class="quick-card" href="#/tools/${t.id}"><div class="qc-icon">${t.icon}</div><div class="qc-title">${t.title}</div><div class="qc-desc">${t.desc}</div></a>`;});html+='</div>';main.innerHTML=html;return;}const toolFns=ACTT.toolRenderers||{};if(toolFns[toolId]){toolFns[toolId](main);}else{main.innerHTML=`<div class="severity-card amber"><div class="sc-title">Tool not found: ${toolId}</div></div>`;}}
 function opClKey(id){return'actt-opcl-'+id;}
 function getOpClState(id){try{return JSON.parse(localStorage.getItem(opClKey(id))||'{}');}catch(e){return{};}}

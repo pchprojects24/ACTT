@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTT Interactive Scenarios — Royal Canadian Navy Physician Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d1117;--surface:#161b22;--surface-raised:#1c2333;
+--border:#30363d;--border-bright:#484f58;
+--text:#e6edf3;--text-muted:#8b949e;--text-dim:#6e7681;
+--accent:#58a6ff;--accent-dim:#1f3a5f;
+--green:#3fb950;--green-dim:#1a3a2a;
+--yellow:#d29922;--yellow-dim:#3d2e00;
+--red:#f85149;--red-dim:#3d1418;
+--orange:#db6d28;--orange-dim:#3d2008;
+--cyan:#39d2c0;--purple:#bc8cff;
+--mono:'IBM Plex Mono',monospace;--sans:'Source Sans 3',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:var(--sans);background:var(--bg);color:var(--text);
+line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+
+/* TOP BAR */
+.topbar{
+position:sticky;top:0;z-index:100;
+background:rgba(13,17,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);padding:0 16px;height:48px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;min-width:0}
+.actt-badge{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:2px 8px;border-radius:4px;white-space:nowrap;
+}
+.topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.back-link{
+font-family:var(--mono);font-size:13px;color:var(--accent);
+text-decoration:none;display:flex;align-items:center;gap:4px;
+}
+.back-link:hover{text-decoration:underline}
+
+/* CONTAINER */
+.container{max-width:800px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{padding:48px 0 32px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.25;margin-bottom:16px}
+.hero-summary{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:720px}
+
+/* SCENARIO CARDS */
+.scenario-grid{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.scenario-card{
+display:flex;align-items:flex-start;gap:16px;
+background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:20px 24px;
+text-decoration:none;color:var(--text);
+transition:border-color .2s,background .2s,transform .15s;
+}
+.scenario-card:hover{
+border-color:var(--accent);background:var(--surface-raised);
+transform:translateY(-2px);text-decoration:none;color:var(--text);
+}
+.scenario-num{
+font-family:var(--mono);font-size:13px;font-weight:600;
+background:var(--accent-dim);color:var(--accent);
+padding:4px 10px;border-radius:4px;flex-shrink:0;
+min-width:32px;text-align:center;margin-top:2px;
+}
+.scenario-info{flex:1;min-width:0}
+.scenario-title{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:6px}
+.scenario-desc{font-size:14px;color:var(--text-muted);line-height:1.55}
+.scenario-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{
+font-family:var(--mono);font-size:10px;font-weight:600;
+padding:2px 8px;border-radius:999px;border:1px solid;
+text-transform:uppercase;letter-spacing:.04em;
+}
+.tag--red{color:var(--red);border-color:var(--red)}
+.tag--orange{color:var(--orange);border-color:var(--orange)}
+.tag--purple{color:var(--purple);border-color:var(--purple)}
+.tag--cyan{color:var(--cyan);border-color:var(--cyan)}
+.tag--accent{color:var(--accent);border-color:var(--accent)}
+.tag--green{color:var(--green);border-color:var(--green)}
+.tag--yellow{color:var(--yellow);border-color:var(--yellow)}
+.scenario-arrow{
+color:var(--text-dim);font-size:20px;flex-shrink:0;
+margin-top:2px;transition:color .2s,transform .2s;
+}
+.scenario-card:hover .scenario-arrow{color:var(--accent);transform:translateX(4px)}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.topbar{padding:0 10px}
+.hero{padding:36px 0 24px}
+.scenario-card{padding:16px;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar" role="navigation" aria-label="Scenario index">
+<div class="topbar-left">
+<span class="actt-badge">ACTT</span>
+<span class="topbar-title">Interactive Scenarios</span>
+</div>
+<div class="topbar-right">
+<a class="back-link" href="../index.html">← Main Reference</a>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<section class="hero">
+<p class="hero-eyebrow">ACTT Scenario Companion Guide</p>
+<h1>Interactive Clinical Scenarios</h1>
+<p class="hero-summary">Twelve scenario-based teaching cases covering the full spectrum of ACTT clinical domains. Each scenario uses a staged, decision-point format with narrative case progression, guided walkthrough, and scored decision-making. Work through them in order or select any scenario to practice.</p>
+</section>
+
+<!-- SCENARIO LIST -->
+<div class="scenario-grid">
+
+<a class="scenario-card" href="actt_scenario_01_head_injury.html">
+<span class="scenario-num">01</span>
+<div class="scenario-info">
+<div class="scenario-title">Progressive Head Injury After Fall in a Machinery Space</div>
+<div class="scenario-desc">TBI, airway risk, scene extraction, neuro trend monitoring, and evacuation timing in a confined shipboard space.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">TBI</span>
+<span class="tag tag--orange">Airway Risk</span>
+<span class="tag tag--purple">Neuro Monitoring</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_02_tension_pneumothorax.html">
+<span class="scenario-num">02</span>
+<div class="scenario-info">
+<div class="scenario-title">Chest Trauma With Suspected Tension Pneumothorax on Upper Deck</div>
+<div class="scenario-desc">Thoracic trauma, needle thoracostomy, chest tube transition, and movement after decompression.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Tension Pneumothorax</span>
+<span class="tag tag--orange">Chest Tube</span>
+<span class="tag tag--accent">Decompression</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_03_burn_inhalation.html">
+<span class="scenario-num">03</span>
+<div class="scenario-info">
+<div class="scenario-title">Major Burn With Inhalation Risk in a Shipboard Fire Response</div>
+<div class="scenario-desc">Burns, airway burn risk, Rule of 10s, urine output targets, and prolonged resuscitation.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Burns</span>
+<span class="tag tag--orange">Inhalation</span>
+<span class="tag tag--purple">Fluid Resuscitation</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_04_septic_shock.html">
+<span class="scenario-num">04</span>
+<div class="scenario-info">
+<div class="scenario-title">Septic Shock in a Sailor With Infection and Delayed Evacuation</div>
+<div class="scenario-desc">Sepsis, antibiotics, fluid versus overload risk, vasopressor use, and prolonged monitoring.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Sepsis</span>
+<span class="tag tag--orange">Vasopressors</span>
+<span class="tag tag--cyan">Prolonged Holding</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_05_combative_casualty.html">
+<span class="scenario-num">05</span>
+<div class="scenario-info">
+<div class="scenario-title">Combative Casualty With Possible Hypoxia, Hypoglycemia, or Head Injury</div>
+<div class="scenario-desc">Agitation and combative algorithm, safety, sedation, hidden medical causes, and airway after chemical restraint.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Combative</span>
+<span class="tag tag--orange">Sedation</span>
+<span class="tag tag--purple">Hidden Causes</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_06_stemi.html">
+<span class="scenario-num">06</span>
+<div class="scenario-info">
+<div class="scenario-title">STEMI Alongside Versus At Sea With Reperfusion Decision</div>
+<div class="scenario-desc">STEMI recognition, ECG-driven decisions, fibrinolysis, and transfer pathway choice.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">STEMI</span>
+<span class="tag tag--orange">Fibrinolysis</span>
+<span class="tag tag--accent">ECG</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_07_hypothermia.html">
+<span class="scenario-num">07</span>
+<div class="scenario-info">
+<div class="scenario-title">Hypothermic Casualty Recovered From Cold Water</div>
+<div class="scenario-desc">Environmental injury, hypothermia staging, altered arrest logic, rewarming, and evacuation thresholds.</div>
+<div class="scenario-tags">
+<span class="tag tag--cyan">Hypothermia</span>
+<span class="tag tag--accent">Rewarming</span>
+<span class="tag tag--purple">Modified Arrest</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_08_polytrauma.html">
+<span class="scenario-num">08</span>
+<div class="scenario-info">
+<div class="scenario-title">Polytrauma With Delayed Evacuation and 24–72 Hour Hold</div>
+<div class="scenario-desc">Integrated multi-system care, prolonged holding, reassessment rhythm, device maintenance, and team documentation.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Polytrauma</span>
+<span class="tag tag--cyan">Prolonged Holding</span>
+<span class="tag tag--green">Documentation</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_09_failed_airway.html">
+<span class="scenario-num">09</span>
+<div class="scenario-info">
+<div class="scenario-title">Failed Airway / Cannot Intubate, Cannot Oxygenate</div>
+<div class="scenario-desc">Failed airway, cricothyroidotomy, rescue sequence, and procedural decisiveness after massive facial trauma.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Failed Airway</span>
+<span class="tag tag--orange">Cricothyroidotomy</span>
+<span class="tag tag--purple">CICO</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_10_shoulder_dislocation.html">
+<span class="scenario-num">10</span>
+<div class="scenario-info">
+<div class="scenario-title">Shoulder Dislocation During Shipboard Work</div>
+<div class="scenario-desc">Orthopedic assessment, reduction techniques, sedation choice, movement, and disciplined restraint in lower-acuity care.</div>
+<div class="scenario-tags">
+<span class="tag tag--yellow">Orthopedic</span>
+<span class="tag tag--accent">Reduction</span>
+<span class="tag tag--green">Restraint</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_11_pressor_shock.html">
+<span class="scenario-num">11</span>
+<div class="scenario-info">
+<div class="scenario-title">Pressor-Dependent Shock With Resource Strain</div>
+<div class="scenario-desc">Vasopressors, infusion safety, monitoring burden, sustainability decisions, and operational strain at sea.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Septic Shock</span>
+<span class="tag tag--orange">Vasopressors</span>
+<span class="tag tag--cyan">Resource Strain</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+<a class="scenario-card" href="actt_scenario_12_chest_tube_redeteriorates.html">
+<span class="scenario-num">12</span>
+<div class="scenario-info">
+<div class="scenario-title">Chest Tube Patient Who Re-Deteriorates During Holding</div>
+<div class="scenario-desc">Procedure maintenance, recurrent tension or blockage, trend recognition, and the fact that stable patients can drift.</div>
+<div class="scenario-tags">
+<span class="tag tag--red">Chest Tube</span>
+<span class="tag tag--orange">Device Maintenance</span>
+<span class="tag tag--cyan">Trend Recognition</span>
+</div>
+</div>
+<span class="scenario-arrow">›</span>
+</a>
+
+</div>
+
+</main>
+
+</body>
+</html>
