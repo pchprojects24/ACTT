@@ -203,6 +203,74 @@ window.ACTT.algorithms={
       relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/procedural-sedation','prolonged-holding/sedation-pain','medications/ketamine','medications/midazolam','sickbay-meds/haloperidol','sickbay-meds/olanzapine','checklists/mental-health-behavioral-crisis','checklists/mental-health-suicide-risk']
     },
     {
+      id:'atls-trauma-survey',
+      title:'ATLS Trauma Survey (Primary and Secondary)',
+      severity:'red',
+      sectionNumber:'4.4B',
+      content:'<h3>4.4B ATLS Trauma Survey Pathway</h3>' +
+        '<p>Use this as the first-pass structure for blunt, penetrating, blast, crush, or burn trauma. The objective is to find and treat the immediate killer before detailed diagnosis. If a problem is found in the primary survey, fix it before moving on.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
+        '<ul>' +
+        '<li>Any trauma patient with significant mechanism, physiologic instability, or distracting injury.</li>' +
+        '<li>Polytrauma, burns with possible associated trauma, or deterioration after transfer or movement.</li>' +
+        '<li>Repeat the same sequence after each major intervention or sudden decline.</li>' +
+        '</ul></div>' +
+
+        '<h4>Immediate Assessment Priorities</h4>' +
+        '<ul>' +
+        '<li>Declare a trauma primary survey and assign roles if staffing allows.</li>' +
+        '<li>Use XABCDE order: control exsanguinating hemorrhage before airway, then move in sequence without losing reassessment discipline.</li>' +
+        '<li>Apply monitoring early, maintain manual C-spine protection when indicated, and start heat-loss prevention immediately.</li>' +
+        '</ul>' +
+
+        '<h4>Immediate Actions / Execution Sequence</h4>' +
+        '<ul>' +
+        '<li><strong>X &mdash; eXsanguination:</strong> control massive external hemorrhage immediately with direct pressure, wound packing, tourniquet, or junctional control. Tourniquet conversion is only for a casualty not in shock, with close monitoring available, and not for traumatic amputation. Aim to convert before 2 hours if bleeding can be controlled by other means; do not remove a tourniquet after 6 hours unless close monitoring and lab capability are available.</li>' +
+        '<li><strong>A &mdash; Airway with C-spine protection:</strong> clear the airway, suction blood or vomit, give oxygen, position, and use adjuncts as needed. If the airway cannot be maintained or is likely to fail, move early to RSI or surgical airway.</li>' +
+        '<li><strong>B &mdash; Breathing:</strong> inspect, auscultate, and assess chest rise, oxygenation, and work of breathing. Treat tension pneumothorax clinically and decompress immediately when suspected in an unstable patient. If a surgical chest tube is placed, smaller bore 20&ndash;22 Fr is acceptable for trauma and all surgical chest tubes should receive one prophylactic antibiotic dose (ceftriaxone 2 g IV x1 in the ATLS deck).</li>' +
+        '<li><strong>C &mdash; Circulation:</strong> check pulses, blood pressure, skin signs, and obvious or internal bleeding sources. Gain IV/IO access, start resuscitation matched to the problem, and use shock index (HR/SBP) as an early warning that shock may be present; a shock index above 1 is concerning. If indicated by the trauma pattern, TXA 2 g slow IV push is the ACTT ATLS teaching point.</li>' +
+        '<li><strong>D &mdash; Disability:</strong> document GCS, pupils, motor asymmetry, and glucose if altered. Worsening mental status, focal findings, or abnormal pupils should branch to the TBI pathway without delaying ABC stabilization.</li>' +
+        '<li><strong>E &mdash; Exposure / Environment:</strong> fully expose long enough to find hidden injury, inspect the back when logistically safe, then cover and actively prevent hypothermia. Expose and keep warm, then transition to the secondary survey once immediate threats are addressed.</li>' +
+        '</ul>' +
+
+        '<h4>When To Move to the Secondary Survey</h4>' +
+        '<p>Move to the secondary survey only when the airway is maintainable, oxygenation and ventilation are acceptable, major hemorrhage is controlled, and the patient has at least temporary response to resuscitation. If instability persists, stay in the primary survey loop and treat the next immediate threat before returning to detail.</p>' +
+
+        '<h4>Secondary Survey Core Components</h4>' +
+        '<ul>' +
+        '<li><strong>History:</strong> mechanism of injury plus AMPLE history (allergies, medications, past medical and social history, last meal, events, and last tetanus when relevant).</li>' +
+        '<li><strong>Head and neck:</strong> scalp, face, maxillofacial injury, pupils, C-spine or neck findings, airway contamination, and expanding hematoma.</li>' +
+        '<li><strong>Chest:</strong> breath sounds, chest wall injury, penetrating wounds, paradoxical movement, and chest tube need or function.</li>' +
+        '<li><strong>Abdomen and pelvis:</strong> tenderness, distension, bruising, penetrating injury, pelvic instability risk, and perineum / rectum / vagina when the mechanism requires it.</li>' +
+        '<li><strong>Extremities and back:</strong> deformity, wounds, burns, fracture, pulses, motor function, sensation, and posterior inspection when log roll can be done safely.</li>' +
+        '<li><strong>Adjuncts:</strong> trend vital signs, SpO<sub>2</sub>, urine output, ECG, targeted labs, and focused ultrasound only if they change the next action.</li>' +
+        '</ul>' +
+
+        '<h4>Reassessment Points</h4>' +
+        '<p>Repeat XABCDE after every major procedure, medication, transfer, or sudden change. Secondary survey findings do not replace the primary survey; they sit on top of it. Document the first set of findings clearly enough that the next examiner can detect change.</p>' +
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Traps</div>' +
+        '<ul>' +
+        '<li>Fixating on the obvious injury and missing exsanguinating hemorrhage, tension physiology, or airway contamination.</li>' +
+        '<li>Moving to the secondary survey before the primary survey threats are actually controlled.</li>' +
+        '<li>Exposing the patient to look for injuries and then allowing preventable hypothermia.</li>' +
+        '<li>Failing to repeat the survey after sedation, movement, decompression, or temporary improvement.</li>' +
+        '</ul></div>' +
+
+        '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
+        '<ul>' +
+        '<li>Keep the sequence simple enough to survive watch turnover: XABCDE, problem list, current devices, and next reassessment time.</li>' +
+        '<li>Use the secondary survey to identify what must be splinted, monitored, dressed, warmed, or documented before prolonged holding begins.</li>' +
+        '<li>If space or staffing is limited, do not let secondary-survey detail delay treatment of airway, breathing, or shock problems that are still evolving.</li>' +
+        '</ul></div></div>',
+      relatedLinks:['algorithms/airway-failure','algorithms/chest-decompression','algorithms/tbi-management','algorithms/burn-resuscitation','domains/domain-2-hemodynamics','domains/domain-3-specialized-trauma','prolonged-holding/stabilization-checklist','prolonged-holding/reassessment-rhythm'],
+      sources:[
+        {title:'ACTT 2026-01 ATLS.pdf',file:'ACTT 2026-01 ATLS.pdf',note:'Primary source for XABCDE trauma survey, hemorrhage control, thoracic trauma adjuncts, TXA, shock index, and transition to secondary survey.'},
+        {title:'Trauma Acute Care Clinical Record.pdf',file:'Trauma Acute Care Clinical Record.pdf',note:'Supports ACTT secondary survey structure and documentation fields.'}
+      ]
+    },
+    {
       id:'tbi-management',
       title:'TBI Management',
       severity:'red',

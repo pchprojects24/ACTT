@@ -82,13 +82,15 @@ window.ACTT.domains={
       title:'Domain 3: Specialized Trauma — TBI, Burns, Ortho/Spinal',
       content:'<h3>3.5 Domain 3: Specialized Trauma</h3>'+
         '<p>Specialized trauma includes injuries with management priorities that differ from standard resuscitation logic. These injuries often demand tighter physiologic targets, more specific monitoring, and greater awareness of secondary injury.</p>'+
+        '<h4>3.5.0 Trauma Assessment Framework</h4>'+
+        '<p>Before branching into TBI, burns, or orthopedic and spinal problems, the casualty still needs a formal ATLS trauma survey. ACTT uses the primary survey in XABCDE or ABCDE order to identify the immediate killer first, then a secondary survey to define the rest of the injury pattern and the prolonged-care burden.</p>'+
         '<h4>3.5.1 Traumatic Brain Injury</h4>'+
         '<p>TBI is repeatedly emphasized in the source material because secondary brain injury is often preventable. The learner must know how to classify severity, protect the airway when indicated, support cerebral perfusion, manage ventilation carefully, identify signs of rising intracranial pressure, and recognize impending herniation. In this domain, inappropriate fluids, excessive hypotension, or careless ventilation can worsen outcome rapidly.</p>'+
         '<h4>3.5.2 Burn Injury</h4>'+
         '<p>Burn management requires early attention to airway risk, fluid strategy, urine output, pain, temperature control, and the possibility of delayed complications. The course appears to emphasize that burn resuscitation is not simply about starting fluids. It is about using a starting formula, then repeatedly adjusting treatment based on output and clinical response while also addressing airway and skin-related complications.</p>'+
         '<h4>3.5.3 Orthopedic and Spinal Injury</h4>'+
         '<p>Orthopedic injuries are often less immediately fatal but can still affect function, pain burden, transport safety, and later care. Joint reductions, immobilization, neurovascular checks, and repeated neurologic reassessment matter more in prolonged holding situations, where the patient may remain under your care much longer than usual.</p>',
-      relatedLinks:['algorithms/tbi-management','algorithms/burn-resuscitation','procedures/joint-reduction','procedures/spinal-immobilization']
+      relatedLinks:['algorithms/atls-trauma-survey','algorithms/tbi-management','algorithms/burn-resuscitation','procedures/joint-reduction','procedures/spinal-immobilization']
     },
     {
       id:'domain-4-environmental',

@@ -4,6 +4,7 @@ window.ACTT.crossLinks={
 'algorithms/airway-failure':{title:'Airway Failure Algorithm',path:'#/algorithms/airway-failure'},
 'algorithms/combative-patient':{title:'Combative Patient Algorithm',path:'#/algorithms/combative-patient'},
 'algorithms/mental-health-behavioral-crisis':{title:'Mental Health & Behavioral Crisis',path:'#/algorithms/mental-health-behavioral-crisis'},
+'algorithms/atls-trauma-survey':{title:'ATLS Trauma Survey',path:'#/algorithms/atls-trauma-survey'},
 'algorithms/tbi-management':{title:'TBI Management Algorithm',path:'#/algorithms/tbi-management'},
 'algorithms/seizure-management':{title:'Seizure Algorithm',path:'#/algorithms/seizure-management'},
 'algorithms/burn-resuscitation':{title:'Burn Resuscitation Algorithm',path:'#/algorithms/burn-resuscitation'},
