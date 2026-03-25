@@ -512,13 +512,15 @@ window.ACTT.medications={
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Do Not Delay the First Antibiotic Dose</div>'+
         '<p>Antibiotic administration is time-critical in severe sepsis and septic shock. The first dose should be given within 1 hour of recognition. Do not delay for diagnostic workup, imaging, or source confirmation when the clinical picture is clear. Every hour of delay worsens outcomes.</p></div>'+
 
-        '<h4>Source-Based Empiric Regimens</h4>'+
-        '<div class="table-wrapper"><table><thead><tr><th>Suspected Source</th><th>Empiric Regimen</th><th>Notes</th></tr></thead><tbody>'+
-        '<tr><td>Unknown / Intra-abdominal</td><td>Ceftriaxone + Metronidazole</td><td>Broad-spectrum coverage including anaerobes.</td></tr>'+
-        '<tr><td>Pneumonia</td><td>Ceftriaxone + Azithromycin</td><td>Covers typical and atypical respiratory pathogens.</td></tr>'+
-        '<tr><td>CNS / Meningitis</td><td>Ceftriaxone + Ampicillin, &plusmn; Dexamethasone, &plusmn; Acyclovir</td><td>Ampicillin covers Listeria. Dexamethasone before or with first antibiotic dose for bacterial meningitis. Add acyclovir if viral encephalitis is suspected.</td></tr>'+
-        '<tr><td>Skin / Soft Tissue</td><td>Cefazolin (non-purulent)</td><td>Clindamycin as alternative if cefazolin allergy or purulent infection suggesting MRSA.</td></tr>'+
-        '<tr><td>Open / Penetrating TBI</td><td>Ertapenem + Moxifloxacin</td><td>Ceftriaxone as fallback if ertapenem and moxifloxacin are unavailable.</td></tr>'+
+        '<h4>Source-Based Empiric Regimens (Naval Guide)</h4>'+
+        '<div class="table-wrapper"><table><thead><tr><th>Suspected Source</th><th>First-line Regimen</th><th>Notes / Alternatives</th></tr></thead><tbody>'+
+        '<tr><td>Unknown / Intra-abdominal</td><td>Ceftriaxone 2 g IV q24h + Metronidazole 500 mg IV q12h</td><td>Naval first-line; covers gram-negative and anaerobes. Use when source unclear but abdominal signs present.</td></tr>'+
+        '<tr><td>Pneumonia</td><td>Ceftriaxone 2 g IV q24h + Azithromycin 500 mg IV q24h</td><td>Typical and atypical coverage. Continue daily while monitoring respiratory status.</td></tr>'+
+        '<tr><td>Urinary tract</td><td>Ceftriaxone 2 g IV q24h</td><td>Complicated UTI/pyelonephritis coverage. Adjust if beta-lactam allergy.</td></tr>'+
+        '<tr><td>STI / PID</td><td>Cefoxitin 2 g IV q6h + Doxycycline 100 mg IV/PO q12h</td><td>Targets gonorrhea/chlamydia. Transition doxycycline to oral when tolerated.</td></tr>'+
+        '<tr><td>Skin / Soft Tissue</td><td>Clindamycin 300&ndash;600 mg IV q6h</td><td>Naval first-line when broad gram-positive/anaerobic coverage needed. Cefazolin 1&ndash;2 g IV q8h for non-purulent MSSA/strep if available.</td></tr>'+
+        '<tr><td>CNS / Meningitis</td><td>Dexamethasone 0.15 mg/kg IV q6h + Ceftriaxone 2 g IV q24h + Ampicillin 2 g IV q4h + Acyclovir 10 mg/kg IV q8h</td><td>Give dexamethasone with or before first antibiotic. Add acyclovir if viral encephalitis cannot be excluded.</td></tr>'+
+        '<tr><td>Open / Penetrating TBI</td><td>Ertapenem 1 g IV q24h + Moxifloxacin 400 mg IV/PO q24h</td><td>Use when stock available. Fallback: Ceftriaxone-based coverage if carbapenem/fluoroquinolone not onboard.</td></tr>'+
         '</tbody></table></div>'+
 
         '<h4>Key Antibiotic Entries</h4>'+
@@ -526,49 +528,63 @@ window.ACTT.medications={
         '<div class="drug-card">'+
         '<h4>Ceftriaxone</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Ceftriaxone</div>'+
-        '<p>Ceftriaxone is confirmed in Sick Bay stock. It is the backbone of most ACTT empiric regimens due to its broad-spectrum coverage, once-daily dosing, and availability.</p></div>'+
-        '<p><strong>Clinical Role:</strong> Third-generation cephalosporin with broad gram-negative and gram-positive coverage. Central to most sepsis regimens in this chapter.</p>'+
+        '<p>Ceftriaxone is confirmed in Sick Bay stock. Backbone for unknown source, pneumonia, urinary, intra-abdominal, and CNS coverage.</p></div>'+
+        '<p><strong>Clinical Role:</strong> Broad gram-negative and gram-positive coverage with once-daily dosing.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>Metronidazole</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Metronidazole IV</div>'+
         '<p>Metronidazole IV is confirmed in Sick Bay stock.</p></div>'+
-        '<p><strong>Clinical Role:</strong> Anaerobic coverage. Combined with ceftriaxone for intra-abdominal and unknown-source infections where anaerobic pathogens are likely.</p>'+
+        '<p><strong>Clinical Role:</strong> Anaerobic coverage paired with ceftriaxone for unknown or intra-abdominal sepsis.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>Azithromycin</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Azithromycin IV</div>'+
         '<p>Azithromycin IV is confirmed in Sick Bay stock.</p></div>'+
-        '<p><strong>Clinical Role:</strong> Atypical pathogen coverage for pneumonia. Combined with ceftriaxone to cover both typical and atypical respiratory organisms in community-acquired pneumonia.</p>'+
+        '<p><strong>Clinical Role:</strong> Atypical pathogen coverage for pneumonia when combined with ceftriaxone.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>Ampicillin</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Ampicillin</div>'+
         '<p>Ampicillin is confirmed in Sick Bay stock.</p></div>'+
-        '<p><strong>Clinical Role:</strong> Provides Listeria coverage in CNS infections. Added to ceftriaxone in meningitis regimens, especially in patients at risk for Listeria (elderly, immunocompromised).</p>'+
+        '<p><strong>Clinical Role:</strong> Listeria coverage in CNS infections; paired with ceftriaxone in meningitis regimens.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>Cefazolin</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Cefazolin</div>'+
         '<p>Cefazolin is confirmed in Sick Bay stock.</p></div>'+
-        '<p><strong>Clinical Role:</strong> First-generation cephalosporin for skin and soft tissue infections, particularly non-purulent cellulitis and surgical wound prophylaxis.</p>'+
+        '<p><strong>Clinical Role:</strong> Non-purulent skin/soft tissue infections and surgical wound prophylaxis when clindamycin is not required.</p>'+
+        '</div>'+
+
+        '<div class="drug-card">'+
+        '<h4>Clindamycin</h4>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CHECK STOCK</span> Clindamycin</div>'+
+        '<p>Confirm availability in Sick Bay; dosing follows Naval guide when stocked.</p></div>'+
+        '<p><strong>Clinical Role:</strong> Skin/soft tissue coverage with toxin suppression; first-line in the Naval sepsis guide when broad gram-positive/anaerobic coverage is needed.</p>'+
+        '</div>'+
+
+        '<div class="drug-card">'+
+        '<h4>Cefoxitin and Doxycycline</h4>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CHECK STOCK</span> Cefoxitin / Doxycycline</div>'+
+        '<p>Verify onboard supply before committing to the STI/PID regimen.</p></div>'+
+        '<p><strong>Clinical Role:</strong> Naval first-line for gonorrhea/chlamydia pelvic infection. Cefoxitin provides gonococcal coverage; doxycycline completes chlamydia coverage.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>Acyclovir</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Acyclovir Injection</div>'+
         '<p>Acyclovir injection is confirmed in Sick Bay stock.</p></div>'+
-        '<p><strong>Clinical Role:</strong> Antiviral agent for suspected viral encephalitis. Added to the CNS infection regimen when herpes simplex encephalitis cannot be excluded.</p>'+
+        '<p><strong>Clinical Role:</strong> Antiviral for suspected viral encephalitis; include when CNS source cannot be excluded.</p>'+
         '</div>'+
 
         '<div class="drug-card">'+
         '<h4>Ertapenem and Moxifloxacin</h4>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">NOT CONFIRMED</span> Ertapenem and Moxifloxacin</div>'+
-        '<p>Neither ertapenem nor moxifloxacin is confirmed in standard Sick Bay stock. These agents are preferred for open and penetrating TBI but may not be available. Ceftriaxone is the fallback if these agents are unavailable.</p></div>'+
+        '<p>Neither ertapenem nor moxifloxacin is confirmed in standard Sick Bay stock. Preferred for open and penetrating TBI when available. Ceftriaxone is the fallback if these agents are unavailable.</p></div>'+
         '</div>',
       relatedLinks:['algorithms/sepsis','thresholds/sepsis-targets','medications/vasopressors','pitfalls/sepsis-errors','prolonged-holding/reassessment-rhythm','shipboard/medication-shipboard','appendices/appendix-c'],
       sources:[
