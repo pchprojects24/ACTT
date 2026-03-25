@@ -224,9 +224,33 @@ window.ACTT.appendices={
         '</tr>' +
         '<tr>' +
           '<td><strong>Epinephrine</strong></td>' +
-          '<td>Anaphylaxis, cardiac arrest, infusion for shock</td>' +
-          '<td>0.3\u20130.5 mg IM for anaphylaxis; 1 mg IV q3\u20135 min arrest; infusion per protocol</td>' +
-          '<td>Avoid concentration confusion; dosing changes by indication</td>' +
+          '<td>Anaphylaxis, cardiac arrest, infusion for shock, or push-dose bridge for sudden hypotension</td>' +
+          '<td>0.3\u20130.5 mg IM for anaphylaxis; 1 mg IV q3\u20135 min arrest; infusion 2\u201310 mcg/min; push-dose 5\u201320 mcg q2\u20135 min</td>' +
+          '<td>Avoid concentration confusion; say the indication out loud before giving any dose</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Vasopressin</strong></td>' +
+          '<td>Add-on in septic or vasodilatory shock when catecholamine needs are rising</td>' +
+          '<td>0.02\u20130.04 units/min</td>' +
+          '<td>Non-adrenergic vasoconstrictor; adjunct, not the fast titration drug</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Dopamine</strong></td>' +
+          '<td>Fallback mixed inotrope/pressor when preferred agents are unavailable</td>' +
+          '<td>2\u201310 mcg/kg/min, titrate up to 20 mcg/kg/min</td>' +
+          '<td>More arrhythmogenic and less predictable than norepinephrine</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Dobutamine</strong></td>' +
+          '<td>Low-output / cardiogenic picture when contractility support is needed</td>' +
+          '<td>2\u201310 mcg/kg/min, titrate to response</td>' +
+          '<td>Inotrope with mild vasodilation; hypotension may worsen if pressure is not already supported</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Push-dose epinephrine</strong></td>' +
+          '<td>Transient peri-intubation, RSI, or sedation-related hypotension while fixing the cause or preparing an infusion</td>' +
+          '<td>10 mcg/mL syringe; 0.5\u20132 mL IV push q2\u20135 min</td>' +
+          '<td>Bridge only. Do not give the 1 mg cardiac arrest dose to a patient with a pulse</td>' +
         '</tr>' +
         '<tr>' +
           '<td><strong>Phentolamine</strong></td>' +
@@ -234,6 +258,17 @@ window.ACTT.appendices={
           '<td>5\u201310 mg diluted for local infiltration</td>' +
           '<td>Use promptly if vasopressor extravasation occurs</td>' +
         '</tr>' +
+        '</tbody>' +
+        '</table></div>' +
+        '<p><strong>Bedside choice:</strong> vasodilated and hypotensive usually means norepinephrine first; weak pump with acceptable pressure points toward dobutamine; push-dose epinephrine is a temporary bridge, not a long-term shock plan.</p>' +
+        '<h4>Push-Dose Epinephrine Mixing Aid</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Step</th><th>Action</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td>1</td><td>Place 9 mL normal saline in a 10 mL syringe.</td></tr>' +
+        '<tr><td>2</td><td>Add 1 mL of cardiac epinephrine 0.1 mg/mL (1:10,000).</td></tr>' +
+        '<tr><td>3</td><td>Final concentration = 10 mcg/mL. Label the syringe.</td></tr>' +
+        '<tr><td>4</td><td>Give 0.5\u20132 mL (5\u201320 mcg) slow IV push every 2\u20135 min to effect, with reassessment after each dose.</td></tr>' +
         '</tbody>' +
         '</table></div>' +
 
@@ -372,7 +407,7 @@ window.ACTT.appendices={
         '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:[]
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','thresholds/hemodynamic','prolonged-holding/reassessment-rhythm']
     },
     {
       id:'appendix-d',
