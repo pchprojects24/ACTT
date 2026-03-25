@@ -17,6 +17,13 @@ window.ACTT.appendices={
         '<thead><tr><th>Algorithm</th><th>Entry Trigger</th><th>Immediate Actions</th><th>Branch Points</th><th>Reassess</th></tr></thead>' +
         '<tbody>' +
         '<tr>' +
+          '<td><strong>ATLS trauma survey</strong></td>' +
+          '<td>Any blunt, penetrating, blast, crush, or burn trauma with possible associated injury</td>' +
+          '<td>XABCDE: control exsanguinating hemorrhage, then airway, breathing, circulation, disability, expose and prevent hypothermia</td>' +
+          '<td>Do not enter the secondary survey until immediate threats are controlled or temporized; branch to airway, chest decompression, TBI, burn, or shock pathways as needed</td>' +
+          '<td>Repeat XABCDE after every intervention, move, or deterioration; then trend AMPLE history, head-to-toe findings, vitals, urine output, and device function</td>' +
+        '</tr>' +
+        '<tr>' +
           '<td><strong>Airway failure / severe AMS</strong></td>' +
           '<td>GCS 8 or less, inability to protect airway, major facial trauma, complete or impending obstruction</td>' +
           '<td>Oxygen, suction, positioning, monitor, preoxygenate, prepare RSI or go directly to surgical airway if oral route is not viable</td>' +
@@ -76,6 +83,8 @@ window.ACTT.appendices={
         '</table></div>',
       relatedLinks:[],
       sources:[
+        {title:'ACTT 2026-01 ATLS.pdf',file:'ACTT 2026-01 ATLS.pdf'},
+        {title:'Trauma Acute Care Clinical Record.pdf',file:'Trauma Acute Care Clinical Record.pdf'},
         {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf'},
         {title:'Burns - Dr Papp - AMTRP 0045.pdf',file:'Burns - Dr Papp - AMTRP 0045.pdf'},
         {title:'Hypothermia and Drowning Jerome 2026-02.pdf',file:'Hypothermia and Drowning Jerome 2026-02.pdf'},
