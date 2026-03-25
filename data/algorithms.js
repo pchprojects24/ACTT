@@ -555,7 +555,7 @@ window.ACTT.algorithms={
         '<ul>' +
         '<li>Establish IV or IO access and begin initial crystalloid resuscitation when appropriate.</li>' +
         '<li>Obtain cultures before antibiotics if feasible and if this does not delay treatment.</li>' +
-        '<li>Administer empiric antibiotics within the target time window.</li>' +
+        '<li>Administer empiric antibiotics within the target time window. Select regimen using the Sepsis &amp; Antibiotics reference.</li>' +
         '<li>Reassess the response to fluids rather than committing to automatic repeated large boluses.</li>' +
         '<li>If hypotension persists after initial volume resuscitation, prepare and start norepinephrine using the available route and monitoring.</li>' +
         '<li>Continue trend monitoring and adjust for respiratory tolerance, urine output, blood pressure, and mental status.</li>' +
