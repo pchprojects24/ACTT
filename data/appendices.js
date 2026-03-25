@@ -836,6 +836,34 @@ window.ACTT.appendices={
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Bedside Line Rule</div>' +
         '<p>When access is limited, keep the pressor on the most reliable line and avoid unsupported three-drug improvisation. If the pair is marked C?, X, ND, blank, or not listed here, separate the infusions and reassess whether current access is adequate for the care plan.</p></div>',
       relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-c','prolonged-holding/fluid-management','prolonged-holding/sedation-pain']
+    },
+    {
+      id:'appendix-m',
+      title:'Appendix M — Documentation Templates & Flow Sheets',
+      content:
+        '<p>Use these DL forms as the default templates for documentation during resuscitation, trauma care, prolonged holding, and transfer. Keep blank copies staged at the resuscitation bay and holding spaces so the recorder can capture events in real time.</p>'+
+        '<div class="table-wrapper"><table>'+
+        '<thead><tr><th>Template</th><th>Use</th><th>Capture</th><th>Operational Tip</th></tr></thead>'+
+        '<tbody>'+
+        '<tr><td><strong>Resuscitation Record</strong></td><td>Cardiac arrest or high-acuity resuscitation</td><td>Exact times for CPR cycles, rhythm changes, defibrillation, airway steps, medications, fluids, and response</td><td>Assign a recorder; timestamp every intervention to support handover and teleconsultation.</td></tr>'+
+        '<tr><td><strong>Trauma Acute Care Clinical Record</strong></td><td>Structured primary/secondary survey and early trauma management</td><td>Mechanism, injuries found, airway/breathing/circulation status, analgesia/procedures, serial vitals, transfer plan</td><td>Use it as the backbone for the secondary survey so injuries, devices, and reassessments are not missed.</td></tr>'+
+        '<tr><td><strong>PCC Nursing Care Plan</strong></td><td>Initial nursing plan for prolonged holding</td><td>Problem list, goals, planned interventions, monitoring frequency, safety checks</td><td>Update after each major change so the plan matches the active problems and staffing reality.</td></tr>'+
+        '<tr><td><strong>PCC Nursing Care Tracker</strong></td><td>Bedside trend sheet during shifts</td><td>Vitals, neuro checks, medication times and doses, infusion rates, fluid balance, lines/tubes, turns/repositioning</td><td>Keep it at the bedside to prevent dose stacking, missed device checks, or undocumented reassessments.</td></tr>'+
+        '<tr><td><strong>8-Hour Check / First 8 Hours / Burn Fluid Resuscitation Flowsheet</strong></td><td>Burn or high-volume resuscitation trending</td><td>Start time, fluids delivered, projected totals, urine output by interval, rate changes, triggers for escalation</td><td>Record every rate change and compare against the 24-hour projection; flag over- or under-resuscitation early.</td></tr>'+
+        '<tr><td><strong>Critical Care 24-hr Hold Requirements</strong></td><td>Prolonged hold and transfer readiness</td><td>Monitoring cadence, medication/infusion accountability, device checks, escalation thresholds, evacuation preparation items</td><td>Pair with the handover structure so MEDEVAC teams receive a concise trend plus current risks.</td></tr>'+
+        '</tbody></table></div>'+
+        '<p>Link each template to the standard handover frame: what happened, what was done, current status, active threats, and what to watch next.</p>',
+      relatedLinks:['team/documentation','team/handover','prolonged-holding/documentation-continuity','prolonged-holding/reassessment-rhythm','checklists/burn-8-hour-check'],
+      sources:[
+        {title:'Resus Record.pdf',file:'Resus Record.pdf'},
+        {title:'Trauma Acute Care Clinical Record.pdf',file:'Trauma Acute Care Clinical Record.pdf'},
+        {title:'PCC-Nursing-Care-Plan_fillable.pdf',file:'PCC-Nursing-Care-Plan_fillable.pdf'},
+        {title:'PCC_Nursing_Care_Tracker.pdf',file:'PCC_Nursing_Care_Tracker.pdf'},
+        {title:'8-Hour-Check.pdf',file:'8-Hour-Check.pdf'},
+        {title:'First8Hours.pdf',file:'First8Hours.pdf'},
+        {title:'Burn Fluid Resus Flowsheet.pdf',file:'Burn Fluid Resus Flowsheet.pdf'},
+        {title:'Critical Care Requirements for 24hr Patient Hold.pdf',file:'Critical Care Requirements for 24hr Patient Hold.pdf'}
+      ]
     }
   ]
 };

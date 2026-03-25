@@ -75,6 +75,7 @@ window.ACTT.crossLinks={
 'prolonged-holding/stabilization-checklist':{title:'Stabilization Checklist',path:'#/prolonged-holding/stabilization-checklist'},
 'prolonged-holding/reassessment-rhythm':{title:'Reassessment Rhythm',path:'#/prolonged-holding/reassessment-rhythm'},
 'prolonged-holding/device-maintenance':{title:'Device Maintenance',path:'#/prolonged-holding/device-maintenance'},
+'prolonged-holding/documentation-continuity':{title:'Documentation & Handover',path:'#/prolonged-holding/documentation-continuity'},
 'prolonged-holding/sedation-pain':{title:'Sedation & Pain Continuity',path:'#/prolonged-holding/sedation-pain'},
 'prolonged-holding/teleconsultation':{title:'Teleconsultation Thresholds',path:'#/prolonged-holding/teleconsultation'},
 'prolonged-holding/holding-limits':{title:'When Holding Is No Longer Safe',path:'#/prolonged-holding/holding-limits'},
@@ -116,6 +117,7 @@ window.ACTT.crossLinks={
 'appendices/appendix-j':{title:'Stock Cross-Reference',path:'#/appendices/appendix-j'},
 'appendices/appendix-k':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
 'appendices/appendix-l':{title:'IV Compatibility & Infusion Quick Reference',path:'#/appendices/appendix-l'},
+'appendices/appendix-m':{title:'Documentation Templates & Flow Sheets',path:'#/appendices/appendix-m'},
 // Aliases to ensure related links resolve to existing content
 'procedures/surgical-airway':{title:'Surgical Airway (Cricothyroidotomy)',path:'#/procedures/surgical-cric'},
 'procedures/needle-decompression':{title:'Needle Decompression',path:'#/procedures/needle-thoracostomy'},

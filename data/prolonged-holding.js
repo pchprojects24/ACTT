@@ -205,7 +205,7 @@ window.ACTT.prolongedHolding={
         '<h4>7.13.2 Structured handover</h4>'+
         '<p>A useful handover should answer five questions quickly: what happened, what has been done, what is the patient like now, what are the active threats, and what specifically must be watched next. This applies to watch turnover, teleconsultation, and actual transfer off the ship.</p>'+
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body"><p>Handover at sea is complicated by watch rotation, fatigue, and the possibility that multiple casualties compete for attention. A written trend sheet posted at the bedside is the most reliable way to maintain continuity. Ensure documentation is legible, timestamped, and organized so that any team member—including one who was not present for the initial resuscitation—can rapidly understand the patient\'s trajectory and current plan.</p></div></div>',
-      relatedLinks:['thresholds/reassessment','pitfalls/handover-failure']
+      relatedLinks:['thresholds/reassessment','pitfalls/handover-failure','appendices/appendix-m']
     },
     {
       id:'teleconsultation',
