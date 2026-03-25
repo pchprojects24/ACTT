@@ -111,6 +111,7 @@ window.ACTT.crossLinks={
 'appendices/appendix-h':{title:'Team & Communication Tools',path:'#/appendices/appendix-h'},
 'appendices/appendix-i':{title:'Study & Review Tools',path:'#/appendices/appendix-i'},
 'appendices/appendix-j':{title:'Stock Cross-Reference',path:'#/appendices/appendix-j'},
+'appendices/appendix-k':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
 // Aliases to ensure related links resolve to existing content
 'procedures/surgical-airway':{title:'Surgical Airway (Cricothyroidotomy)',path:'#/procedures/surgical-cric'},
 'procedures/needle-decompression':{title:'Needle Decompression',path:'#/procedures/needle-thoracostomy'},
@@ -128,7 +129,7 @@ window.ACTT.crossLinks={
 'algorithms/stemi-management':{title:'STEMI Management',path:'#/algorithms/stemi'},
 'algorithms/fibrinolysis-decision':{title:'Fibrinolysis Decision',path:'#/algorithms/stemi'},
 'medications/anticoagulants':{title:'Anticoagulants',path:'#/medications/fibrinolytics'},
-'procedures/ecg-interpretation':{title:'ECG Interpretation',path:'#/thresholds/stemi-thresholds'},
+'procedures/ecg-interpretation':{title:'ECG Interpretation Quick Reference',path:'#/appendices/appendix-k'},
 'procedures/pocus':{title:'Point-of-Care Ultrasound',path:'#/domains/domain-7-diagnostics'},
 'procedures/abg-interpretation':{title:'ABG Interpretation',path:'#/domains/domain-7-diagnostics'},
 'algorithms/icp-assessment':{title:'ICP Assessment',path:'#/thresholds/neurologic-tbi'},
