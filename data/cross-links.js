@@ -82,9 +82,11 @@ window.ACTT.crossLinks={
 // Shipboard
 'shipboard/core-realities':{title:'Shipboard Realities',path:'#/shipboard/core-realities'},
 'shipboard/airway-at-sea':{title:'Airway at Sea',path:'#/shipboard/airway-at-sea'},
+'shipboard/circulation-at-sea':{title:'Circulation at Sea',path:'#/shipboard/circulation-at-sea'},
 'shipboard/medication-shipboard':{title:'Medications Shipboard',path:'#/shipboard/medication-shipboard'},
 'shipboard/failure-points':{title:'Shipboard Failure Points',path:'#/shipboard/failure-points'},
 // Team
+'team/role-assignment':{title:'Role Assignment',path:'#/team/role-assignment'},
 'team/core-principles':{title:'Team Core Principles',path:'#/team/core-principles'},
 'team/handover':{title:'Handover Structure',path:'#/team/handover'},
 'team/documentation':{title:'Documentation Standards',path:'#/team/documentation'},
