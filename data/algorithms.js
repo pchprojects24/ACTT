@@ -102,7 +102,7 @@ window.ACTT.algorithms={
         '</ul>' +
 
         '<h4>Decision Branches</h4>' +
-        '<p>If verbal de-escalation succeeds, proceed with assessment. If the patient remains unsafe, escalate to physical control and chemical restraint. If sedation results in loss of airway control, or the patient remains unsafe despite sedation, transition to the airway failure pathway (4.3).</p>' +
+        '<p>If verbal de-escalation succeeds, proceed with assessment. If the patient remains unsafe, escalate to physical control and chemical restraint. If the patient is not frankly violent but the main problem is psychosis, suicidality, or prolonged behavioural management, move to the mental health and behavioral crisis pathway in parallel. If sedation results in loss of airway control, or the patient remains unsafe despite sedation, transition to the airway failure pathway (4.3).</p>' +
 
         '<h4>Key Execution Points</h4>' +
         '<ul>' +
@@ -127,7 +127,70 @@ window.ACTT.algorithms={
         '<li>Movement, confined spaces, and limited escape routes increase staff injury risk during physical control.</li>' +
         '<li>Document what prompted restraint, what was used, how the patient responded, and when reassessments were performed, especially if prolonged holding follows.</li>' +
         '</ul></div></div>',
-      relatedLinks:['algorithms/airway-failure','medications/ketamine','medications/midazolam','procedures/rsi','pitfalls/diagnostic-anchoring','thresholds/glucose']
+      relatedLinks:['algorithms/mental-health-behavioral-crisis','algorithms/airway-failure','medications/ketamine','medications/midazolam','procedures/rsi','pitfalls/diagnostic-anchoring','thresholds/glucose','checklists/mental-health-behavioral-crisis']
+    },
+    {
+      id:'mental-health-behavioral-crisis',
+      title:'Mental Health and Behavioral Crisis',
+      severity:'red',
+      sectionNumber:'4.4A',
+      content:'<h3>4.4A Mental Health and Behavioral Crisis Pathway</h3>' +
+        '<p>This pathway covers acute agitation, psychosis, delirium, and suicidality when the patient\'s presentation creates immediate safety, medical, or evacuation concerns. The priority is to keep the scene controlled, identify medical contributors early, use the least force needed to regain control, and set an observation and escalation plan that is realistic for shipboard care.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
+        '<ul>' +
+        '<li>Erratic, hostile, psychotic, or severely distressed behaviour that threatens the patient, the team, or the mission.</li>' +
+        '<li>New agitation, paranoia, hallucinations, or delirium where toxicologic, metabolic, infectious, or neurologic causes remain possible.</li>' +
+        '<li>Suicidal thoughts, an organized plan, recent self-harm, or access to lethal means in a setting where the patient cannot be left unsupervised.</li>' +
+        '</ul></div>' +
+
+        '<h4>Immediate Assessment Priorities</h4>' +
+        '<ul>' +
+        '<li>Make the scene safer first: remove weapons and obvious hazards, reduce crowding, and keep an exit route for staff.</li>' +
+        '<li>Decide whether agitation is mild, moderate, or severe. Severe agitation / excited delirium is a medical emergency.</li>' +
+        '<li>Rapidly screen for reversible medical drivers: hypoxia, hypoglycemia, hyperthermia, head injury, intoxication / withdrawal, sepsis, meningitis, serotonin syndrome, or neuroleptic malignant syndrome.</li>' +
+        '<li>If the patient can engage, ask directly about suicidal thoughts, intent, plan, access to means, and recent stressors.</li>' +
+        '</ul>' +
+
+        '<h4>Immediate Actions / Execution Sequence</h4>' +
+        '<ul>' +
+        '<li>Use verbal de-escalation first when safe: one speaker, calm voice, short phrases, visible hands, clear limits, and simple choices.</li>' +
+        '<li>Move the patient to the quietest controllable space available and reduce unnecessary personnel and stimulation.</li>' +
+        '<li>Obtain ABCs, SpO<sub>2</sub>, glucose, temperature, and focused trauma / tox exam as early as feasible; treat abnormal findings in parallel.</li>' +
+        '<li>If the patient becomes dangerous or blocks essential care, use physical restraint only as a brief bridge to chemical sedation. Avoid prone restraint and any neck or chest compression.</li>' +
+        '<li>After sedation or control, place on continuous monitoring, reassess airway and breathing immediately, and keep resuscitation equipment at the bedside.</li>' +
+        '<li>For suicidality, do not leave the patient alone, remove access to obvious means, and start command / supervisory notification and evacuation planning early.</li>' +
+        '</ul>' +
+
+        '<h4>Decision Branches</h4>' +
+        '<p>If the patient is mildly agitated and still cooperative, continue verbal de-escalation and focused medical assessment. If moderate to severe agitation persists or danger rises, move to the combative patient pathway for coordinated restraint and sedation. If vitals, temperature, oxygenation, or neurologic findings are abnormal, treat this as a medical presentation first. If suicide risk is high, an active plan is present, or observation cannot be reliably maintained onboard, escalate to urgent repatriation / shore transfer with escort.</p>' +
+
+        '<h4>Key Execution Points</h4>' +
+        '<ul>' +
+        '<li>Agitation, psychosis, and suicidality are presentations, not diagnoses. Keep medical and toxicologic causes in the differential until actively excluded.</li>' +
+        '<li>Physical restraint is a temporary bridge; prolonged struggling increases risk of asphyxia, hyperthermia, rhabdomyolysis, cardiovascular collapse, and staff injury.</li>' +
+        '<li>If antipsychotic or benzodiazepine medication is used, document the dose, response, reassessment rhythm, and the airway / monitoring plan.</li>' +
+        '<li>Mobilize available supports early: chain of command, Fleet Surgeon / remote physician, buddy system, sentinels, chaplain, or trusted peers when appropriate.</li>' +
+        '</ul>' +
+
+        '<h4>Reassessment Points</h4>' +
+        '<p>Repeat airway, breathing, circulation, temperature, glucose, and mental-status checks after each de-escalation attempt, restraint episode, or medication dose. Reassess suicide risk again after intoxication, delirium, or severe agitation begins to clear because the history often changes once the patient can engage. Review whether the current watch can maintain safe continuous observation before deciding to hold the patient onboard.</p>' +
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Traps</div>' +
+        '<ul>' +
+        '<li>Assuming bizarre behaviour is psychiatric before checking oxygenation, glucose, temperature, and trauma clues.</li>' +
+        '<li>Using physical restraint without a rapid transition plan, airway checks, or repeat vital signs.</li>' +
+        '<li>Dismissing suicidal ideation because the patient later appears calmer, embarrassed, or intoxicated.</li>' +
+        '<li>Failing to document means restriction, observation level, command notification, and the exact reason the patient could or could not be held onboard.</li>' +
+        '</ul></div>' +
+
+        '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
+        '<ul>' +
+        '<li>Confinement, noise, sleep disruption, weapons access, ladders, open decks, and surrounding water all increase risk in a behavioural crisis.</li>' +
+        '<li>Onboard management is only acceptable if the patient can be observed continuously, means can be restricted, and the team can still respond to medical deterioration.</li>' +
+        '<li>Have a low threshold to contact superiors and arrange repatriation for active suicidality, persistent psychosis, or recurrent dangerous agitation.</li>' +
+        '</ul></div></div>',
+      relatedLinks:['algorithms/combative-patient','algorithms/airway-failure','procedures/procedural-sedation','prolonged-holding/sedation-pain','medications/ketamine','medications/midazolam','sickbay-meds/haloperidol','sickbay-meds/olanzapine','checklists/mental-health-behavioral-crisis','checklists/mental-health-suicide-risk']
     },
     {
       id:'tbi-management',

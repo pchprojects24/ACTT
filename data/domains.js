@@ -168,6 +168,7 @@ window.ACTT.domains={
         '<li>Leadership and role assignment.</li>'+
         '<li>Pre-procedure briefing and contingency planning.</li>'+
         '<li>Closed-loop communication during high-risk tasks.</li>'+
+        '<li>Behavioural crisis control: scene safety, de-escalation, restraint monitoring, and suicide-risk escalation.</li>'+
         '<li>Clear casualty handover.</li>'+
         '<li>Teleconsultation and remote support when local capability is limited.</li>'+
         '<li>Documentation that supports continuity of care over 24\u201372 hours.</li>'+
@@ -176,7 +177,7 @@ window.ACTT.domains={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>In a shipboard environment, the same small team may receive, stabilize, monitor, reassess, re-brief, and hand over the same patient over an extended period. Poor organization creates preventable error. Good communication reduces missed reassessment, medication duplication, line dislodgement, and delay in escalation.</p>'+
         '</div></div>',
-      relatedLinks:['procedures/casualty-handover','procedures/teleconsultation','procedures/documentation','algorithms/team-organization']
+      relatedLinks:['algorithms/mental-health-behavioral-crisis','checklists/mental-health-behavioral-crisis','checklists/mental-health-suicide-risk','procedures/casualty-handover','procedures/teleconsultation','procedures/documentation','algorithms/team-organization']
     },
     {
       id:'domain-intersections',
@@ -188,6 +189,7 @@ window.ACTT.domains={
         '<li><strong>Burns plus airway edema plus fluid resuscitation:</strong> airway timing and fluid strategy interact closely.</li>'+
         '<li><strong>Sepsis plus respiratory compromise:</strong> fluid can help perfusion but worsen breathing.</li>'+
         '<li><strong>Combative patient plus hypoxia, hypoglycemia, or TBI:</strong> behavior may be a sign, not the diagnosis.</li>'+
+        '<li><strong>Suicidality or psychosis at sea:</strong> environmental risk, means restriction, and supervision capability can change the evacuation threshold.</li>'+
         '<li><strong>Hypothermia plus cardiac arrest:</strong> standard termination logic may not apply.</li>'+
         '<li><strong>Polytrauma plus delayed evacuation:</strong> the burden shifts from rescue to sustained organized management.</li>'+
         '</ul>'+

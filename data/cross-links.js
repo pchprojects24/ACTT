@@ -3,6 +3,7 @@ window.ACTT.crossLinks={
 // Algorithms
 'algorithms/airway-failure':{title:'Airway Failure Algorithm',path:'#/algorithms/airway-failure'},
 'algorithms/combative-patient':{title:'Combative Patient Algorithm',path:'#/algorithms/combative-patient'},
+'algorithms/mental-health-behavioral-crisis':{title:'Mental Health & Behavioral Crisis',path:'#/algorithms/mental-health-behavioral-crisis'},
 'algorithms/tbi-management':{title:'TBI Management Algorithm',path:'#/algorithms/tbi-management'},
 'algorithms/seizure-management':{title:'Seizure Algorithm',path:'#/algorithms/seizure-management'},
 'algorithms/burn-resuscitation':{title:'Burn Resuscitation Algorithm',path:'#/algorithms/burn-resuscitation'},
@@ -34,6 +35,8 @@ window.ACTT.crossLinks={
 'medications/antibiotics':{title:'Antibiotics',path:'#/medications/antibiotics'},
 'medications/sedatives':{title:'Sedatives & Adjuncts',path:'#/medications/sedatives'},
 'sickbay-meds/insulin_regular':{title:'Insulin Regular',path:'#/sickbay-meds/insulin_regular'},
+'sickbay-meds/haloperidol':{title:'Haloperidol',path:'#/sickbay-meds/haloperidol'},
+'sickbay-meds/olanzapine':{title:'Olanzapine',path:'#/sickbay-meds/olanzapine'},
 // Domains
 'domains/domain-1-airway':{title:'Airway Domain',path:'#/domains/domain-1-airway'},
 'domains/domain-2-hemodynamics':{title:'Hemodynamics Domain',path:'#/domains/domain-2-hemodynamics'},
@@ -95,6 +98,8 @@ window.ACTT.crossLinks={
 'tools/ddx':{title:'Differential Diagnosis',path:'#/tools/ddx'},
 // Checklists
 'checklists/dka-hyperglycemia':{title:'DKA / Hyperglycemic Emergency Checklist',path:'#/checklists/dka-hyperglycemia'},
+'checklists/mental-health-behavioral-crisis':{title:'Mental Health / Behavioral Crisis Checklist',path:'#/checklists/mental-health-behavioral-crisis'},
+'checklists/mental-health-suicide-risk':{title:'Mental Health / Suicide Risk Screening',path:'#/checklists/mental-health-suicide-risk'},
 // Appendices
 'appendices/appendix-a':{title:'Algorithm Summary Cards',path:'#/appendices/appendix-a'},
 'appendices/appendix-b':{title:'Procedure Checklists',path:'#/appendices/appendix-b'},
