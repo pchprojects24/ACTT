@@ -486,7 +486,7 @@ window.ACTT.algorithms={
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
         '<p>Limited diagnostics and delayed transfer increase the importance of serial clinical examination, practical source identification, and clear documentation of response to each intervention.</p>' +
         '</div></div>',
-      relatedLinks:['procedures/iv-io-access','medications/norepinephrine','medications/antibiotics','medications/crystalloid','thresholds/map','thresholds/lactate','thresholds/urine-output','pitfalls/fluid-overload']
+      relatedLinks:['procedures/iv-io-access','medications/norepinephrine','medications/antibiotics','medications/crystalloid','appendices/appendix-l','thresholds/map','thresholds/lactate','thresholds/urine-output','pitfalls/fluid-overload']
     },
     {
       id:'dka',
