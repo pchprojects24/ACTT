@@ -4,6 +4,7 @@ window.ACTT.crossLinks={
 'algorithms/airway-failure':{title:'Airway Failure Algorithm',path:'#/algorithms/airway-failure'},
 'algorithms/combative-patient':{title:'Combative Patient Algorithm',path:'#/algorithms/combative-patient'},
 'algorithms/tbi-management':{title:'TBI Management Algorithm',path:'#/algorithms/tbi-management'},
+'algorithms/seizure-management':{title:'Seizure Algorithm',path:'#/algorithms/seizure-management'},
 'algorithms/burn-resuscitation':{title:'Burn Resuscitation Algorithm',path:'#/algorithms/burn-resuscitation'},
 'algorithms/hypothermia':{title:'Hypothermia Algorithm',path:'#/algorithms/hypothermia'},
 'algorithms/sepsis':{title:'Sepsis Algorithm',path:'#/algorithms/sepsis'},

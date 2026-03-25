@@ -276,7 +276,7 @@ window.ACTT.medications={
         '<p>Levetiracetam is not confirmed in standard Sick Bay stock. If unavailable, seizure prophylaxis may need to rely on repeated benzodiazepine dosing, which carries higher sedation and respiratory depression risk and creates a larger monitoring burden.</p>'+
         '</div></div>'+
         '</div>',
-      relatedLinks:['algorithms/tbi-management','medications/icp-meds','medications/analgesics','thresholds/neurologic-tbi','pitfalls/neurologic-errors','prolonged-holding/reassessment-rhythm','tools/gcs']
+      relatedLinks:['algorithms/seizure-management','algorithms/tbi-management','medications/icp-meds','medications/analgesics','thresholds/neurologic-tbi','pitfalls/neurologic-errors','prolonged-holding/reassessment-rhythm','tools/gcs']
     },
     {
       id:'icp-meds',

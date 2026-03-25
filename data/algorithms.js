@@ -189,11 +189,75 @@ window.ACTT.algorithms={
       relatedLinks:['algorithms/airway-failure','procedures/rsi','medications/hypertonic-saline','medications/mannitol','thresholds/sbp','thresholds/etco2','thresholds/icp','pitfalls/permissive-hypotension-with-tbi']
     },
     {
+      id:'seizure-management',
+      title:'Seizure Management and Status Epilepticus',
+      severity:'red',
+      sectionNumber:'4.6',
+      content:'<h3>4.6 Seizure Management and Status Epilepticus Pathway</h3>' +
+        '<p>This pathway centers on immediate airway protection, rapid benzodiazepine delivery, identification of reversible causes, and decisive escalation when seizures do not stop. The goal is to stop the seizure fast, prevent recurrence, and protect the patient from hypoxia, aspiration, and prolonged convulsive injury.</p>' +
+
+        '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
+        '<ul>' +
+        '<li>Active tonic-clonic seizure or recurrent seizures without full recovery.</li>' +
+        '<li>Seizure activity lasting 5 minutes or more, or back-to-back seizures (status epilepticus).</li>' +
+        '<li>Post-ictal patient not protecting airway, with persistent altered LOC, or with planned evacuation delay.</li>' +
+        '</ul></div>' +
+
+        '<h4>Immediate Assessment Priorities</h4>' +
+        '<ul>' +
+        '<li>Airway protection and ability to oxygenate/ventilate now; place laterally and suction if needed.</li>' +
+        '<li>Check blood glucose immediately; treat hypoglycemia without delay.</li>' +
+        '<li>Estimate seizure duration, prior benzodiazepine doses, and response so far.</li>' +
+        '<li>Scan for reversible causes: trauma/TBI, hypoxia, infection/fever, electrolyte disturbance, toxins/withdrawal, eclampsia.</li>' +
+        '<li>Judge whether respiratory support or RSI preparation is required before additional sedating doses.</li>' +
+        '</ul>' +
+
+        '<h4>Immediate Actions / Execution Sequence</h4>' +
+        '<ul>' +
+        '<li>Protect airway: lateral position, suction, oxygen, and continuous monitoring (SpO<sub>2</sub>, ECG, BP, EtCO<sub>2</sub> if available).</li>' +
+        '<li>Obtain IV/IO access if possible; do not delay first benzodiazepine dose while attempting IV if IM is faster.</li>' +
+        '<li>Give midazolam 5 mg IV/IO/IM; repeat every 5 minutes until seizure stops. Avoid under-dosing or long delays.</li>' +
+        '<li>If seizure persists after two benzodiazepine doses or status is likely, load levetiracetam 2 g IV/IO while preparing airway/ventilation support.</li>' +
+        '<li>Correct reversible causes in parallel: glucose, oxygenation, temperature, and suspected tox/metabolic issues.</li>' +
+        '<li>If ventilation or airway protection fails, move to RSI with ketamine and rocuronium per airway pathway.</li>' +
+        '</ul>' +
+
+        '<h4>Decision Branches</h4>' +
+        '<p>If seizures continue after two benzodiazepine doses, move to second-line loading and prepare for airway control. If glucose is low, correct immediately and reassess before stacking sedatives. If the patient stops seizing but remains deeply altered, consider non-convulsive status epilepticus and continue monitoring, maintenance antiepileptic dosing, and evacuation planning. Suspected eclampsia or toxin exposure requires condition-specific treatment in parallel.</p>' +
+
+        '<h4>Key Execution Points</h4>' +
+        '<ul>' +
+        '<li>Do not wait 5 minutes to give the first benzodiazepine. Early adequate dosing is the single most effective step.</li>' +
+        '<li>Every benzodiazepine dose requires airway vigilance. Assign someone to monitor respirations and preparedness for BVM.</li>' +
+        '<li>Second-line loading is the follow-through to prevent recurrence; it does not replace benzodiazepine rescue.</li>' +
+        '<li>Document seizure start time, doses, and response to guide teleconsultation and evacuation urgency.</li>' +
+        '</ul>' +
+
+        '<h4>Reassessment Points</h4>' +
+        '<p>After visible convulsions stop, reassess airway protection, ventilation, oxygenation, blood pressure, GCS, pupils, and glucose. Monitor for respiratory depression and recurrent seizure activity. Confirm that maintenance antiepileptic therapy has been started and that evacuation/transfer is coordinated.</p>' +
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Traps</div>' +
+        '<ul>' +
+        '<li>Delayed benzodiazepine dosing while pursuing IV access.</li>' +
+        '<li>Stacking sedatives without airway preparation and continuous monitoring.</li>' +
+        '<li>Missing hypoglycemia, hypoxia, or toxic/metabolic causes while focusing only on stopping convulsions.</li>' +
+        '<li>Assuming the emergency is over when movements stop; non-convulsive status and recurrence risk remain.</li>' +
+        '</ul></div>' +
+
+        '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
+        '<ul>' +
+        '<li>Limited monitoring and oxygen require simple airway positioning, suction readiness, and clear RSI contingency.</li>' +
+        '<li>Medication stock may be limited; plan for adequate benzodiazepine supply and a maintenance agent during delayed evacuation.</li>' +
+        '<li>Document timelines and doses for teleconsultation and receiving teams; assign ongoing neurologic checks during holding.</li>' +
+        '</ul></div></div>',
+      relatedLinks:['algorithms/airway-failure','procedures/rsi','medications/seizure-meds','medications/midazolam','thresholds/neurologic-tbi','thresholds/glucose','pitfalls/neurologic-errors','prolonged-holding/reassessment-rhythm']
+    },
+    {
       id:'burn-resuscitation',
       title:'Burn Assessment and Resuscitation',
       severity:'red',
-      sectionNumber:'4.6',
-      content:'<h3>4.6 Burn Assessment and Resuscitation Pathway</h3>' +
+      sectionNumber:'4.7',
+      content:'<h3>4.7 Burn Assessment and Resuscitation Pathway</h3>' +
         '<p>This pathway focuses on airway risk, fluid strategy, urine-output guided resuscitation, temperature control, pain management, and recognition of limb- or chest-threatening circumferential burns.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -251,8 +315,8 @@ window.ACTT.algorithms={
       id:'hypothermia',
       title:'Accidental Hypothermia',
       severity:'red',
-      sectionNumber:'4.7',
-      content:'<h3>4.7 Accidental Hypothermia Pathway</h3>' +
+      sectionNumber:'4.8',
+      content:'<h3>4.8 Accidental Hypothermia Pathway</h3>' +
         '<p>This is a stage-based pathway. The central execution principle is that the colder patient may still be salvageable and may require modified resuscitation logic, especially in deep hypothermia and arrest.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -307,8 +371,8 @@ window.ACTT.algorithms={
       id:'sepsis',
       title:'Sepsis and Septic Shock',
       severity:'red',
-      sectionNumber:'4.8',
-      content:'<h3>4.8 Sepsis and Septic Shock Pathway</h3>' +
+      sectionNumber:'4.9',
+      content:'<h3>4.9 Sepsis and Septic Shock Pathway</h3>' +
         '<p>This pathway is built around early recognition, timely antibiotics, appropriate fluids, transition to vasopressors when needed, and ongoing reassessment in settings where resources may be limited or evacuation delayed.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -365,8 +429,8 @@ window.ACTT.algorithms={
       id:'stemi',
       title:'STEMI and Fibrinolysis',
       severity:'red',
-      sectionNumber:'4.9',
-      content:'<h3>4.9 STEMI and Fibrinolysis Pathway</h3>' +
+      sectionNumber:'4.10',
+      content:'<h3>4.10 STEMI and Fibrinolysis Pathway</h3>' +
         '<p>This pathway is a time-sensitive risk-benefit algorithm. The clinician must identify true ST-elevation myocardial infarction, determine whether timely PCI is unavailable, exclude major contraindications, and execute fibrinolysis and adjunctive therapy safely.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -422,8 +486,8 @@ window.ACTT.algorithms={
       id:'chest-decompression',
       title:'Needle/Chest Decompression (Tension Pneumothorax)',
       severity:'red',
-      sectionNumber:'4.10',
-      content:'<h3>4.10 Tension Pneumothorax Pathway</h3>' +
+      sectionNumber:'4.11',
+      content:'<h3>4.11 Tension Pneumothorax Pathway</h3>' +
         '<p>This pathway is built around rapid recognition and immediate decompression. The critical operational principle is that a suspected tension pneumothorax in an unstable patient is treated as a clinical emergency, not a radiology problem.</p>' +
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Entry Conditions</div>' +
@@ -475,8 +539,8 @@ window.ACTT.algorithms={
       id:'multi-system',
       title:'Integrated Multi-System Decision Pathways',
       severity:'red',
-      sectionNumber:'4.11',
-      content:'<h3>4.11 Integrated Multi-System Decision Pathways</h3>' +
+      sectionNumber:'4.12',
+      content:'<h3>4.12 Integrated Multi-System Decision Pathways</h3>' +
         '<p>Real casualties often fit more than one algorithm at the same time. The clinician must decide what kills first, what can wait, and how one treatment may worsen another problem. This is where the earlier domain framework becomes useful.</p>' +
 
         '<h4>Common Conflicted Scenarios</h4>' +
@@ -499,7 +563,7 @@ window.ACTT.algorithms={
         '<li>After the intervention, force a reassessment before moving on.</li>' +
         '</ol>' +
 
-        '<h3>4.12 Algorithm Execution in the RCN At-Sea Context</h3>' +
+        '<h3>4.13 Algorithm Execution in the RCN At-Sea Context</h3>' +
         '<p>Shipboard practice changes how algorithms are used. The sequence may be the same as ashore, but the practical limits are different: staffing may be thinner, evacuation may be delayed, diagnostics may be limited, and the patient may need to be maintained for many hours.</p>' +
 
         '<h4>Practical Constraints</h4>' +
@@ -518,7 +582,7 @@ window.ACTT.algorithms={
         '<li>Use teleconsultation early when the next branch is uncertain or when competing priorities are difficult to balance.</li>' +
         '</ul>' +
 
-        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Errors in Algorithm Use (4.13)</div>' +
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Errors in Algorithm Use (4.14)</div>' +
         '<ul>' +
         '<li>Recognizing the problem but delaying the first treatment step.</li>' +
         '<li>Collecting data without acting on clear thresholds.</li>' +
@@ -528,10 +592,10 @@ window.ACTT.algorithms={
         '<li>Stopping at temporary improvement and missing the need for definitive management.</li>' +
         '</ul></div>' +
 
-        '<h4>End State for the Learner (4.14)</h4>' +
+        '<h4>End State for the Learner (4.15)</h4>' +
         '<p>After this chapter, the learner should be able to recognize the major ACTT-critical presentations, activate the correct pathway, carry out the first intervention sequence, identify when the current step has failed, and transition either to escalation or to prolonged holding. The aim is not memorization alone. The aim is to know what to do on the patient, in order, under pressure.</p>' +
 
-        '<h4>Bridge to the Next Chapter (4.15)</h4>' +
+        '<h4>Bridge to the Next Chapter (4.16)</h4>' +
         '<p>Chapter 5 moves from decision pathways to procedural execution. Where this chapter answers when to act and what branch comes next, the next chapter focuses on how to physically perform the core high-acuity procedures.</p>' +
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> At-Sea Considerations<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">' +
