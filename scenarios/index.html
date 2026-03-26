@@ -41,10 +41,11 @@ background:var(--accent-dim);color:var(--accent);
 padding:2px 8px;border-radius:4px;white-space:nowrap;
 }
 .topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
 .back-link{
 font-family:var(--mono);font-size:13px;color:var(--accent);
 text-decoration:none;display:flex;align-items:center;gap:4px;
+min-height:44px;padding:6px 0;
 }
 .back-link:hover{text-decoration:underline}
 
@@ -100,7 +101,8 @@ margin-top:2px;transition:color .2s,transform .2s;
 
 /* RESPONSIVE */
 @media(max-width:480px){
-.topbar{padding:0 10px}
+.topbar{padding:6px 10px;height:auto;min-height:48px}
+.topbar-right{width:100%;justify-content:space-between;gap:8px}
 .hero{padding:36px 0 24px}
 .scenario-card{padding:16px;gap:12px}
 }
@@ -115,7 +117,7 @@ margin-top:2px;transition:color .2s,transform .2s;
 <span class="topbar-title">Interactive Scenarios</span>
 </div>
 <div class="topbar-right">
-<a class="back-link" href="../index.html">← Main Reference</a>
+<a class="back-link" href="../index.html#/scenarios">← Main Reference</a>
 </div>
 </nav>
 

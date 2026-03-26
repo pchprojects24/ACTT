@@ -106,6 +106,10 @@ strong { color: var(--text-primary); }
   background: var(--bg-card);
   color: var(--text-secondary);
   border: 1px solid var(--border);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn.small:hover {
@@ -174,6 +178,9 @@ strong { color: var(--text-primary); }
   text-decoration: none;
   font-size: 0.85rem;
   white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .site-header a:hover { text-decoration: underline; }
@@ -270,6 +277,9 @@ strong { color: var(--text-primary); }
   text-decoration: none;
   font-size: 0.9rem;
   white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .back-link:hover { text-decoration: underline; }
@@ -319,6 +329,7 @@ strong { color: var(--text-primary); }
   color: var(--text-primary);
   transition: border-color 0.2s, box-shadow 0.2s;
   display: block;
+  min-height: 44px;
 }
 
 .card:hover {
@@ -450,12 +461,32 @@ details.ht-item summary:hover {
 
 @media (max-width: 600px) {
   .topbar { padding: 8px 12px; }
-  .topbar-inner { gap: 6px; }
+  .topbar-inner { gap: 8px; align-items: stretch; }
   .pill { font-size: 0.78rem; }
-  .btn.small { font-size: 0.78rem; padding: 4px 10px; }
+  .btn.small { font-size: 0.82rem; padding: 8px 12px; }
   .wrap { padding: 20px 14px 48px; }
   .content { padding: 20px 14px 48px; }
   h1 { font-size: 1.25rem; }
   h2 { font-size: 1rem; }
-  .site-header { padding: 8px 14px; gap: 10px; }
+  .site-header { padding: 8px 14px; gap: 8px; align-items: stretch; }
+  .site-title { width: 100%; min-width: 0; }
+  .site-header a { flex: 1 1 auto; justify-content: center; }
+  .site-header a:not(:last-child)::after { display: none; }
+  .idx-bar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .back-link { white-space: normal; }
+  .idx-subtitle,
+  .category {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-bottom: 24px;
+  }
 }

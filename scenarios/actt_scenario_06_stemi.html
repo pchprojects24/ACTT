@@ -41,7 +41,7 @@ background:var(--accent-dim);color:var(--accent);
 padding:2px 8px;border-radius:4px;white-space:nowrap;
 }
 .topbar-title{font-size:14px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
 .progress-track{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;width:0%;background:var(--accent);border-radius:2px;transition:width .4s ease}
 .progress-label{font-family:var(--mono);font-size:12px;color:var(--text-muted);white-space:nowrap}
@@ -253,7 +253,7 @@ cursor:pointer;margin-top:20px;transition:border-color .2s,color .2s;
 /* BACK LINK */
 .back-link{
 font-family:var(--mono);font-size:13px;color:var(--accent);
-text-decoration:none;display:flex;align-items:center;gap:4px;white-space:nowrap;
+text-decoration:none;display:flex;align-items:center;gap:4px;white-space:nowrap;min-height:44px;padding:6px 0;
 }
 .back-link:hover{text-decoration:underline}
 
@@ -275,7 +275,8 @@ transition:border-color .2s,background .2s;
 
 /* RESPONSIVE */
 @media(max-width:480px){
-.topbar{padding:0 10px}
+.topbar{padding:6px 10px;height:auto;min-height:48px}
+.topbar-right{width:100%;justify-content:space-between;gap:8px}
 .topbar-title{display:none}
 .hero{padding:36px 0 24px}
 .stage-body{padding:16px 16px 20px}
