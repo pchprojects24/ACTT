@@ -1,4 +1,4 @@
-const CACHE_NAME = 'actt-reference-v5';
+const CACHE_NAME = 'actt-reference-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -91,6 +91,7 @@ const ASSETS = [
   './data/Procedures/txa.html',
   './data/Procedures/wound_packing.html',
   './data/Sickbay inventory/index.html',
+  './data/Sickbay inventory/Data/master_inventory.csv',
   './data/Sickbay inventory/assets/app.js',
   './data/Sickbay inventory/assets/style.css',
   './data/Meds/index.html',
