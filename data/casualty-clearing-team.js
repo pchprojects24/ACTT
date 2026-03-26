@@ -1,140 +1,336 @@
-window.ACTT = window.ACTT || {};
+window.ACTT=window.ACTT||{};
+window.ACTT.cct={
+  id:'cct',
+  title:'Casualty Clearing Team',
+  subtitle:'Repository content map for support-team training build-out (draft organization)',
+  intro:'<p>This section is intentionally a <strong>content map</strong>, not final teaching text. It consolidates existing repository material that can be re-used for the Casualty Clearing Team audience and sorts it under the new submenu structure.</p><p>Each topic identifies what is directly useful now, what needs simplification, and what should remain flagged as advanced. Use this as the build scaffold for the next authoring pass.</p>',
+  sections:[
+    {
+      id:'role-responsibilities',
+      title:'Role and Responsibilities',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+ 
+        '<li><strong>Directly useful:</strong> Team lead ownership, role assignment, role drift prevention, and sustained 24–72 h team rhythm in <a href="#/team/role-assignment">Team & Communication</a> and <a href="#/team/sustained-performance">Team Performance During Holding</a>.</li>'+
+        '<li><strong>Partially useful:</strong> MASCAL command-role checklist can be adapted for small CCT staffing models: <a href="#/checklists/mascal">MASCAL checklist</a>.</li>'+
+        '<li><strong>Cross-link opportunity:</strong> Pair role expectations with <a href="#/shipboard/core-realities">Shipboard realities</a> and <a href="#/prolonged-holding/stabilization-checklist">stabilization checklist</a> so role limits are explicit.</li>'+
+        '</ul>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">ADVANCED</span> Items to keep out of entry-level CCT delivery</div><p>High-autonomy leadership content tied to RSI/chest tube/pericardiocentesis decision authority should remain advanced unless local scope explicitly includes it.</p></div>'+ 
+        '<p><em>Placeholder for next task:</em> convert this map into concise “what CCT member does in first 10 minutes / first hour / handover” role cards.</p>',
+      relatedLinks:['team/core-principles','team/role-assignment','team/sustained-performance','shipboard/core-realities','checklists/mascal']
+    },
+    {
+      id:'primary-assessment',
+      title:'Primary Assessment',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> <a href="#/algorithms/atls-trauma-survey">ATLS trauma survey algorithm</a>, <a href="#/domains/domain-3-specialized-trauma">trauma assessment framework</a>, and airway/circulation threshold triggers in <a href="#/thresholds/airway-respiratory">Critical Numbers</a>.</li>'+
+        '<li><strong>Partially useful:</strong> ACLS standalone pages can support non-trauma first-pass checks when collapse/cardiac patterns dominate.</li>'+
+        '<li><strong>Cross-link opportunity:</strong> Bridge assessment findings to action checklists (RSI, sepsis screening, DKA, chest pain) for CCT handoff accuracy.</li>'+
+        '</ul>'+
+        '<p><em>Placeholder for next task:</em> add a CCT-focused XABCDE quick sequence with “what to report immediately” prompts.</p>',
+      relatedLinks:['algorithms/atls-trauma-survey','domains/domain-3-specialized-trauma','thresholds/airway-respiratory','checklists/sepsis-screening','checklists/chest-pain-assessment']
+    },
+    {
+      id:'reporting-communication',
+      title:'Reporting and Communication',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> Closed-loop communication, critical change callouts, handover structure, and teleconsultation frameworks in <a href="#/team/acute-communication">acute communication</a>, <a href="#/team/handover">handover</a>, and <a href="#/team/teleconsultation">teleconsultation</a>.</li>'+
+        '<li><strong>Directly useful:</strong> <a href="#/checklists/medevac">MEDEVAC 9-line checklist</a> and <a href="#/checklists/transfer-evacuation">transfer/evacuation checklist</a> for standard reporting outputs.</li>'+
+        '<li><strong>Cross-link opportunity:</strong> Use documentation module from prolonged holding to reduce information loss across watch changes.</li>'+
+        '</ul>'+
+        '<p><em>Placeholder for next task:</em> add one-page CCT handover template (casualty state, interventions, trends, pending risks).</p>',
+      relatedLinks:['team/acute-communication','team/handover','team/teleconsultation','prolonged-holding/documentation-continuity','checklists/medevac','checklists/transfer-evacuation']
+    },
+    {
+      id:'equipment',
+      title:'Equipment',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> Device pages in <a href="data/Equipment/index.html">Equipment (standalone)</a> for Zoll EMV, monitor, suction, i-STAT, Infusomat, Belmont buddy lite, oxygen concentrator.</li>'+
+        '<li><strong>Directly useful:</strong> Readiness checklists for airway and monitor function (<a href="#/checklists/emergency-airway-equipment">airway equipment</a>, <a href="#/checklists/defibrillator-monitor-function">defib/monitor</a>).</li>'+
+        '<li><strong>Partially useful:</strong> Appendix P source bundle surfaces transport-monitoring references and IFUs; useful for job aids.</li>'+
+        '</ul>'+
+        '<p><em>Placeholder for next task:</em> split equipment into “CCT operator checks” vs “advanced clinician setup” check blocks.</p>',
+      relatedLinks:['checklists/emergency-airway-equipment','checklists/defibrillator-monitor-function','appendices/appendix-p','appendices/appendix-o']
+    },
+    {
+      id:'patient-movement',
+      title:'Patient Movement',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> <a href="#/shipboard/location-movement">location and movement at sea</a>, <a href="#/shipboard/triage-prioritization">shipboard triage/prioritization</a>, and <a href="#/team/handover">handover/transfer risks</a>.</li>'+
+        '<li><strong>Directly useful:</strong> Transfer prep items in <a href="#/checklists/transfer-evacuation">transfer/evacuation checklist</a> and MEDEVAC 9-line.</li>'+
+        '<li><strong>Cross-link opportunity:</strong> Pull selected CCT Pocket / Annex C references from Appendix P into movement doctrine notes.</li>'+
+        '</ul>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">ADVANCED</span> Keep as advanced references</div><p>Full critical-care transport doctrine documents (CCT Pocket, CCTT Pacific, Annex C) are valuable but too dense for baseline CCT onboarding; keep as advanced annex links.</p></div>'+ 
+        '<p><em>Placeholder for next task:</em> add a “move/no-move now” decision aid tied to airway and hemodynamic stability checks.</p>',
+      relatedLinks:['shipboard/location-movement','shipboard/triage-prioritization','team/handover','checklists/transfer-evacuation','checklists/medevac','appendices/appendix-p']
+    },
+    {
+      id:'injuries-medical-emergencies',
+      title:'Injuries and Medical Emergencies',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> High-frequency algorithms (burns, TBI, sepsis, hypothermia, chest decompression, seizure, DKA, STEMI, combative casualty).</li>'+
+        '<li><strong>Directly useful:</strong> Scenario package (12 ACTT scenarios) provides practical context for CCT response sequences.</li>'+
+        '<li><strong>Partially useful:</strong> Some procedure pages assume clinician-level intervention; CCT extracts should focus on prep/assist/escalate triggers.</li>'+
+        '</ul>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">ADVANCED</span> Not baseline CCT procedural scope</div><p>Surgical cricothyrotomy, pericardiocentesis, fibrinolysis dosing strategy, and full ventilator titration logic should remain advanced unless specifically required by role scope.</p></div>'+ 
+        '<p><em>Placeholder for next task:</em> create CCT “recognize-support-escalate” cards per emergency type.</p>',
+      relatedLinks:['algorithms/burn-resuscitation','algorithms/tbi-management','algorithms/sepsis','algorithms/hypothermia','algorithms/chest-decompression','algorithms/seizure-management','algorithms/dka','algorithms/stemi','algorithms/combative-patient']
+    },
+    {
+      id:'monitoring-vital-signs',
+      title:'Monitoring and Vital Signs',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> Thresholds chapter (airway, hemodynamic, neurologic, burn, sepsis, reassessment numbers) for trend triggers.</li>'+
+        '<li><strong>Directly useful:</strong> Prolonged holding reassessment rhythm, device maintenance, and documentation continuity sections.</li>'+
+        '<li><strong>Directly useful:</strong> Checklists: sepsis screen, post-ROSC, post-fibrinolysis monitoring, DKA hyperglycemia.</li>'+
+        '</ul>'+
+        '<p><em>Placeholder for next task:</em> draft a CCT vitals-trending board template (time, trend, trigger reached, action taken).</p>',
+      relatedLinks:['thresholds/reassessment-numbers','thresholds/hemodynamic','thresholds/airway-respiratory','prolonged-holding/reassessment-rhythm','prolonged-holding/documentation-continuity','checklists/sepsis-screening','checklists/post-rosc']
+    },
+    {
+      id:'quick-reference',
+      title:'Quick Reference',
+      content:
+        '<h3>Existing Material Mapped Here</h3>'+
+        '<ul>'+
+        '<li><strong>Directly useful:</strong> Appendices A–P, especially med-tech quick cards, oxygen quick reference, and supplemental transport/monitoring references.</li>'+
+        '<li><strong>Directly useful:</strong> Clinical tools (GCS, burn, dose calc, reassessment timer, interactions, differential diagnosis) for at-bedside use.</li>'+
+        '<li><strong>Cross-link opportunity:</strong> Add one CCT launcher page that points to the most-used 10 references for casualty clearing workflows.</li>'+
+        '</ul>'+
+        '<p><em>Placeholder for next task:</em> produce compact CCT quick-reference bundle and trim duplicate source docs.</p>',
+      relatedLinks:['appendices/appendix-n','appendices/appendix-o','appendices/appendix-p','tools/gcs','tools/burn','tools/dosecalc','tools/timer']
+    }
+  ]
+};
 
-const casualtyClearingTeamSection = {
+window.ACTT = window.ACTT || {};
+window.ACTT.casualtyClearingTeam = {
   id: 'casualty-clearing-team',
   title: 'Casualty Clearing Team',
-  subtitle: 'Practical support-team workflow for casualty clearing, stabilization, movement, and handover.',
+  subtitle: 'Practical shipboard support guide for casualty reception, stabilization support, and transfer readiness.',
   intro:
-    '<p>This section is built for <strong>support-team execution</strong>: what to do first, what to report, and what to prepare next. It intentionally avoids advanced clinician-only doctrine unless needed for escalation.</p>'+ 
-    '<p>Use the submenu topics as a sequence: role setup, primary assessment, communication, equipment, movement, and ongoing monitoring.</p>',
+    '<p>This section is for <strong>Casualty Clearing Team (CCT) support personnel</strong> who help receive, stabilize, monitor, document, and move casualties on board. It is intentionally practical and task-focused.</p>' +
+    '<p>Use these pages during drills and real events to support safe, repeatable care when staffing, space, and MEDEVAC timelines are constrained.</p>' +
+    '<div class="shipboard-callout"><strong>How to use this section:</strong><ul><li>Start with <strong>Role and Responsibilities</strong> if the team is forming.</li><li>Use <strong>Primary Assessment</strong> and <strong>Reporting and Communication</strong> during first contact and handoff.</li><li>Use <strong>Equipment</strong>, <strong>Patient Movement</strong>, and <strong>Monitoring and Vital Signs</strong> during ongoing care.</li><li>Use <strong>Quick Reference</strong> for compressed checklists.</li></ul></div>',
   sections: [
     {
       id: 'role-and-responsibilities',
       title: 'Role and Responsibilities',
       content:
-        '<h3>Role setup in the first minutes</h3>'+ 
-        '<ul>'+ 
-        '<li>Assign lead, airway support, circulation/support, recorder, and runner roles immediately.</li>'+ 
-        '<li>Confirm role boundaries early to prevent role drift during high workload periods.</li>'+ 
-        '<li>Reconfirm who owns escalation calls, external communication, and transfer preparation.</li>'+ 
-        '</ul>'+ 
-        '<h3>Support-team scope (baseline)</h3>'+ 
-        '<p>Baseline CCT actions focus on <strong>recognize, support, prepare, and escalate</strong>. Advanced procedures remain clinician-directed unless local scope specifically authorizes independent performance.</p>'+ 
-        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">ADVANCED</span> Keep outside baseline onboarding</div><p>High-autonomy decisions for surgical airway, chest tube insertion decisions, and other invasive specialist procedures should remain advanced references.</p></div>'+ 
-        '<h3>Quick role reset prompt</h3>'+ 
-        '<p><strong>Every handover or watch change:</strong> Who leads? Who documents? Who calls out deterioration? Who coordinates movement?</p>',
-      relatedLinks: ['team/core-principles','team/role-assignment','team/sustained-performance','prolonged-holding/stabilization-checklist','checklists/mascal']
+        '<h3>Role and Responsibilities</h3>' +
+        '<h4>Mission</h4>' +
+        '<p>Provide organized casualty support that keeps patients stable, visible, and ready for transfer while the clinical lead performs advanced decision-making.</p>' +
+        '<h4>Core CCT Tasks</h4>' +
+        '<ul>' +
+          '<li>Prepare treatment area, oxygen, suction, monitor, and movement route.</li>' +
+          '<li>Support hemorrhage control, airway positioning, warming, and basic interventions as directed.</li>' +
+          '<li>Obtain and repeat vital signs; call out deterioration early.</li>' +
+          '<li>Track times, treatments, fluid totals, and key changes.</li>' +
+          '<li>Prepare transfer paperwork and package casualty for internal move or MEDEVAC.</li>' +
+        '</ul>' +
+        '<h4>Suggested Team Roles (adapt to staffing)</h4>' +
+        '<ul>' +
+          '<li><strong>CCT Lead/Coordinator:</strong> assigns tasks, maintains overview, confirms priorities.</li>' +
+          '<li><strong>Bedside Support:</strong> airway assist, hemorrhage control support, splinting, warming, positioning.</li>' +
+          '<li><strong>Monitor/Recorder:</strong> trends vitals, documents interventions and response.</li>' +
+          '<li><strong>Runner/Logistics:</strong> equipment, medications, route prep, communications relay.</li>' +
+        '</ul>' +
+        '<div class="shipboard-callout"><strong>Role boundaries:</strong><ul><li>CCT supports and executes assigned tasks.</li><li>Advanced procedures (e.g., RSI, chest tube, pressor titration strategy) remain under clinician direction.</li><li>When unsure, escalate early and clarify task ownership out loud.</li></ul></div>'
     },
     {
       id: 'primary-assessment',
       title: 'Primary Assessment',
       content:
-        '<h3>CCT primary pass (XABCDE)</h3>'+ 
-        '<ol>'+ 
-        '<li><strong>Immediate threats:</strong> major hemorrhage, airway compromise, severe respiratory failure.</li>'+ 
-        '<li><strong>Stabilization actions:</strong> oxygenation, hemorrhage control, temperature control, and rapid trend baseline.</li>'+ 
-        '<li><strong>Escalation trigger check:</strong> identify thresholds that require immediate clinician review or transfer planning.</li>'+ 
-        '</ol>'+ 
-        '<h3>What to report immediately</h3>'+ 
-        '<ul>'+ 
-        '<li>Airway status and respiratory effort changes.</li>'+ 
-        '<li>Perfusion/pressure trend direction (not just one value).</li>'+ 
-        '<li>Mental-status change or new focal neurologic concern.</li>'+ 
-        '<li>Interventions already performed and response.</li>'+ 
-        '</ul>',
-      relatedLinks: ['algorithms/atls-trauma-survey','domains/domain-3-specialized-trauma','thresholds/airway-respiratory','thresholds/hemodynamic','checklists/sepsis-screening']
+        '<h3>Primary Assessment</h3>' +
+        '<p>Use a simple repeatable structure: <strong>MARCH</strong> then <strong>ABCDE/XABCDE reassessment</strong> when directed. Treat immediate killers first.</p>' +
+        '<h4>MARCH for CCT Support</h4>' +
+        '<ul>' +
+          '<li><strong>M — Massive hemorrhage:</strong> apply direct pressure, support tourniquet use, prepare packing supplies, note time.</li>' +
+          '<li><strong>A — Airway:</strong> position, suction, adjuncts (OPA/NPA) if directed, prepare BVM and oxygen.</li>' +
+          '<li><strong>R — Respiration:</strong> expose chest, apply oxygen, assist seal/dressing setup, watch for increasing distress.</li>' +
+          '<li><strong>C — Circulation:</strong> assist IV/IO setup, keep casualty warm, check pulses/skin signs, track fluid given.</li>' +
+          '<li><strong>H — Head/Hypothermia:</strong> AVPU/GCS trend, pupils if trained, prevent heat loss immediately.</li>' +
+        '</ul>' +
+        '<h4>After Any Intervention, Move, or Deterioration</h4>' +
+        '<ul>' +
+          '<li>Repeat quick primary check (airway, breathing, perfusion, mental status, temperature exposure).</li>' +
+          '<li>Confirm all lines/tubes/dressings remained secure.</li>' +
+          '<li>Update latest vitals and response to treatment.</li>' +
+        '</ul>' +
+        '<div class="shipboard-callout"><strong>Escalate now if any of the following:</strong><ul><li>Uncontrolled bleeding, worsening breathing, or falling level of consciousness.</li><li>SpO<sub>2</sub> dropping despite oxygen.</li><li>Shock signs worsening (cool clammy skin, weak pulses, altered mentation, dropping BP).</li></ul></div>'
     },
     {
       id: 'reporting-and-communication',
       title: 'Reporting and Communication',
       content:
-        '<h3>Communication standard</h3>'+ 
-        '<p>Use concise, closed-loop updates with a repeat-back for tasking and critical values.</p>'+ 
-        '<h3>Minimum handover bundle</h3>'+ 
-        '<ul>'+ 
-        '<li>Casualty identifiers and mechanism/problem summary.</li>'+ 
-        '<li>Current status: airway, breathing, circulation, neuro trend, temperature.</li>'+ 
-        '<li>Interventions with times and response.</li>'+ 
-        '<li>Current concerns, pending risks, and next expected deterioration trigger.</li>'+ 
-        '</ul>'+ 
-        '<h3>When preparing transfer</h3>'+ 
-        '<p>Start MEDEVAC and transfer checklist elements early to reduce delay once movement is approved.</p>',
-      relatedLinks: ['team/acute-communication','team/handover','team/teleconsultation','checklists/medevac','checklists/transfer-evacuation','prolonged-holding/documentation-continuity']
+        '<h3>Reporting and Communication</h3>' +
+        '<h4>MIST Handover Format (default)</h4>' +
+        '<ul>' +
+          '<li><strong>M — Mechanism/Medical complaint:</strong> what happened or key illness concern.</li>' +
+          '<li><strong>I — Injuries/Information:</strong> major findings from primary survey and obvious injuries.</li>' +
+          '<li><strong>S — Signs:</strong> latest vitals, trends, mental status, oxygen requirement.</li>' +
+          '<li><strong>T — Treatment:</strong> what was done, when, and patient response.</li>' +
+        '</ul>' +
+        '<h4>Closed-Loop Communication Rules</h4>' +
+        '<ul>' +
+          '<li>Repeat back critical orders (drug, dose, route, time).</li>' +
+          '<li>Verbally confirm task completion.</li>' +
+          '<li>Call out changes immediately: "BP falling", "SpO<sub>2</sub> now 88%", "more agitated".</li>' +
+        '</ul>' +
+        '<h4>MEDEVAC / Transfer Preparation Snapshot</h4>' +
+        '<ul>' +
+          '<li>Patient identifiers, problem list, and urgency category.</li>' +
+          '<li>Current status: airway/oxygen, circulation, neuro status, pain/sedation status.</li>' +
+          '<li>Interventions with times (tourniquet time, meds, fluids, procedures).</li>' +
+          '<li>Outstanding risks: potential airway failure, bleeding risk, device concerns.</li>' +
+        '</ul>' +
+        '<div class="shipboard-callout"><strong>Avoid these common handoff failures:</strong><ul><li>Missing times for last sedative/analgesic doses.</li><li>No trend data (only one set of vitals).</li><li>No statement of what may fail next.</li></ul></div>'
     },
     {
       id: 'equipment',
       title: 'Equipment',
       content:
-        '<h3>Operator-first equipment checks</h3>'+ 
-        '<ul>'+ 
-        '<li><strong>Airway/oxygen:</strong> suction, oxygen source, BVM, airway adjunct readiness.</li>'+ 
-        '<li><strong>Monitoring:</strong> monitor power, leads/cables, trend capture reliability.</li>'+ 
-        '<li><strong>Access/infusion:</strong> IV/IO supplies and infusion setup readiness.</li>'+ 
-        '<li><strong>Transport:</strong> battery/endurance, secured lines, movement-safe packaging.</li>'+ 
-        '</ul>'+ 
-        '<p>Keep checks short and repeatable. If a device fails readiness, escalate and assign a backup immediately.</p>',
-      relatedLinks: ['checklists/emergency-airway-equipment','checklists/defibrillator-monitor-function','appendices/appendix-o','appendices/appendix-p']
+        '<h3>Equipment</h3>' +
+        '<h4>Priority Equipment Groups</h4>' +
+        '<ul>' +
+          '<li><strong>Airway/Oxygen:</strong> oxygen source, BVM, suction, airway adjuncts, ETCO<sub>2</sub> if available.</li>' +
+          '<li><strong>Hemorrhage/Trauma:</strong> tourniquets, hemostatic gauze, pressure dressings, splints, burn sheets.</li>' +
+          '<li><strong>Monitoring:</strong> ECG/defib, SpO<sub>2</sub>, NIBP cuffs, thermometer, glucose meter.</li>' +
+          '<li><strong>Access/Fluids:</strong> IV/IO supplies, flushes, giving sets, warmed fluids when available.</li>' +
+          '<li><strong>Movement/Packaging:</strong> stretcher/litter, straps, blankets, securing materials, route lights.</li>' +
+        '</ul>' +
+        '<h4>Quick Readiness Check (start of event or watch)</h4>' +
+        '<ul>' +
+          '<li>Power/battery status confirmed for monitor, suction, and transport ventilator if used.</li>' +
+          '<li>Oxygen reserve estimated for projected transport/holding period.</li>' +
+          '<li>Critical disposables present and in date (pads, tubing, airway consumables).</li>' +
+          '<li>Backup plan staged (spare suction, spare airway adjuncts, spare BP cuff/probe).</li>' +
+        '</ul>' +
+        '<div class="shipboard-callout"><strong>Shipboard tip:</strong> Before moving a patient, recheck what can snag, disconnect, tip, or run out (oxygen, battery, drains, lines, monitor leads).</div>'
     },
     {
       id: 'patient-movement',
       title: 'Patient Movement',
       content:
-        '<h3>Move / no-move framing</h3>'+ 
-        '<ul>'+ 
-        '<li><strong>Do not move yet:</strong> uncontrolled airway or hemodynamic instability without immediate mitigation.</li>'+ 
-        '<li><strong>Move now:</strong> destination offers clearly higher safety or required intervention capacity.</li>'+ 
-        '<li><strong>Before movement:</strong> secure tubes/lines, pre-brief route, assign hazards and stop points.</li>'+ 
-        '</ul>'+ 
-        '<h3>Transfer handoff discipline</h3>'+ 
-        '<p>Give a short movement brief before departure, then a structured handoff on arrival without omitting trend data.</p>',
-      relatedLinks: ['shipboard/location-movement','shipboard/triage-prioritization','team/handover','checklists/transfer-evacuation','checklists/medevac']
+        '<h3>Patient Movement</h3>' +
+        '<p>Move only when destination improves care or safety. Every movement is a risk event.</p>' +
+        '<h4>Pre-Move Checklist</h4>' +
+        '<ul>' +
+          '<li>State why moving and where going.</li>' +
+          '<li>Recheck airway, breathing, perfusion, and bleeding control before departure.</li>' +
+          '<li>Secure all lines/tubes/drains with slack and visible anchor points.</li>' +
+          '<li>Assign roles: airway watch, lines/drains watch, route lead, stretcher team.</li>' +
+          '<li>Carry immediate rescue kit: oxygen, BVM, suction option, key meds, dressing supplies.</li>' +
+        '</ul>' +
+        '<h4>During Movement</h4>' +
+        '<ul>' +
+          '<li>Pause if deterioration occurs; treat before continuing.</li>' +
+          '<li>Protect C-spine and fractures as indicated.</li>' +
+          '<li>Maintain verbal updates at intervals and at route hazards (ladders, narrow passageways).</li>' +
+        '</ul>' +
+        '<h4>Post-Move Arrival Check</h4>' +
+        '<ul>' +
+          '<li>Immediate reassessment and full set of vitals.</li>' +
+          '<li>Confirm device function (oxygen flow, suction, monitor signals, drain position/patency).</li>' +
+          '<li>Document movement time and any adverse events.</li>' +
+        '</ul>'
     },
     {
       id: 'injuries-and-medical-emergencies',
       title: 'Injuries and Medical Emergencies',
       content:
-        '<h3>High-frequency emergency set</h3>'+ 
-        '<p>Prioritize response familiarity for burns, TBI, sepsis, chest syndromes, DKA/hyperglycemia, seizure, hypothermia, and agitation/combative casualty pathways.</p>'+ 
-        '<h3>Support-team expectations</h3>'+ 
-        '<ul>'+ 
-        '<li>Recognize early pattern and announce likely pathway.</li>'+ 
-        '<li>Prepare equipment/medication support for clinician-directed interventions.</li>'+ 
-        '<li>Track response and deterioration triggers for rapid escalation.</li>'+ 
-        '</ul>'+ 
-        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">SCOPE NOTE</span> Keep baseline practical</div><p>Use this section for sequence control and prep support. Reserve specialist-only procedural detail for advanced references.</p></div>',
-      relatedLinks: ['algorithms/burn-resuscitation','algorithms/tbi-management','algorithms/sepsis','algorithms/stemi','algorithms/dka','algorithms/seizure-management','algorithms/combative-patient']
+        '<h3>Injuries and Medical Emergencies</h3>' +
+        '<p>CCT members should recognize patterns early, support immediate measures, and escalate rapidly.</p>' +
+        '<h4>High-Priority Trauma Patterns</h4>' +
+        '<ul>' +
+          '<li><strong>Major bleeding:</strong> direct pressure, tourniquet/packing support, warming, rapid reassessment.</li>' +
+          '<li><strong>Chest injury:</strong> worsening dyspnea, unilateral breath changes, chest seal/chest tube support readiness.</li>' +
+          '<li><strong>Head injury:</strong> declining mentation, vomiting, pupils changing, seizure activity.</li>' +
+          '<li><strong>Burns/inhalation:</strong> airway soot/voice change, circumferential burns, fluid and temperature support.</li>' +
+          '<li><strong>Fracture/crush:</strong> splint, distal pulse/sensation checks, pain and compartment concern watch.</li>' +
+        '</ul>' +
+        '<h4>Common Shipboard Medical Emergencies</h4>' +
+        '<ul>' +
+          '<li><strong>ACS/chest pain:</strong> monitor, vitals, oxygen if hypoxic, prepare for transfer pathway.</li>' +
+          '<li><strong>Sepsis/shock:</strong> fever/hypothermia plus hypotension or altered mental status; prioritize perfusion support.</li>' +
+          '<li><strong>Anaphylaxis:</strong> airway swelling/wheeze/hypotension; immediate emergency response support.</li>' +
+          '<li><strong>DKA/hyperglycemia:</strong> dehydration, tachypnea, altered status; monitor glucose and fluids per plan.</li>' +
+          '<li><strong>Hypothermia/drowning:</strong> gentle handling, rewarming support, careful vital-sign checks.</li>' +
+        '</ul>' +
+        '<div class="shipboard-callout"><strong>CCT focus:</strong> recognize, report, support immediate interventions, then trend response. Do not wait for complete diagnosis before escalating a dangerous pattern.</div>'
     },
     {
       id: 'monitoring-and-vital-signs',
       title: 'Monitoring and Vital Signs',
       content:
-        '<h3>Trend-first monitoring approach</h3>'+ 
-        '<ul>'+ 
-        '<li>Record time-stamped trends, not isolated values.</li>'+ 
-        '<li>Document trigger thresholds reached and action taken.</li>'+ 
-        '<li>Use reassessment rhythm appropriate to casualty acuity and trajectory.</li>'+ 
-        '</ul>'+ 
-        '<h3>Minimum tracking board fields</h3>'+ 
-        '<p><strong>Time | vital trend | trigger reached | intervention | response | next review time</strong></p>',
-      relatedLinks: ['thresholds/reassessment-numbers','thresholds/hemodynamic','thresholds/airway-respiratory','prolonged-holding/reassessment-rhythm','checklists/post-rosc','checklists/sepsis-screening']
+        '<h3>Monitoring and Vital Signs</h3>' +
+        '<h4>What to Trend</h4>' +
+        '<ul>' +
+          '<li>HR, BP, RR, SpO<sub>2</sub>, temperature, pain score, mental status (AVPU/GCS), urine output when available.</li>' +
+          '<li>Device status: oxygen source, airway position, dressings, drains, IV/IO patency, infusion rates.</li>' +
+          '<li>Clinical response after each intervention (better/worse/unchanged).</li>' +
+        '</ul>' +
+        '<h4>Practical Frequency Guide</h4>' +
+        '<ul>' +
+          '<li><strong>Unstable or immediately post-intervention:</strong> every 5-15 min.</li>' +
+          '<li><strong>Temporarily stable high-risk casualty:</strong> every 15-30 min.</li>' +
+          '<li><strong>Extended holding with stable trend:</strong> at least hourly, plus after any change.</li>' +
+        '</ul>' +
+        '<h4>Escalation Triggers</h4>' +
+        '<ul>' +
+          '<li>New hypoxia, rising oxygen requirement, or worsening work of breathing.</li>' +
+          '<li>Falling BP, rising HR, reduced urine output, cool mottled skin, or altered mentation.</li>' +
+          '<li>New confusion, seizure, focal neurologic signs, or decreasing GCS.</li>' +
+          '<li>Recurrent bleeding, drain failure, loss of IV/IO access, or equipment failure.</li>' +
+        '</ul>' +
+        '<div class="shipboard-callout"><strong>Trend over snapshot:</strong> one normal set of vitals does not clear risk. A worsening trend is often the earliest warning at sea.</div>'
     },
     {
       id: 'quick-reference',
       title: 'Quick Reference',
       content:
-        '<h3>Recommended launch set (most-used)</h3>'+ 
-        '<ul>'+ 
-        '<li>Primary assessment algorithm and airway/hemodynamic threshold pages.</li>'+ 
-        '<li>MEDEVAC + transfer/evacuation checklists.</li>'+ 
-        '<li>Handover communication page and documentation continuity page.</li>'+ 
-        '<li>At-bedside tools: GCS, burn calculator, dose calculator, reassessment timer.</li>'+ 
-        '</ul>'+ 
-        '<h3>Use this page for fast jump navigation</h3>'+ 
-        '<p>If content appears duplicated elsewhere, keep this section as the concise launcher and defer full detail to source pages.</p>',
-      relatedLinks: ['algorithms/atls-trauma-survey','thresholds/airway-respiratory','thresholds/hemodynamic','team/handover','checklists/medevac','checklists/transfer-evacuation','appendices/appendix-n','tools/gcs','tools/burn','tools/dosecalc','tools/timer']
+        '<h3>Quick Reference</h3>' +
+        '<h4>60-Second CCT Start</h4>' +
+        '<ul>' +
+          '<li>State lead and roles.</li>' +
+          '<li>Run MARCH.</li>' +
+          '<li>Apply monitor and get baseline vitals.</li>' +
+          '<li>Start documentation clock (times, meds, interventions, response).</li>' +
+          '<li>Identify likely transfer need early.</li>' +
+        '</ul>' +
+        '<h4>MIST Handover Card</h4>' +
+        '<ul>' +
+          '<li><strong>M:</strong> Mechanism/medical complaint</li>' +
+          '<li><strong>I:</strong> Injuries/information found</li>' +
+          '<li><strong>S:</strong> Signs (latest + trend)</li>' +
+          '<li><strong>T:</strong> Treatments + times + response</li>' +
+        '</ul>' +
+        '<h4>Before Any Movement</h4>' +
+        '<ul>' +
+          '<li>Reassess ABC/perfusion.</li>' +
+          '<li>Secure devices and confirm oxygen/power reserve.</li>' +
+          '<li>Assign airway watcher and line watcher.</li>' +
+          '<li>Carry rescue kit and brief route hazards.</li>' +
+        '</ul>' +
+        '<h4>Do Not Miss</h4>' +
+        '<ul>' +
+          '<li>Tourniquet time not documented.</li>' +
+          '<li>No repeat vitals after meds/procedure/movement.</li>' +
+          '<li>Unclear last sedative/analgesic dose at handover.</li>' +
+          '<li>Device displacement after transfer.</li>' +
+        '</ul>'
     }
   ]
 };
-
-window.ACTT.casualtyClearingTeam = casualtyClearingTeamSection;
-window.ACTT.cct = casualtyClearingTeamSection;
