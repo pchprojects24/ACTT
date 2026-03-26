@@ -936,6 +936,44 @@ window.ACTT.appendices={
         {title:'Ventilator PERLs_Handout for Students.pdf',file:'Ventilator PERLs_Handout for Students.pdf'},
         {title:'oxygen-invacare-platinum10.html',file:'oxygen-invacare-platinum10.html',note:'Stationary concentrator quick-use reference.'}
       ]
+    },
+    {
+      id:'appendix-p',
+      title:'Appendix P — Supplemental Transport, Monitoring & Infusion References',
+      content:
+        '<p>This appendix surfaces high-value source documents that were present in the repository but not previously exposed in the in-app reference flow. It is intentionally curated: only practical bedside or transport-use references are included here.</p>'+
+        '<div class="table-wrapper"><table>'+
+        '<thead><tr><th>Reference</th><th>Best Use in ACTT Context</th><th>Why Included</th></tr></thead>'+
+        '<tbody>'+
+        '<tr><td><strong>ECG Cheat sheet</strong></td><td>Rapid rhythm and ischemia pattern refresh before or during ACS/arrhythmia cases</td><td>High-frequency skill support that complements ACLS and STEMI pathways.</td></tr>'+
+        '<tr><td><strong>Adjunct Medications for Management of Acute MI</strong></td><td>Medication planning after STEMI recognition and fibrinolytic decision</td><td>Adds practical drug support details beyond the core algorithm card.</td></tr>'+
+        '<tr><td><strong>TOH Infusion Sheets</strong></td><td>Pump setup and bedside infusion titration reference</td><td>Useful concentration and titration guardrails for prolonged/critical care holds.</td></tr>'+
+        '<tr><td><strong>Y-site Compatibility Critical Care Chart</strong></td><td>Line planning when access is limited and multiple infusions are needed</td><td>Helps reduce preventable infusion compatibility errors.</td></tr>'+
+        '<tr><td><strong>Zoll EMV Plus / EMV Quick Guide</strong></td><td>Ventilator setup checks, troubleshooting, and settings refresh</td><td>Operationally relevant for airway stations and deteriorating respiratory patients.</td></tr>'+
+        '<tr><td><strong>I-STAT manuals (Istat ACTT / NRU Asterix / IStat manual)</strong></td><td>Analyzer setup, cartridge handling, and troubleshooting at point of care</td><td>Supports lab reliability during scenarios and real prolonged holds.</td></tr>'+
+        '<tr><td><strong>Infusomat IFU (2nd Gen)</strong></td><td>Pump-specific setup and alarm troubleshooting</td><td>Adds practical backup guidance for infusion delivery continuity.</td></tr>'+
+        '<tr><td><strong>CCT Pocket / CCTT Pacific / Annex C CCT Manual</strong></td><td>Transfer planning standards and critical care transport framing</td><td>Extends team handover and transport preparation content with doctrinal references.</td></tr>'+
+        '<tr><td><strong>NATO TCCC Maritime Scenarios</strong></td><td>Cross-checking maritime trauma care training scenarios</td><td>High educational value for scenario design and maritime context reinforcement.</td></tr>'+
+        '</tbody></table></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CURATION NOTE</span> Intentionally Not Fully Surfaced</div>'+
+        '<p>Administrative drafts, candidate schedules, and duplicate legacy versions remain excluded from core navigation to avoid clutter. Use this appendix as a bridge to essential supplemental references while keeping the app focused on high-yield operational content.</p></div>',
+      relatedLinks:['algorithms/acs-stemi','appendices/appendix-l','team/handover','prolonged-holding/critical-care-priorities','tools/interactions'],
+      sources:[
+        {title:'ECG Cheat sheet.pdf',file:'ECG Cheat sheet.pdf'},
+        {title:'Adjunct Medications for Management of Acute MI.pdf',file:'Adjunct Medications for Management of Acute MI.pdf'},
+        {title:'TOH Infusion Sheets.pdf',file:'TOH Infusion Sheets.pdf'},
+        {title:'Y-site Compatibility Critical Care Chart June 2022.pdf',file:'Y-site Compatibility Critical Care Chart June 2022.pdf'},
+        {title:'Zoll EMV Plus.pdf',file:'Zoll EMV Plus.pdf'},
+        {title:'EMV Quick guide.pdf',file:'EMV Quick guide.pdf'},
+        {title:'Istat ACTT.pdf',file:'Istat ACTT.pdf'},
+        {title:'NRU Asterix i-STAT Procedure Manual.pdf',file:'NRU Asterix i-STAT Procedure Manual.pdf'},
+        {title:'IStat manual.pdf',file:'IStat manual.pdf'},
+        {title:'Infusomat_2ndGen_IFU1.pdf',file:'Infusomat_2ndGen_IFU1.pdf'},
+        {title:'CCT Pocket 2022.pdf',file:'CCT Pocket 2022.pdf'},
+        {title:'CCTT_Pacific Version_revised 2021.pdf',file:'CCTT_Pacific Version_revised 2021.pdf'},
+        {title:'Annex C CCT Manual V3  Final Approved.pdf',file:'Annex C CCT Manual V3  Final Approved.pdf'},
+        {title:'NATO TCCC Maritime Scenarios_MedNP_UPDATE 24JUN2020.pdf',file:'NATO TCCC Maritime Scenarios_MedNP_UPDATE 24JUN2020.pdf'}
+      ]
     }
   ]
 };
