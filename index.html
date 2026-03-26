@@ -10,19 +10,19 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='24' fill='%231a2332'/%3E%3Ctext x='96' y='120' font-family='Arial,sans-serif' font-size='80' font-weight='bold' fill='%233b82f6' text-anchor='middle'%3EA%3C/text%3E%3Ctext x='96' y='160' font-family='Arial,sans-serif' font-size='24' fill='%2394a3b8' text-anchor='middle'%3ECTT%3C/text%3E%3C/svg%3E">
 <style>
 :root {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --bg-surface: #1a2332;
-  --bg-card: #243044;
+  --bg-primary: #15243a;
+  --bg-secondary: #21344f;
+  --bg-tertiary: #314765;
+  --bg-surface: #1c2d45;
+  --bg-card: #233a57;
   --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-secondary: #b2c1d6;
+  --text-muted: #8ea3c0;
   --accent: #3b82f6;
   --accent-hover: #2563eb;
   --accent-dim: #1e3a5f;
-  --border: #334155;
-  --border-light: #475569;
+  --border: #3a4f6e;
+  --border-light: #4f678a;
   --severity-red: #dc2626;
   --severity-red-bg: #450a0a;
   --severity-amber: #d97706;
@@ -43,9 +43,9 @@
   --shadow-lg: 0 8px 24px rgba(0,0,0,0.3);
 }
 body.light-mode {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #f1f5f9;
-  --bg-tertiary: #e2e8f0;
+  --bg-primary: #f2f6fb;
+  --bg-secondary: #eaf1f8;
+  --bg-tertiary: #dde7f2;
   --bg-surface: #ffffff;
   --bg-card: #ffffff;
   --text-primary: #1e293b;
@@ -335,6 +335,12 @@ tr:hover td { background: var(--bg-secondary); }
 .home-stat strong { display: block; font-size: 1rem; line-height: 1.2; margin-bottom: 3px; color: var(--text-primary); }
 .home-stat span { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .home-section-title { margin: 24px 0 12px; font-size: 1.08rem; font-weight: 700; letter-spacing: 0.01em; }
+.home-section-subtitle { margin: -4px 0 12px; font-size: 0.9rem; color: var(--text-secondary); }
+.home-flow-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-bottom: 20px; }
+.home-flow-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
+.home-flow-card h3 { margin: 0 0 6px; font-size: 0.98rem; }
+.home-flow-card p { margin: 0; color: var(--text-secondary); font-size: 0.86rem; line-height: 1.55; }
+
 .nav-group-label {
   padding: 8px 16px 4px;
   font-size: 0.72rem;
@@ -713,17 +719,18 @@ function init(){if(!state.darkMode)document.body.classList.add('light-mode');doc
 const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null};
 function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(window.innerWidth>768&&state.sidebarOpen)closeSidebar();});handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
 function getNavSections(){return[
-{id:'home',title:'Dashboard',icon:'&#9776;',path:'#/',group:'primary'},
-{id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',group:'primary',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
+{id:'home',title:'Home Overview',icon:'&#8962;',path:'#/',group:'primary'},
 {id:'algorithms',title:'Algorithms',icon:'&#9881;',path:'#/algorithms',group:'primary',items:ACTT.algorithms?ACTT.algorithms.sections.map(s=>({id:s.id,title:s.title,path:'#/algorithms/'+s.id})):[]},
 {id:'procedures',title:'Procedures',icon:'&#9874;',path:'#/procedures',group:'primary',items:ACTT.procedures?ACTT.procedures.sections.map(s=>({id:s.id,title:s.title,path:'#/procedures/'+s.id})):[]},
+{id:'checklists',title:'Checklists',icon:'&#128221;',path:'#/checklists',group:'primary'},
 {id:'medications',title:'Medication Reference',icon:'&#128138;',path:'#/medications',group:'primary',items:ACTT.medications?ACTT.medications.sections.map(s=>({id:s.id,title:s.title,path:'#/medications/'+s.id})):[]},
-{id:'sickbay',title:'Sick Bay',icon:'&#129658;',path:'#/sickbay',group:'primary',items:[{id:'sickbay-meds',title:'Sick Bay Meds',path:'#/sickbay-meds'},{id:'checklists',title:'Checklists',path:'#/checklists'}]},
-{id:'prolonged-holding',title:'Prolonged Holding',icon:'&#9201;',path:'#/prolonged-holding',group:'reference',items:ACTT.prolongedHolding?ACTT.prolongedHolding.sections.map(s=>({id:s.id,title:s.title,path:'#/prolonged-holding/'+s.id})):[]},
-{id:'thresholds',title:'Critical Numbers',icon:'&#128200;',path:'#/thresholds',group:'reference',items:ACTT.thresholds?ACTT.thresholds.sections.map(s=>({id:s.id,title:s.title,path:'#/thresholds/'+s.id})):[]},
-{id:'pitfalls',title:'Pitfalls & Errors',icon:'&#9888;',path:'#/pitfalls',group:'reference',items:ACTT.pitfalls?ACTT.pitfalls.sections.map(s=>({id:s.id,title:s.title,path:'#/pitfalls/'+s.id})):[]},
+{id:'thresholds',title:'Critical Numbers',icon:'&#128200;',path:'#/thresholds',group:'primary',items:ACTT.thresholds?ACTT.thresholds.sections.map(s=>({id:s.id,title:s.title,path:'#/thresholds/'+s.id})):[]},
+{id:'prolonged-holding',title:'Prolonged Holding',icon:'&#9201;',path:'#/prolonged-holding',group:'primary',items:ACTT.prolongedHolding?ACTT.prolongedHolding.sections.map(s=>({id:s.id,title:s.title,path:'#/prolonged-holding/'+s.id})):[]},
+{id:'sickbay',title:'Sick Bay',icon:'&#129658;',path:'#/sickbay',group:'primary',items:[{id:'sickbay-meds',title:'Sick Bay Meds',path:'#/sickbay-meds'},{id:'acls',title:'ACLS (Standalone)',path:'data/ACLS/index.html'},{id:'equipment',title:'Equipment (Standalone)',path:'data/Equipment/index.html'},{id:'lab',title:'Lab (Standalone)',path:'data/Lab/index.html'},{id:'checklists',title:'Checklists',path:'#/checklists'}]},
+{id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',group:'reference',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
 {id:'shipboard',title:'Shipboard Application',icon:'&#9875;',path:'#/shipboard',group:'reference',items:ACTT.shipboard?ACTT.shipboard.sections.map(s=>({id:s.id,title:s.title,path:'#/shipboard/'+s.id})):[]},
 {id:'team',title:'Team & Communication',icon:'&#128101;',path:'#/team',group:'reference',items:ACTT.team?ACTT.team.sections.map(s=>({id:s.id,title:s.title,path:'#/team/'+s.id})):[]},
+{id:'pitfalls',title:'Pitfalls & Errors',icon:'&#9888;',path:'#/pitfalls',group:'reference',items:ACTT.pitfalls?ACTT.pitfalls.sections.map(s=>({id:s.id,title:s.title,path:'#/pitfalls/'+s.id})):[]},
 {id:'study',title:'Study & Review',icon:'&#128214;',path:'#/study',group:'reference',items:ACTT.study?ACTT.study.sections.map(s=>({id:s.id,title:s.title,path:'#/study/'+s.id})):[]},
 {id:'appendices',title:'Quick Reference',icon:'&#128203;',path:'#/appendices',group:'reference',items:ACTT.appendices?ACTT.appendices.sections.map(s=>({id:s.id,title:s.title,path:'#/appendices/'+s.id})):[]},
 {id:'tools',title:'Clinical Tools',icon:'&#128295;',path:'#/tools',group:'utilities',items:[
@@ -736,7 +743,7 @@ function getNavSections(){return[
 ]},
 {id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html',group:'utilities'}
 ];}
-function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Primary Care Paths',reference:'Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" tabindex="0" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')" role="button" tabindex="0"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Immediate Care Workflow',reference:'Supporting Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" tabindex="0" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')" role="button" tabindex="0"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
 function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)closeSidebar();}
 function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
@@ -762,13 +769,16 @@ html+='<h2 class="home-section-title">Primary Navigation</h2><div class="cards-g
 html+='</div><h2 class="home-section-title">Additional Resources</h2><div class="cards-grid">';
 [{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour management framework for delayed MEDEVAC scenarios.',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'High-risk errors to avoid across assessment, resuscitation, and medication delivery.',path:'#/pitfalls'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback.',path:'scenarios/index.html'},{icon:'&#128295;',title:'Clinical Tools',desc:'Bedside calculators and decision support for rapid clinical workflow support.',path:'#/tools'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div>';main.innerHTML=html;}
-function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training \u2014 Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
-html+=`<div class="content-section u-section-block"><p class="u-text-compact">Use the sidebar navigation to access any section. Use the search bar to find specific content across all chapters. Clinical tools are available for bedside calculations and decision support.</p></div>`;
-html+='<section class="u-section-block"><h2 class="u-section-heading">Quick Access</h2><div class="cards-grid cards-grid-home">';
-[{icon:'&#9881;',title:'Algorithms',desc:'Major decision pathways for airway, TBI, burns, sepsis, STEMI, and more',path:'#/algorithms'},{icon:'&#128138;',title:'Drug Reference',desc:'Complete medication cards with dosing, preparation, monitoring, and cautions',path:'#/medications'},{icon:'&#129658;',title:'Sick Bay',desc:'Sick Bay dashboard with medication library and onboard reference links',path:'#/sickbay'},{icon:'&#128200;',title:'Critical Numbers',desc:'Key thresholds, targets, and trigger values that drive clinical action',path:'#/thresholds'},{icon:'&#9874;',title:'Procedures',desc:'Step-by-step procedural guides for RSI, chest tube, IO, cricothyroidotomy, and more',path:'#/procedures'},{icon:'&#9201;',title:'Prolonged Holding',desc:'24\u201372 hour management framework for delayed MEDEVAC scenarios',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Critical errors to avoid across airway, resuscitation, neuro, burns, and medications',path:'#/pitfalls'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'12 scenario-based teaching cases with staged decision points and scored clinical decision-making',path:'scenarios/index.html'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
-html+='</div></section><section class="u-section-block"><h2 class="u-section-heading">Clinical Tools</h2><div class="cards-grid cards-grid-home">';
-[{icon:'&#129504;',title:'GCS Calculator',desc:'Calculate Glasgow Coma Scale with automatic airway threshold alerts',path:'#/tools/gcs'},{icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate calculator with adjustment guidance',path:'#/tools/burn'},{icon:'&#9878;',title:'Dose Calculator',desc:'Weight-based dose calculations for all major ACTT medications',path:'#/tools/dosecalc'},{icon:'&#9201;',title:'Reassessment Timer',desc:'Configurable interval reminders with context-specific reassessment checklists',path:'#/tools/timer'},{icon:'&#9763;',title:'Drug Interactions',desc:'Check for known cautions and compounding risks between selected medications',path:'#/tools/interactions'},{icon:'&#128270;',title:'Differential Diagnosis',desc:'Symptom-based differential diagnosis helper with prioritized causes',path:'#/tools/ddx'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
-html+='</div></section></div>';main.innerHTML=html;}
+function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training — Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
+html+=`<section class="home-hero"><p>Rapid access to high-risk trauma and acute care actions for shipboard and austere settings. The home page is organized in operational sequence: stabilize, execute, then sustain and hand over care.</p><div class="home-hero-actions"><a class="btn btn-primary" href="#/algorithms">&#9881; Immediate Algorithms</a><a class="btn btn-outline" href="#/procedures">&#9874; Open Procedures</a><a class="btn btn-outline" href="#/checklists">&#128221; Open Checklists</a></div><div class="home-stat-grid"><div class="home-stat"><strong>${ACTT.algorithms&&ACTT.algorithms.sections?ACTT.algorithms.sections.length:0}</strong><span>Algorithms</span></div><div class="home-stat"><strong>${ACTT.procedures&&ACTT.procedures.sections?ACTT.procedures.sections.length:0}</strong><span>Procedures</span></div><div class="home-stat"><strong>${ACTT.medications&&ACTT.medications.sections?ACTT.medications.sections.length:0}</strong><span>Medication Cards</span></div><div class="home-stat"><strong>${ACTT.checklists&&ACTT.checklists.sections?ACTT.checklists.sections.length:0}</strong><span>Checklists</span></div></div></section>`;
+html+='<section class="u-section-block"><h2 class="u-section-heading">Clinical Flow</h2><p class="home-section-subtitle">Use this order during early casualty management.</p><div class="home-flow-grid">';
+[{title:'1) Recognize & Prioritize',desc:'Clinical Domains and Critical Numbers help frame urgency, differential priorities, and action thresholds.'},{title:'2) Execute Initial Treatment',desc:'Algorithms and Procedures provide sequence for airway, shock, trauma, and deterioration pathways.'},{title:'3) Sustain & Transfer',desc:'Medication guidance, checklists, team communication, and prolonged holding modules support safe continuity.'}].forEach(card=>{html+=`<article class="home-flow-card"><h3>${card.title}</h3><p>${card.desc}</p></article>`;});
+html+='</div></section>';
+html+='<section class="u-section-block"><h2 class="u-section-heading">Immediate Priority Topics</h2><div class="cards-grid cards-grid-home">';
+[{icon:'&#9881;',title:'Algorithms',desc:'Time-critical pathways for airway failure, shock, trauma patterns, STEMI, sepsis, and altered behavior.',path:'#/algorithms'},{icon:'&#9874;',title:'Procedures',desc:'Execution guides for RSI, chest decompression, chest tube, IO/IV access, and other urgent interventions.',path:'#/procedures'},{icon:'&#128221;',title:'Checklists',desc:'Interactive cognitive aids for RSI, anaphylaxis, DKA, post-ROSC, MASCAL, and readiness tasks.',path:'#/checklists'},{icon:'&#128138;',title:'Medication Reference',desc:'ACTT medication monographs with dosing, contraindications, preparation, and monitoring notes.',path:'#/medications'},{icon:'&#128200;',title:'Critical Numbers',desc:'High-consequence thresholds and treatment targets that trigger escalation or plan change.',path:'#/thresholds'},{icon:'&#129658;',title:'Sick Bay',desc:'Shipboard hub linking Sick Bay meds, ACLS, equipment guides, lab references, and inventory.',path:'#/sickbay'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div></section><section class="u-section-block"><h2 class="u-section-heading">Supporting Reference & Training</h2><div class="cards-grid cards-grid-home">';
+[{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour care framework when evacuation delays require trend-based reassessment and staged care.',path:'#/prolonged-holding'},{icon:'&#9875;',title:'Shipboard Application',desc:'How to adapt ACTT decisions to maritime constraints, logistics limits, and delayed evacuation reality.',path:'#/shipboard'},{icon:'&#128101;',title:'Team & Communication',desc:'Role assignment, closed-loop communication, and handover structure for high-acuity events.',path:'#/team'},{icon:'&#9883;',title:'Clinical Domains',desc:'Organizing model for major ACTT problem clusters and domain overlap under pressure.',path:'#/domains'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Common failure modes and prevention points across assessment, airway, circulation, sedation, and meds.',path:'#/pitfalls'},{icon:'&#128214;',title:'Study & Review',desc:'Deliberate practice structure for memorization, sequence rehearsal, and scenario preparation.',path:'#/study'},{icon:'&#128203;',title:'Quick Reference',desc:'Condensed appendices and rapid-use reference tables for bedside checks and review.',path:'#/appendices'},{icon:'&#128295;',title:'Clinical Tools',desc:'GCS, burn fluid, dose, timer, interactions, and differential support calculators.',path:'#/tools'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback to test sequence control.',path:'scenarios/index.html'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div></section>';main.innerHTML=html;}
 function renderSection(main,data,sectionId,parentTitle,parentPath){
 if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}
 if(parentPath==='#/sickbay-meds'&&!sectionId){renderSickBayMedLibrary(main,data,parentTitle,parentPath);return;}
