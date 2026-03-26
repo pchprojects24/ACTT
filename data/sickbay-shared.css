@@ -7,15 +7,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg-primary:    #0f172a;
-  --bg-card:       #1e293b;
-  --bg-header:     #1a2332;
-  --text-primary:  #f1f5f9;
-  --text-secondary:#94a3b8;
-  --text-muted:    #64748b;
-  --accent:        #3b82f6;
-  --accent-hover:  #2563eb;
-  --border:        #334155;
+  --bg-primary:    #15243a;
+  --bg-card:       #223751;
+  --bg-header:     #1b2c44;
+  --text-primary:  #edf2fa;
+  --text-secondary:#b2c1d6;
+  --text-muted:    #8ea3c0;
+  --accent:        #4f8cff;
+  --accent-hover:  #3a78ee;
+  --border:        #3a4f6e;
   --radius:        6px;
   --shadow:        0 4px 12px rgba(0,0,0,0.3);
 }
@@ -38,11 +38,11 @@ a:hover { text-decoration: underline; }
 /* ── Headings (shared) ── */
 h1 { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
 h2 { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-h3 { font-size: 1rem; font-weight: 600; color: #cbd5e1; margin: 18px 0 8px; }
+h3 { font-size: 1rem; font-weight: 600; color: #d8e2ef; margin: 18px 0 8px; }
 h4 { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin: 14px 0 6px; }
 
 /* ── Lists ── */
-ul, ol { margin: 0 0 12px 22px; color: #cbd5e1; }
+ul, ol { margin: 0 0 12px 22px; color: #d8e2ef; }
 li { margin-bottom: 4px; }
 li > ul, li > ol { margin-top: 4px; }
 
