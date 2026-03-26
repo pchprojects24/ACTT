@@ -94,6 +94,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .app-brand { font-weight: 800; font-size: 1.2rem; color: var(--accent); white-space: nowrap; letter-spacing: 1px; }
 .app-brand span { color: var(--text-muted); font-weight: 400; font-size: 0.8rem; margin-left: 8px; letter-spacing: 0; }
 .search-container { flex: 1; max-width: 480px; position: relative; }
+.search-close {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+.search-close:hover { background: var(--bg-tertiary); }
 .search-input {
   width: 100%; padding: 9px 14px 9px 38px; border-radius: 20px;
   border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);
@@ -457,26 +467,94 @@ tr:hover td { background: var(--bg-secondary); }
   .menu-toggle { display: flex; }
   .app-brand { order: 1; font-size: 0.96rem; letter-spacing: 0.3px; }
   .header-actions { order: 2; gap: 6px; }
+  :root { --header-h: 72px; }
+  :root { --header-h: 108px; }
+  body {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100dvh;
+  }
+  .app-header {
+    height: var(--header-h);
+    padding: 0 12px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    align-content: center;
+  }
+  .menu-toggle { display: flex; }
+  .app-brand { order: 1; font-size: 1rem; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .header-actions { order: 2; gap: 4px; margin-left: auto; }
   .search-container {
-    order: 3;
-    flex: 1 1 100%;
+    display: none;
+  }
+  body.mobile-search-open .search-container {
+    display: block;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
     max-width: none;
+    padding: 10px 12px 12px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 205;
+    box-shadow: var(--shadow-md);
+  }
+  body.mobile-search-open .search-container .search-close {
+    display: inline-flex;
+    position: absolute;
+    right: 20px;
+    top: 16px;
+  }
+  body.mobile-search-open .search-container .search-input {
+    padding-right: 40px;
+  }
+  body.mobile-search-open .search-container .search-results {
+    position: relative;
+    top: 8px;
+    max-height: min(50vh, 320px);
   }
   .search-input { height: 34px; padding-top: 7px; padding-bottom: 7px; }
   .search-results { max-height: min(55vh, 360px); }
+  .header-actions > .header-btn { display: none; }
+  .search-results {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    height: calc(100dvh - var(--header-h) - env(safe-area-inset-bottom));
+    max-height: none;
+    overflow-y: auto;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    z-index: 205;
+    padding-bottom: env(safe-area-inset-bottom);
+    -webkit-overflow-scrolling: touch;
+  }
   .secondary-actions { display: none; }
   .more-actions { display: block; }
   .app-sidebar { transform: translateX(-100%); width: 280px; }
   .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
+  body.sidebar-open { overflow: hidden; }
+  body.sidebar-open .app-main { pointer-events: none; overflow: hidden; touch-action: none; }
   .app-main { margin-left: 0; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .app-main {
+    margin-left: 0;
+    margin-top: var(--header-h);
+    height: auto;
+    overflow: visible;
+    padding: 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
   .app-brand span { display: none; }
   .section-title { font-size: 1.4rem; }
   .section-nav-actions { margin-bottom: 16px; }
   .section-nav-actions .btn { flex: 1 1 auto; justify-content: center; min-height: 40px; }
   .topic-page-content { padding: 14px 14px 16px; }
   .content-section p,.content-section ul,.content-section ol { max-width: 100%; }
-  .search-container { max-width: none; }
-  .header-actions { gap: 2px; }
+  .header-actions { gap: 4px; }
   .font-controls { display: none; }
   .header-btn,
   .more-toggle {
@@ -571,11 +649,12 @@ tr:hover td { background: var(--bg-secondary); }
 </head>
 <body>
 <header class="app-header">
-  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">&#9776;</button>
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu" aria-controls="appSidebar" aria-expanded="false">&#9776;</button>
   <div class="app-brand">ACTT<span>v1.0</span></div>
   <div class="search-container">
     <span class="search-icon">&#128269;</span>
     <input type="text" class="search-input" placeholder="Search all content..." oninput="handleSearch(this.value)" onfocus="showSearchResults()" id="searchInput">
+    <button class="search-close" type="button" onclick="toggleMobileSearch(false)" aria-label="Close search">&times;</button>
     <div class="search-results" id="searchResults"></div>
   </div>
   <div class="header-actions">
@@ -591,6 +670,8 @@ tr:hover td { background: var(--bg-secondary); }
     <details class="more-actions">
       <summary class="more-toggle header-btn" aria-label="More actions" title="More actions">&#8942;</summary>
       <div class="more-actions-panel">
+        <button class="header-btn" onclick="toggleMobileSearch(true)" title="Search"><span>&#128269;</span> Search</button>
+        <button class="header-btn" onclick="toggleDarkMode()" title="Toggle dark/light mode"><span>&#9789;</span> Theme</button>
         <div class="font-controls">
           <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size"><span>A-</span> Font down</button>
           <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size"><span>A+</span> Font up</button>
@@ -601,8 +682,8 @@ tr:hover td { background: var(--bg-secondary); }
     </details>
   </div>
 </header>
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-<aside class="app-sidebar" id="appSidebar">
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="app-sidebar" id="appSidebar" aria-hidden="true">
   <nav class="sidebar-nav" id="sidebarNav"></nav>
 </aside>
 <main class="app-main" id="appMain">
@@ -628,7 +709,9 @@ tr:hover td { background: var(--bg-secondary); }
 <script>
 window.ACTT=window.ACTT||{};
 const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{}};
-function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
+function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(!isMobileViewport())document.body.classList.remove('mobile-search-open');});handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
+const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null};
+function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(window.innerWidth>768&&state.sidebarOpen)closeSidebar();});handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
 function getNavSections(){return[
 {id:'home',title:'Dashboard',icon:'&#9776;',path:'#/',group:'primary'},
 {id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',group:'primary',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
@@ -653,11 +736,12 @@ function getNavSections(){return[
 ]},
 {id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html',group:'utilities'}
 ];}
-function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Primary Care Paths',reference:'Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Primary Care Paths',reference:'Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" tabindex="0" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')" role="button" tabindex="0"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
-function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)toggleSidebar();}
+function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)closeSidebar();}
 function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
 function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(state.sidebarOpen&&window.innerWidth<=768)toggleSidebar(false);const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
+function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
 function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
 function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
 function renderSectionNavActions(parentTitle,parentPath){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';html+='</div>';return html;}
@@ -740,10 +824,30 @@ function toggleClItem(checklistId,idx){const key='actt-cl-'+checklistId;const ar
 function resetCl(checklistId){localStorage.removeItem('actt-cl-'+checklistId);renderChecklists(document.getElementById('appMain'),checklistId);}
 function renderChecklists(main,sub){const data=ACTT.checklists;if(!data){main.innerHTML='<div class="loading">Loading checklists...</div>';return;}if(sub){const sec=data.sections.find(s=>s.id===sub);if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Checklist not found</div></div>';return;}let html=renderSectionHeader(sec.title,sec.badge||'',[{title:'Home',path:'#/'},{title:'Checklists',path:'#/checklists'},{title:sec.title,path:'#/checklists/'+sub}]);if(sec.type==='placeholder'){html+='<div class="content-section"><div class="severity-card amber" style="margin-bottom:20px"><div class="sc-title">Coming Soon</div><p>'+sec.desc+'</p><p style="margin-top:8px;color:var(--text-muted);font-size:0.85rem">Drop the official PDF into <code>data/checklists/pdf/</code> and this page will be updated to link to it.</p></div></div>';main.innerHTML=html;return;}if(sec.type==='operational'){renderOperationalChecklist(main,sec);return;}if(sec.type==='inspection'){renderInspectionChecklist(main,sec);return;}const key='actt-cl-'+sub;const checked=JSON.parse(localStorage.getItem(key)||'[]');const total=sec.items.length;const done=checked.length;const pct=total>0?Math.round(done/total*100):0;html+='<div class="cl-progress"><div class="cl-progress-bar"><div class="cl-progress-bar-fill" style="width:'+pct+'%"></div></div><span class="cl-progress-count">'+done+' / '+total+' complete</span><span class="cl-progress-pct">'+pct+'%</span></div>';html+='<div class="cl-list">';sec.items.forEach((item,i)=>{const isDone=checked.includes(i);html+='<div class="cl-item'+(isDone?' cl-done':'')+'" data-idx="'+i+'" onclick="toggleClItem(\''+sub+'\','+i+')"><span class="cl-check">'+(isDone?'&#10003;':''  )+'</span><span class="cl-text">'+item+'</span></div>';});html+='</div><div style="margin-top:4px;display:flex;gap:10px;flex-wrap:wrap">';if(sec.crossLink)html+='<a class="btn btn-outline" href="'+sec.crossLink+'">View '+sec.crossLinkTitle+' &#8250;</a>';html+='<button class="btn btn-outline" onclick="resetCl(\''+sub+'\')">&#8635; Reset Checklist</button></div>';if(sec.sources)html+=renderSourceDocuments(sec.sources);main.innerHTML=html;return;}const clinical=data.sections.filter(s=>s.type==='clinical');const operational=data.sections.filter(s=>s.type!=='clinical');let html=renderSectionHeader(data.title,data.subtitle,[{title:'Home',path:'#/'},{title:'Checklists',path:'#/checklists'}]);html+='<div class="content-section"><p style="color:var(--text-secondary);font-size:0.92rem;line-height:1.6">Clinical cognitive aids for use during emergencies, and operational readiness checklists for routine sick bay management. Clinical aids are interactive with progress tracking — tap any item to mark it complete.</p></div>';if(clinical.length){html+='<h2 style="margin-bottom:16px">Clinical Cognitive Aids</h2><div class="cards-grid">';clinical.forEach(s=>{const done=JSON.parse(localStorage.getItem('actt-cl-'+s.id)||'[]').length;const total=s.items?s.items.length:0;html+='<a class="quick-card" href="#/checklists/'+s.id+'"><div class="qc-icon">'+s.icon+'</div><div class="qc-title">'+s.title+'</div><div class="qc-desc">'+s.desc+'</div>'+(done>0?'<div style="margin-top:8px;font-size:0.8rem;color:var(--accent)">'+done+'/'+total+' complete</div>':'')+'</a>';});html+='</div>';}if(operational.length){html+='<h2 style="margin:24px 0 16px">Operational Checklists</h2><div class="cards-grid">';operational.forEach(s=>{if(s.type==='operational'&&s.groups&&s.groups.length){const prog=opClProgress(s.id);const pct=prog.total>0?Math.round((prog.present+prog.serviceable)/(prog.total*2)*100):0;html+='<a class="quick-card" href="#/checklists/'+s.id+'"><div class="qc-icon">'+s.icon+'</div><div class="qc-title">'+s.title+'</div><div class="qc-desc">'+s.desc+'</div>'+(pct>0?'<div style="margin-top:8px;font-size:0.8rem;color:var(--accent)">'+pct+'% complete</div>':'')+'</a>';}else if(s.type==='inspection'&&s.groups&&s.groups.length){const prog=inspClProgress(s.id);const pct=prog.total>0?Math.round(prog.done/prog.total*100):0;html+='<a class="quick-card" href="#/checklists/'+s.id+'"><div class="qc-icon">'+s.icon+'</div><div class="qc-title">'+s.title+'</div><div class="qc-desc">'+s.desc+'</div>'+(pct>0?'<div style="margin-top:8px;font-size:0.8rem;color:var(--accent)">'+pct+'% complete</div>':'')+'</a>';}else{html+='<div class="quick-card" style="opacity:0.6;cursor:default"><div class="qc-icon">'+s.icon+'</div><div class="qc-title">'+s.title+'<span style="font-size:0.7rem;background:var(--bg-tertiary);color:var(--text-muted);padding:2px 6px;border-radius:4px;margin-left:8px;vertical-align:middle">Pending</span></div><div class="qc-desc">'+s.desc+'</div></div>';}});html+='</div>';}main.innerHTML=html;}
 function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,study:ACTT.study,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity});});});}
-function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');return;}const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);let matches=state.searchIndex.filter(item=>{const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');return;}results.innerHTML=matches.map(m=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<div class="search-result-item" onclick="window.location.hash='${m.path.replace('#','')}';document.getElementById('searchResults').classList.remove('active');document.getElementById('searchInput').value='';"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></div>`;}).join('');results.classList.add('active');}
+function isMobileViewport(){return window.matchMedia('(max-width: 768px)').matches;}
+function toggleMobileSearch(forceOpen){
+  if(!isMobileViewport())return;
+  const shouldOpen=typeof forceOpen==='boolean'?forceOpen:!document.body.classList.contains('mobile-search-open');
+  document.body.classList.toggle('mobile-search-open',shouldOpen);
+  const input=document.getElementById('searchInput');
+  const results=document.getElementById('searchResults');
+  if(shouldOpen){setTimeout(()=>input.focus(),20);}
+  else {input.value='';results.classList.remove('active');}
+}
+function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');return;}const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);let matches=state.searchIndex.filter(item=>{const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');return;}results.innerHTML=matches.map(m=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<div class="search-result-item" onclick="window.location.hash='${m.path.replace('#','')}';document.getElementById('searchResults').classList.remove('active');document.getElementById('searchInput').value='';if(window.matchMedia('(max-width: 768px)').matches){document.body.classList.remove('mobile-search-open');}"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></div>`;}).join('');results.classList.add('active');}
+function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');return;}const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);let matches=state.searchIndex.filter(item=>{const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');return;}results.innerHTML=matches.map(m=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<div class="search-result-item" onclick="window.location.hash='${m.path.replace('#','')}';closeSearchResults(true);"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></div>`;}).join('');results.classList.add('active');}
 function showSearchResults(){const val=document.getElementById('searchInput').value;if(val&&val.length>=2)document.getElementById('searchResults').classList.add('active');}
+function closeSearchResults(clearInput=false){
+  const results=document.getElementById('searchResults');
+  const input=document.getElementById('searchInput');
+  results.classList.remove('active');
+  if(clearInput)input.value='';
+  input.blur();
+}
 document.addEventListener('click',e=>{
   if(!e.target.closest('.search-container'))document.getElementById('searchResults').classList.remove('active');
+  if(isMobileViewport()&&document.body.classList.contains('mobile-search-open')&&!e.target.closest('.search-container')&&!e.target.closest('.more-actions'))toggleMobileSearch(false);
+  if(!e.target.closest('.search-container'))closeSearchResults();
   if(!e.target.closest('.more-actions'))document.querySelectorAll('.more-actions[open]').forEach(el=>el.removeAttribute('open'));
 });
 document.querySelectorAll('.more-actions-panel button').forEach(btn=>btn.addEventListener('click',()=>{
@@ -758,7 +862,25 @@ function updateBookmarksPanel(){const panel=document.getElementById('bookmarksPa
 function removeBookmark(route){state.bookmarks=state.bookmarks.filter(b=>b!==route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
 function toggleSidebar(forceOpen){state.sidebarOpen=typeof forceOpen==='boolean'?forceOpen:!state.sidebarOpen;document.getElementById('appSidebar').classList.toggle('open',state.sidebarOpen);document.getElementById('sidebarOverlay').classList.toggle('active',state.sidebarOpen);document.body.classList.toggle('sidebar-open',state.sidebarOpen&&window.innerWidth<=768);}
 window.addEventListener('resize',()=>{if(window.innerWidth>768&&state.sidebarOpen)toggleSidebar(false);});
+function getSidebarFocusableElements(){return Array.from(document.querySelectorAll('#appSidebar a[href], #appSidebar button:not([disabled]), #appSidebar [tabindex]:not([tabindex="-1"]), #appSidebar input:not([disabled]), #appSidebar select:not([disabled]), #appSidebar textarea:not([disabled])')).filter(el=>el.offsetParent!==null);}
+function setSidebarOpen(isOpen){state.sidebarOpen=isOpen;const sidebar=document.getElementById('appSidebar');const overlay=document.getElementById('sidebarOverlay');const menuToggle=document.querySelector('.menu-toggle');sidebar.classList.toggle('open',isOpen);overlay.classList.toggle('active',isOpen);document.body.classList.toggle('sidebar-open',isOpen);sidebar.setAttribute('aria-hidden',isOpen?'false':'true');if(menuToggle)menuToggle.setAttribute('aria-expanded',isOpen?'true':'false');if(isOpen){state.lastFocusedElement=document.activeElement;const first=getSidebarFocusableElements()[0];if(first)first.focus();}else if(state.lastFocusedElement&&typeof state.lastFocusedElement.focus==='function'){state.lastFocusedElement.focus();state.lastFocusedElement=null;}}
+function toggleSidebar(){setSidebarOpen(!state.sidebarOpen);}
+function closeSidebar(){setSidebarOpen(false);}
+function openSidebar(){state.sidebarOpen=true;document.getElementById('appSidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('active');}
+function closeSidebar(){state.sidebarOpen=false;document.getElementById('appSidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('active');}
+function toggleSidebar(){if(state.sidebarOpen)closeSidebar();else openSidebar();}
 function printSection(){window.print();}
+document.addEventListener('keydown',e=>{
+  if(e.target.classList&&e.target.classList.contains('nav-section-header')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();e.target.click();return;}
+  if(!state.sidebarOpen)return;
+  if(e.key==='Escape'){e.preventDefault();closeSidebar();return;}
+  if(e.key!=='Tab')return;
+  const focusable=getSidebarFocusableElements();
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1],active=document.activeElement;
+  if(e.shiftKey){if(active===first||!document.getElementById('appSidebar').contains(active)){e.preventDefault();last.focus();}}
+  else if(active===last||!document.getElementById('appSidebar').contains(active)){e.preventDefault();first.focus();}
+});
 document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
