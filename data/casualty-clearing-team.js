@@ -111,6 +111,10 @@ window.ACTT.cct={
         '</ul>'+
         '<p><em>Placeholder for next task:</em> produce compact CCT quick-reference bundle and trim duplicate source docs.</p>',
       relatedLinks:['appendices/appendix-n','appendices/appendix-o','appendices/appendix-p','tools/gcs','tools/burn','tools/dosecalc','tools/timer']
+    }
+  ]
+};
+
 window.ACTT = window.ACTT || {};
 window.ACTT.casualtyClearingTeam = {
   id: 'casualty-clearing-team',
