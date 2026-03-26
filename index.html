@@ -487,6 +487,9 @@ tr:hover td { background: var(--bg-secondary); }
   .more-actions { display: block; }
   .app-sidebar { transform: translateX(-100%); width: 280px; }
   .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
+  body.sidebar-open { overflow: hidden; }
+  body.sidebar-open .app-main { pointer-events: none; overflow: hidden; touch-action: none; }
+  .app-main { margin-left: 0; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
   .app-main {
     margin-left: 0;
     margin-top: var(--header-h);
@@ -589,7 +592,7 @@ tr:hover td { background: var(--bg-secondary); }
 </head>
 <body>
 <header class="app-header">
-  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">&#9776;</button>
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu" aria-controls="appSidebar" aria-expanded="false">&#9776;</button>
   <div class="app-brand">ACTT<span>v1.0</span></div>
   <div class="search-container">
     <span class="search-icon">&#128269;</span>
@@ -619,8 +622,8 @@ tr:hover td { background: var(--bg-secondary); }
     </details>
   </div>
 </header>
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-<aside class="app-sidebar" id="appSidebar">
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="app-sidebar" id="appSidebar" aria-hidden="true">
   <nav class="sidebar-nav" id="sidebarNav"></nav>
 </aside>
 <main class="app-main" id="appMain">
@@ -645,8 +648,8 @@ tr:hover td { background: var(--bg-secondary); }
 <script src="data/cross-links.js"></script>
 <script>
 window.ACTT=window.ACTT||{};
-const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{}};
-function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
+const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null};
+function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(window.innerWidth>768&&state.sidebarOpen)closeSidebar();});handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
 function getNavSections(){return[
 {id:'home',title:'Dashboard',icon:'&#9776;',path:'#/',group:'primary'},
 {id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',group:'primary',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
@@ -671,7 +674,7 @@ function getNavSections(){return[
 ]},
 {id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html',group:'utilities'}
 ];}
-function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Primary Care Paths',reference:'Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Primary Care Paths',reference:'Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" tabindex="0" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')" role="button" tabindex="0"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
 function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)closeSidebar();}
 function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
@@ -781,10 +784,25 @@ function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.b
 function updateBookmarkBtn(){const btn=document.getElementById('bookmarkBtn');const isB=state.bookmarks.includes(state.currentRoute);btn.innerHTML=isB?'&#9733;':'&#9734;';btn.classList.toggle('active',isB);}
 function updateBookmarksPanel(){const panel=document.getElementById('bookmarksPanel');if(!panel)return;if(state.bookmarks.length===0){panel.innerHTML='<div style="padding:8px 16px;font-size:0.85rem;color:var(--text-muted)">No bookmarks yet</div>';return;}panel.innerHTML=state.bookmarks.map(b=>{const title=b.replace('#/','').replace(/\//g,' > ')||'Home';return`<div class="bookmark-item" style="display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:0.85rem;color:var(--text-secondary);cursor:pointer" onclick="window.location.hash='${b.replace('#','')}'"><span>${title}</span><span style="color:var(--severity-red);font-size:12px;margin-left:auto;opacity:0.5;cursor:pointer" onclick="event.stopPropagation();removeBookmark('${b}')">&#10005;</span></div>`;}).join('');}
 function removeBookmark(route){state.bookmarks=state.bookmarks.filter(b=>b!==route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
+function getSidebarFocusableElements(){return Array.from(document.querySelectorAll('#appSidebar a[href], #appSidebar button:not([disabled]), #appSidebar [tabindex]:not([tabindex="-1"]), #appSidebar input:not([disabled]), #appSidebar select:not([disabled]), #appSidebar textarea:not([disabled])')).filter(el=>el.offsetParent!==null);}
+function setSidebarOpen(isOpen){state.sidebarOpen=isOpen;const sidebar=document.getElementById('appSidebar');const overlay=document.getElementById('sidebarOverlay');const menuToggle=document.querySelector('.menu-toggle');sidebar.classList.toggle('open',isOpen);overlay.classList.toggle('active',isOpen);document.body.classList.toggle('sidebar-open',isOpen);sidebar.setAttribute('aria-hidden',isOpen?'false':'true');if(menuToggle)menuToggle.setAttribute('aria-expanded',isOpen?'true':'false');if(isOpen){state.lastFocusedElement=document.activeElement;const first=getSidebarFocusableElements()[0];if(first)first.focus();}else if(state.lastFocusedElement&&typeof state.lastFocusedElement.focus==='function'){state.lastFocusedElement.focus();state.lastFocusedElement=null;}}
+function toggleSidebar(){setSidebarOpen(!state.sidebarOpen);}
+function closeSidebar(){setSidebarOpen(false);}
 function openSidebar(){state.sidebarOpen=true;document.getElementById('appSidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('active');}
 function closeSidebar(){state.sidebarOpen=false;document.getElementById('appSidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('active');}
 function toggleSidebar(){if(state.sidebarOpen)closeSidebar();else openSidebar();}
 function printSection(){window.print();}
+document.addEventListener('keydown',e=>{
+  if(e.target.classList&&e.target.classList.contains('nav-section-header')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();e.target.click();return;}
+  if(!state.sidebarOpen)return;
+  if(e.key==='Escape'){e.preventDefault();closeSidebar();return;}
+  if(e.key!=='Tab')return;
+  const focusable=getSidebarFocusableElements();
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1],active=document.activeElement;
+  if(e.shiftKey){if(active===first||!document.getElementById('appSidebar').contains(active)){e.preventDefault();last.focus();}}
+  else if(active===last||!document.getElementById('appSidebar').contains(active)){e.preventDefault();first.focus();}
+});
 document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
