@@ -166,6 +166,145 @@ window.ACTT.team={
           '<li>State what may fail next before handover.</li>' +
         '</ul>',
       relatedLinks:[]
+    },
+    {
+      id:'high-performance-teams',
+      title:'High-Performance Teams & CALM Leadership',
+      content:'<h3>High-Performance Teams</h3>' +
+        '<p>A high-performance team is a group of people who strive for excellence through: (1) a shared common vision, goals, and metrics; (2) collaborating, challenging, and holding each other accountable; (3) shared leadership and mutual trust. In acute care settings, high-performance team function is directly linked to increased mission success, increased resilience, and improved adaptability under stress.</p>' +
+
+        '<h4>Team Lead Responsibilities</h4>' +
+        '<p>The team lead must be actively engaged through all three phases of a clinical event:</p>' +
+        '<ul>' +
+          '<li><strong>Before (Briefing):</strong> Identify team members, assign roles, clarify goals and operational climate.</li>' +
+          '<li><strong>During:</strong> Direct care, monitor team dynamics, routinely provide summary statements, provide support to team members, ensure adequate coverage across tasks.</li>' +
+          '<li><strong>After:</strong> Lead or coordinate the debrief, provide support to team members if required, ensure aftercare, practice self-care.</li>' +
+        '</ul>' +
+
+        '<h4>CALM Leadership Framework</h4>' +
+        '<div class="severity-card green">' +
+          '<div class="sc-title"><span class="sc-label">LEADERSHIP</span> CALM</div>' +
+          '<ul>' +
+            '<li><strong>C — Clear, Compassionate Communication:</strong> State findings, priorities, and orders clearly and directly. Avoid vague or ambiguous language. Acknowledge team members\' concerns and contributions.</li>' +
+            '<li><strong>A — Adaptive Awareness:</strong> Maintain situational awareness across the whole patient. Recognize when the plan has changed and re-state priorities accordingly. Adapt to unexpected developments without losing the overall goal.</li>' +
+            '<li><strong>L — Listen to Team:</strong> Actively receive input from team members. Create psychological safety so that concerns are raised rather than silenced. Invite read-back and verification.</li>' +
+            '<li><strong>M — Manage Team Tasks and Conflict:</strong> Distribute workload deliberately. Identify task overload or confusion and intervene. Address conflict promptly to maintain team cohesion under pressure.</li>' +
+          '</ul>' +
+        '</div>' +
+
+        '<h4>Team Member Responsibilities</h4>' +
+        '<ul>' +
+          '<li><strong>Before (Briefing):</strong> Identify your expertise and situational knowledge; speak up if you have relevant information the lead may not have.</li>' +
+          '<li><strong>During:</strong> Perform your assigned role, remain flexible to task reassignment. Use closed-loop communication when receiving and completing tasks. Provide feedback to the lead as needed.</li>' +
+          '<li><strong>After:</strong> Participate actively in the debrief — speak up about what went well and what could improve. Collaborate on solutions to problems encountered. Practice self-care after high-acuity events.</li>' +
+        '</ul>',
+      relatedLinks:['team/two-challenge-rule','team/stress-management','team/team-debrief','team/leadership']
+    },
+    {
+      id:'two-challenge-rule',
+      title:'Two-Challenge Rule',
+      content:'<h3>Two-Challenge Rule</h3>' +
+        '<p>The Two-Challenge Rule is a communication safety tool invoked when an initial assertion or concern is ignored by another team member, including a more senior clinician.</p>' +
+
+        '<div class="severity-card amber">' +
+          '<div class="sc-title"><span class="sc-label">RULE</span> Two-Challenge</div>' +
+          '<ol>' +
+            '<li>Voice your concern clearly and assertively at least <strong>twice</strong> to ensure it has been heard.</li>' +
+            '<li>The member being challenged <strong>must acknowledge</strong> the concern — silence or dismissal is not acceptable.</li>' +
+            '<li>Provide supporting clinical information with the second challenge (e.g., a dose, a trend, a reference).</li>' +
+            '<li>If the outcome is still not acceptable after two challenges, <strong>take a stronger course of action</strong> — escalate to supervisor or chain of command, or invoke a patient safety stoppage.</li>' +
+          '</ol>' +
+        '</div>' +
+
+        '<h4>Why This Matters</h4>' +
+        '<p>Hierarchy and authority gradients are a known source of clinical error. Team members at all levels are responsible for patient safety. Assertive communication, backed by clinical evidence, is not insubordination — it is a required professional skill.</p>' +
+
+        '<h4>Example Scenario</h4>' +
+        '<p>A patient is ordered a medication infusion at an unusually high rate. The team member preparing the infusion has concerns. After raising the concern once and being dismissed, they apply the Two-Challenge Rule:</p>' +
+        '<p><em>"I\'m concerned about this rate. If I run the drip at that dose, we\'ll exceed the usual range within minutes. I\'m not confident this is correct — can we verify the order before I start?"</em></p>' +
+        '<p>The lead verifies the order, identifies an error, and corrects the rate. The team member\'s assertiveness prevented patient harm. A good lead thanks the team member for speaking up.</p>' +
+
+        '<h4>Key Point</h4>' +
+        '<p>A team that speaks up — and a lead who genuinely listens — prevents medication errors, procedure complications, and avoidable escalations. Build the habit of both roles: stating concerns clearly and receiving them openly.</p>',
+      relatedLinks:['team/high-performance-teams','team/leadership','team/acute-communication']
+    },
+    {
+      id:'stress-management',
+      title:'Managing Stress & Focus Under Pressure',
+      content:'<h3>Managing Stress and Focus Under Pressure</h3>' +
+        '<p>High-acuity clinical environments generate significant stress. The Yerkes-Dodson principle captures why this matters: performance improves as arousal increases up to an optimal point, then declines sharply with excessive stress. The goal of stress management is not to eliminate arousal — it is to stay within the performance zone and return to it when stress escalates.</p>' +
+
+        '<h4>Managing Focus and Attention</h4>' +
+        '<p>Under pressure, attention narrows. This is useful for single critical tasks but dangerous when it leads to tunnel vision — fixating on one finding while missing broader deterioration. Combat attentional narrowing by:</p>' +
+        '<ul>' +
+          '<li>Deliberately scanning beyond the immediate task at regular intervals.</li>' +
+          '<li>Assigning monitoring responsibility explicitly so the team collectively covers the full picture.</li>' +
+          '<li>Using summary statements to reset shared situational awareness: "Current situation is… next priority is…"</li>' +
+        '</ul>' +
+
+        '<h4>Tactical Breathing</h4>' +
+        '<div class="severity-card green">' +
+          '<div class="sc-title"><span class="sc-label">TECHNIQUE</span> Tactical Breathing (Box Breathing)</div>' +
+          '<ul>' +
+            '<li>Inhale for 4 counts.</li>' +
+            '<li>Hold for 4 counts.</li>' +
+            '<li>Exhale for 4 counts.</li>' +
+            '<li>Hold for 4 counts.</li>' +
+          '</ul>' +
+          '<p style="margin-top:8px">Use before a high-stakes intervention, during a pause in a procedure, or any time you recognize your performance is degrading under stress. Takes less than 30 seconds. Activates the parasympathetic system and restores focus.</p>' +
+        '</div>' +
+
+        '<h4>Visualization</h4>' +
+        '<p>Mental rehearsal before a high-stakes task primes performance. Envision successfully completing the procedure or scenario: remain calm and relaxed in the visualization, create a vivid picture of each step, and mentally rehearse the "what ifs" — what you will do if the first attempt fails, if an unexpected complication arises, or if a key piece of equipment is unavailable.</p>' +
+
+        '<h4>Cognitive Reframing</h4>' +
+        '<p>Cognitive reframing intercepts unhelpful automatic thoughts that degrade performance under stress. The three-step process:</p>' +
+        '<ol>' +
+          '<li><strong>Catch it:</strong> Recognize the unhelpful thought (e.g., "I can\'t do this", "Everything is going wrong").</li>' +
+          '<li><strong>Challenge it:</strong> Ask whether the thought is accurate, useful, or based on evidence.</li>' +
+          '<li><strong>Change it:</strong> Replace with a functional, action-oriented statement (e.g., "I\'ve prepared for this — what is the next step?").</li>' +
+        '</ol>' +
+
+        '<h4>Progressive Relaxation</h4>' +
+        '<p>When time permits between phases of care (e.g., during a prolonged hold), progressive muscle relaxation reduces cumulative physiological stress:</p>' +
+        '<ol>' +
+          '<li>Tense all muscles for 10–15 seconds.</li>' +
+          '<li>Release completely and notice the contrast.</li>' +
+          '<li>Repeat 5 times, or perform as a sequential full-body scan moving through muscle groups.</li>' +
+        '</ol>' +
+
+        '<h4>Your Responsibilities in the Team</h4>' +
+        '<p>Individual performance directly affects team performance. Pre-event preparation, physical readiness, and recognizing your own stress response are professional responsibilities in a high-acuity setting. A team member who is aware of their own performance state and communicates limitations honestly is more valuable than one who pushes through silently while degraded.</p>',
+      relatedLinks:['team/high-performance-teams','team/team-debrief','team/sustained-performance']
+    },
+    {
+      id:'team-debrief',
+      title:'Team Debrief — START Framework',
+      content:'<h3>Team Debrief: START Collaborative Debrief</h3>' +
+        '<p>Debriefing after a clinical event is a core component of high-performance team function. It is not an optional add-on — it is how teams learn, rebuild resilience, and improve subsequent performance. The START framework provides structure for an effective post-event debrief.</p>' +
+
+        '<div class="severity-card green">' +
+          '<div class="sc-title"><span class="sc-label">DEBRIEF</span> START Framework</div>' +
+          '<ul>' +
+            '<li><strong>S — Supportive and Safe Environment:</strong> Establish psychological safety before beginning. The debrief is not a blame exercise. Every participant should feel comfortable speaking honestly. The lead sets this tone explicitly: "This is a learning conversation — there are no wrong answers here."</li>' +
+            '<li><strong>T — Team Focused:</strong> Keep the conversation directed at team function, not individual performance. Frame observations around systems, communication, and process: "What did the team do well?" rather than "What did you do wrong?"</li>' +
+            '<li><strong>A — Acknowledge Experience:</strong> Before analyzing performance, acknowledge what the team went through. High-acuity events are stressful. Naming that explicitly validates the team\'s experience and creates emotional readiness for learning.</li>' +
+            '<li><strong>R — Reflect and Conceptualize:</strong> Review what happened, what worked, and what could be improved. Connect observed behaviours to the underlying principles. This is where the learning occurs: "When we did X, the result was Y because…"</li>' +
+            '<li><strong>T — Take Away:</strong> Identify one to three specific, actionable changes the team will make next time. A good take-away is concrete and rehearsable: "Next time, we\'ll assign a recorder before starting RSI" or "We\'ll use the Two-Challenge Rule if a concern is dismissed."</li>' +
+          '</ul>' +
+        '</div>' +
+
+        '<h4>When to Debrief</h4>' +
+        '<ul>' +
+          '<li>After any high-acuity clinical event (cardiac arrest, RSI, MASCAL, failed airway).</li>' +
+          '<li>After training simulations and scenario exercises.</li>' +
+          '<li>After prolonged holding handovers when the case involved significant complexity or team stress.</li>' +
+          '<li>After any event where a team member invoked the Two-Challenge Rule or raised a safety concern.</li>' +
+        '</ul>' +
+
+        '<h4>Aftercare</h4>' +
+        '<p>Not all debriefs are purely technical. High-acuity events — particularly those involving serious harm, death, or near-miss situations — can affect team members beyond the professional domain. The lead is responsible for recognizing when team members need psychosocial support beyond the technical debrief, and for facilitating access to that support.</p>',
+      relatedLinks:['team/high-performance-teams','team/stress-management','team/sustained-performance','team/leadership']
     }
   ]
 };

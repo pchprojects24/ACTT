@@ -633,9 +633,25 @@ window.ACTT.appendices={
           '<td><strong>Teleconsultation call template</strong></td>' +
           '<td>Problem summary, key trends, current interventions, onboard limits, specific question or requested decision support</td>' +
         '</tr>' +
+        '<tr>' +
+          '<td><strong>CALM Leadership</strong></td>' +
+          '<td>Clear compassionate communication &mdash; Adaptive awareness &mdash; Listen to team &mdash; Manage tasks and conflict. See Team &amp; Communication &rarr; High-Performance Teams &amp; CALM Leadership.</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>Two-Challenge Rule</strong></td>' +
+          '<td>Raise concern assertively twice; provide supporting evidence on second challenge; escalate to chain of command if unresolved. See Team &amp; Communication &rarr; Two-Challenge Rule.</td>' +
+        '</tr>' +
+        '<tr>' +
+          '<td><strong>START Debrief</strong></td>' +
+          '<td>Supportive safe environment &mdash; Team focused &mdash; Acknowledge experience &mdash; Reflect and conceptualize &mdash; Take away. Run after every high-acuity event. See Team &amp; Communication &rarr; Team Debrief.</td>' +
+        '</tr>' +
         '</tbody>' +
         '</table></div>',
-      relatedLinks:[]
+      relatedLinks:['team/high-performance-teams','team/two-challenge-rule','team/team-debrief','team/stress-management'],
+      sources:[
+        {title:'ACTT 01 2026 – Team Dynamics.pdf',file:'ACTT 01 2026 -Team Dynamics.pdf',note:'CALM leadership, Two-Challenge Rule, stress management, START debrief framework. ACTT FEB 2026.'},
+        {title:'ACTT Reference for PAs.pdf',file:'ACTT reference for PAs.pdf',note:'Quick reference guide for Physician Assistants at the ACTT course.'}
+      ]
     },
     {
       id:'appendix-i',
@@ -834,8 +850,58 @@ window.ACTT.appendices={
         '</table></div>' +
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Bedside Line Rule</div>' +
-        '<p>When access is limited, keep the pressor on the most reliable line and avoid unsupported three-drug improvisation. If the pair is marked C?, X, ND, blank, or not listed here, separate the infusions and reassess whether current access is adequate for the care plan.</p></div>',
-      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-c','prolonged-holding/fluid-management','prolonged-holding/sedation-pain']
+        '<p>When access is limited, keep the pressor on the most reliable line and avoid unsupported three-drug improvisation. If the pair is marked C?, X, ND, blank, or not listed here, separate the infusions and reassess whether current access is adequate for the care plan.</p></div>' +
+
+        '<h4>Fluid Administration Methods</h4>' +
+        '<p>Three methods are available for IV fluid and medication delivery. Select based on available equipment, urgency, and the precision required:</p>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Method</th><th>When to Use</th><th>Key Consideration</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Gravity Infusion</strong></td><td>Simple maintenance fluids, basic antibiotic infusions, lower-acuity settings</td><td>Must calculate drip rate manually using the tubing drop factor.</td></tr>' +
+        '<tr><td><strong>Pressure Bag</strong></td><td>Rapid fluid resuscitation when no pump is available, or when flow rate must overcome high back-pressure (e.g., large-bore catheter with NS bolus)</td><td>Monitor IV gauge — do not over-pressurize. Flow rate depends on catheter gauge; large bore (14–16G) required for high-flow resuscitation.</td></tr>' +
+        '<tr><td><strong>IV Pump (B.&nbsp;Braun Infusomat)</strong></td><td>All critical care infusions, vasoactive medications, sedation, antibiotic secondary infusions</td><td>Preferred for dose-critical medications. Use Drug Library when available. See Equipment &rarr; B.&thinsp;Braun Infusomat for detailed programming.</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Drip Rate Calculation (Gravity Infusion)</h4>' +
+        '<div class="severity-card green">' +
+          '<div class="sc-title"><span class="sc-label">FORMULA</span> Drip Rate</div>' +
+          '<p><strong>gtts/min = (mL/hr &times; Drop Factor) &divide; 60</strong></p>' +
+          '<p style="margin-top:6px">Common drop factors: <strong>10 gtts/mL</strong> (standard macrodrip), 15 gtts/mL, 20 gtts/mL, <strong>60 gtts/mL</strong> (microdrip/pediatric).</p>' +
+          '<p style="margin-top:6px"><strong>Example:</strong> 100 mL/hr with 10-drop-factor tubing: (100 &times; 10) &divide; 60 = <strong>17 gtts/min</strong>. To count at bedside: divide by 4 to get drops per 15 seconds = <strong>4 drops/15 sec</strong>.</p>' +
+        '</div>' +
+
+        '<h4>IV Site Maintenance</h4>' +
+        '<div class="table-wrapper"><table>' +
+        '<thead><tr><th>Element</th><th>Standard</th></tr></thead>' +
+        '<tbody>' +
+        '<tr><td><strong>Non-aseptic insertion</strong></td><td>Replace VAD within 24–48 hours</td></tr>' +
+        '<tr><td><strong>Dressing change</strong></td><td>Every 7 days, or sooner if integrity compromised or complications arise. Cleanse site at each change.</td></tr>' +
+        '<tr><td><strong>Line flush</strong></td><td>Preservative-free 0.9% Normal Saline before and after medication use. Scrub connections for 15 seconds prior to access.</td></tr>' +
+        '<tr><td><strong>Administration set — continuous infusion</strong></td><td>Every 7 days with new VAD insertion, or when IV solution changes, or when contamination/integrity is compromised</td></tr>' +
+        '<tr><td><strong>Administration set — blood/blood products</strong></td><td>After 4 units or 4 hours (whichever comes first); between different products</td></tr>' +
+        '<tr><td><strong>Administration set — propofol / lipids</strong></td><td>Every 6–12 hours (propofol) or every 12 hours (lipids / parenteral nutrition)</td></tr>' +
+        '<tr><td><strong>Labelling</strong></td><td>Label all administration sets with date and time of start. Label IV line close to patient with medication name. Re-site only if signs of complications and VAD is still needed.</td></tr>' +
+        '</tbody>' +
+        '</table></div>' +
+
+        '<h4>Medication Reconstitution — Drug Monograph Checklist</h4>' +
+        '<p>When reconstituting any IV antibiotic or medication, confirm all six elements from the drug monograph before preparing:</p>' +
+        '<ol>' +
+          '<li>Indications</li>' +
+          '<li>Reconstitution and Stability (diluent, volume, resulting concentration)</li>' +
+          '<li>Compatibility (Y-site, admixture restrictions)</li>' +
+          '<li>Preparation and Administration (route, infusion time)</li>' +
+          '<li>Dosages (weight-based or flat dose, frequency)</li>' +
+          '<li>Complications (extravasation risk, rate-related reactions, drug interactions)</li>' +
+        '</ol>' +
+        '<p><strong>Ceftriaxone example:</strong> 1 g vial — add 9.6 mL SWI to provide 100 mg/mL. Dilute in 50 mL for IV; administer over 20–30 minutes. 2 g vial — add 19.2 mL SWI to provide 100 mg/mL.</p>',
+      relatedLinks:['medications/vasopressors','algorithms/sepsis','appendices/appendix-c','prolonged-holding/fluid-management','prolonged-holding/sedation-pain'],
+      sources:[
+        {title:'Medication Administration Brown 2026 final.pdf',file:'Medication Administration Brown 2026 final.pdf',note:'IV access, drip rate calculations, pressure bags, B-Braun pump programming, medication reconstitution. ACTT 2026.'},
+        {title:'TOH Infusion Sheets.pdf',file:'TOH Infusion Sheets.pdf'},
+        {title:'Y-site Compatibility Critical Care Chart June 2022.pdf',file:'Y-site Compatibility Critical Care Chart June 2022.pdf'}
+      ]
     },
     {
       id:'appendix-m',
