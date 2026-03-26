@@ -83,7 +83,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
   background: var(--bg-surface); border-bottom: 1px solid var(--border);
   display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 100;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); overflow: visible;
 }
 .menu-toggle {
   display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
@@ -113,16 +113,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .search-result-item .sr-title { font-weight: 600; margin: 2px 0; }
 .search-result-item .sr-snippet { font-size: 0.85rem; color: var(--text-secondary); }
 .search-result-item .sr-snippet mark { background: var(--accent-dim); color: var(--accent); padding: 0 2px; border-radius: 2px; }
-.header-actions { display: flex; align-items: center; gap: 4px; }
+.header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.secondary-actions { display: flex; align-items: center; gap: 8px; }
 .header-btn {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   border-radius: 50%; font-size: 16px; transition: all var(--transition); position: relative;
 }
 .header-btn:hover { background: var(--bg-tertiary); transform: scale(1.1); }
 .header-btn.active { color: var(--accent); }
-.font-controls { display: flex; align-items: center; gap: 2px; }
-.font-btn { font-size: 13px; font-weight: 700; width: 32px; height: 32px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+.font-controls { display: flex; align-items: center; gap: 6px; }
+.font-btn { font-size: 13px; font-weight: 700; width: 36px; height: 36px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
 .font-btn:hover { background: var(--bg-tertiary); }
+.more-actions { position: relative; }
+.more-toggle {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.more-toggle:hover { background: var(--bg-tertiary); }
+.more-actions summary { list-style: none; }
+.more-actions summary::-webkit-details-marker { display: none; }
+.more-actions-panel {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 168px; padding: 8px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-surface); box-shadow: var(--shadow-md);
+  display: flex; flex-direction: column; gap: 6px; z-index: 210;
+}
+.more-actions-panel .header-btn,
+.more-actions-panel .font-btn {
+  width: 100%; justify-content: flex-start; border-radius: var(--radius);
+  padding: 0 10px; gap: 8px; font-size: 0.85rem;
+}
+.more-actions-panel .font-controls { flex-direction: column; align-items: stretch; }
 .app-sidebar {
   position: fixed; top: var(--header-h); left: 0; bottom: 0; width: var(--sidebar-w);
   background: var(--bg-surface); border-right: 1px solid var(--border);
@@ -186,6 +209,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .content-section p { margin-bottom: 12px; color: var(--text-secondary); line-height: 1.7; }
 .content-section ul, .content-section ol { margin: 0 0 12px 20px; color: var(--text-secondary); }
 .content-section li { margin-bottom: 6px; line-height: 1.6; }
+.u-section-block { margin: 18px 0 22px; }
+.u-section-heading {
+  margin: 0 0 14px;
+  font-size: 1.04rem;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+.u-text-compact {
+  margin: 0;
+  max-width: 72ch;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
 .accordion { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; transition: box-shadow var(--transition); }
 .accordion:hover { box-shadow: var(--shadow-sm); }
 .accordion-header {
@@ -224,6 +261,8 @@ th { background: var(--bg-tertiary); padding: 11px 14px; text-align: left; font-
 td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text-secondary); }
 tr:hover td { background: var(--bg-secondary); }
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 20px 0; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+.cards-grid.cards-grid-home { gap: 18px; margin: 0; }
 .quick-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
   padding: 20px; cursor: pointer; transition: all 0.25s ease; text-decoration: none; display: block; color: inherit;
@@ -380,7 +419,26 @@ tr:hover td { background: var(--bg-secondary); }
 .procedure-step .ps-text { color: var(--text-secondary); line-height: 1.6; }
 @media (max-width: 1024px) { .threshold-card { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) {
+  :root { --header-h: 108px; }
+  .app-header {
+    height: var(--header-h);
+    padding: 10px 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
   .menu-toggle { display: flex; }
+  .app-brand { order: 1; font-size: 1.05rem; }
+  .header-actions { order: 2; gap: 6px; }
+  .search-container {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  .search-input { height: 36px; padding-top: 8px; padding-bottom: 8px; }
+  .search-results { max-height: min(55vh, 360px); }
+  .secondary-actions { display: none; }
+  .more-actions { display: block; }
   .app-sidebar { transform: translateX(-100%); width: 280px; }
   .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
   .app-main { margin-left: 0; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
@@ -391,9 +449,14 @@ tr:hover td { background: var(--bg-secondary); }
   .section-actions { width: 100%; }
   .section-actions .btn { flex: 1; justify-content: center; }
   .cards-grid { grid-template-columns: 1fr; }
+  .u-section-block { margin: 24px 0 28px; }
+  .u-section-heading { margin-bottom: 16px; }
+  .u-text-compact { font-size: 0.95rem; line-height: 1.72; }
+  .cards-grid.cards-grid-home { gap: 16px; }
   .dose-results { grid-template-columns: 1fr; }
   .quick-card { padding: 16px; }
 }
+.more-actions { display: none; }
 .sidebar-overlay { display: none; position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 85; }
 .sidebar-overlay.active { display: block; }
 @media print {
@@ -476,13 +539,26 @@ tr:hover td { background: var(--bg-secondary); }
     <div class="search-results" id="searchResults"></div>
   </div>
   <div class="header-actions">
-    <div class="font-controls">
-      <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size">A-</button>
-      <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size">A+</button>
-    </div>
-    <button class="header-btn" onclick="toggleBookmark()" id="bookmarkBtn" title="Bookmark this section">&#9734;</button>
     <button class="header-btn" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark/light mode">&#9789;</button>
-    <button class="header-btn" onclick="printSection()" title="Print this section">&#128424;</button>
+    <div class="secondary-actions">
+      <div class="font-controls">
+        <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size">A-</button>
+        <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size">A+</button>
+      </div>
+      <button class="header-btn" onclick="toggleBookmark()" id="bookmarkBtn" title="Bookmark this section">&#9734;</button>
+      <button class="header-btn" onclick="printSection()" title="Print this section">&#128424;</button>
+    </div>
+    <details class="more-actions">
+      <summary class="more-toggle header-btn" aria-label="More actions" title="More actions">&#8942;</summary>
+      <div class="more-actions-panel">
+        <div class="font-controls">
+          <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size"><span>A-</span> Font down</button>
+          <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size"><span>A+</span> Font up</button>
+        </div>
+        <button class="header-btn" onclick="toggleBookmark()" title="Bookmark this section"><span>&#9734;</span> Bookmark</button>
+        <button class="header-btn" onclick="printSection()" title="Print this section"><span>&#128424;</span> Print</button>
+      </div>
+    </details>
   </div>
 </header>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
@@ -559,6 +635,13 @@ html+='<h2 class="home-section-title">Primary Navigation</h2><div class="cards-g
 html+='</div><h2 class="home-section-title">Additional Resources</h2><div class="cards-grid">';
 [{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour management framework for delayed MEDEVAC scenarios.',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'High-risk errors to avoid across assessment, resuscitation, and medication delivery.',path:'#/pitfalls'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback.',path:'scenarios/index.html'},{icon:'&#128295;',title:'Clinical Tools',desc:'Bedside calculators and decision support for rapid clinical workflow support.',path:'#/tools'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div>';main.innerHTML=html;}
+function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training \u2014 Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
+html+=`<div class="content-section u-section-block"><p class="u-text-compact">Use the sidebar navigation to access any section. Use the search bar to find specific content across all chapters. Clinical tools are available for bedside calculations and decision support.</p></div>`;
+html+='<section class="u-section-block"><h2 class="u-section-heading">Quick Access</h2><div class="cards-grid cards-grid-home">';
+[{icon:'&#9881;',title:'Algorithms',desc:'Major decision pathways for airway, TBI, burns, sepsis, STEMI, and more',path:'#/algorithms'},{icon:'&#128138;',title:'Drug Reference',desc:'Complete medication cards with dosing, preparation, monitoring, and cautions',path:'#/medications'},{icon:'&#129658;',title:'Sick Bay',desc:'Sick Bay dashboard with medication library and onboard reference links',path:'#/sickbay'},{icon:'&#128200;',title:'Critical Numbers',desc:'Key thresholds, targets, and trigger values that drive clinical action',path:'#/thresholds'},{icon:'&#9874;',title:'Procedures',desc:'Step-by-step procedural guides for RSI, chest tube, IO, cricothyroidotomy, and more',path:'#/procedures'},{icon:'&#9201;',title:'Prolonged Holding',desc:'24\u201372 hour management framework for delayed MEDEVAC scenarios',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Critical errors to avoid across airway, resuscitation, neuro, burns, and medications',path:'#/pitfalls'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'12 scenario-based teaching cases with staged decision points and scored clinical decision-making',path:'scenarios/index.html'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div></section><section class="u-section-block"><h2 class="u-section-heading">Clinical Tools</h2><div class="cards-grid cards-grid-home">';
+[{icon:'&#129504;',title:'GCS Calculator',desc:'Calculate Glasgow Coma Scale with automatic airway threshold alerts',path:'#/tools/gcs'},{icon:'&#128293;',title:'Burn Calculator',desc:'Rule of 10s fluid resuscitation rate calculator with adjustment guidance',path:'#/tools/burn'},{icon:'&#9878;',title:'Dose Calculator',desc:'Weight-based dose calculations for all major ACTT medications',path:'#/tools/dosecalc'},{icon:'&#9201;',title:'Reassessment Timer',desc:'Configurable interval reminders with context-specific reassessment checklists',path:'#/tools/timer'},{icon:'&#9763;',title:'Drug Interactions',desc:'Check for known cautions and compounding risks between selected medications',path:'#/tools/interactions'},{icon:'&#128270;',title:'Differential Diagnosis',desc:'Symptom-based differential diagnosis helper with prioritized causes',path:'#/tools/ddx'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div></section>';main.innerHTML=html;}
 function renderSection(main,data,sectionId,parentTitle,parentPath){
 if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}
 if(parentPath==='#/sickbay-meds'&&!sectionId){renderSickBayMedLibrary(main,data,parentTitle,parentPath);return;}
@@ -612,7 +695,14 @@ function renderChecklists(main,sub){const data=ACTT.checklists;if(!data){main.in
 function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,study:ACTT.study,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity});});});}
 function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');return;}const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);let matches=state.searchIndex.filter(item=>{const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');return;}results.innerHTML=matches.map(m=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<div class="search-result-item" onclick="window.location.hash='${m.path.replace('#','')}';document.getElementById('searchResults').classList.remove('active');document.getElementById('searchInput').value='';"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></div>`;}).join('');results.classList.add('active');}
 function showSearchResults(){const val=document.getElementById('searchInput').value;if(val&&val.length>=2)document.getElementById('searchResults').classList.add('active');}
-document.addEventListener('click',e=>{if(!e.target.closest('.search-container'))document.getElementById('searchResults').classList.remove('active');});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.search-container'))document.getElementById('searchResults').classList.remove('active');
+  if(!e.target.closest('.more-actions'))document.querySelectorAll('.more-actions[open]').forEach(el=>el.removeAttribute('open'));
+});
+document.querySelectorAll('.more-actions-panel button').forEach(btn=>btn.addEventListener('click',()=>{
+  const menu=document.querySelector('.more-actions[open]');
+  if(menu)menu.removeAttribute('open');
+}));
 function toggleDarkMode(){state.darkMode=!state.darkMode;document.body.classList.toggle('light-mode',!state.darkMode);localStorage.setItem('actt-darkmode',state.darkMode?'dark':'light');document.getElementById('darkModeBtn').innerHTML=state.darkMode?'&#9789;':'&#9788;';}
 function changeFontSize(dir){state.fontScale=Math.max(0.8,Math.min(1.4,state.fontScale+dir*0.1));document.documentElement.style.setProperty('--font-scale',state.fontScale);localStorage.setItem('actt-fontscale',state.fontScale);}
 function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.bookmarks.indexOf(route);if(idx>=0)state.bookmarks.splice(idx,1);else state.bookmarks.push(route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
