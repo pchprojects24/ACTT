@@ -183,8 +183,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow-y: auto;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 28px 36px;
-  padding-bottom: max(28px, env(safe-area-inset-bottom));
+  padding: clamp(18px, 3vw, 32px) clamp(16px, 4vw, 40px);
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
   max-width: 100%;
 }
 .breadcrumbs { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; flex-wrap: wrap; }
@@ -192,16 +192,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .breadcrumbs a:hover { color: var(--accent); text-decoration: none; }
 .breadcrumbs .bc-sep { color: var(--text-muted); }
 .breadcrumbs .bc-current { color: var(--text-secondary); font-weight: 500; }
-.section-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-.section-title { font-size: 1.8rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
-.section-subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-top: 6px; line-height: 1.5; }
+.section-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px 20px; margin-bottom: 22px; flex-wrap: wrap; }
+.section-title { font-size: clamp(1.45rem, 1.1rem + 1.5vw, 1.95rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; }
+.section-subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-top: 8px; line-height: 1.6; max-width: 78ch; }
 .section-actions { display: flex; gap: 8px; flex-shrink: 0; }
-.btn { padding: 8px 16px; border-radius: var(--radius); font-size: 0.85rem; font-weight: 500; transition: all var(--transition); display: inline-flex; align-items: center; gap: 6px; }
+.btn { padding: 9px 16px; border-radius: 10px; font-size: 0.86rem; font-weight: 600; transition: all var(--transition); display: inline-flex; align-items: center; gap: 6px; line-height: 1.2; }
 .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 1px 3px rgba(59,130,246,0.3); }
 .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 2px 6px rgba(59,130,246,0.4); transform: translateY(-1px); }
 .btn-outline { border: 1px solid var(--border); color: var(--text-secondary); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-.btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+.btn-sm { padding: 7px 12px; font-size: 0.8rem; }
 .content-section { margin-bottom: 32px; }
 .content-section h2 { font-size: 1.4rem; margin-bottom: 12px; color: var(--text-primary); }
 .content-section h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--text-primary); }
@@ -260,11 +260,12 @@ table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: v
 th { background: var(--bg-tertiary); padding: 11px 14px; text-align: left; font-weight: 600; border: 1px solid var(--border); white-space: nowrap; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.3px; }
 td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text-secondary); }
 tr:hover td { background: var(--bg-secondary); }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 20px 0; }
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
 .cards-grid.cards-grid-home { gap: 18px; margin: 0; }
 .quick-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 24px; cursor: pointer; transition: all 0.25s ease; text-decoration: none; display: block; color: inherit;
+  padding: 20px; cursor: pointer; transition: all 0.25s ease; text-decoration: none; display: block; color: inherit;
   position: relative; overflow: hidden;
 }
 .quick-card::before {
@@ -274,9 +275,37 @@ tr:hover td { background: var(--bg-secondary); }
 }
 .quick-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-md); text-decoration: none; color: inherit; }
 .quick-card:hover::before { opacity: 1; }
-.quick-card .qc-icon { font-size: 32px; margin-bottom: 12px; }
-.quick-card .qc-title { font-weight: 700; font-size: 1.08rem; margin-bottom: 8px; }
+.quick-card .qc-icon { font-size: 28px; margin-bottom: 10px; }
+.quick-card .qc-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 8px; line-height: 1.3; }
 .quick-card .qc-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+.home-hero {
+  background: linear-gradient(130deg, var(--bg-card), var(--bg-surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px, 3vw, 24px);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 22px;
+}
+.home-hero p { color: var(--text-secondary); margin: 10px 0 0; max-width: 76ch; line-height: 1.7; }
+.home-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.home-stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 10px; margin-top: 14px; }
+.home-stat {
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.home-stat strong { display: block; font-size: 1rem; line-height: 1.2; margin-bottom: 3px; color: var(--text-primary); }
+.home-stat span { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.home-section-title { margin: 24px 0 12px; font-size: 1.08rem; font-weight: 700; letter-spacing: 0.01em; }
+.nav-group-label {
+  padding: 8px 16px 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
 .related-content { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
 .related-content h3 { font-size: 1rem; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
 .source-documents { margin-top: 24px; }
@@ -414,13 +443,18 @@ tr:hover td { background: var(--bg-secondary); }
   .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
   .app-main { margin-left: 0; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
   .app-brand span { display: none; }
-  .section-title { font-size: 1.4rem; }
+  .search-container { max-width: none; }
+  .header-actions { gap: 2px; }
+  .font-controls { display: none; }
+  .section-actions { width: 100%; }
+  .section-actions .btn { flex: 1; justify-content: center; }
   .cards-grid { grid-template-columns: 1fr; }
   .u-section-block { margin: 24px 0 28px; }
   .u-section-heading { margin-bottom: 16px; }
   .u-text-compact { font-size: 0.95rem; line-height: 1.72; }
   .cards-grid.cards-grid-home { gap: 16px; }
   .dose-results { grid-template-columns: 1fr; }
+  .quick-card { padding: 16px; }
 }
 .more-actions { display: none; }
 .sidebar-overlay { display: none; position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 85; }
@@ -556,20 +590,20 @@ window.ACTT=window.ACTT||{};
 const state={currentRoute:'',bookmarks:JSON.parse(localStorage.getItem('actt-bookmarks')||'[]'),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:parseFloat(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{}};
 function init(){if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
 function getNavSections(){return[
-{id:'home',title:'Dashboard',icon:'&#9776;',path:'#/'},
-{id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
-{id:'algorithms',title:'Algorithms',icon:'&#9881;',path:'#/algorithms',items:ACTT.algorithms?ACTT.algorithms.sections.map(s=>({id:s.id,title:s.title,path:'#/algorithms/'+s.id})):[]},
-{id:'procedures',title:'Procedures',icon:'&#9874;',path:'#/procedures',items:ACTT.procedures?ACTT.procedures.sections.map(s=>({id:s.id,title:s.title,path:'#/procedures/'+s.id})):[]},
-{id:'medications',title:'Medication Reference',icon:'&#128138;',path:'#/medications',items:ACTT.medications?ACTT.medications.sections.map(s=>({id:s.id,title:s.title,path:'#/medications/'+s.id})):[]},
-{id:'sickbay',title:'Sick Bay',icon:'&#129658;',path:'#/sickbay',items:[{id:'sickbay-meds',title:'Sick Bay Meds',path:'#/sickbay-meds'},{id:'checklists',title:'Checklists',path:'#/checklists'}]},
-{id:'prolonged-holding',title:'Prolonged Holding',icon:'&#9201;',path:'#/prolonged-holding',items:ACTT.prolongedHolding?ACTT.prolongedHolding.sections.map(s=>({id:s.id,title:s.title,path:'#/prolonged-holding/'+s.id})):[]},
-{id:'thresholds',title:'Critical Numbers',icon:'&#128200;',path:'#/thresholds',items:ACTT.thresholds?ACTT.thresholds.sections.map(s=>({id:s.id,title:s.title,path:'#/thresholds/'+s.id})):[]},
-{id:'pitfalls',title:'Pitfalls & Errors',icon:'&#9888;',path:'#/pitfalls',items:ACTT.pitfalls?ACTT.pitfalls.sections.map(s=>({id:s.id,title:s.title,path:'#/pitfalls/'+s.id})):[]},
-{id:'shipboard',title:'Shipboard Application',icon:'&#9875;',path:'#/shipboard',items:ACTT.shipboard?ACTT.shipboard.sections.map(s=>({id:s.id,title:s.title,path:'#/shipboard/'+s.id})):[]},
-{id:'team',title:'Team & Communication',icon:'&#128101;',path:'#/team',items:ACTT.team?ACTT.team.sections.map(s=>({id:s.id,title:s.title,path:'#/team/'+s.id})):[]},
-{id:'study',title:'Study & Review',icon:'&#128214;',path:'#/study',items:ACTT.study?ACTT.study.sections.map(s=>({id:s.id,title:s.title,path:'#/study/'+s.id})):[]},
-{id:'appendices',title:'Quick Reference',icon:'&#128203;',path:'#/appendices',items:ACTT.appendices?ACTT.appendices.sections.map(s=>({id:s.id,title:s.title,path:'#/appendices/'+s.id})):[]},
-{id:'tools',title:'Clinical Tools',icon:'&#128295;',path:'#/tools',items:[
+{id:'home',title:'Dashboard',icon:'&#9776;',path:'#/',group:'primary'},
+{id:'domains',title:'Clinical Domains',icon:'&#9883;',path:'#/domains',group:'primary',items:ACTT.domains?ACTT.domains.sections.map(s=>({id:s.id,title:s.title,path:'#/domains/'+s.id})):[]},
+{id:'algorithms',title:'Algorithms',icon:'&#9881;',path:'#/algorithms',group:'primary',items:ACTT.algorithms?ACTT.algorithms.sections.map(s=>({id:s.id,title:s.title,path:'#/algorithms/'+s.id})):[]},
+{id:'procedures',title:'Procedures',icon:'&#9874;',path:'#/procedures',group:'primary',items:ACTT.procedures?ACTT.procedures.sections.map(s=>({id:s.id,title:s.title,path:'#/procedures/'+s.id})):[]},
+{id:'medications',title:'Medication Reference',icon:'&#128138;',path:'#/medications',group:'primary',items:ACTT.medications?ACTT.medications.sections.map(s=>({id:s.id,title:s.title,path:'#/medications/'+s.id})):[]},
+{id:'sickbay',title:'Sick Bay',icon:'&#129658;',path:'#/sickbay',group:'primary',items:[{id:'sickbay-meds',title:'Sick Bay Meds',path:'#/sickbay-meds'},{id:'checklists',title:'Checklists',path:'#/checklists'}]},
+{id:'prolonged-holding',title:'Prolonged Holding',icon:'&#9201;',path:'#/prolonged-holding',group:'reference',items:ACTT.prolongedHolding?ACTT.prolongedHolding.sections.map(s=>({id:s.id,title:s.title,path:'#/prolonged-holding/'+s.id})):[]},
+{id:'thresholds',title:'Critical Numbers',icon:'&#128200;',path:'#/thresholds',group:'reference',items:ACTT.thresholds?ACTT.thresholds.sections.map(s=>({id:s.id,title:s.title,path:'#/thresholds/'+s.id})):[]},
+{id:'pitfalls',title:'Pitfalls & Errors',icon:'&#9888;',path:'#/pitfalls',group:'reference',items:ACTT.pitfalls?ACTT.pitfalls.sections.map(s=>({id:s.id,title:s.title,path:'#/pitfalls/'+s.id})):[]},
+{id:'shipboard',title:'Shipboard Application',icon:'&#9875;',path:'#/shipboard',group:'reference',items:ACTT.shipboard?ACTT.shipboard.sections.map(s=>({id:s.id,title:s.title,path:'#/shipboard/'+s.id})):[]},
+{id:'team',title:'Team & Communication',icon:'&#128101;',path:'#/team',group:'reference',items:ACTT.team?ACTT.team.sections.map(s=>({id:s.id,title:s.title,path:'#/team/'+s.id})):[]},
+{id:'study',title:'Study & Review',icon:'&#128214;',path:'#/study',group:'reference',items:ACTT.study?ACTT.study.sections.map(s=>({id:s.id,title:s.title,path:'#/study/'+s.id})):[]},
+{id:'appendices',title:'Quick Reference',icon:'&#128203;',path:'#/appendices',group:'reference',items:ACTT.appendices?ACTT.appendices.sections.map(s=>({id:s.id,title:s.title,path:'#/appendices/'+s.id})):[]},
+{id:'tools',title:'Clinical Tools',icon:'&#128295;',path:'#/tools',group:'utilities',items:[
 {id:'gcs',title:'GCS Calculator',path:'#/tools/gcs'},
 {id:'burn',title:'Burn Calculator',path:'#/tools/burn'},
 {id:'dosecalc',title:'Dose Calculator',path:'#/tools/dosecalc'},
@@ -577,9 +611,9 @@ function getNavSections(){return[
 {id:'interactions',title:'Drug Interactions',path:'#/tools/interactions'},
 {id:'ddx',title:'Differential Diagnosis',path:'#/tools/ddx'}
 ]},
-{id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html'}
+{id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html',group:'utilities'}
 ];}
-function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';sections.forEach(sec=>{const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Primary Care Paths',reference:'Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
 function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)toggleSidebar();}
 function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
@@ -594,6 +628,13 @@ function renderShipboardCallout(text){return`<div class="shipboard-callout"><div
 function buildSourceHref(src,basePath=''){if(src.href)return src.href;return encodeURI(`${basePath}DL information/${src.file}`);}
 function renderSourceDocuments(sources,basePath=''){if(!sources||sources.length===0)return'';let html='<div class="related-content source-documents"><h3>Source Documents</h3><div class="source-doc-list">';sources.forEach(src=>{const href=escapeHtml(buildSourceHref(src,basePath));const title=escapeHtml(src.title||src.file||'Source document');html+=`<div class="source-doc-item"><a class="source-doc-link" href="${href}" target="_blank" rel="noopener">${title}</a>`;if(src.note)html+=`<div class="source-doc-note">${escapeHtml(src.note)}</div>`;if(src.file)html+=`<div class="source-doc-path">DL information/${escapeHtml(src.file)}</div>`;html+='</div>';});html+='</div></div>';return html;}
 function renderRelatedContent(links){if(!links||links.length===0)return'';const cl=ACTT.crossLinks||{};let html='<div class="related-content"><h3>Related Content</h3><div class="related-links">';links.forEach(l=>{const info=cl[l]||{title:l.replace(/[-\/]/g,' '),path:'#/'+l};html+=`<a class="related-link" href="${info.path}">${info.title}</a>`;});html+='</div></div>';return html;}
+function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training — Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
+html+=`<section class="home-hero"><p>Fast access to high-priority trauma and acute care guidance for shipboard and austere settings. Start with algorithms for immediate actions, then open procedures, meds, and checklists to support execution.</p><div class="home-hero-actions"><a class="btn btn-primary" href="#/algorithms">&#9881; Open Algorithms</a><a class="btn btn-outline" href="#/checklists">&#128221; Open Checklists</a><a class="btn btn-outline" href="#/tools">&#128295; Open Clinical Tools</a></div><div class="home-stat-grid"><div class="home-stat"><strong>${ACTT.algorithms&&ACTT.algorithms.sections?ACTT.algorithms.sections.length:0}</strong><span>Algorithms</span></div><div class="home-stat"><strong>${ACTT.procedures&&ACTT.procedures.sections?ACTT.procedures.sections.length:0}</strong><span>Procedures</span></div><div class="home-stat"><strong>${ACTT.medications&&ACTT.medications.sections?ACTT.medications.sections.length:0}</strong><span>Medication Cards</span></div><div class="home-stat"><strong>${ACTT.checklists&&ACTT.checklists.sections?ACTT.checklists.sections.length:0}</strong><span>Checklists</span></div></div></section>`;
+html+='<h2 class="home-section-title">Primary Navigation</h2><div class="cards-grid">';
+[{icon:'&#9881;',title:'Algorithms',desc:'Decision pathways for airway, TBI, burns, sepsis, STEMI, and other high-risk presentations.',path:'#/algorithms'},{icon:'&#9874;',title:'Procedures',desc:'Step-by-step practical guides for RSI, chest tube, IO, cricothyroidotomy, and related interventions.',path:'#/procedures'},{icon:'&#128138;',title:'Medication Reference',desc:'Medication monographs with dosing, preparation, cautions, and monitoring considerations.',path:'#/medications'},{icon:'&#129658;',title:'Sick Bay',desc:'Sick Bay dashboard with medication library and operational clinical resources.',path:'#/sickbay'},{icon:'&#128221;',title:'Checklists',desc:'Clinical cognitive aids and operational readiness checklists with progress tracking.',path:'#/checklists'},{icon:'&#128200;',title:'Critical Numbers',desc:'Key thresholds and trigger values used to guide urgent decisions.',path:'#/thresholds'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div><h2 class="home-section-title">Additional Resources</h2><div class="cards-grid">';
+[{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour management framework for delayed MEDEVAC scenarios.',path:'#/prolonged-holding'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'High-risk errors to avoid across assessment, resuscitation, and medication delivery.',path:'#/pitfalls'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback.',path:'scenarios/index.html'},{icon:'&#128295;',title:'Clinical Tools',desc:'Bedside calculators and decision support for rapid clinical workflow support.',path:'#/tools'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+html+='</div>';main.innerHTML=html;}
 function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training \u2014 Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
 html+=`<div class="content-section u-section-block"><p class="u-text-compact">Use the sidebar navigation to access any section. Use the search bar to find specific content across all chapters. Clinical tools are available for bedside calculations and decision support.</p></div>`;
 html+='<section class="u-section-block"><h2 class="u-section-heading">Quick Access</h2><div class="cards-grid cards-grid-home">';
