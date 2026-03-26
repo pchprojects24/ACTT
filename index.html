@@ -83,7 +83,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
   background: var(--bg-surface); border-bottom: 1px solid var(--border);
   display: flex; align-items: center; padding: 0 20px; gap: 16px; z-index: 100;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); overflow: visible;
 }
 .menu-toggle {
   display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
@@ -113,16 +113,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .search-result-item .sr-title { font-weight: 600; margin: 2px 0; }
 .search-result-item .sr-snippet { font-size: 0.85rem; color: var(--text-secondary); }
 .search-result-item .sr-snippet mark { background: var(--accent-dim); color: var(--accent); padding: 0 2px; border-radius: 2px; }
-.header-actions { display: flex; align-items: center; gap: 4px; }
+.header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.secondary-actions { display: flex; align-items: center; gap: 8px; }
 .header-btn {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   border-radius: 50%; font-size: 16px; transition: all var(--transition); position: relative;
 }
 .header-btn:hover { background: var(--bg-tertiary); transform: scale(1.1); }
 .header-btn.active { color: var(--accent); }
-.font-controls { display: flex; align-items: center; gap: 2px; }
-.font-btn { font-size: 13px; font-weight: 700; width: 32px; height: 32px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+.font-controls { display: flex; align-items: center; gap: 6px; }
+.font-btn { font-size: 13px; font-weight: 700; width: 36px; height: 36px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
 .font-btn:hover { background: var(--bg-tertiary); }
+.more-actions { position: relative; }
+.more-toggle {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.more-toggle:hover { background: var(--bg-tertiary); }
+.more-actions summary { list-style: none; }
+.more-actions summary::-webkit-details-marker { display: none; }
+.more-actions-panel {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 168px; padding: 8px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-surface); box-shadow: var(--shadow-md);
+  display: flex; flex-direction: column; gap: 6px; z-index: 210;
+}
+.more-actions-panel .header-btn,
+.more-actions-panel .font-btn {
+  width: 100%; justify-content: flex-start; border-radius: var(--radius);
+  padding: 0 10px; gap: 8px; font-size: 0.85rem;
+}
+.more-actions-panel .font-controls { flex-direction: column; align-items: stretch; }
 .app-sidebar {
   position: fixed; top: var(--header-h); left: 0; bottom: 0; width: var(--sidebar-w);
   background: var(--bg-surface); border-right: 1px solid var(--border);
@@ -367,7 +390,26 @@ tr:hover td { background: var(--bg-secondary); }
 .procedure-step .ps-text { color: var(--text-secondary); line-height: 1.6; }
 @media (max-width: 1024px) { .threshold-card { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) {
+  :root { --header-h: 108px; }
+  .app-header {
+    height: var(--header-h);
+    padding: 10px 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
   .menu-toggle { display: flex; }
+  .app-brand { order: 1; font-size: 1.05rem; }
+  .header-actions { order: 2; gap: 6px; }
+  .search-container {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  .search-input { height: 36px; padding-top: 8px; padding-bottom: 8px; }
+  .search-results { max-height: min(55vh, 360px); }
+  .secondary-actions { display: none; }
+  .more-actions { display: block; }
   .app-sidebar { transform: translateX(-100%); width: 280px; }
   .app-sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
   .app-main { margin-left: 0; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
@@ -380,6 +422,7 @@ tr:hover td { background: var(--bg-secondary); }
   .cards-grid.cards-grid-home { gap: 16px; }
   .dose-results { grid-template-columns: 1fr; }
 }
+.more-actions { display: none; }
 .sidebar-overlay { display: none; position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 85; }
 .sidebar-overlay.active { display: block; }
 @media print {
@@ -462,13 +505,26 @@ tr:hover td { background: var(--bg-secondary); }
     <div class="search-results" id="searchResults"></div>
   </div>
   <div class="header-actions">
-    <div class="font-controls">
-      <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size">A-</button>
-      <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size">A+</button>
-    </div>
-    <button class="header-btn" onclick="toggleBookmark()" id="bookmarkBtn" title="Bookmark this section">&#9734;</button>
     <button class="header-btn" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark/light mode">&#9789;</button>
-    <button class="header-btn" onclick="printSection()" title="Print this section">&#128424;</button>
+    <div class="secondary-actions">
+      <div class="font-controls">
+        <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size">A-</button>
+        <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size">A+</button>
+      </div>
+      <button class="header-btn" onclick="toggleBookmark()" id="bookmarkBtn" title="Bookmark this section">&#9734;</button>
+      <button class="header-btn" onclick="printSection()" title="Print this section">&#128424;</button>
+    </div>
+    <details class="more-actions">
+      <summary class="more-toggle header-btn" aria-label="More actions" title="More actions">&#8942;</summary>
+      <div class="more-actions-panel">
+        <div class="font-controls">
+          <button class="font-btn" onclick="changeFontSize(-1)" title="Decrease font size"><span>A-</span> Font down</button>
+          <button class="font-btn" onclick="changeFontSize(1)" title="Increase font size"><span>A+</span> Font up</button>
+        </div>
+        <button class="header-btn" onclick="toggleBookmark()" title="Bookmark this section"><span>&#9734;</span> Bookmark</button>
+        <button class="header-btn" onclick="printSection()" title="Print this section"><span>&#128424;</span> Print</button>
+      </div>
+    </details>
   </div>
 </header>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
@@ -598,7 +654,14 @@ function renderChecklists(main,sub){const data=ACTT.checklists;if(!data){main.in
 function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,study:ACTT.study,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity});});});}
 function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');return;}const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);let matches=state.searchIndex.filter(item=>{const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');return;}results.innerHTML=matches.map(m=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<div class="search-result-item" onclick="window.location.hash='${m.path.replace('#','')}';document.getElementById('searchResults').classList.remove('active');document.getElementById('searchInput').value='';"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></div>`;}).join('');results.classList.add('active');}
 function showSearchResults(){const val=document.getElementById('searchInput').value;if(val&&val.length>=2)document.getElementById('searchResults').classList.add('active');}
-document.addEventListener('click',e=>{if(!e.target.closest('.search-container'))document.getElementById('searchResults').classList.remove('active');});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.search-container'))document.getElementById('searchResults').classList.remove('active');
+  if(!e.target.closest('.more-actions'))document.querySelectorAll('.more-actions[open]').forEach(el=>el.removeAttribute('open'));
+});
+document.querySelectorAll('.more-actions-panel button').forEach(btn=>btn.addEventListener('click',()=>{
+  const menu=document.querySelector('.more-actions[open]');
+  if(menu)menu.removeAttribute('open');
+}));
 function toggleDarkMode(){state.darkMode=!state.darkMode;document.body.classList.toggle('light-mode',!state.darkMode);localStorage.setItem('actt-darkmode',state.darkMode?'dark':'light');document.getElementById('darkModeBtn').innerHTML=state.darkMode?'&#9789;':'&#9788;';}
 function changeFontSize(dir){state.fontScale=Math.max(0.8,Math.min(1.4,state.fontScale+dir*0.1));document.documentElement.style.setProperty('--font-scale',state.fontScale);localStorage.setItem('actt-fontscale',state.fontScale);}
 function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.bookmarks.indexOf(route);if(idx>=0)state.bookmarks.splice(idx,1);else state.bookmarks.push(route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
