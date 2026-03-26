@@ -824,12 +824,8 @@ main.innerHTML=html;
 }else{
 let html='<div class="content-shell">'+renderSectionHeader(data.title,cleanSubtitle,[{title:'Home',path:'#/'},{title:data.title,path:parentPath}]);
 html+=renderSectionNavActions('Home','#/');
-html+='<div class="section-quick-links">';
-data.sections.forEach(sec=>{html+=`<a class="section-quick-link" href="${parentPath}/${sec.id}">${sec.title}</a>`;});
-html+='</div>';
-html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(\'appMain\'))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(\'appMain\'))">Collapse All</button></div>';
-data.sections.forEach(sec=>{const preview=cleanHeadingNumbering(sec.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').substring(0,200).trim();html+=renderAccordion(sec.id,sec.title,`<div class="content-section">${preview}...</div><p><a href="${parentPath}/${sec.id}">View full section &#8250;</a></p>`,sec.severity);});
-if(data.intro)html+=renderContextDetails(data.intro,'Background and chapter context');
+if(data.sections.length>0){html+='<div class="section-quick-links">';data.sections.forEach(sec=>{html+=`<a class="section-quick-link" href="${parentPath}/${sec.id}">${sec.title}</a>`;});html+='</div>';}
+if(data.intro){if(data.sections.length===0){html+=data.intro;}else{html+=renderContextDetails(data.intro,'Background and chapter context');}}
 html+='</div>';
 main.innerHTML=html;
 }}
