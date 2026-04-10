@@ -245,7 +245,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 2px 6px rgba(59,130,246,0.4); transform: translateY(-1px); }
 .btn-outline { border: 1px solid var(--border); color: var(--text-secondary); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-.btn-sm { padding: 5px 10px; font-size: 0.8rem; }
 .section-nav-actions {
   display: flex;
   gap: 10px;
@@ -490,19 +489,7 @@ tr:hover td { background: var(--bg-secondary); }
 .procedure-step .ps-text { color: var(--text-secondary); line-height: 1.6; }
 @media (max-width: 1024px) { .threshold-card { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) {
-  :root { --header-h: 92px; }
-  .app-header {
-    height: var(--header-h);
-    padding: 8px 10px;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-content: flex-start;
-  }
-  .menu-toggle { display: flex; }
-  .app-brand { order: 1; font-size: 0.96rem; letter-spacing: 0.3px; }
-  .header-actions { order: 2; gap: 6px; }
-  :root { --header-h: 72px; }
-  :root { --header-h: 108px; }
+  :root { --header-h: 60px; }
   body {
     overflow-y: auto;
     height: auto;
@@ -624,6 +611,121 @@ tr:hover td { background: var(--bg-secondary); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
 .loading { display: flex; justify-content: center; align-items: center; padding: 60px; color: var(--text-muted); font-size: 1rem; }
+
+/* Skip to content link */
+.skip-link {
+  position: fixed; top: -100px; left: 16px; z-index: 9999;
+  background: var(--accent); color: #fff; padding: 10px 18px;
+  border-radius: 0 0 var(--radius) var(--radius); font-weight: 700;
+  transition: top 0.2s; text-decoration: none;
+}
+.skip-link:focus { top: 0; color: #fff; text-decoration: none; }
+
+/* Focus-visible rings for all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 20px; z-index: 80;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--accent); color: #fff; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-md); cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  border: none;
+}
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { transform: translateY(-2px); background: var(--accent-hover); }
+@media (max-width: 768px) { .back-to-top { bottom: max(20px, env(safe-area-inset-bottom)); right: 16px; } }
+
+/* Toast notifications */
+.toast-container {
+  position: fixed; bottom: 80px; right: 20px; z-index: 500;
+  display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+}
+.toast {
+  padding: 10px 16px; background: var(--bg-surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow-md);
+  font-size: 0.88rem; color: var(--text-primary);
+  animation: toastIn 0.25s ease, toastOut 0.3s ease 2.2s forwards;
+  pointer-events: auto;
+}
+.toast.toast-success { border-left: 3px solid var(--severity-green); }
+.toast.toast-info { border-left: 3px solid var(--accent); }
+@keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes toastOut { from { opacity: 1; } to { opacity: 0; transform: translateX(20px); } }
+
+/* CCT role cards */
+.cct-role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 14px 0 20px; }
+.cct-role-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+  border-top: 3px solid var(--accent);
+}
+.cct-role-card .rc-icon { font-size: 24px; margin-bottom: 8px; }
+.cct-role-card .rc-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: var(--text-primary); }
+.cct-role-card .rc-desc { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.55; }
+
+/* CCT MARCH steps */
+.march-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 14px 0; }
+.march-card {
+  border-radius: var(--radius); padding: 14px 16px;
+  border: 1px solid var(--border); background: var(--bg-card);
+  border-left: 4px solid var(--accent);
+}
+.march-card .mc-letter {
+  font-size: 1.4rem; font-weight: 900; color: var(--accent);
+  font-family: ui-monospace, monospace; line-height: 1;
+}
+.march-card .mc-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
+.march-card .mc-items { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* CCT escalation banner */
+.escalation-banner {
+  background: var(--severity-red-bg); border: 1px solid var(--severity-red);
+  border-radius: var(--radius); padding: 14px 18px; margin: 16px 0;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.escalation-banner .eb-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.escalation-banner .eb-body { flex: 1; }
+.escalation-banner .eb-title { font-weight: 700; color: var(--severity-red); margin-bottom: 6px; font-size: 0.95rem; }
+.escalation-banner ul { margin: 0 0 0 18px; color: var(--text-secondary); font-size: 0.87rem; }
+.escalation-banner li { margin-bottom: 4px; line-height: 1.5; }
+
+/* CCT MIST card */
+.mist-card {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; margin: 14px 0;
+  background: var(--border);
+}
+.mist-item { background: var(--bg-card); padding: 14px 16px; }
+.mist-item .mi-letter {
+  font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1;
+  font-family: ui-monospace, monospace;
+}
+.mist-item .mi-word { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
+.mist-item .mi-desc { margin-top: 6px; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.55; }
+@media (max-width: 520px) { .mist-card { grid-template-columns: 1fr; } }
+
+/* CCT frequency table */
+.freq-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
+.freq-table th { background: var(--bg-tertiary); padding: 9px 12px; text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid var(--border); }
+.freq-table td { padding: 10px 12px; border: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+.freq-table tr:hover td { background: var(--bg-secondary); }
+.freq-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
+.freq-badge.urgent { background: var(--severity-red-bg); color: var(--severity-red); border: 1px solid var(--severity-red); }
+.freq-badge.caution { background: var(--severity-amber-bg); color: var(--severity-amber); border: 1px solid var(--severity-amber); }
+.freq-badge.stable { background: var(--severity-green-bg); color: var(--severity-green); border: 1px solid var(--severity-green); }
 .cl-progress{display:flex;align-items:center;gap:12px;padding:12px 0 16px;flex-wrap:wrap}
 .cl-progress-bar{flex:1;min-width:120px;height:8px;background:var(--bg-tertiary);border-radius:4px;overflow:hidden}
 .cl-progress-bar-fill{height:100%;background:var(--accent);border-radius:4px;transition:width 0.3s ease}
@@ -678,6 +780,12 @@ tr:hover td { background: var(--bg-secondary); }
 .cl-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 @media print{
+  .app-header,.app-sidebar,.sidebar-overlay,.op-cl-actions,.section-actions,.expand-collapse-btns,.back-to-top,.toast-container,.section-nav-actions,.breadcrumbs{display:none!important}
+  .cct-role-grid{grid-template-columns:repeat(2,1fr)!important}
+  .march-grid{grid-template-columns:repeat(2,1fr)!important}
+  .mist-card{grid-template-columns:repeat(2,1fr)!important}
+  .escalation-banner,.severity-card{break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .shipboard-callout-body{display:block!important}
   .app-header,.app-sidebar,.sidebar-overlay,.op-cl-actions,.section-actions,.expand-collapse-btns{display:none!important}
   .app-main{margin:0;padding:12px;height:auto;overflow:visible}
   .op-cl-meta{border:1px solid #ccc;background:#f9f9f9}
@@ -698,6 +806,7 @@ tr:hover td { background: var(--bg-secondary); }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#appMain">Skip to content</a>
 <header class="app-header">
   <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu" aria-controls="appSidebar" aria-expanded="false">&#9776;</button>
   <div class="app-brand">ACTT<span>v1.0</span></div>
@@ -736,9 +845,11 @@ tr:hover td { background: var(--bg-secondary); }
 <aside class="app-sidebar" id="appSidebar" aria-hidden="true">
   <nav class="sidebar-nav" id="sidebarNav"></nav>
 </aside>
-<main class="app-main" id="appMain">
+<main class="app-main" id="appMain" tabindex="-1">
   <div class="loading">Loading ACTT Reference...</div>
 </main>
+<button class="back-to-top" id="backToTop" title="Back to top" aria-label="Scroll back to top">&#8593;</button>
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 <script src="data/chapters-1-2.js"></script>
 <script src="data/domains.js"></script>
 <script src="data/algorithms.js"></script>
@@ -761,7 +872,8 @@ tr:hover td { background: var(--bg-secondary); }
 window.ACTT=window.ACTT||{};
 const SEARCH_SYNONYMS={rsi:['airway','intubation'],intubation:['rsi','airway'],stemi:['acs'],dka:['diabetic ketoacidosis'],pea:['asystole'],vf:['v-fib','ventricular fibrillation']};
 const QUIZ_BANK={algorithms:[{q:'In shock management, what matters most first?',options:['Trend perfusion and treat cause rapidly','Wait for complete labs before intervention','Prioritize transport paperwork'],answer:0},{q:'For sepsis onboard, the highest-yield early action is:',options:['Early antibiotics with source-focused reassessment','Delay antibiotics until culture results return','Use vasopressors before fluid assessment'],answer:0},{q:'When burn airway edema is expected to worsen, best approach is:',options:['Plan early definitive airway before failure','Wait for overt obstruction signs','Use repeated sedatives to calm breathing'],answer:0}],procedures:[{q:'If IV access fails in unstable patient, next best access is:',options:['IO access','Delay meds and retry later','Oral medications only'],answer:0},{q:'Chest decompression is indicated when:',options:['Tension physiology with respiratory/hemodynamic compromise','Any chest pain after trauma','Only when imaging confirms pneumothorax'],answer:0},{q:'During RSI, the most important team behavior is:',options:['Clear role assignment and closed-loop communication','Silent workflow with independent actions','Skip pre-brief to save time'],answer:0}],medications:[{q:'Onboard medication safety should emphasize:',options:['Dose, contraindications, and monitoring trends','Name memorization only','Mixing meds quickly without checks'],answer:0},{q:'A useful medication cognitive aid is:',options:['Standardized prep and reassessment checklist','Ad hoc undocumented dosing','Single-provider memory only'],answer:0},{q:'When sedating prolonged-hold patients, watch for:',options:['Accumulation and delayed respiratory compromise','Only immediate blood pressure changes','No change if doses are small'],answer:0}]};
-function init(){enrichAllMetadata();if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(!isMobileViewport())document.body.classList.remove('mobile-search-open');});handleRoute();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
+function initBackToTop(){const btn=document.getElementById('backToTop');const main=document.getElementById('appMain');if(!btn||!main)return;main.addEventListener('scroll',()=>{btn.classList.toggle('visible',main.scrollTop>300);},{ passive:true });btn.addEventListener('click',()=>main.scrollTo({top:0,behavior:'smooth'}));}
+function init(){enrichAllMetadata();if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(!isMobileViewport())document.body.classList.remove('mobile-search-open');});handleRoute();initBackToTop();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
 const state={currentRoute:'',bookmarks:(()=>{try{return JSON.parse(localStorage.getItem('actt-bookmarks')||'[]');}catch(e){return[];}})(),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:(v=>{const n=parseFloat(v);return isNaN(n)?1:Math.max(0.8,Math.min(1.4,n));})(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null,searchFilter:localStorage.getItem('actt-search-filter')||'all',learnerProgress:(()=>{try{return JSON.parse(localStorage.getItem('actt-learner-progress')||'{"visited":{},"quiz":{}}');}catch(e){return{visited:{},quiz:{}};}})()};
 function getNavSections(){return[
 {id:'home',title:'Home Overview',icon:'&#8962;',path:'#/',group:'primary'},
@@ -792,7 +904,7 @@ function getNavSections(){return[
 function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Immediate Care Workflow',reference:'Supporting Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" tabindex="0" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')" role="button" tabindex="0"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
 function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)closeSidebar();}
-function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
+function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}setTimeout(()=>{exactItem.scrollIntoView({block:'nearest',behavior:'smooth'});},120);}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
 function ensureMetadata(data){if(!data||!Array.isArray(data.sections))return;data.sections.forEach(sec=>{if(!sec.meta)sec.meta={};sec.meta.lastReviewed=sec.meta.lastReviewed||'2026-03-20';sec.meta.reviewer=sec.meta.reviewer||'ACTT Curriculum Team';sec.meta.sourceDate=sec.meta.sourceDate||'2025-01-01';sec.meta.expiryNotice=sec.meta.expiryNotice||'Review within 12 months or after protocol change';});}
 function enrichAllMetadata(){[ACTT.domains,ACTT.algorithms,ACTT.procedures,ACTT.medications,ACTT.sickbay,ACTT.sickbayMeds,ACTT.prolongedHolding,ACTT.thresholds,ACTT.pitfalls,ACTT.shipboard,ACTT.team,ACTT.casualtyClearingTeam,ACTT.study,ACTT.appendices,ACTT.checklists].forEach(ensureMetadata);}
 function saveLearnerProgress(){localStorage.setItem('actt-learner-progress',JSON.stringify(state.learnerProgress));}
@@ -806,7 +918,7 @@ function announceSearchResults(message){const status=document.getElementById('se
 function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
 function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
 function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
-function renderSectionNavActions(parentTitle,parentPath){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';html+='</div>';return html;}
+function renderSectionNavActions(parentTitle,parentPath,data,sectionId){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';if(data&&data.sections&&sectionId){const idx=data.sections.findIndex(s=>s.id===sectionId);if(idx>0){const prev=data.sections[idx-1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${prev.id}">&#8592; ${prev.title}</a>`;}if(idx<data.sections.length-1){const next=data.sections[idx+1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${next.id}">${next.title} &#8594;</a>`;}}html+='</div>';return html;}
 function stripChapterLabel(text){if(!text)return'';return String(text).replace(/^\s*Chapter\s+\d+\s*[—-]\s*/i,'').trim();}
 function cleanHeadingNumbering(html){if(!html)return'';return String(html)
   .replace(/<(h[1-6])([^>]*)>\s*Chapter\s+\d+\s+/gi,'<$1$2>')
@@ -842,7 +954,7 @@ if(!sec){main.innerHTML='<div class="severity-card amber"><div class="sc-title">
 markVisited(parentPath+'/'+sectionId);
 let html='<div class="content-shell">'+renderSectionHeader(sec.title,stripChapterLabel(sec.subtitle||''),[{title:'Home',path:'#/'},{title:parentTitle,path:parentPath},{title:sec.title,path:parentPath+'/'+sectionId}]);
 html+=renderMetadataBanner(sec.meta);
-html+=renderSectionNavActions(parentTitle,parentPath);
+html+=renderSectionNavActions(parentTitle,parentPath,data,sectionId);
 html+='<div class="expand-collapse-btns"><button class="btn btn-outline btn-sm" onclick="expandAll(document.getElementById(&quot;appMain&quot;))">Expand All</button><button class="btn btn-outline btn-sm" onclick="collapseAll(document.getElementById(&quot;appMain&quot;))">Collapse All</button></div>';
 html+='<div class="content-section">'+formatTopicContent(sec.content||'')+'</div>';
 if(parentPath==='#/algorithms')html+='<div style="margin:8px 0 18px"><a class="btn btn-outline" href="#/checklists">Open Checklists Folder &#8250;</a></div>';
@@ -928,7 +1040,8 @@ document.querySelectorAll('.more-actions-panel button').forEach(btn=>btn.addEven
 }));
 function toggleDarkMode(){state.darkMode=!state.darkMode;document.body.classList.toggle('light-mode',!state.darkMode);localStorage.setItem('actt-darkmode',state.darkMode?'dark':'light');document.getElementById('darkModeBtn').innerHTML=state.darkMode?'&#9789;':'&#9788;';}
 function changeFontSize(dir){state.fontScale=Math.max(0.8,Math.min(1.4,state.fontScale+dir*0.1));document.documentElement.style.setProperty('--font-scale',state.fontScale);localStorage.setItem('actt-fontscale',state.fontScale);}
-function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.bookmarks.indexOf(route);if(idx>=0)state.bookmarks.splice(idx,1);else state.bookmarks.push(route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
+function showToast(msg,type='info'){const c=document.getElementById('toastContainer');if(!c)return;const t=document.createElement('div');t.className='toast toast-'+type;t.textContent=msg;c.appendChild(t);setTimeout(()=>t.remove(),2600);}
+function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.bookmarks.indexOf(route);if(idx>=0){state.bookmarks.splice(idx,1);showToast('Bookmark removed','info');}else{state.bookmarks.push(route);showToast('Bookmarked!','success');}localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
 function updateBookmarkBtn(){const btn=document.getElementById('bookmarkBtn');const isB=state.bookmarks.includes(state.currentRoute);btn.innerHTML=isB?'&#9733;':'&#9734;';btn.classList.toggle('active',isB);}
 function updateBookmarksPanel(){const panel=document.getElementById('bookmarksPanel');if(!panel)return;if(state.bookmarks.length===0){panel.innerHTML='<div style="padding:8px 16px;font-size:0.85rem;color:var(--text-muted)">No bookmarks yet</div>';return;}panel.innerHTML=state.bookmarks.map(b=>{const title=b.replace('#/','').replace(/\//g,' > ')||'Home';return`<div class="bookmark-item" style="display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:0.85rem;color:var(--text-secondary);cursor:pointer" onclick="window.location.hash='${b.replace('#','')}'"><span>${title}</span><span style="color:var(--severity-red);font-size:12px;margin-left:auto;opacity:0.5;cursor:pointer" onclick="event.stopPropagation();removeBookmark('${b}')">&#10005;</span></div>`;}).join('');}
 function removeBookmark(route){state.bookmarks=state.bookmarks.filter(b=>b!==route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
