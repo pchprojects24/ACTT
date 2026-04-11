@@ -803,6 +803,44 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   a{color:#000;text-decoration:none}
   .breadcrumbs,.section-subtitle{display:none}
 }
+/* ---------- Reference Library ---------- */
+.lib-filter{margin:12px 0 18px}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:10px 0 22px}
+.lib-grid-featured{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.lib-card{display:flex;flex-direction:column;gap:6px;padding:14px;border:1px solid var(--border);background:var(--bg-elevated);border-radius:10px;text-decoration:none;color:var(--text-primary);transition:transform .15s,border-color .15s,box-shadow .15s}
+.lib-card:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.lib-card-top{display:flex;align-items:center;gap:6px;font-size:.72rem}
+.lib-ext{display:inline-block;padding:2px 7px;background:var(--accent);color:#fff;border-radius:4px;font-weight:700;letter-spacing:.04em}
+.lib-tag{display:inline-block;padding:2px 7px;border:1px solid var(--border-strong,var(--border));border-radius:4px;color:var(--text-secondary);font-weight:600}
+.lib-title{font-size:.95rem;font-weight:600;line-height:1.35;color:var(--text-primary)}
+.lib-note{font-size:.82rem;color:var(--text-secondary);line-height:1.4}
+.lib-path{margin-top:auto;font-size:.7rem;color:var(--text-muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;opacity:.85}
+.lib-category{margin:22px 0}
+.lib-cat-label{font-size:1.05rem;margin:6px 0 2px}
+.lib-cat-desc{font-size:.85rem;color:var(--text-secondary);margin:0 0 10px}
+.lib-category-nav{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.lib-chip{display:inline-block;padding:6px 12px;font-size:.8rem;border:1px solid var(--border);border-radius:999px;color:var(--text-secondary);text-decoration:none;background:var(--bg-elevated)}
+.lib-chip:hover{border-color:var(--accent);color:var(--accent)}
+.u-section-heading{font-size:1.1rem;margin:20px 0 8px;color:var(--text-primary)}
+/* ---------- In-shell Scenario list ---------- */
+.scn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:14px 0}
+.scn-card{display:flex;align-items:flex-start;gap:14px;padding:16px;border:1px solid var(--border);background:var(--bg-elevated);border-radius:12px;text-decoration:none;color:var(--text-primary);position:relative;transition:transform .15s,border-color .15s,box-shadow .15s}
+.scn-card:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.scn-num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;background:var(--accent);color:#fff;font-weight:800;font-size:1rem}
+.scn-body{flex:1;min-width:0}
+.scn-title{font-size:.95rem;font-weight:700;line-height:1.35;margin-bottom:4px}
+.scn-desc{font-size:.82rem;color:var(--text-secondary);line-height:1.4;margin-bottom:8px}
+.scn-tags{display:flex;flex-wrap:wrap;gap:5px}
+.scn-tag{display:inline-block;padding:2px 8px;font-size:.7rem;border:1px solid var(--border);border-radius:999px;color:var(--text-secondary);background:transparent}
+.scn-arrow{position:absolute;right:12px;top:12px;font-size:1.4rem;color:var(--text-muted);line-height:1}
+/* ---------- Role-based home shortcuts ---------- */
+.role-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0 20px}
+.role-card{display:block;padding:14px 16px;border:1px solid var(--border);background:var(--bg-elevated);border-radius:12px;text-decoration:none;color:var(--text-primary);transition:transform .15s,border-color .15s,box-shadow .15s}
+.role-card:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.role-icon{font-size:1.3rem;margin-bottom:6px}
+.role-title{font-size:.95rem;font-weight:700;margin-bottom:2px}
+.role-desc{font-size:.8rem;color:var(--text-secondary);line-height:1.35}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
@@ -867,6 +905,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 <script src="data/appendices.js"></script>
 <script src="data/tools.js"></script>
 <script src="data/checklists.js"></script>
+<script src="data/library.js"></script>
 <script src="data/cross-links.js"></script>
 <script>
 window.ACTT=window.ACTT||{};
@@ -891,6 +930,7 @@ function getNavSections(){return[
 {id:'pitfalls',title:'Pitfalls & Errors',icon:'&#9888;',path:'#/pitfalls',group:'reference',items:ACTT.pitfalls?ACTT.pitfalls.sections.map(s=>({id:s.id,title:s.title,path:'#/pitfalls/'+s.id})):[]},
 {id:'study',title:'Study & Review',icon:'&#128214;',path:'#/study',group:'reference',items:ACTT.study?ACTT.study.sections.map(s=>({id:s.id,title:s.title,path:'#/study/'+s.id})):[]},
 {id:'appendices',title:'Quick Reference',icon:'&#128203;',path:'#/appendices',group:'reference',items:ACTT.appendices?ACTT.appendices.sections.map(s=>({id:s.id,title:s.title,path:'#/appendices/'+s.id})):[]},
+{id:'library',title:'Reference Library',icon:'&#128218;',path:'#/library',group:'reference',items:ACTT.library?ACTT.library.categories.map(c=>({id:c.id,title:c.label,path:'#/library/'+c.id})):[]},
 {id:'tools',title:'Clinical Tools',icon:'&#128295;',path:'#/tools',group:'utilities',items:[
 {id:'gcs',title:'GCS Calculator',path:'#/tools/gcs'},
 {id:'burn',title:'Burn Calculator',path:'#/tools/burn'},
@@ -899,7 +939,7 @@ function getNavSections(){return[
 {id:'interactions',title:'Drug Interactions',path:'#/tools/interactions'},
 {id:'ddx',title:'Differential Diagnosis',path:'#/tools/ddx'}
 ]},
-{id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'scenarios/index.html',group:'utilities'}
+{id:'scenarios',title:'Interactive Scenarios',icon:'&#127891;',path:'#/scenarios',group:'utilities',items:[{id:'scenarios-open-player',title:'Open full scenario player',path:'scenarios/index.html'}]}
 ];}
 function buildSidebar(){const nav=document.getElementById('sidebarNav');const sections=getNavSections();let html='';let currentGroup='';const groupLabels={primary:'Immediate Care Workflow',reference:'Supporting Reference',utilities:'Tools & Training'};sections.forEach(sec=>{if(sec.group!==currentGroup){currentGroup=sec.group;html+=`<div class="nav-group-label">${groupLabels[currentGroup]||'Navigation'}</div>`;}const hasItems=sec.items&&sec.items.length>0;const isExternal=sec.path&&!sec.path.startsWith('#');const headerAction=sec.id==='sickbay'?`navigateTo('${sec.path}');toggleNavSection('${sec.id}')`:(isExternal?`window.location.href='${sec.path}'`:(hasItems?`toggleNavSection('${sec.id}')`:`navigateTo('${sec.path}')`));html+=`<div class="nav-section" data-section="${sec.id}">`;html+=`<div class="nav-section-header" onclick="${headerAction}" data-path="${sec.path}" role="button" tabindex="0" aria-label="Open ${sec.title}"><span class="nav-icon">${sec.icon}</span>${sec.title}`;if(hasItems)html+=`<span class="nav-chevron">&#9654;</span>`;html+=`</div>`;if(hasItems){html+=`<div class="nav-section-items" id="navItems-${sec.id}">`;sec.items.forEach(item=>{html+=`<a class="nav-item" href="${item.path}" data-path="${item.path}">${item.title}</a>`;});html+=`</div>`;}html+=`</div>`;});html+=`<div class="nav-divider"></div><div class="nav-section"><div class="nav-section-header" onclick="toggleNavSection('bookmarks')" role="button" tabindex="0"><span class="nav-icon">&#9733;</span>Bookmarks<span class="nav-chevron">&#9654;</span></div><div class="nav-section-items" id="navItems-bookmarks"><div class="bookmarks-panel" id="bookmarksPanel"></div></div></div>`;nav.innerHTML=html;updateBookmarksPanel();}
 function toggleNavSection(id){const items=document.getElementById('navItems-'+id);const header=items?.previousElementSibling;if(!items)return;items.classList.toggle('expanded');header?.classList.toggle('expanded');}
@@ -915,7 +955,7 @@ function renderMetadataBanner(meta){if(!meta)return'';return '<div class="metada
 function setSearchFilter(filter){state.searchFilter=filter||'all';localStorage.setItem('actt-search-filter',state.searchFilter);const input=document.getElementById('searchInput');if(input&&input.value.trim().length>=2)handleSearch(input.value);}
 function expandTerms(query){const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);const expanded=new Set(terms);terms.forEach(t=>(SEARCH_SYNONYMS[t]||[]).forEach(s=>expanded.add(s)));return [...expanded];}
 function announceSearchResults(message){const status=document.getElementById('searchStatus');if(status)status.textContent=message;}
-function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
+function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;case'library':renderLibrary(main,sub);break;case'scenarios':renderScenariosList(main);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
 function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
 function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
 function renderSectionNavActions(parentTitle,parentPath,data,sectionId){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';if(data&&data.sections&&sectionId){const idx=data.sections.findIndex(s=>s.id===sectionId);if(idx>0){const prev=data.sections[idx-1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${prev.id}">&#8592; ${prev.title}</a>`;}if(idx<data.sections.length-1){const next=data.sections[idx+1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${next.id}">${next.title} &#8594;</a>`;}}html+='</div>';return html;}
@@ -936,13 +976,16 @@ function renderSourceDocuments(sources,basePath=''){if(!sources||sources.length=
 function renderRelatedContent(links){if(!links||links.length===0)return'';const cl=ACTT.crossLinks||{};let html='<div class="related-content"><h3>Related Content</h3><div class="related-links">';links.forEach(l=>{const info=cl[l]||{title:l.replace(/[-\/]/g,' '),path:'#/'+l};html+=`<a class="related-link" href="${info.path}">${info.title}</a>`;});html+='</div></div>';return html;}
 function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training — Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
 html+=`<section class="home-hero"><p>Rapid access to high-risk trauma and acute care actions for shipboard and austere settings. The home page is organized in operational sequence: stabilize, execute, then sustain and hand over care.</p><div class="home-hero-actions"><a class="btn btn-primary" href="#/algorithms">&#9881; Immediate Algorithms</a><a class="btn btn-outline" href="#/procedures">&#9874; Open Procedures</a><a class="btn btn-outline" href="#/checklists">&#128221; Open Checklists</a></div><div class="home-stat-grid"><div class="home-stat"><strong>${ACTT.algorithms&&ACTT.algorithms.sections?ACTT.algorithms.sections.length:0}</strong><span>Algorithms</span></div><div class="home-stat"><strong>${ACTT.procedures&&ACTT.procedures.sections?ACTT.procedures.sections.length:0}</strong><span>Procedures</span></div><div class="home-stat"><strong>${ACTT.medications&&ACTT.medications.sections?ACTT.medications.sections.length:0}</strong><span>Medication Cards</span></div><div class="home-stat"><strong>${ACTT.checklists&&ACTT.checklists.sections?ACTT.checklists.sections.length:0}</strong><span>Checklists</span></div></div></section>`;
+html+='<section class="u-section-block"><h2 class="u-section-heading">Start Where You Are</h2><p class="home-section-subtitle">Pick the entry point that matches how you\'re using the app right now.</p><div class="role-strip">';
+[{icon:'&#127891;',title:'First time through',desc:'Read the Prep Manual, then work through the scenarios in order.',path:'#/study'},{icon:'&#9889;',title:'Rapid clinical answer',desc:'Jump to Algorithms, Procedures, or Critical Numbers.',path:'#/algorithms'},{icon:'&#128218;',title:'Deep reference',desc:'Browse every source document in the Reference Library.',path:'#/library'},{icon:'&#128203;',title:'Checklists & inspection',desc:'Interactive cognitive aids and readiness checks.',path:'#/checklists'}].forEach(r=>{html+=`<a class="role-card" href="${r.path}"><div class="role-icon">${r.icon}</div><div class="role-title">${r.title}</div><div class="role-desc">${r.desc}</div></a>`;});
+html+='</div></section>';
 html+='<section class="u-section-block"><h2 class="u-section-heading">Clinical Flow</h2><p class="home-section-subtitle">Use this order during early casualty management.</p><div class="home-flow-grid">';
 [{title:'1) Recognize & Prioritize',desc:'Clinical Domains and Critical Numbers help frame urgency, differential priorities, and action thresholds.'},{title:'2) Execute Initial Treatment',desc:'Algorithms and Procedures provide sequence for airway, shock, trauma, and deterioration pathways.'},{title:'3) Sustain & Transfer',desc:'Medication guidance, checklists, team communication, and prolonged holding modules support safe continuity.'}].forEach(card=>{html+=`<article class="home-flow-card"><h3>${card.title}</h3><p>${card.desc}</p></article>`;});
 html+='</div></section>';
 html+='<section class="u-section-block"><h2 class="u-section-heading">Immediate Priority Topics</h2><div class="cards-grid cards-grid-home">';
 [{icon:'&#9881;',title:'Algorithms',desc:'Time-critical pathways for airway failure, shock, trauma patterns, STEMI, sepsis, and altered behavior.',path:'#/algorithms'},{icon:'&#9874;',title:'Procedures',desc:'Execution guides for RSI, chest decompression, chest tube, IO/IV access, and other urgent interventions.',path:'#/procedures'},{icon:'&#128221;',title:'Checklists',desc:'Interactive cognitive aids for RSI, anaphylaxis, DKA, post-ROSC, MASCAL, and readiness tasks.',path:'#/checklists'},{icon:'&#128138;',title:'Medication Reference',desc:'ACTT medication monographs with dosing, contraindications, preparation, and monitoring notes.',path:'#/medications'},{icon:'&#128200;',title:'Critical Numbers',desc:'High-consequence thresholds and treatment targets that trigger escalation or plan change.',path:'#/thresholds'},{icon:'&#129658;',title:'Sick Bay',desc:'Shipboard hub linking Sick Bay meds, ACLS, equipment guides, lab references, and inventory.',path:'#/sickbay'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div></section><section class="u-section-block"><h2 class="u-section-heading">Supporting Reference & Training</h2><div class="cards-grid cards-grid-home">';
-[{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour care framework when evacuation delays require trend-based reassessment and staged care.',path:'#/prolonged-holding'},{icon:'&#9875;',title:'Shipboard Application',desc:'How to adapt ACTT decisions to maritime constraints, logistics limits, and delayed evacuation reality.',path:'#/shipboard'},{icon:'&#128101;',title:'Team & Communication',desc:'Role assignment, closed-loop communication, and handover structure for high-acuity events.',path:'#/team'},{icon:'&#9937;',title:'Casualty Clearing Team',desc:'Practical support-team guidance for casualty reception, stabilization support, monitoring, and transfer readiness.',path:'#/casualty-clearing-team'},{icon:'&#9883;',title:'Clinical Domains',desc:'Organizing model for major ACTT problem clusters and domain overlap under pressure.',path:'#/domains'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Common failure modes and prevention points across assessment, airway, circulation, sedation, and meds.',path:'#/pitfalls'},{icon:'&#128214;',title:'Study & Review',desc:'Deliberate practice structure for memorization, sequence rehearsal, and scenario preparation.',path:'#/study'},{icon:'&#128203;',title:'Quick Reference',desc:'Condensed appendices and rapid-use reference tables for bedside checks and review.',path:'#/appendices'},{icon:'&#128295;',title:'Clinical Tools',desc:'GCS, burn fluid, dose, timer, interactions, and differential support calculators.',path:'#/tools'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback to test sequence control.',path:'scenarios/index.html'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
+[{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour care framework when evacuation delays require trend-based reassessment and staged care.',path:'#/prolonged-holding'},{icon:'&#9875;',title:'Shipboard Application',desc:'How to adapt ACTT decisions to maritime constraints, logistics limits, and delayed evacuation reality.',path:'#/shipboard'},{icon:'&#128101;',title:'Team & Communication',desc:'Role assignment, closed-loop communication, and handover structure for high-acuity events.',path:'#/team'},{icon:'&#9937;',title:'Casualty Clearing Team',desc:'Practical support-team guidance for casualty reception, stabilization support, monitoring, and transfer readiness.',path:'#/casualty-clearing-team'},{icon:'&#9883;',title:'Clinical Domains',desc:'Organizing model for major ACTT problem clusters and domain overlap under pressure.',path:'#/domains'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Common failure modes and prevention points across assessment, airway, circulation, sedation, and meds.',path:'#/pitfalls'},{icon:'&#128214;',title:'Study & Review',desc:'Deliberate practice structure for memorization, sequence rehearsal, and scenario preparation.',path:'#/study'},{icon:'&#128203;',title:'Quick Reference',desc:'Condensed appendices and rapid-use reference tables for bedside checks and review.',path:'#/appendices'},{icon:'&#128295;',title:'Clinical Tools',desc:'GCS, burn fluid, dose, timer, interactions, and differential support calculators.',path:'#/tools'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback to test sequence control.',path:'#/scenarios'},{icon:'&#128218;',title:'Reference Library',desc:'Every source PDF, slide deck, and technical reference organised by clinical topic.',path:'#/library'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
 html+='</div></section>';main.innerHTML=html;}
 function renderSection(main,data,sectionId,parentTitle,parentPath){
 if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}
@@ -1008,7 +1051,200 @@ function renderChecklists(main,sub){const data=ACTT.checklists;if(!data){main.in
 function renderQuiz(main,domain){const set=QUIZ_BANK[domain];if(!set){main.innerHTML='<div class="severity-card amber"><div class="sc-title">Quiz not found</div></div>';return;}let html='<div class="content-shell">'+renderSectionHeader('Micro-quiz: '+domain.charAt(0).toUpperCase()+domain.slice(1),'Rapid retrieval practice (3 questions)',[{title:'Home',path:'#/'},{title:'Quiz',path:'#/quiz/'+domain}]);const prior=state.learnerProgress.quiz[domain];if(prior)html+='<div class="progress-hint">Previous score: '+prior.score+' / '+prior.total+' ('+Math.round(prior.score/prior.total*100)+'%)</div>';html+='<div id="quizWrap">';set.forEach((item,i)=>{html+='<div class="quiz-block"><div><strong>Q'+(i+1)+'.</strong> '+escapeHtml(item.q)+'</div>';item.options.forEach((opt,oi)=>{html+='<button class="quiz-option" type="button" onclick="gradeQuizOption(this,'+i+','+oi+',\''+domain+'\')">'+escapeHtml(opt)+'</button>';});html+='<div class="progress-hint" id="quizFeedback'+i+'"></div></div>';});html+='</div><div class="op-cl-actions"><button class="btn btn-outline" onclick="window.location.hash=\'#/'+domain+'\'">Back to '+domain+'</button></div></div>';main.innerHTML=html;}
 function gradeQuizOption(btn,qIdx,oIdx,domain){const q=QUIZ_BANK[domain][qIdx];const block=btn.closest('.quiz-block');const opts=block.querySelectorAll('.quiz-option');opts.forEach((el,i)=>{el.disabled=true;if(i===q.answer)el.classList.add('correct');else if(i===oIdx)el.classList.add('incorrect');});const fb=document.getElementById('quizFeedback'+qIdx);fb.textContent=oIdx===q.answer?'Correct.':'Review this section and retry.';setTimeout(()=>{const blocks=[...document.querySelectorAll('.quiz-block')];const finished=blocks.every(b=>[...b.querySelectorAll('.quiz-option')].some(o=>o.disabled));if(finished){let score=0;blocks.forEach((b,i)=>{const corr=b.querySelectorAll('.quiz-option')[QUIZ_BANK[domain][i].answer];if(corr&&corr.classList.contains('correct'))score++;});recordQuizScore(domain,score,QUIZ_BANK[domain].length);markVisited('#/quiz/'+domain);}},20);}
 
-function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,'casualty-clearing-team':ACTT.casualtyClearingTeam,study:ACTT.study,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity,topic:key});});});}
+/* ---------- Reference Library ---------- */
+function libraryFileHref(item){
+  var base=item.basePath!==undefined?item.basePath:'DL information/';
+  return encodeURI(base+item.file);
+}
+function libraryItemCard(item){
+  var href=escapeHtml(libraryFileHref(item));
+  var title=escapeHtml(item.title||item.file||'Document');
+  var ext=(item.file||'').split('.').pop().toUpperCase();
+  var note=item.note?'<div class="lib-note">'+escapeHtml(item.note)+'</div>':'';
+  var tag=item.tag?'<span class="lib-tag">'+escapeHtml(item.tag)+'</span>':'';
+  return '<a class="lib-card" href="'+href+'" target="_blank" rel="noopener">'+
+    '<div class="lib-card-top"><span class="lib-ext">'+escapeHtml(ext)+'</span>'+tag+'</div>'+
+    '<div class="lib-title">'+title+'</div>'+
+    note+
+    '<div class="lib-path">'+escapeHtml((item.basePath!==undefined?item.basePath:'DL information/')+item.file)+'</div>'+
+    '</a>';
+}
+function renderLibrary(main,sub){
+  var data=ACTT.library;
+  if(!data){main.innerHTML='<div class="loading">Loading reference library...</div>';return;}
+  var crumbs=[{title:'Home',path:'#/'},{title:data.title,path:'#/library'}];
+  var html='<div class="content-shell">'+renderSectionHeader(data.title,data.subtitle,crumbs);
+  html+=renderSectionNavActions('Home','#/');
+  html+='<div class="content-section">'+data.intro+'</div>';
+  html+='<div class="lib-filter"><label for="libFilter" class="visually-hidden">Filter reference library</label>'+
+    '<input type="search" id="libFilter" class="tool-input" placeholder="Filter documents by title or topic..." oninput="filterLibrary(this.value)" autocomplete="off"></div>';
+  if(!sub&&data.featured&&data.featured.length){
+    html+='<h2 class="u-section-heading">Featured</h2><div class="lib-grid lib-grid-featured">';
+    data.featured.forEach(function(it){html+=libraryItemCard(it);});
+    html+='</div>';
+  }
+  html+='<h2 class="u-section-heading">Browse by Topic</h2>';
+  html+='<div class="lib-category-nav">';
+  data.categories.forEach(function(cat){
+    html+='<a class="lib-chip" href="#/library/'+cat.id+'" data-lib-chip="'+cat.id+'">'+escapeHtml(cat.label)+'</a>';
+  });
+  html+='</div>';
+  var cats=sub?data.categories.filter(function(c){return c.id===sub;}):data.categories;
+  if(sub&&cats.length===0){
+    html+='<div class="severity-card amber"><div class="sc-title">Category not found</div><p>Browse all categories <a href="#/library">here</a>.</p></div>';
+  }
+  cats.forEach(function(cat){
+    html+='<section class="lib-category" id="libcat-'+escapeHtml(cat.id)+'">';
+    html+='<h3 class="lib-cat-label">'+escapeHtml(cat.label)+'</h3>';
+    if(cat.desc)html+='<p class="lib-cat-desc">'+escapeHtml(cat.desc)+'</p>';
+    html+='<div class="lib-grid">';
+    cat.items.forEach(function(it){html+=libraryItemCard(it);});
+    html+='</div></section>';
+  });
+  html+='</div>';
+  main.innerHTML=html;
+}
+function filterLibrary(query){
+  var q=(query||'').trim().toLowerCase();
+  document.querySelectorAll('.lib-card').forEach(function(card){
+    var text=card.textContent.toLowerCase();
+    card.style.display=(!q||text.indexOf(q)>=0)?'':'none';
+  });
+  document.querySelectorAll('.lib-category').forEach(function(cat){
+    var visible=Array.from(cat.querySelectorAll('.lib-card')).some(function(c){return c.style.display!=='none';});
+    cat.style.display=visible?'':'none';
+  });
+}
+
+/* ---------- In-shell Scenarios list ---------- */
+var SCENARIO_INDEX=[
+  {num:'01',id:'head_injury',title:'Progressive Head Injury After Fall in a Machinery Space',desc:'TBI, airway risk, scene extraction, neuro trend monitoring, evacuation timing in a confined shipboard space.',tags:['TBI','Airway Risk','Neuro Monitoring']},
+  {num:'02',id:'tension_pneumothorax',title:'Chest Trauma With Suspected Tension Pneumothorax on Upper Deck',desc:'Thoracic trauma, needle thoracostomy, chest tube transition, and movement after decompression.',tags:['Tension Pneumothorax','Chest Tube','Decompression']},
+  {num:'03',id:'burn_inhalation',title:'Major Burn With Inhalation Risk in a Shipboard Fire Response',desc:'Burns, airway burn risk, Rule of 10s, urine output targets, prolonged resuscitation.',tags:['Burns','Inhalation','Fluid Resuscitation']},
+  {num:'04',id:'septic_shock',title:'Septic Shock in a Sailor With Infection and Delayed Evacuation',desc:'Sepsis, antibiotics, fluid versus overload, vasopressor use, prolonged monitoring.',tags:['Sepsis','Vasopressors','Prolonged Holding']},
+  {num:'05',id:'combative_casualty',title:'Combative Casualty With Possible Hypoxia, Hypoglycemia, or Head Injury',desc:'Agitation and combative algorithm, safety, sedation, hidden medical causes, airway after chemical restraint.',tags:['Combative','Sedation','Hidden Causes']},
+  {num:'06',id:'stemi',title:'STEMI Alongside Versus At Sea With Reperfusion Decision',desc:'STEMI recognition, ECG-driven decisions, fibrinolysis, transfer pathway choice.',tags:['STEMI','Fibrinolysis','ECG']},
+  {num:'07',id:'hypothermia',title:'Hypothermic Casualty Recovered From Cold Water',desc:'Environmental injury, hypothermia staging, altered arrest logic, rewarming, evacuation thresholds.',tags:['Hypothermia','Rewarming','Modified Arrest']},
+  {num:'08',id:'polytrauma',title:'Polytrauma With Delayed Evacuation and 24–72 Hour Hold',desc:'Integrated multi-system care, prolonged holding, reassessment rhythm, device maintenance, team documentation.',tags:['Polytrauma','Prolonged Holding','Documentation']},
+  {num:'09',id:'failed_airway',title:'Failed Airway / Cannot Intubate, Cannot Oxygenate',desc:'Failed airway, cricothyroidotomy, rescue sequence, procedural decisiveness after massive facial trauma.',tags:['Failed Airway','Cricothyroidotomy','CICO']},
+  {num:'10',id:'shoulder_dislocation',title:'Shoulder Dislocation During Shipboard Work',desc:'Orthopedic assessment, reduction techniques, sedation choice, movement, disciplined restraint.',tags:['Orthopedic','Reduction','Restraint']},
+  {num:'11',id:'pressor_shock',title:'Pressor-Dependent Shock With Resource Strain',desc:'Vasopressors, infusion safety, monitoring burden, sustainability decisions, operational strain at sea.',tags:['Septic Shock','Vasopressors','Resource Strain']},
+  {num:'12',id:'chest_tube_redeteriorates',title:'Chest Tube Patient Who Re-Deteriorates During Holding',desc:'Procedure maintenance, recurrent tension or blockage, trend recognition, drift during holding.',tags:['Chest Tube','Device Maintenance','Trend Recognition']}
+];
+function scenarioHref(sc){return 'scenarios/actt_scenario_'+sc.num+'_'+sc.id+'.html';}
+function renderScenariosList(main){
+  var crumbs=[{title:'Home',path:'#/'},{title:'Interactive Scenarios',path:'#/scenarios'}];
+  var html='<div class="content-shell">'+renderSectionHeader('Interactive Scenarios','Twelve staged teaching cases covering the full ACTT spectrum',crumbs);
+  html+=renderSectionNavActions('Home','#/');
+  html+='<div class="content-section"><p>Each scenario uses a staged decision-point format with narrative case progression, guided walkthrough, and scored decision-making. Work through them in order, or open any single case to practice a specific domain. Cases open in the full-screen scenario player.</p></div>';
+  html+='<div class="scn-grid">';
+  SCENARIO_INDEX.forEach(function(sc){
+    var tags=sc.tags.map(function(t){return '<span class="scn-tag">'+escapeHtml(t)+'</span>';}).join('');
+    html+='<a class="scn-card" href="'+escapeHtml(scenarioHref(sc))+'">'+
+      '<span class="scn-num">'+sc.num+'</span>'+
+      '<div class="scn-body"><div class="scn-title">'+escapeHtml(sc.title)+'</div>'+
+      '<div class="scn-desc">'+escapeHtml(sc.desc)+'</div>'+
+      '<div class="scn-tags">'+tags+'</div></div>'+
+      '<span class="scn-arrow">&rsaquo;</span></a>';
+  });
+  html+='</div></div>';
+  main.innerHTML=html;
+}
+
+/* ---------- Static entries for standalone pages ---------- */
+/* These are external HTMLs that live outside the SPA shell, but they must be
+   discoverable via header search. We seed them into the search index with
+   a full path so clicking a search result jumps straight to the standalone page. */
+var STATIC_SEARCH_ENTRIES=[
+  // ACLS algorithms
+  {title:'Shockable — VF / pVT',path:'data/ACLS/shockable_vf_pvt.html',section:'ACLS Algorithms',topic:'algorithms',text:'Ventricular fibrillation pulseless VT pathway defibrillation CPR epinephrine amiodarone'},
+  {title:'Non-shockable — PEA / Asystole',path:'data/ACLS/nonshockable_pea_asystole.html',section:'ACLS Algorithms',topic:'algorithms',text:'Pulseless electrical activity asystole Hs and Ts epinephrine'},
+  {title:'Post-ROSC Care',path:'data/ACLS/post_rosc.html',section:'ACLS Algorithms',topic:'algorithms',text:'Post cardiac arrest return of spontaneous circulation targeted temperature oxygenation'},
+  {title:'Bradycardia',path:'data/ACLS/bradycardia.html',section:'ACLS Algorithms',topic:'algorithms',text:'Symptomatic bradycardia atropine pacing dopamine epinephrine'},
+  {title:'Tachycardia',path:'data/ACLS/tachycardia.html',section:'ACLS Algorithms',topic:'algorithms',text:'Stable unstable tachycardia adenosine cardioversion narrow wide complex'},
+  {title:'Electrical Cardioversion',path:'data/ACLS/cardioversion.html',section:'ACLS Algorithms',topic:'algorithms',text:'Synchronized cardioversion energy selection sedation'},
+  {title:'ACS / STEMI',path:'data/ACLS/acs_stemi.html',section:'ACLS Algorithms',topic:'algorithms',text:'Acute coronary syndrome STEMI aspirin nitroglycerin ECG fibrinolysis'},
+  {title:'Acute Stroke',path:'data/ACLS/stroke_acute.html',section:'ACLS Algorithms',topic:'algorithms',text:'Stroke FAST screen thrombolysis alteplase neuro'},
+  {title:'Anaphylaxis',path:'data/ACLS/anaphylaxis.html',section:'ACLS Algorithms',topic:'algorithms',text:'Anaphylaxis epinephrine IM airway diphenhydramine fluids'},
+  {title:'Hyperkalemia',path:'data/ACLS/hyperkalemia.html',section:'ACLS Algorithms',topic:'algorithms',text:'Hyperkalemia ECG calcium gluconate insulin dextrose bicarbonate'},
+  {title:'Hypothermia (ACLS)',path:'data/ACLS/hypothermia.html',section:'ACLS Algorithms',topic:'algorithms',text:'Cold exposure rewarming modified arrest algorithm'},
+  {title:'Opioid Toxicity',path:'data/ACLS/opioid_toxicity.html',section:'ACLS Algorithms',topic:'algorithms',text:'Naloxone opioid overdose respiratory depression'},
+  // Equipment
+  {title:'Zoll EMV+ 731 Ventilator',path:'data/Equipment/zoll-emv-731.html',section:'Equipment',topic:'tools',text:'Portable ventilator setup modes alarms oxygen'},
+  {title:'Zoll Propaq MD Monitor/Defibrillator',path:'data/Equipment/zoll-propaq-md.html',section:'Equipment',topic:'tools',text:'Monitor defibrillator pacing cardioversion'},
+  {title:'Braun Infusomat Pump',path:'data/Equipment/braun-infusomat.html',section:'Equipment',topic:'tools',text:'IV infusion pump programming rate'},
+  {title:'Patient Monitor — Mindray N1',path:'data/Equipment/patient-monitor-mindray-n1.html',section:'Equipment',topic:'tools',text:'Vital signs monitor setup alarms operation'},
+  {title:'Masimo Rad-57 Pulse CO-oximeter',path:'data/Equipment/masimo-rad57.html',section:'Equipment',topic:'tools',text:'SpO2 carbon monoxide methemoglobin pulse'},
+  {title:'ECG — Schiller AT-102 G2',path:'data/Equipment/ecg-schiller-at102g2.html',section:'Equipment',topic:'tools',text:'12 lead ECG machine operation filters troubleshooting'},
+  {title:'i-STAT Analyzer',path:'data/Equipment/i-stat.html',section:'Equipment',topic:'tools',text:'Handheld blood analyzer cartridges QC'},
+  {title:'Oxygen — Invacare Platinum 10',path:'data/Equipment/oxygen-invacare-platinum10.html',section:'Equipment',topic:'tools',text:'Oxygen concentrator setup flow settings'},
+  {title:'Suction — Laerdal LSU',path:'data/Equipment/suction-laerdal-lsu.html',section:'Equipment',topic:'tools',text:'Portable suction unit operation maintenance'},
+  {title:'Cocoon Warming Device',path:'data/Equipment/cocoon-warming-device.html',section:'Equipment',topic:'tools',text:'Patient warming system setup hypothermia'},
+  {title:'Belmont buddy lite Fluid Warmer',path:'data/Equipment/belmont-buddy-lite.html',section:'Equipment',topic:'tools',text:'Portable blood fluid warmer IV crystalloid'},
+  {title:'Incubator — Millipore XX631',path:'data/Equipment/incubator-millipore-xx631.html',section:'Equipment',topic:'tools',text:'Laboratory incubator temperature management'},
+  {title:'Water Colorimeter — Hach DR900',path:'data/Equipment/water-colorimeter-hach-dr900.html',section:'Equipment',topic:'tools',text:'Water quality testing device methods'},
+  // Lab
+  {title:'i-STAT Overview & Setup',path:'data/Lab/overview.html',section:'Point-of-Care Lab',topic:'tools',text:'i-STAT basics power-on navigation daily verification'},
+  {title:'i-STAT Cartridge Types & Handling',path:'data/Lab/cartridges.html',section:'Point-of-Care Lab',topic:'tools',text:'Cartridge storage handling selection i-STAT'},
+  {title:'CHEM8+ Cartridge',path:'data/Lab/chem8plus.html',section:'Point-of-Care Lab',topic:'tools',text:'Electrolytes renal glucose hematocrit ionized calcium'},
+  {title:'CG4+ Cartridge (blood gas)',path:'data/Lab/cg4plus.html',section:'Point-of-Care Lab',topic:'tools',text:'Blood gas lactate pH respiratory failure sepsis'},
+  {title:'PT/INR',path:'data/Lab/ptinr.html',section:'Point-of-Care Lab',topic:'tools',text:'Coagulation bleeding anticoagulation monitoring'},
+  {title:'Troponin I',path:'data/Lab/troponin.html',section:'Point-of-Care Lab',topic:'tools',text:'Cardiac biomarker chest pain ACS'},
+  {title:'Rapid Troponin',path:'data/Lab/rapid-troponin.html',section:'Point-of-Care Lab',topic:'tools',text:'Rapid point of care troponin testing'},
+  {title:'Monospot Test',path:'data/Lab/monospot.html',section:'Point-of-Care Lab',topic:'tools',text:'Infectious mononucleosis heterophile antibody'},
+  {title:'Rapid Strep Test',path:'data/Lab/rapid-strep.html',section:'Point-of-Care Lab',topic:'tools',text:'Group A streptococcus antigen'},
+  {title:'Pregnancy Test',path:'data/Lab/pregnancy-test.html',section:'Point-of-Care Lab',topic:'tools',text:'Urine hCG pregnancy test procedure'},
+  {title:'Quality Control (QC)',path:'data/Lab/qc.html',section:'Point-of-Care Lab',topic:'tools',text:'QC procedures liquid controls lockout'},
+  {title:'Daily Checks',path:'data/Lab/daily-checks.html',section:'Point-of-Care Lab',topic:'tools',text:'Daily i-STAT verification electronic simulator'},
+  {title:'Weekly Checks',path:'data/Lab/weekly-checks.html',section:'Point-of-Care Lab',topic:'tools',text:'Weekly maintenance calibration verification'},
+  {title:'i-STAT Troubleshooting',path:'data/Lab/troubleshooting.html',section:'Point-of-Care Lab',topic:'tools',text:'Common errors codes fixes escalation'},
+  // Standalone Procedures
+  {title:'BVM + OPA / NPA',path:'data/Procedures/bvm_opa_npa.html',section:'Procedure Quick Guide',topic:'procedures',text:'Bag valve mask ventilation oral nasal airway'},
+  {title:'Supraglottic Airway (i-gel / LMA)',path:'data/Procedures/supraglottic_airway.html',section:'Procedure Quick Guide',topic:'procedures',text:'Supraglottic i-gel LMA insertion'},
+  {title:'Endotracheal Intubation',path:'data/Procedures/ett_intubation.html',section:'Procedure Quick Guide',topic:'procedures',text:'ETT intubation confirmation securing'},
+  {title:'Cricothyrotomy (CICO)',path:'data/Procedures/cricothyrotomy_cico.html',section:'Procedure Quick Guide',topic:'procedures',text:'Surgical airway cannot intubate cannot oxygenate'},
+  {title:'Needle Decompression',path:'data/Procedures/needle_decompression.html',section:'Procedure Quick Guide',topic:'procedures',text:'Tension pneumothorax needle thoracostomy'},
+  {title:'Chest Seal',path:'data/Procedures/chest_seal.html',section:'Procedure Quick Guide',topic:'procedures',text:'Open pneumothorax chest seal application'},
+  {title:'Chest Tube Insertion',path:'data/Procedures/chest_tube.html',section:'Procedure Quick Guide',topic:'procedures',text:'Tube thoracostomy insertion'},
+  {title:'IV Access',path:'data/Procedures/iv_access.html',section:'Procedure Quick Guide',topic:'procedures',text:'Peripheral intravenous access site selection'},
+  {title:'IO Access',path:'data/Procedures/io_access.html',section:'Procedure Quick Guide',topic:'procedures',text:'Intraosseous access EZ-IO humeral tibial'},
+  {title:'Tourniquet Application',path:'data/Procedures/tourniquet.html',section:'Procedure Quick Guide',topic:'procedures',text:'Tourniquet extremity hemorrhage control'},
+  {title:'Wound Packing',path:'data/Procedures/wound_packing.html',section:'Procedure Quick Guide',topic:'procedures',text:'Hemostatic dressing wound packing'},
+  {title:'TXA Administration',path:'data/Procedures/txa.html',section:'Procedure Quick Guide',topic:'procedures',text:'Tranexamic acid dosing trauma'},
+  // Scenarios - reachable via in-shell route
+  {title:'Scenario 01 — Head Injury After Fall',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'TBI airway risk scene extraction neuro monitoring evacuation machinery space'},
+  {title:'Scenario 02 — Tension Pneumothorax',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Tension pneumothorax chest decompression chest tube upper deck'},
+  {title:'Scenario 03 — Major Burn With Inhalation',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Burns inhalation airway Rule of 10s fluid resuscitation fire response'},
+  {title:'Scenario 04 — Septic Shock Delayed Evacuation',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Sepsis septic shock antibiotics vasopressors prolonged monitoring'},
+  {title:'Scenario 05 — Combative Casualty',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Combative agitation sedation hypoxia hypoglycemia head injury'},
+  {title:'Scenario 06 — STEMI Reperfusion Decision',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'STEMI fibrinolysis ECG transfer acs'},
+  {title:'Scenario 07 — Hypothermia After Cold Water',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Hypothermia rewarming modified arrest drowning'},
+  {title:'Scenario 08 — Polytrauma 24-72h Hold',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Polytrauma prolonged holding documentation reassessment'},
+  {title:'Scenario 09 — Failed Airway / CICO',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Failed airway cricothyrotomy CICO facial trauma'},
+  {title:'Scenario 10 — Shoulder Dislocation',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Shoulder dislocation reduction sedation orthopedic'},
+  {title:'Scenario 11 — Pressor-Dependent Shock',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Pressors vasopressors shock resource strain sustainability'},
+  {title:'Scenario 12 — Chest Tube Re-Deterioration',path:'#/scenarios',section:'Scenario',topic:'scenarios',text:'Chest tube maintenance recurrent tension trend recognition'}
+];
+function seedLibrarySearchEntries(){
+  if(!ACTT.library)return [];
+  var out=[];
+  (ACTT.library.featured||[]).concat((ACTT.library.categories||[]).flatMap(function(c){return c.items.map(function(i){return Object.assign({_cat:c.label},i);});})).forEach(function(it){
+    out.push({
+      title:it.title,
+      path:'#/library'+(it._cat?'':''),
+      section:'Reference Library'+(it._cat?' — '+it._cat:''),
+      topic:'library',
+      text:(it.note||'')+' '+(it.file||''),
+      externalHref:libraryFileHref(it)
+    });
+  });
+  return out;
+}
+function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,'casualty-clearing-team':ACTT.casualtyClearingTeam,study:ACTT.study,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity,topic:key});});});
+  // Seed standalone pages so header search can reach them.
+  STATIC_SEARCH_ENTRIES.forEach(function(e){state.searchIndex.push({id:e.path,title:e.title,text:e.text,fullText:e.title+' '+e.text,section:e.section,path:e.path,topic:e.topic||'all'});});
+  seedLibrarySearchEntries().forEach(function(e){state.searchIndex.push({id:e.path+':'+e.title,title:e.title,text:e.text,fullText:e.title+' '+e.text,section:e.section,path:e.externalHref||e.path,topic:e.topic||'all'});});
+}
 function isMobileViewport(){return window.matchMedia('(max-width: 768px)').matches;}
 function toggleMobileSearch(forceOpen){
   if(!isMobileViewport())return;
@@ -1019,7 +1255,18 @@ function toggleMobileSearch(forceOpen){
   if(shouldOpen){setTimeout(()=>input.focus(),20);}
   else {input.value='';results.classList.remove('active');}
 }
-function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');announceSearchResults('');return;}const terms=expandTerms(query);let matches=state.searchIndex.filter(item=>{if(state.searchFilter!=='all'&&item.topic!==state.searchFilter)return false;const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');announceSearchResults('No results found');return;}results.innerHTML=matches.map((m,i)=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});return`<button type="button" class="search-result-item" role="option" aria-selected="${i===0?'true':'false'}" onclick="window.location.hash='${m.path.replace('#','')}';document.getElementById('searchResults').classList.remove('active');document.getElementById('searchInput').value='';if(window.matchMedia('(max-width: 768px)').matches){document.body.classList.remove('mobile-search-open');}"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></button>`;}).join('');results.classList.add('active');announceSearchResults(matches.length+' results shown');}
+function goToSearchResult(path){
+  const results=document.getElementById('searchResults');
+  const input=document.getElementById('searchInput');
+  if(results)results.classList.remove('active');
+  if(input)input.value='';
+  if(window.matchMedia('(max-width: 768px)').matches){document.body.classList.remove('mobile-search-open');}
+  if(!path)return;
+  if(path.indexOf('#')===0){window.location.hash=path.substring(1);return;}
+  // External path (standalone html or source PDF)
+  window.open(path,'_blank','noopener');
+}
+function handleSearch(query){const results=document.getElementById('searchResults');if(!query||query.length<2){results.classList.remove('active');announceSearchResults('');return;}const terms=expandTerms(query);let matches=state.searchIndex.filter(item=>{if(state.searchFilter!=='all'&&item.topic!==state.searchFilter)return false;const searchable=(item.title+' '+item.fullText).toLowerCase();return terms.every(t=>searchable.includes(t));}).slice(0,15);if(matches.length===0){results.innerHTML='<div class="search-result-item"><div class="sr-title">No results found</div></div>';results.classList.add('active');announceSearchResults('No results found');return;}results.innerHTML=matches.map((m,i)=>{const idx=m.fullText.toLowerCase().indexOf(terms[0]);const start=Math.max(0,idx-40);const snippet='...'+m.fullText.substring(start,start+120)+'...';let highlighted=snippet;terms.forEach(t=>{highlighted=highlighted.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')})`,'gi'),'<mark>$1</mark>');});const safePath=String(m.path).replace(/'/g,"\\'");return`<button type="button" class="search-result-item" role="option" aria-selected="${i===0?'true':'false'}" onclick="goToSearchResult('${safePath}')"><div class="sr-section">${m.section}</div><div class="sr-title">${m.title}</div><div class="sr-snippet">${highlighted}</div></button>`;}).join('');results.classList.add('active');announceSearchResults(matches.length+' results shown');}
 function showSearchResults(){const val=document.getElementById('searchInput').value;if(val&&val.length>=2)document.getElementById('searchResults').classList.add('active');}
 function closeSearchResults(clearInput=false){
   const results=document.getElementById('searchResults');
