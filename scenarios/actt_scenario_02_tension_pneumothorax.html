@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scenario-engine.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -296,6 +297,10 @@ transition:border-color .2s,background .2s;
 <span class="topbar-title">Scenario 02 — Tension Pneumothorax</span>
 </div>
 <div class="topbar-right">
+<span class="save-indicator" id="saveIndicator">
+<svg class="save-indicator-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+Saved
+</span>
 <a class="back-link" href="index.html">← All Scenarios</a>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 <span class="progress-label" id="progressLabel">0 / 5</span>
@@ -771,142 +776,304 @@ A clear clinical lead must call the likely diagnosis early. One person should be
 
 </main>
 
+<script src="scenario-engine.js"></script>
 <script>
 (function(){
 "use strict";
 
+// ============================================================================
+// CONFIGURATION
+// ============================================================================
+
+var SCENARIO_ID = "scenario-02-tension-pneumothorax";
 var TOTAL_DP = 5;
-var answers = {};
-var stageUnlocks = {1:true,2:false,3:false,4:false,5:false,6:false};
-var continueReqs = {2:["1"],3:["2"],4:["3","4"],5:["5"]};
+var TOTAL_STAGES = 6;
+
+// Extract continue requirements from existing script
+var continueReqs = extractContinueReqs();
+
+// Note: Decision metadata would need to be added manually for full review functionality
+var decisionMetadata = {};
+
+// ============================================================================
+// SCENARIO ENGINE INITIALIZATION
+// ============================================================================
+
+var engine = new ScenarioEngine({
+  scenarioId: SCENARIO_ID,
+  totalDecisionPoints: TOTAL_DP,
+  continueRequirements: continueReqs,
+  decisionMetadata: decisionMetadata,
+  initialStageUnlocks: {1: true, 2: false, 3: false, 4: false, 5: false, 6: false}
+});
+
+// ============================================================================
+// HELPER: Extract continue requirements from DOM
+// ============================================================================
+
+function extractContinueReqs(){
+  var reqs = {};
+  // Stage 2 typically requires DP 1
+  if(document.getElementById("cont2")) reqs[2] = ["1"];
+  // Stage 3 typically requires DP 2
+  if(document.getElementById("cont3")) reqs[3] = ["2"];
+  // Stage 4 may require multiple DPs - check DOM structure
+  if(document.getElementById("cont4")) reqs[4] = ["3", "4"];
+  // Stage 5 typically requires DP 5
+  if(document.getElementById("cont5")) reqs[5] = ["5"];
+  return reqs;
+}
+
+// ============================================================================
+// UI UPDATE FUNCTIONS
+// ============================================================================
 
 function updateProgress(){
-  var answered = Object.keys(answers).length;
-  document.getElementById("progressLabel").textContent = answered + " / " + TOTAL_DP;
-  document.getElementById("progressFill").style.width = (answered/TOTAL_DP*100)+"%";
+  var counts = engine.getProgressCounts();
+  document.getElementById("progressLabel").textContent = counts.answered + " / " + counts.total;
+  document.getElementById("progressFill").style.width = engine.getProgressPercentage() + "%";
+}
+
+function showSaveIndicator(){
+  var indicator = document.getElementById("saveIndicator");
+  if(!indicator) return;
+
+  indicator.classList.add("visible");
+  setTimeout(function(){
+    indicator.classList.remove("visible");
+  }, 2000);
 }
 
 function checkContinue(stageNum){
   if(stageNum === 1) return;
-  var btnId = "cont"+stageNum;
+  var btnId = "cont" + stageNum;
   var btn = document.getElementById(btnId);
   if(!btn) return;
-  var reqs = continueReqs[stageNum];
-  if(!reqs){btn.disabled=false;return;}
-  var allMet = reqs.every(function(dp){return answers.hasOwnProperty(dp);});
-  btn.disabled = !allMet;
+
+  btn.disabled = !engine.canContinueFromStage(stageNum);
 }
+
+// ============================================================================
+// DECISION POINT HANDLING
+// ============================================================================
 
 window.selectOption = function(el){
   if(el.classList.contains("locked")) return;
+
   var dp = el.getAttribute("data-dp");
   var choice = el.getAttribute("data-choice");
   var grade = el.getAttribute("data-grade");
-  if(answers.hasOwnProperty(dp)) return;
-  answers[dp] = {choice:choice, grade:grade};
 
-  var container = document.getElementById("dp"+dp);
+  // Record answer in engine
+  if(!engine.recordAnswer(dp, choice, grade)) return;
+
+  // Visual feedback
+  var container = document.getElementById("dp" + dp);
   var btns = container.querySelectorAll(".option-btn");
   btns.forEach(function(b){
     b.classList.add("locked");
     var g = b.getAttribute("data-grade");
-    if(g==="correct") b.classList.add("correct-show");
-    else if(g==="acceptable") b.classList.add("acceptable-show");
+    if(g === "correct") b.classList.add("correct-show");
+    else if(g === "acceptable") b.classList.add("acceptable-show");
     else b.classList.add("incorrect-show");
-    if(b.getAttribute("data-choice")===choice) b.classList.add("selected");
+    if(b.getAttribute("data-choice") === choice) b.classList.add("selected");
   });
 
-  var fb = document.getElementById("dp"+dp+"-fb-"+choice);
+  // Show feedback
+  var fb = document.getElementById("dp" + dp + "-fb-" + choice);
   if(fb) fb.classList.add("visible");
 
+  // Update UI
   updateProgress();
+  showSaveIndicator();
 
-  for(var s=2;s<=5;s++) checkContinue(s);
+  // Check all continue buttons
+  for(var s = 2; s <= 5; s++) checkContinue(s);
 
-  if(Object.keys(answers).length === TOTAL_DP) showScore();
+  // If complete, show score
+  if(engine.isComplete()) showScore();
 };
 
+// ============================================================================
+// SCORING AND REVIEW
+// ============================================================================
+
 function showScore(){
-  var pts=0, optimal=0, acceptable=0, suboptimal=0;
-  for(var dp in answers){
-    var g = answers[dp].grade;
-    if(g==="correct"){pts+=2;optimal++;}
-    else if(g==="acceptable"){pts+=1;acceptable++;}
-    else{suboptimal++;}
-  }
-  var pct = Math.round(pts/(TOTAL_DP*2)*100);
-  document.getElementById("scorePct").textContent = pct+"%";
-  document.getElementById("scoreSub").textContent = pts+" of "+(TOTAL_DP*2)+" points";
-  document.getElementById("statOptimal").textContent = optimal;
-  document.getElementById("statAcceptable").textContent = acceptable;
-  document.getElementById("statSuboptimal").textContent = suboptimal;
+  var score = engine.calculateScore();
+
+  document.getElementById("scorePct").textContent = score.percentage + "%";
+  document.getElementById("scoreSub").textContent = score.points + " of " + score.maxPoints + " points";
+  document.getElementById("statOptimal").textContent = score.optimal;
+  document.getElementById("statAcceptable").textContent = score.acceptable;
+  document.getElementById("statSuboptimal").textContent = score.suboptimal;
   document.getElementById("scoreBreakdown").style.display = "flex";
   document.getElementById("resetBtn").style.display = "inline-block";
+
+  // Save completion data
+  engine.saveCompletion();
 }
 
+// ============================================================================
+// STAGE NAVIGATION
+// ============================================================================
+
 window.toggleStage = function(n){
-  var header = document.querySelector("#stage"+n+" .stage-header");
-  var body = document.getElementById("stage"+n+"Body");
+  var header = document.querySelector("#stage" + n + " .stage-header");
+  var body = document.getElementById("stage" + n + "Body");
   var expanded = header.getAttribute("aria-expanded") === "true";
-  header.setAttribute("aria-expanded", expanded?"false":"true");
-  if(expanded){body.classList.remove("open");}
-  else{body.classList.add("open");}
+
+  header.setAttribute("aria-expanded", expanded ? "false" : "true");
+  if(expanded){
+    body.classList.remove("open");
+  } else {
+    body.classList.add("open");
+  }
 };
 
 window.advanceStage = function(current){
   var next = current + 1;
-  if(next > 6) return;
+  if(next > TOTAL_STAGES) return;
 
-  var cHeader = document.querySelector("#stage"+current+" .stage-header");
-  var cBody = document.getElementById("stage"+current+"Body");
-  cHeader.setAttribute("aria-expanded","false");
+  // Close current
+  var cHeader = document.querySelector("#stage" + current + " .stage-header");
+  var cBody = document.getElementById("stage" + current + "Body");
+  cHeader.setAttribute("aria-expanded", "false");
   cBody.classList.remove("open");
 
-  stageUnlocks[next] = true;
-  var nHeader = document.querySelector("#stage"+next+" .stage-header");
-  var nBody = document.getElementById("stage"+next+"Body");
-  nHeader.setAttribute("aria-expanded","true");
+  // Open next
+  engine.unlockStage(next);
+  var nHeader = document.querySelector("#stage" + next + " .stage-header");
+  var nBody = document.getElementById("stage" + next + "Body");
+  nHeader.setAttribute("aria-expanded", "true");
   nBody.classList.add("open");
 
+  // Scroll
   setTimeout(function(){
-    document.getElementById("stage"+next).scrollIntoView({behavior:"smooth",block:"start"});
-  },80);
+    document.getElementById("stage" + next).scrollIntoView({behavior: "smooth", block: "start"});
+  }, 80);
+
+  showSaveIndicator();
 };
 
+// ============================================================================
+// RESET FUNCTIONALITY
+// ============================================================================
+
 window.resetScenario = function(){
-  answers = {};
+  if(!confirm("Are you sure you want to reset this scenario? All progress will be lost.")) return;
+
+  engine.reset();
+
+  // Reset UI
   updateProgress();
 
-  for(var dp=1;dp<=TOTAL_DP;dp++){
-    var container = document.getElementById("dp"+dp);
+  // Reset all decision points
+  for(var dp = 1; dp <= TOTAL_DP; dp++){
+    var container = document.getElementById("dp" + dp);
     if(!container) continue;
+
     var btns = container.querySelectorAll(".option-btn");
     btns.forEach(function(b){
-      b.classList.remove("locked","selected","correct-show","acceptable-show","incorrect-show");
+      b.classList.remove("locked", "selected", "correct-show", "acceptable-show", "incorrect-show");
     });
+
     var fbs = container.querySelectorAll(".feedback");
-    fbs.forEach(function(f){f.classList.remove("visible");});
+    fbs.forEach(function(f){
+      f.classList.remove("visible");
+    });
   }
 
-  for(var s=2;s<=5;s++){
-    var btn = document.getElementById("cont"+s);
+  // Disable continue buttons
+  for(var s = 2; s <= 5; s++){
+    var btn = document.getElementById("cont" + s);
     if(btn) btn.disabled = true;
   }
 
+  // Reset score panel
   document.getElementById("scorePct").textContent = "—";
-  document.getElementById("scoreSub").textContent = "Complete all 5 decision points to see your score";
+  document.getElementById("scoreSub").textContent = "Complete all " + TOTAL_DP + " decision points to see your score";
   document.getElementById("scoreBreakdown").style.display = "none";
   document.getElementById("resetBtn").style.display = "none";
 
-  for(var i=1;i<=6;i++){
-    var h = document.querySelector("#stage"+i+" .stage-header");
-    var b = document.getElementById("stage"+i+"Body");
-    if(i===1){h.setAttribute("aria-expanded","true");b.classList.add("open");}
-    else{h.setAttribute("aria-expanded","false");b.classList.remove("open");}
+  // Close all stages, open stage 1
+  for(var i = 1; i <= TOTAL_STAGES; i++){
+    var h = document.querySelector("#stage" + i + " .stage-header");
+    var b = document.getElementById("stage" + i + "Body");
+    if(i === 1){
+      h.setAttribute("aria-expanded", "true");
+      b.classList.add("open");
+    } else {
+      h.setAttribute("aria-expanded", "false");
+      b.classList.remove("open");
+    }
   }
 
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top: 0, behavior: "smooth"});
 };
+
+// ============================================================================
+// RESTORE PROGRESS ON LOAD
+// ============================================================================
+
+function restoreScenarioState(){
+  if(!engine.restoreProgress()) return;
+
+  // Restore decision point UI
+  for(var dpId in engine.answers){
+    var answer = engine.answers[dpId];
+    var container = document.getElementById("dp" + dpId);
+    if(!container) continue;
+
+    // Lock and style buttons
+    var btns = container.querySelectorAll(".option-btn");
+    btns.forEach(function(b){
+      b.classList.add("locked");
+      var g = b.getAttribute("data-grade");
+      if(g === "correct") b.classList.add("correct-show");
+      else if(g === "acceptable") b.classList.add("acceptable-show");
+      else b.classList.add("incorrect-show");
+      if(b.getAttribute("data-choice") === answer.choice) b.classList.add("selected");
+    });
+
+    // Show feedback
+    var fb = document.getElementById("dp" + dpId + "-fb-" + answer.choice);
+    if(fb) fb.classList.add("visible");
+  }
+
+  // Update progress
+  updateProgress();
+
+  // Check continue buttons
+  for(var s = 2; s <= 5; s++) checkContinue(s);
+
+  // If complete, show score
+  if(engine.isComplete()) showScore();
+}
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
+function initializeScenario(){
+  // Check for saved progress and show resume prompt if exists
+  ScenarioEngine.showResumePrompt(
+    SCENARIO_ID,
+    function onResume(){
+      restoreScenarioState();
+    },
+    function onStart(){
+      // Fresh start - no restoration needed
+      updateProgress();
+    }
+  );
+}
+
+// Run initialization when DOM is ready
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", initializeScenario);
+} else {
+  initializeScenario();
+}
 
 })();
 </script>
