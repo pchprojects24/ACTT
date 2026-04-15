@@ -4,7 +4,7 @@ window.ACTT=window.ACTT||{};
   ----------------------
   Complete, browsable index of every source document shipped with the ACTT
   reference app. Each entry carries a stable category, a short clinical
-  description, and the raw filename so direct downloads work offline.
+  description, and the raw filename for direct reference.
 
   Rendering: see renderLibrary() in index.html. Search integration seeds
   these entries so header search can reach reference PDFs directly.
@@ -14,7 +14,7 @@ window.ACTT.library={
   title:'Reference Library',
   subtitle:'Every source document, organised for fast reference',
   intro:'<p>Every source PDF, slide deck, and technical reference that ships with the ACTT app — organised by clinical topic and device. Use the filter box to find a specific document, or browse a category when building study time or preparing a scenario.</p>'+
-    '<p>Files live under <code>DL information/</code> inside the app bundle, which means they open directly even when offline. Root-level manuals (e.g. the ACTT Preparation Manual, Scenario Companion) are also listed here.</p>',
+    '<p>Files live under <code>DL information/</code> inside the app bundle for direct access. Root-level manuals (e.g. the ACTT Preparation Manual, Scenario Companion) are also listed here.</p>',
   // Top-level featured items pinned at the top of the library
   featured:[
     {
