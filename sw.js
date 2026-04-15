@@ -1,4 +1,4 @@
-const CACHE_NAME = 'actt-reference-v7';
+const CACHE_NAME = 'actt-reference-v8';
 const ASSETS = [
   './',
   './index.html',

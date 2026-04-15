@@ -1000,7 +1000,7 @@ window.ACTT.appendices={
       sources:[
         {title:'oxygen.pdf',file:'oxygen.pdf'},
         {title:'Ventilator PERLs_Handout for Students.pdf',file:'Ventilator PERLs_Handout for Students.pdf'},
-        {title:'oxygen-invacare-platinum10.html',file:'oxygen-invacare-platinum10.html',note:'Stationary concentrator quick-use reference.'}
+        {title:'Invacare Platinum 10 Oxygen Concentrator',file:'oxygen-invacare-platinum10.html',href:'data/Equipment/oxygen-invacare-platinum10.html',note:'Stationary concentrator quick-use reference.'}
       ]
     },
     {
