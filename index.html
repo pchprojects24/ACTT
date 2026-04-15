@@ -80,6 +80,23 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-hover); text-decoration: underline; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+/* Accessibility: Focus visible styles */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible, [role="link"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
 .app-header {
   position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
   background: var(--bg-surface); border-bottom: 1px solid var(--border);
@@ -105,12 +122,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .search-close:hover { background: var(--bg-tertiary); }
 .search-input {
-  width: 100%; padding: 9px 14px 9px 38px; border-radius: 20px;
+  width: 100%; padding: 9px 140px 9px 38px; border-radius: 20px;
   border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);
   font-size: 0.9rem; outline: none; transition: all var(--transition);
 }
 .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; pointer-events: none; }
+.search-icon { position: absolute; left: 14px; top: 13px; color: var(--text-muted); font-size: 14px; pointer-events: none; z-index: 1; }
+.search-filter-container {
+  position: absolute; right: 8px; top: 6px; z-index: 1;
+}
+.search-filter {
+  padding: 5px 8px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--bg-tertiary); color: var(--text-secondary);
+  font-size: 0.75rem; cursor: pointer; transition: all var(--transition);
+  font-weight: 600;
+}
+.search-filter:hover { border-color: var(--accent); color: var(--text-primary); }
+.search-filter:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(59,130,246,0.15); outline: none; }
 .search-results {
   position: absolute; top: calc(100% + 4px); left: 0; right: 0; max-height: 400px; overflow-y: auto;
   background: var(--bg-surface); border: 1px solid var(--border);
@@ -594,7 +622,16 @@ tr:hover td { background: var(--bg-secondary); }
   .app-brand span { display: none; }
   .section-title { font-size: 1.4rem; }
   .section-nav-actions { margin-bottom: 16px; }
-  .section-nav-actions .btn { flex: 1 1 auto; justify-content: center; min-height: 40px; }
+  .section-nav-actions .btn { flex: 1 1 auto; justify-content: center; min-height: 44px; }
+  /* Mobile ergonomics: Improved tap targets and spacing */
+  .nav-section-header { min-height: 48px; padding: 12px 16px; }
+  .nav-item { min-height: 44px; padding: 10px 16px 10px 46px; }
+  .btn { min-height: 44px; padding: 10px 18px; }
+  .btn-sm { min-height: 40px; padding: 9px 14px; }
+  .cl-item { min-height: 52px; padding: 14px 16px; margin-bottom: 10px; }
+  .search-result-item { min-height: 56px; padding: 12px 16px; }
+  .section-quick-link { min-height: 48px; padding: 12px 14px; }
+  .quick-card, .card { min-height: 72px; padding: 18px 20px; }
   .topic-page-content { padding: 14px 14px 16px; }
   .content-section p,.content-section ul,.content-section ol { max-width: 100%; }
   .header-actions { gap: 4px; }
@@ -642,17 +679,6 @@ tr:hover td { background: var(--bg-secondary); }
   transition: top 0.2s; text-decoration: none;
 }
 .skip-link:focus { top: 0; color: #fff; text-decoration: none; }
-
-/* Focus-visible rings for all interactive elements */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
 
 /* Back to top button */
 .back-to-top {
@@ -1657,9 +1683,23 @@ body.light-mode .bridge-hero {
   <div class="app-brand">ACTT<span>v1.0</span></div>
   <div class="search-container">
     <span class="search-icon">&#128269;</span>
-    <div class="search-tools"><select id="searchFilter" class="search-filter" onchange="setSearchFilter(this.value)" aria-label="Filter search by section"><option value="all">All content</option><option value="algorithms">Algorithms</option><option value="procedures">Procedures</option><option value="medications">Medications</option><option value="checklists">Checklists</option><option value="tools">Tools</option></select></div><input type="text" class="search-input" placeholder="Search all content..." oninput="handleSearch(this.value)" onfocus="showSearchResults()" id="searchInput">
+    <input type="text" class="search-input" placeholder="Search all content..." oninput="handleSearch(this.value)" onfocus="showSearchResults()" id="searchInput" aria-label="Search content" aria-describedby="searchStatus">
+    <div class="search-filter-container">
+      <label for="searchFilter" class="visually-hidden">Filter search by content type</label>
+      <select id="searchFilter" class="search-filter" onchange="setSearchFilter(this.value)" aria-label="Filter search by content type">
+        <option value="all">All content</option>
+        <option value="algorithms">Algorithms</option>
+        <option value="procedures">Procedures</option>
+        <option value="medications">Medications</option>
+        <option value="checklists">Checklists</option>
+        <option value="scenarios">Scenarios</option>
+        <option value="docs">Docs & References</option>
+        <option value="tools">Tools</option>
+      </select>
+    </div>
     <button class="search-close" type="button" onclick="toggleMobileSearch(false)" aria-label="Close search">&times;</button>
-    <div class="search-status" id="searchStatus" aria-live="polite"></div><div class="search-results" id="searchResults" role="listbox" aria-label="Search results"></div>
+    <div class="search-status" id="searchStatus" aria-live="polite" aria-atomic="true"></div>
+    <div class="search-results" id="searchResults" role="listbox" aria-label="Search results"></div>
   </div>
   <div class="header-actions">
     <button class="header-btn" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark/light mode">&#9789;</button>
@@ -1720,7 +1760,7 @@ const SEARCH_SYNONYMS={rsi:['airway','intubation'],intubation:['rsi','airway'],s
 const QUIZ_BANK={algorithms:[{q:'In shock management, what matters most first?',options:['Trend perfusion and treat cause rapidly','Wait for complete labs before intervention','Prioritize transport paperwork'],answer:0},{q:'For sepsis onboard, the highest-yield early action is:',options:['Early antibiotics with source-focused reassessment','Delay antibiotics until culture results return','Use vasopressors before fluid assessment'],answer:0},{q:'When burn airway edema is expected to worsen, best approach is:',options:['Plan early definitive airway before failure','Wait for overt obstruction signs','Use repeated sedatives to calm breathing'],answer:0}],procedures:[{q:'If IV access fails in unstable patient, next best access is:',options:['IO access','Delay meds and retry later','Oral medications only'],answer:0},{q:'Chest decompression is indicated when:',options:['Tension physiology with respiratory/hemodynamic compromise','Any chest pain after trauma','Only when imaging confirms pneumothorax'],answer:0},{q:'During RSI, the most important team behavior is:',options:['Clear role assignment and closed-loop communication','Silent workflow with independent actions','Skip pre-brief to save time'],answer:0}],medications:[{q:'Onboard medication safety should emphasize:',options:['Dose, contraindications, and monitoring trends','Name memorization only','Mixing meds quickly without checks'],answer:0},{q:'A useful medication cognitive aid is:',options:['Standardized prep and reassessment checklist','Ad hoc undocumented dosing','Single-provider memory only'],answer:0},{q:'When sedating prolonged-hold patients, watch for:',options:['Accumulation and delayed respiratory compromise','Only immediate blood pressure changes','No change if doses are small'],answer:0}]};
 function initBackToTop(){const btn=document.getElementById('backToTop');const main=document.getElementById('appMain');if(!btn||!main)return;main.addEventListener('scroll',()=>{btn.classList.toggle('visible',main.scrollTop>300);},{ passive:true });btn.addEventListener('click',()=>main.scrollTo({top:0,behavior:'smooth'}));}
 function init(){enrichAllMetadata();if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(!isMobileViewport())document.body.classList.remove('mobile-search-open');});handleRoute();initBackToTop();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
-const state={currentRoute:'',bookmarks:(()=>{try{return JSON.parse(localStorage.getItem('actt-bookmarks')||'[]');}catch(e){return[];}})(),favorites:(()=>{try{return JSON.parse(localStorage.getItem('actt-favorites')||'[]');}catch(e){return[];}})(),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:(v=>{const n=parseFloat(v);return isNaN(n)?1:Math.max(0.8,Math.min(1.4,n));})(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null,searchFilter:localStorage.getItem('actt-search-filter')||'all',learnerProgress:(()=>{try{return JSON.parse(localStorage.getItem('actt-learner-progress')||'{"visited":{},"quiz":{}}');}catch(e){return{visited:{},quiz:{}};}})()};
+const state={currentRoute:'',bookmarks:(()=>{try{return JSON.parse(localStorage.getItem('actt-bookmarks')||'[]');}catch(e){return[];}})(),favorites:(()=>{try{return JSON.parse(localStorage.getItem('actt-favorites')||'[]');}catch(e){return[];}})(),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:(v=>{const n=parseFloat(v);return isNaN(n)?1:Math.max(0.8,Math.min(1.4,n));})(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null,searchFilter:localStorage.getItem('actt-search-filter')||'all',learnerProgress:(()=>{try{return JSON.parse(localStorage.getItem('actt-learner-progress')||'{"visited":{},"quiz":{}}');}catch(e){return{visited:{},quiz:{}};}})(),scrollPositions:{}};
 function getNavSections(){return[
 {id:'home',title:'Home Overview',icon:'&#8962;',path:'#/',group:'primary'},
 {id:'algorithms',title:'Algorithms',icon:'&#9881;',path:'#/algorithms',group:'primary',items:ACTT.algorithms?ACTT.algorithms.sections.map(s=>({id:s.id,title:s.title,path:'#/algorithms/'+s.id})):[]},
@@ -1762,7 +1802,63 @@ function renderMetadataBanner(meta){if(!meta)return'';return '<div class="metada
 function setSearchFilter(filter){state.searchFilter=filter||'all';localStorage.setItem('actt-search-filter',state.searchFilter);const input=document.getElementById('searchInput');if(input&&input.value.trim().length>=2)handleSearch(input.value);}
 function expandTerms(query){const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);const expanded=new Set(terms);terms.forEach(t=>(SEARCH_SYNONYMS[t]||[]).forEach(s=>expanded.add(s)));return [...expanded];}
 function announceSearchResults(message){const status=document.getElementById('searchStatus');if(status)status.textContent=message;}
-function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();updateFavoriteBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;case'library':renderLibrary(main,sub);break;case'scenarios':renderScenariosList(main);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}setTimeout(()=>{enhanceProcedureSteps();embedClinicalTools();},100);}
+function handleRoute(){
+  const hash=window.location.hash||'#/';
+  const main=document.getElementById('appMain');
+  // Save scroll position for previous route
+  if(state.currentRoute&&state.currentRoute!==hash){
+    state.scrollPositions[state.currentRoute]=main.scrollTop;
+  }
+  state.currentRoute=hash;
+  updateActiveNav();
+  updateBookmarkBtn();
+  updateFavoriteBtn();
+  if(window.innerWidth<=768)closeSidebar();
+  const filterEl=document.getElementById('searchFilter');
+  if(filterEl)filterEl.value=state.searchFilter;
+  // Reset scroll to top (will be restored if returning to page)
+  main.scrollTop=0;
+  const parts=hash.replace('#/','').split('/').filter(Boolean);
+  const section=parts[0]||'home';
+  const sub=parts[1]||'';
+  try{
+    switch(section){
+      case'':case'home':renderHome(main);break;
+      case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;
+      case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;
+      case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;
+      case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;
+      case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;
+      case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;
+      case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;
+      case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;
+      case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;
+      case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;
+      case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;
+      case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;
+      case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;
+      case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;
+      case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;
+      case'tools':renderTools(main,sub);break;
+      case'checklists':renderChecklists(main,sub);break;
+      case'quiz':renderQuiz(main,sub);break;
+      case'library':renderLibrary(main,sub);break;
+      case'scenarios':renderScenariosList(main);break;
+      default:renderHome(main);
+    }
+  }catch(e){
+    main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;
+    console.error(e);
+  }
+  // Restore scroll position if returning to this page
+  setTimeout(()=>{
+    if(state.scrollPositions[hash]!==undefined){
+      main.scrollTop=state.scrollPositions[hash];
+    }
+    enhanceProcedureSteps();
+    embedClinicalTools();
+  },100);
+}
 function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
 function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="fav-btn" id="favoriteBtn" onclick="toggleFavorite()" aria-label="Add to Quick Reference">&#9734;</button><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
 function renderSectionNavActions(parentTitle,parentPath,data,sectionId){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';if(data&&data.sections&&sectionId){const idx=data.sections.findIndex(s=>s.id===sectionId);if(idx>0){const prev=data.sections[idx-1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${prev.id}">&#8592; ${prev.title}</a>`;}if(idx<data.sections.length-1){const next=data.sections[idx+1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${next.id}">${next.title} &#8594;</a>`;}}html+='</div>';return html;}
@@ -1893,6 +1989,43 @@ function renderHome(main){
     </div>
   </section>`;
   }
+
+  // Learning Pathways
+  html+=`<section class="home-section" aria-labelledby="pathwaysHeading">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Structured Learning</div>
+        <h2 id="pathwaysHeading" class="home-section-title">Learn by Pathway</h2>
+        <p class="home-section-desc">Curated weekly learning tracks that build skills progressively across related domains. Follow one pathway per week for systematic skill-building.</p>
+      </div>
+    </div>
+    <div class="mc-grid">
+      <a class="mc-card mc-card--red" href="#/pathways/airway">
+        <span class="mc-tag">Week 1</span>
+        <div class="mc-title">Airway Week</div>
+        <p class="mc-desc">RSI preparation, airway failure algorithms, difficult airway adjuncts, surgical airway procedures, post-intubation management.</p>
+        <div class="mc-cta">Start pathway <span>&rarr;</span></div>
+      </a>
+      <a class="mc-card mc-card--amber" href="#/pathways/shock">
+        <span class="mc-tag">Week 2</span>
+        <div class="mc-title">Shock & Resuscitation</div>
+        <p class="mc-desc">Hemorrhage control, shock types, massive transfusion, vasopressor selection, hemodynamic monitoring, fluid resuscitation.</p>
+        <div class="mc-cta">Start pathway <span>&rarr;</span></div>
+      </a>
+      <a class="mc-card mc-card--blue" href="#/pathways/prolonged-hold">
+        <span class="mc-tag">Week 3</span>
+        <div class="mc-title">Prolonged Hold</div>
+        <p class="mc-desc">Multi-day care, sepsis management, ventilator strategies, nutrition, analgesia, wound care, equipment troubleshooting.</p>
+        <div class="mc-cta">Start pathway <span>&rarr;</span></div>
+      </a>
+      <a class="mc-card mc-card--teal" href="#/pathways/trauma">
+        <span class="mc-tag">Week 4</span>
+        <div class="mc-title">Trauma Systems</div>
+        <p class="mc-desc">Primary/secondary surveys, TBI management, thoracic/abdominal injuries, burn care, blast injuries, MASCAL triage.</p>
+        <div class="mc-cta">Start pathway <span>&rarr;</span></div>
+      </a>
+    </div>
+  </section>`;
 
   // Mission Critical Access
   html+=`<section class="home-section" aria-labelledby="mcHeading">
