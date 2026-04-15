@@ -1470,7 +1470,10 @@ function buildSourceHref(src,basePath=''){if(src.href)return src.href;return enc
 function renderSourceDocuments(sources,basePath=''){if(!sources||sources.length===0)return'';let html='<div class="related-content source-documents"><h3>Source Documents</h3><div class="source-doc-list">';sources.forEach(src=>{const href=escapeHtml(buildSourceHref(src,basePath));const title=escapeHtml(src.title||src.file||'Source document');html+=`<div class="source-doc-item"><a class="source-doc-link" href="${href}" target="_blank" rel="noopener">${title}</a>`;if(src.note)html+=`<div class="source-doc-note">${escapeHtml(src.note)}</div>`;if(src.file){const displayPath=src.href?src.href:('DL information/'+src.file);html+=`<div class="source-doc-path">${escapeHtml(displayPath)}</div>`;}html+='</div>';});html+='</div></div>';return html;}
 function isValidRoute(link){
   if(!link)return false;
-  const parts=String(link).split('/');
+  const str=String(link);
+  const cl=ACTT.crossLinks||{};
+  if(cl[str])return true;
+  const parts=str.split('/');
   const topic=parts[0];
   const sub=parts.slice(1).join('/');
   // Always-valid topic routes (rendered by dedicated handlers)
