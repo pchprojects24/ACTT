@@ -841,6 +841,501 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 .role-title{font-size:.95rem;font-weight:700;margin-bottom:2px}
 .role-desc{font-size:.8rem;color:var(--text-secondary);line-height:1.35}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ================= Redesigned Home / Command Bridge ================= */
+.home-shell { max-width: 1240px; margin: 0 auto; }
+.home-breadcrumbs { display: none; }
+.home-shell .section-header { display: none; }
+
+/* Hero – "Command Bridge" */
+.bridge-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: clamp(22px, 3.2vw, 38px) clamp(22px, 3.2vw, 44px);
+  background:
+    radial-gradient(1200px 380px at 85% -120px, rgba(59,130,246,0.32), transparent 60%),
+    radial-gradient(900px 380px at -10% 120%, rgba(16,185,129,0.18), transparent 55%),
+    linear-gradient(135deg, #0f1d33 0%, #1a2f52 55%, #1f3b66 100%);
+  border: 1px solid rgba(59,130,246,0.35);
+  box-shadow: 0 24px 48px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05);
+  color: #f1f5f9;
+  margin-bottom: 26px;
+}
+body.light-mode .bridge-hero {
+  background:
+    radial-gradient(1200px 380px at 85% -120px, rgba(59,130,246,0.18), transparent 60%),
+    radial-gradient(900px 380px at -10% 120%, rgba(16,185,129,0.10), transparent 55%),
+    linear-gradient(135deg, #1e3a8a 0%, #1e40af 55%, #2563eb 100%);
+  color: #f8fafc;
+  border-color: rgba(37,99,235,0.35);
+}
+.bridge-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), transparent 70%);
+  pointer-events: none;
+}
+.bridge-hero > * { position: relative; }
+
+.bridge-topline {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #a9c4ea;
+  margin-bottom: 14px;
+}
+.bridge-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px;
+  background: rgba(59,130,246,0.18);
+  border: 1px solid rgba(59,130,246,0.55);
+  color: #cfe0ff;
+}
+.bridge-badge::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: #22d3ee; box-shadow: 0 0 12px #22d3ee;
+}
+.bridge-dot { color: rgba(255,255,255,0.35); }
+.bridge-status { color: #b4cff2; }
+
+.bridge-hero-title {
+  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: #f8fafc;
+  margin: 0 0 6px;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.35);
+}
+.bridge-hero-title .bridge-hero-em {
+  background: linear-gradient(90deg, #60a5fa 0%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bridge-hero-tagline {
+  font-size: clamp(0.95rem, 0.82rem + 0.35vw, 1.08rem);
+  color: #cfdcf0;
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+.bridge-hero-desc {
+  color: #b9c7dc;
+  max-width: 72ch;
+  line-height: 1.65;
+  margin: 10px 0 20px;
+  font-size: 0.95rem;
+}
+.bridge-hero-ctas {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px;
+}
+.bridge-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.bridge-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  box-shadow: 0 8px 18px -6px rgba(37,99,235,0.65), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.bridge-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -6px rgba(37,99,235,0.75); color: #fff; text-decoration: none; }
+.bridge-btn-secondary {
+  background: rgba(255,255,255,0.08);
+  color: #eaf1fb;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(4px);
+}
+.bridge-btn-secondary:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); transform: translateY(-2px); color: #fff; text-decoration: none; }
+.bridge-btn-ghost {
+  background: transparent;
+  color: #cfe0ff;
+  border: 1px solid rgba(147,197,253,0.35);
+}
+.bridge-btn-ghost:hover { background: rgba(147,197,253,0.14); color: #fff; transform: translateY(-2px); text-decoration: none; }
+
+.bridge-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(255,255,255,0.15);
+}
+.bridge-stat {
+  text-align: center;
+  padding: 6px 4px;
+}
+.bridge-stat strong {
+  display: block;
+  font-size: clamp(1.35rem, 1rem + 0.6vw, 1.7rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.bridge-stat span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8faac9;
+}
+
+/* Section heading shared style */
+.home-section { margin: 32px 0 26px; }
+.home-section-head { margin-bottom: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.home-section-kicker {
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+}
+.home-section-title {
+  font-size: clamp(1.2rem, 0.95rem + 0.8vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0;
+}
+.home-section-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+  max-width: 70ch;
+  line-height: 1.55;
+}
+.home-section-link {
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--accent); text-decoration: none;
+  white-space: nowrap;
+}
+.home-section-link:hover { text-decoration: underline; }
+
+/* Mission Critical Access */
+.mc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.mc-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 18px 20px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  text-decoration: none;
+  color: var(--text-primary);
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.mc-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--mc-accent, var(--accent));
+}
+.mc-card::after {
+  content: "";
+  position: absolute; right: -40px; top: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: var(--mc-accent, var(--accent));
+  opacity: 0.08;
+  transition: opacity 0.2s ease;
+}
+.mc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 32px -16px rgba(0,0,0,0.45);
+  border-color: var(--mc-accent, var(--accent));
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.mc-card:hover::after { opacity: 0.16; }
+.mc-card--red { --mc-accent: #ef4444; }
+.mc-card--amber { --mc-accent: #f59e0b; }
+.mc-card--blue { --mc-accent: #3b82f6; }
+.mc-card--teal { --mc-accent: #14b8a6; }
+.mc-tag {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 0.66rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mc-accent);
+  background: color-mix(in srgb, var(--mc-accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--mc-accent) 40%, transparent);
+}
+.mc-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 2px 0 0;
+}
+.mc-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+.mc-cta {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--mc-accent);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.mc-cta span { transition: transform 0.15s ease; }
+.mc-card:hover .mc-cta span { transform: translateX(3px); }
+
+/* Phase Timeline */
+.phase-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  position: relative;
+}
+.phase-timeline::before {
+  content: "";
+  position: absolute; top: 24px; left: 8%; right: 8%; height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+  opacity: 0.35;
+  z-index: 0;
+}
+.phase-node { position: relative; z-index: 1; }
+.phase-link {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 6px 8px 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+.phase-link:hover {
+  background: var(--bg-card);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.phase-marker {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.1rem;
+  box-shadow: 0 6px 16px -8px rgba(59,130,246,0.6);
+  margin-bottom: 10px;
+}
+.phase-link:hover .phase-marker {
+  background: var(--accent);
+  color: #fff;
+}
+.phase-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.phase-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.45;
+  max-width: 22ch;
+}
+@media (max-width: 820px) {
+  .phase-timeline { grid-template-columns: 1fr 1fr; }
+  .phase-timeline::before { display: none; }
+}
+@media (max-width: 480px) {
+  .phase-timeline { grid-template-columns: 1fr; }
+}
+
+/* Deck (card grid) sections */
+.deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.deck-card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  position: relative;
+}
+.deck-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 14px 26px -16px rgba(0,0,0,0.4);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.deck-card-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.deck-card-icon {
+  width: 42px; height: 42px; border-radius: 11px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.deck-card-badge {
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 3px 9px; border-radius: 999px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+.deck-card-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  color: var(--text-primary);
+  margin: 4px 0 0;
+}
+.deck-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+.deck-card-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 4px;
+}
+.deck-card-chip {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+}
+.deck-card:hover .deck-card-chip { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+
+/* Featured scenario */
+.featured-scenario {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 16px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--bg-card)) 0%, var(--bg-card) 60%);
+  position: relative;
+  overflow: hidden;
+}
+.featured-scenario::before {
+  content: "";
+  position: absolute; right: -60px; bottom: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.06;
+}
+.featured-scenario > * { position: relative; }
+.featured-scenario-kicker {
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+}
+.featured-scenario-title {
+  font-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.45rem);
+  font-weight: 800;
+  margin: 6px 0 6px;
+  color: var(--text-primary);
+}
+.featured-scenario-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  max-width: 60ch;
+}
+.featured-scenario-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.featured-scenario-meta {
+  display: flex; flex-direction: column; gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+.featured-meta-row {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.featured-meta-row strong {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+@media (max-width: 720px) {
+  .featured-scenario { grid-template-columns: 1fr; padding: 18px; }
+}
+
+/* Home status strip / footer */
+.home-status-strip {
+  margin: 32px 0 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.home-status-strip strong { color: var(--text-primary); }
+.home-status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border-radius: 999px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.home-status-pill::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: currentColor; box-shadow: 0 0 8px currentColor;
+}
+
+@media (max-width: 768px) {
+  .bridge-hero { border-radius: 14px; }
+  .bridge-hero-ctas .bridge-btn { flex: 1; justify-content: center; }
+  .home-section { margin: 28px 0 22px; }
+  .mc-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -974,19 +1469,296 @@ function renderShipboardCallout(text){return`<div class="shipboard-callout"><div
 function buildSourceHref(src,basePath=''){if(src.href)return src.href;return encodeURI(`${basePath}DL information/${src.file}`);}
 function renderSourceDocuments(sources,basePath=''){if(!sources||sources.length===0)return'';let html='<div class="related-content source-documents"><h3>Source Documents</h3><div class="source-doc-list">';sources.forEach(src=>{const href=escapeHtml(buildSourceHref(src,basePath));const title=escapeHtml(src.title||src.file||'Source document');html+=`<div class="source-doc-item"><a class="source-doc-link" href="${href}" target="_blank" rel="noopener">${title}</a>`;if(src.note)html+=`<div class="source-doc-note">${escapeHtml(src.note)}</div>`;if(src.file)html+=`<div class="source-doc-path">DL information/${escapeHtml(src.file)}</div>`;html+='</div>';});html+='</div></div>';return html;}
 function renderRelatedContent(links){if(!links||links.length===0)return'';const cl=ACTT.crossLinks||{};let html='<div class="related-content"><h3>Related Content</h3><div class="related-links">';links.forEach(l=>{const info=cl[l]||{title:l.replace(/[-\/]/g,' '),path:'#/'+l};html+=`<a class="related-link" href="${info.path}">${info.title}</a>`;});html+='</div></div>';return html;}
-function renderHome(main){let html=renderSectionHeader('ACTT Reference','Acute Care Team Training — Royal Canadian Navy Physician Assistant',[{title:'Home',path:'#/'}]);
-html+=`<section class="home-hero"><p>Rapid access to high-risk trauma and acute care actions for shipboard and austere settings. The home page is organized in operational sequence: stabilize, execute, then sustain and hand over care.</p><div class="home-hero-actions"><a class="btn btn-primary" href="#/algorithms">&#9881; Immediate Algorithms</a><a class="btn btn-outline" href="#/procedures">&#9874; Open Procedures</a><a class="btn btn-outline" href="#/checklists">&#128221; Open Checklists</a></div><div class="home-stat-grid"><div class="home-stat"><strong>${ACTT.algorithms&&ACTT.algorithms.sections?ACTT.algorithms.sections.length:0}</strong><span>Algorithms</span></div><div class="home-stat"><strong>${ACTT.procedures&&ACTT.procedures.sections?ACTT.procedures.sections.length:0}</strong><span>Procedures</span></div><div class="home-stat"><strong>${ACTT.medications&&ACTT.medications.sections?ACTT.medications.sections.length:0}</strong><span>Medication Cards</span></div><div class="home-stat"><strong>${ACTT.checklists&&ACTT.checklists.sections?ACTT.checklists.sections.length:0}</strong><span>Checklists</span></div></div></section>`;
-html+='<section class="u-section-block"><h2 class="u-section-heading">Start Where You Are</h2><p class="home-section-subtitle">Pick the entry point that matches how you\'re using the app right now.</p><div class="role-strip">';
-[{icon:'&#127891;',title:'First time through',desc:'Read the Prep Manual, then work through the scenarios in order.',path:'#/study'},{icon:'&#9889;',title:'Rapid clinical answer',desc:'Jump to Algorithms, Procedures, or Critical Numbers.',path:'#/algorithms'},{icon:'&#128218;',title:'Deep reference',desc:'Browse every source document in the Reference Library.',path:'#/library'},{icon:'&#128203;',title:'Checklists & inspection',desc:'Interactive cognitive aids and readiness checks.',path:'#/checklists'}].forEach(r=>{html+=`<a class="role-card" href="${r.path}"><div class="role-icon">${r.icon}</div><div class="role-title">${r.title}</div><div class="role-desc">${r.desc}</div></a>`;});
-html+='</div></section>';
-html+='<section class="u-section-block"><h2 class="u-section-heading">Clinical Flow</h2><p class="home-section-subtitle">Use this order during early casualty management.</p><div class="home-flow-grid">';
-[{title:'1) Recognize & Prioritize',desc:'Clinical Domains and Critical Numbers help frame urgency, differential priorities, and action thresholds.'},{title:'2) Execute Initial Treatment',desc:'Algorithms and Procedures provide sequence for airway, shock, trauma, and deterioration pathways.'},{title:'3) Sustain & Transfer',desc:'Medication guidance, checklists, team communication, and prolonged holding modules support safe continuity.'}].forEach(card=>{html+=`<article class="home-flow-card"><h3>${card.title}</h3><p>${card.desc}</p></article>`;});
-html+='</div></section>';
-html+='<section class="u-section-block"><h2 class="u-section-heading">Immediate Priority Topics</h2><div class="cards-grid cards-grid-home">';
-[{icon:'&#9881;',title:'Algorithms',desc:'Time-critical pathways for airway failure, shock, trauma patterns, STEMI, sepsis, and altered behavior.',path:'#/algorithms'},{icon:'&#9874;',title:'Procedures',desc:'Execution guides for RSI, chest decompression, chest tube, IO/IV access, and other urgent interventions.',path:'#/procedures'},{icon:'&#128221;',title:'Checklists',desc:'Interactive cognitive aids for RSI, anaphylaxis, DKA, post-ROSC, MASCAL, and readiness tasks.',path:'#/checklists'},{icon:'&#128138;',title:'Medication Reference',desc:'ACTT medication monographs with dosing, contraindications, preparation, and monitoring notes.',path:'#/medications'},{icon:'&#128200;',title:'Critical Numbers',desc:'High-consequence thresholds and treatment targets that trigger escalation or plan change.',path:'#/thresholds'},{icon:'&#129658;',title:'Sick Bay',desc:'Shipboard hub linking Sick Bay meds, ACLS, equipment guides, lab references, and inventory.',path:'#/sickbay'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
-html+='</div></section><section class="u-section-block"><h2 class="u-section-heading">Supporting Reference & Training</h2><div class="cards-grid cards-grid-home">';
-[{icon:'&#9201;',title:'Prolonged Holding',desc:'24–72 hour care framework when evacuation delays require trend-based reassessment and staged care.',path:'#/prolonged-holding'},{icon:'&#9875;',title:'Shipboard Application',desc:'How to adapt ACTT decisions to maritime constraints, logistics limits, and delayed evacuation reality.',path:'#/shipboard'},{icon:'&#128101;',title:'Team & Communication',desc:'Role assignment, closed-loop communication, and handover structure for high-acuity events.',path:'#/team'},{icon:'&#9937;',title:'Casualty Clearing Team',desc:'Practical support-team guidance for casualty reception, stabilization support, monitoring, and transfer readiness.',path:'#/casualty-clearing-team'},{icon:'&#9883;',title:'Clinical Domains',desc:'Organizing model for major ACTT problem clusters and domain overlap under pressure.',path:'#/domains'},{icon:'&#9888;',title:'Pitfalls & Errors',desc:'Common failure modes and prevention points across assessment, airway, circulation, sedation, and meds.',path:'#/pitfalls'},{icon:'&#128214;',title:'Study & Review',desc:'Deliberate practice structure for memorization, sequence rehearsal, and scenario preparation.',path:'#/study'},{icon:'&#128203;',title:'Quick Reference',desc:'Condensed appendices and rapid-use reference tables for bedside checks and review.',path:'#/appendices'},{icon:'&#128295;',title:'Clinical Tools',desc:'GCS, burn fluid, dose, timer, interactions, and differential support calculators.',path:'#/tools'},{icon:'&#127891;',title:'Interactive Scenarios',desc:'Scenario-based training cases with staged decisions and feedback to test sequence control.',path:'#/scenarios'},{icon:'&#128218;',title:'Reference Library',desc:'Every source PDF, slide deck, and technical reference organised by clinical topic.',path:'#/library'}].forEach(c=>{html+=`<a class="quick-card" href="${c.path}"><div class="qc-icon">${c.icon}</div><div class="qc-title">${c.title}</div><div class="qc-desc">${c.desc}</div></a>`;});
-html+='</div></section>';main.innerHTML=html;}
+function renderHome(main){
+  const count=(obj,key)=>obj&&obj[key]?obj[key].length:0;
+  const stats={
+    algorithms:count(ACTT.algorithms,'sections'),
+    procedures:count(ACTT.procedures,'sections'),
+    medications:count(ACTT.medications,'sections'),
+    checklists:count(ACTT.checklists,'sections'),
+    thresholds:count(ACTT.thresholds,'sections'),
+    scenarios:12,
+    library:ACTT.library&&ACTT.library.categories?ACTT.library.categories.length:0
+  };
+  const today=new Date();
+  const dateStr=today.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+  const featured={
+    num:'01',
+    title:'Closed Head Injury with Deterioration',
+    desc:'Severe TBI with evolving herniation. Run airway, osmotherapy, and damage-control timing. Practice structured reassessment and MEDEVAC prep under shipboard constraints.',
+    href:'scenarios/actt_scenario_01_head_injury.html',
+    time:'25–35 min',
+    level:'Advanced'
+  };
+
+  let html='';
+  // Hero
+  html+=`<section class="bridge-hero" aria-labelledby="homeTitle">
+    <div class="bridge-topline">
+      <span class="bridge-badge">RCN · Physician Assistant</span>
+      <span class="bridge-dot">•</span>
+      <span class="bridge-status">Field-Ready · Offline Enabled</span>
+      <span class="bridge-dot">•</span>
+      <span class="bridge-status">${escapeHtml(dateStr)}</span>
+    </div>
+    <h1 id="homeTitle" class="bridge-hero-title">ACTT <span class="bridge-hero-em">Reference</span></h1>
+    <p class="bridge-hero-tagline">Acute Care Team Training — Shipboard &amp; austere casualty care.</p>
+    <p class="bridge-hero-desc">Rapid, offline-capable decision support for the prolonged-hold reality: when definitive care is hours or days away and every sequence, number, and team role matters. Built for the Royal Canadian Navy Physician Assistant and the casualty clearing team around them.</p>
+    <div class="bridge-hero-ctas">
+      <a class="bridge-btn bridge-btn-primary" href="#/algorithms"><span>&#9889;</span> Emergency Algorithms</a>
+      <a class="bridge-btn bridge-btn-secondary" href="#/checklists"><span>&#9776;</span> Run a Checklist</a>
+      <a class="bridge-btn bridge-btn-ghost" href="#/scenarios"><span>&#9654;</span> Launch Scenario</a>
+    </div>
+    <div class="bridge-stats" role="list">
+      <div class="bridge-stat" role="listitem"><strong>${stats.algorithms}</strong><span>Algorithms</span></div>
+      <div class="bridge-stat" role="listitem"><strong>${stats.procedures}</strong><span>Procedures</span></div>
+      <div class="bridge-stat" role="listitem"><strong>${stats.medications}</strong><span>Medications</span></div>
+      <div class="bridge-stat" role="listitem"><strong>${stats.checklists}</strong><span>Checklists</span></div>
+      <div class="bridge-stat" role="listitem"><strong>${stats.thresholds}</strong><span>Thresholds</span></div>
+      <div class="bridge-stat" role="listitem"><strong>${stats.scenarios}</strong><span>Scenarios</span></div>
+    </div>
+  </section>`;
+
+  // Mission Critical Access
+  html+=`<section class="home-section" aria-labelledby="mcHeading">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Mission Critical Access</div>
+        <h2 id="mcHeading" class="home-section-title">Go here first under pressure</h2>
+        <p class="home-section-desc">Shortest path from recognition to action. Red = life threats, amber = hands-on, blue = decision numbers, teal = cognitive aids.</p>
+      </div>
+    </div>
+    <div class="mc-grid">
+      <a class="mc-card mc-card--red" href="#/algorithms/airway-failure">
+        <span class="mc-tag">Life Threats</span>
+        <div class="mc-title">Failed Airway &amp; Shock</div>
+        <p class="mc-desc">RSI, tension pneumothorax, massive hemorrhage, arrest pathways, STEMI, anaphylaxis, sepsis.</p>
+        <div class="mc-cta">Open algorithms <span>&rarr;</span></div>
+      </a>
+      <a class="mc-card mc-card--amber" href="#/procedures/rsi">
+        <span class="mc-tag">Hands-On</span>
+        <div class="mc-title">Urgent Procedures</div>
+        <p class="mc-desc">RSI setup, needle/surgical cric, chest decompression, chest tube, IO access, pericardiocentesis.</p>
+        <div class="mc-cta">Open procedures <span>&rarr;</span></div>
+      </a>
+      <a class="mc-card mc-card--blue" href="#/thresholds/hemodynamic">
+        <span class="mc-tag">Decision Numbers</span>
+        <div class="mc-title">Critical Thresholds</div>
+        <p class="mc-desc">Vitals, labs, airway, hemorrhage, neuro, burn, and sepsis numbers that trigger escalation.</p>
+        <div class="mc-cta">Open thresholds <span>&rarr;</span></div>
+      </a>
+      <a class="mc-card mc-card--teal" href="#/checklists/rsi">
+        <span class="mc-tag">Cognitive Aid</span>
+        <div class="mc-title">Interactive Checklists</div>
+        <p class="mc-desc">RSI, anaphylaxis, DKA, post-ROSC, MEDEVAC, MASCAL, and equipment readiness checks.</p>
+        <div class="mc-cta">Run a checklist <span>&rarr;</span></div>
+      </a>
+    </div>
+  </section>`;
+
+  // Clinical phase timeline
+  html+=`<section class="home-section" aria-labelledby="phaseHeading">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Operational Sequence</div>
+        <h2 id="phaseHeading" class="home-section-title">ACTT Clinical Phases</h2>
+        <p class="home-section-desc">Sustained casualty care under delayed evacuation. Use this order when the clock is hours, not minutes.</p>
+      </div>
+    </div>
+    <ol class="phase-timeline">
+      <li class="phase-node"><a class="phase-link" href="#/domains"><div class="phase-marker">1</div><div class="phase-name">Recognize</div><div class="phase-desc">Frame urgency, domains, and priority numbers.</div></a></li>
+      <li class="phase-node"><a class="phase-link" href="#/algorithms"><div class="phase-marker">2</div><div class="phase-name">Stabilize</div><div class="phase-desc">Airway, breathing, circulation algorithms.</div></a></li>
+      <li class="phase-node"><a class="phase-link" href="#/procedures"><div class="phase-marker">3</div><div class="phase-name">Treat</div><div class="phase-desc">Procedures, medications, monitoring targets.</div></a></li>
+      <li class="phase-node"><a class="phase-link" href="#/prolonged-holding"><div class="phase-marker">4</div><div class="phase-name">Sustain</div><div class="phase-desc">Prolonged hold, trending, role rotation.</div></a></li>
+      <li class="phase-node"><a class="phase-link" href="#/team"><div class="phase-marker">5</div><div class="phase-name">Transfer</div><div class="phase-desc">Handover, evac readiness, team comms.</div></a></li>
+    </ol>
+  </section>`;
+
+  // Clinical Reference Deck
+  html+=`<section class="home-section" aria-labelledby="clinDeck">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Deck 01</div>
+        <h2 id="clinDeck" class="home-section-title">Clinical Reference</h2>
+        <p class="home-section-desc">Core clinical knowledge for rapid retrieval at the bedside.</p>
+      </div>
+      <a class="home-section-link" href="#/algorithms">Browse all &rsaquo;</a>
+    </div>
+    <div class="deck-grid">
+      <a class="deck-card" href="#/algorithms">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9881;</span><span class="deck-card-badge">${stats.algorithms} pathways</span></div>
+        <div class="deck-card-title">Algorithms</div>
+        <p class="deck-card-desc">Time-critical pathways for airway, shock, trauma, arrest, STEMI, sepsis, burns, and TBI.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">RSI</span><span class="deck-card-chip">Shock</span><span class="deck-card-chip">STEMI</span></div>
+      </a>
+      <a class="deck-card" href="#/procedures">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9874;</span><span class="deck-card-badge">${stats.procedures} guides</span></div>
+        <div class="deck-card-title">Procedures</div>
+        <p class="deck-card-desc">Step-by-step execution guides for airway, chest, vascular, and ultrasound-guided procedures.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Cric</span><span class="deck-card-chip">Chest tube</span><span class="deck-card-chip">IO</span></div>
+      </a>
+      <a class="deck-card" href="#/medications">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128138;</span><span class="deck-card-badge">${stats.medications} groups</span></div>
+        <div class="deck-card-title">Medications</div>
+        <p class="deck-card-desc">Monographs with dose, contraindications, preparation, and monitoring for ACTT-relevant drugs.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Push-dose</span><span class="deck-card-chip">Sedation</span><span class="deck-card-chip">Pressors</span></div>
+      </a>
+      <a class="deck-card" href="#/thresholds">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128200;</span><span class="deck-card-badge">${stats.thresholds} sets</span></div>
+        <div class="deck-card-title">Critical Numbers</div>
+        <p class="deck-card-desc">Vital, lab, and physiologic thresholds that trigger escalation or change the plan.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Hemodynamic</span><span class="deck-card-chip">Airway</span><span class="deck-card-chip">Neuro</span></div>
+      </a>
+      <a class="deck-card" href="#/domains">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9883;</span><span class="deck-card-badge">Frameworks</span></div>
+        <div class="deck-card-title">Clinical Domains</div>
+        <p class="deck-card-desc">Organizing model for major ACTT problem clusters and how they overlap under pressure.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Airway</span><span class="deck-card-chip">Shock</span><span class="deck-card-chip">TBI</span></div>
+      </a>
+      <a class="deck-card" href="#/pitfalls">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9888;</span><span class="deck-card-badge">Red flags</span></div>
+        <div class="deck-card-title">Pitfalls &amp; Errors</div>
+        <p class="deck-card-desc">Common failure modes and prevention points across assessment, airway, circulation, and meds.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Anchoring</span><span class="deck-card-chip">Missed shock</span><span class="deck-card-chip">Airway delay</span></div>
+      </a>
+    </div>
+  </section>`;
+
+  // Shipboard / Operational Deck
+  html+=`<section class="home-section" aria-labelledby="opDeck">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Deck 02</div>
+        <h2 id="opDeck" class="home-section-title">Shipboard &amp; Operational</h2>
+        <p class="home-section-desc">The austere, delayed-evacuation context that defines ACTT. Sick bay, prolonged hold, and team.</p>
+      </div>
+      <a class="home-section-link" href="#/shipboard">View operations &rsaquo;</a>
+    </div>
+    <div class="deck-grid">
+      <a class="deck-card" href="#/sickbay">
+        <div class="deck-card-head"><span class="deck-card-icon">&#129658;</span><span class="deck-card-badge">Hub</span></div>
+        <div class="deck-card-title">Sick Bay</div>
+        <p class="deck-card-desc">Shipboard hub linking Sick Bay meds, ACLS, equipment guides, lab references, and inventory.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Meds</span><span class="deck-card-chip">ACLS</span><span class="deck-card-chip">Lab</span></div>
+      </a>
+      <a class="deck-card" href="#/prolonged-holding">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9201;</span><span class="deck-card-badge">24–72 h</span></div>
+        <div class="deck-card-title">Prolonged Holding</div>
+        <p class="deck-card-desc">Extended-care framework when evacuation delays require trend-based reassessment and staged care.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Trends</span><span class="deck-card-chip">Rotation</span><span class="deck-card-chip">Nutrition</span></div>
+      </a>
+      <a class="deck-card" href="#/shipboard">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9875;</span><span class="deck-card-badge">Maritime</span></div>
+        <div class="deck-card-title">Shipboard Application</div>
+        <p class="deck-card-desc">How to adapt ACTT decisions to maritime constraints, logistics limits, and delayed-evacuation reality.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Transfer</span><span class="deck-card-chip">Helo</span><span class="deck-card-chip">RHIB</span></div>
+      </a>
+      <a class="deck-card" href="#/team">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128101;</span><span class="deck-card-badge">CRM</span></div>
+        <div class="deck-card-title">Team &amp; Communication</div>
+        <p class="deck-card-desc">Role assignment, closed-loop communication, and handover structure for high-acuity events.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Roles</span><span class="deck-card-chip">Handover</span><span class="deck-card-chip">Brief</span></div>
+      </a>
+      <a class="deck-card" href="#/casualty-clearing-team">
+        <div class="deck-card-head"><span class="deck-card-icon">&#9937;</span><span class="deck-card-badge">Support team</span></div>
+        <div class="deck-card-title">Casualty Clearing Team</div>
+        <p class="deck-card-desc">Practical CCT guidance: reception, stabilization support, monitoring, and transfer readiness.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">MARCH</span><span class="deck-card-chip">MIST</span><span class="deck-card-chip">Triage</span></div>
+      </a>
+      <a class="deck-card" href="#/checklists">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128221;</span><span class="deck-card-badge">${stats.checklists} checklists</span></div>
+        <div class="deck-card-title">Operational Checklists</div>
+        <p class="deck-card-desc">Interactive cognitive aids for RSI, anaphylaxis, DKA, post-ROSC, MEDEVAC, and MASCAL.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">RSI</span><span class="deck-card-chip">MEDEVAC</span><span class="deck-card-chip">MASCAL</span></div>
+      </a>
+    </div>
+  </section>`;
+
+  // Training & Tools deck
+  html+=`<section class="home-section" aria-labelledby="trDeck">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Deck 03</div>
+        <h2 id="trDeck" class="home-section-title">Training &amp; Tools</h2>
+        <p class="home-section-desc">Deliberate practice, reference study, and on-the-fly clinical calculators.</p>
+      </div>
+      <a class="home-section-link" href="#/scenarios">All scenarios &rsaquo;</a>
+    </div>
+    <div class="deck-grid">
+      <a class="deck-card" href="#/scenarios">
+        <div class="deck-card-head"><span class="deck-card-icon">&#127891;</span><span class="deck-card-badge">${stats.scenarios} cases</span></div>
+        <div class="deck-card-title">Interactive Scenarios</div>
+        <p class="deck-card-desc">Staged-decision simulations with feedback. Test sequence control under time pressure.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Trauma</span><span class="deck-card-chip">Sepsis</span><span class="deck-card-chip">STEMI</span></div>
+      </a>
+      <a class="deck-card" href="#/study">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128214;</span><span class="deck-card-badge">Drills</span></div>
+        <div class="deck-card-title">Study &amp; Review</div>
+        <p class="deck-card-desc">Structured memorization, sequence rehearsal, and scenario prep built for spaced repetition.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Flashcards</span><span class="deck-card-chip">Drills</span><span class="deck-card-chip">Prep</span></div>
+      </a>
+      <a class="deck-card" href="#/tools">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128295;</span><span class="deck-card-badge">6 calculators</span></div>
+        <div class="deck-card-title">Clinical Tools</div>
+        <p class="deck-card-desc">GCS, burn fluid, weight-based dose, reassessment timer, drug interactions, and differential support.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">GCS</span><span class="deck-card-chip">Burn %</span><span class="deck-card-chip">Doses</span></div>
+      </a>
+      <a class="deck-card" href="#/appendices">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128203;</span><span class="deck-card-badge">Quick ref</span></div>
+        <div class="deck-card-title">Quick Reference</div>
+        <p class="deck-card-desc">Condensed appendices and rapid-use reference tables for bedside checks and revision.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Tables</span><span class="deck-card-chip">Cards</span><span class="deck-card-chip">Index</span></div>
+      </a>
+      <a class="deck-card" href="#/library">
+        <div class="deck-card-head"><span class="deck-card-icon">&#128218;</span><span class="deck-card-badge">${stats.library} categories</span></div>
+        <div class="deck-card-title">Reference Library</div>
+        <p class="deck-card-desc">Every source PDF, slide deck, and technical reference organised by clinical topic.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">PDFs</span><span class="deck-card-chip">Slides</span><span class="deck-card-chip">Manuals</span></div>
+      </a>
+      <a class="deck-card" href="#/tools/timer">
+        <div class="deck-card-head"><span class="deck-card-icon">&#8986;</span><span class="deck-card-badge">Live</span></div>
+        <div class="deck-card-title">Reassessment Timer</div>
+        <p class="deck-card-desc">Multi-patient reassessment clock for prolonged-hold monitoring with configurable intervals.</p>
+        <div class="deck-card-chips"><span class="deck-card-chip">Vitals</span><span class="deck-card-chip">Meds</span><span class="deck-card-chip">Checks</span></div>
+      </a>
+    </div>
+  </section>`;
+
+  // Featured Scenario
+  html+=`<section class="home-section" aria-labelledby="featScn">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">Featured Training</div>
+        <h2 id="featScn" class="home-section-title">Try tonight&rsquo;s scenario</h2>
+        <p class="home-section-desc">Rotating case to keep critical pathways sharp. Run it solo or as a full team drill.</p>
+      </div>
+    </div>
+    <div class="featured-scenario">
+      <div>
+        <div class="featured-scenario-kicker">Scenario ${escapeHtml(featured.num)}</div>
+        <h3 class="featured-scenario-title">${escapeHtml(featured.title)}</h3>
+        <p class="featured-scenario-desc">${escapeHtml(featured.desc)}</p>
+        <div class="featured-scenario-actions">
+          <a class="bridge-btn bridge-btn-primary" href="${escapeHtml(featured.href)}"><span>&#9654;</span> Start scenario</a>
+          <a class="bridge-btn bridge-btn-ghost" href="#/scenarios"><span>&#9776;</span> Browse all 12</a>
+        </div>
+      </div>
+      <div class="featured-scenario-meta">
+        <div class="featured-meta-row">Duration<strong>${escapeHtml(featured.time)}</strong></div>
+        <div class="featured-meta-row">Difficulty<strong>${escapeHtml(featured.level)}</strong></div>
+        <div class="featured-meta-row">Primary domain<strong>Neurotrauma &middot; Airway</strong></div>
+      </div>
+    </div>
+  </section>`;
+
+  // Status strip / footer
+  html+=`<div class="home-status-strip">
+    <div><span class="home-status-pill">Operational</span> &nbsp; Content last reviewed <strong>${escapeHtml(dateStr)}</strong> by ACTT Curriculum Team</div>
+    <div>Offline-ready &middot; v1.0 &middot; <a href="#/library">Source documents</a></div>
+  </div>`;
+
+  main.innerHTML='<div class="home-shell">'+html+'</div>';
+}
 function renderSection(main,data,sectionId,parentTitle,parentPath){
 if(!data){main.innerHTML='<div class="loading">Content loading...</div>';return;}
 if(parentPath==='#/sickbay-meds'&&!sectionId){renderSickBayMedLibrary(main,data,parentTitle,parentPath);return;}
