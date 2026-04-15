@@ -483,10 +483,32 @@ tr:hover td { background: var(--bg-secondary); }
 .dose-card .dc-dose { font-size: 1.2rem; font-weight: 700; font-family: monospace; margin-bottom: 4px; }
 .dose-card .dc-route { font-size: 0.85rem; color: var(--text-muted); }
 .dose-card .dc-note { font-size: 0.85rem; color: var(--severity-amber); margin-top: 6px; }
-.procedure-step { display: flex; gap: 14px; margin-bottom: 12px; padding: 12px 14px; background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); transition: box-shadow var(--transition); }
+.procedure-step { display: flex; gap: 14px; margin-bottom: 12px; padding: 12px 14px; background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); transition: box-shadow var(--transition); cursor: pointer; }
 .procedure-step:hover { box-shadow: var(--shadow-sm); }
-.procedure-step .ps-num { width: 30px; height: 30px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; box-shadow: 0 2px 4px rgba(59,130,246,0.3); }
+.procedure-step.completed { opacity: 0.6; background: var(--bg-secondary); }
+.procedure-step.completed .ps-num { background: var(--severity-green); }
+.procedure-step .ps-num { width: 30px; height: 30px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; box-shadow: 0 2px 4px rgba(59,130,246,0.3); transition: all var(--transition); }
 .procedure-step .ps-text { color: var(--text-secondary); line-height: 1.6; }
+.procedure-step .ps-check { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-left: auto; transition: all var(--transition); }
+.procedure-step.completed .ps-check { background: var(--severity-green); border-color: var(--severity-green); color: #fff; }
+.procedure-controls { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+.procedure-progress { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; margin: 16px 0; }
+.procedure-progress-bar { height: 8px; background: var(--bg-tertiary); border-radius: 4px; overflow: hidden; margin: 8px 0; }
+.procedure-progress-fill { height: 100%; background: var(--accent); transition: width 0.3s ease; }
+.procedure-progress-text { font-size: 0.85rem; color: var(--text-secondary); }
+.interactive-algorithm { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin: 16px 0; }
+.algorithm-step { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin: 12px 0; }
+.algorithm-step.active { border-color: var(--accent); background: var(--accent-dim); box-shadow: var(--shadow-sm); }
+.algorithm-step h4 { margin: 0 0 10px 0; color: var(--text-primary); }
+.algorithm-choices { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.algorithm-choice { padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); cursor: pointer; transition: all var(--transition); text-align: left; }
+.algorithm-choice:hover { border-color: var(--accent); background: var(--accent-dim); }
+.algorithm-choice.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+.algorithm-controls { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+.algorithm-path { font-size: 0.85rem; color: var(--text-muted); margin: 8px 0; padding: 8px 12px; background: var(--bg-tertiary); border-radius: var(--radius); }
+.embedded-tool { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 16px; margin: 16px 0; }
+.embedded-tool-header { font-weight: 600; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.embedded-tool-icon { font-size: 1.2rem; }
 @media (max-width: 1024px) { .threshold-card { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) {
   :root { --header-h: 60px; }
@@ -1450,7 +1472,7 @@ function renderMetadataBanner(meta){if(!meta)return'';return '<div class="metada
 function setSearchFilter(filter){state.searchFilter=filter||'all';localStorage.setItem('actt-search-filter',state.searchFilter);const input=document.getElementById('searchInput');if(input&&input.value.trim().length>=2)handleSearch(input.value);}
 function expandTerms(query){const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);const expanded=new Set(terms);terms.forEach(t=>(SEARCH_SYNONYMS[t]||[]).forEach(s=>expanded.add(s)));return [...expanded];}
 function announceSearchResults(message){const status=document.getElementById('searchStatus');if(status)status.textContent=message;}
-function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;case'library':renderLibrary(main,sub);break;case'scenarios':renderScenariosList(main);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}}
+function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;case'library':renderLibrary(main,sub);break;case'scenarios':renderScenariosList(main);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}setTimeout(()=>{enhanceProcedureSteps();embedClinicalTools();},100);}
 function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
 function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
 function renderSectionNavActions(parentTitle,parentPath,data,sectionId){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';if(data&&data.sections&&sectionId){const idx=data.sections.findIndex(s=>s.id===sectionId);if(idx>0){const prev=data.sections[idx-1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${prev.id}">&#8592; ${prev.title}</a>`;}if(idx<data.sections.length-1){const next=data.sections[idx+1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${next.id}">${next.title} &#8594;</a>`;}}html+='</div>';return html;}
@@ -2105,6 +2127,133 @@ document.addEventListener('keydown',e=>{
   if(e.shiftKey){if(active===first||!document.getElementById('appSidebar').contains(active)){e.preventDefault();last.focus();}}
   else if(active===last||!document.getElementById('appSidebar').contains(active)){e.preventDefault();first.focus();}
 });
+
+// ===== Interactive Procedure Progress Tracking =====
+function toggleProcedureStep(procId,stepIdx){
+  const key='actt-proc-'+procId;
+  const completed=JSON.parse(localStorage.getItem(key)||'[]');
+  const pos=completed.indexOf(stepIdx);
+  if(pos>=0)completed.splice(pos,1);
+  else completed.push(stepIdx);
+  localStorage.setItem(key,JSON.stringify(completed));
+  updateProcedureUI(procId,completed);
+}
+function updateProcedureUI(procId,completed){
+  document.querySelectorAll('.procedure-step[data-proc="'+procId+'"]').forEach(el=>{
+    const idx=parseInt(el.dataset.idx);
+    const isDone=completed.includes(idx);
+    el.classList.toggle('completed',isDone);
+    const check=el.querySelector('.ps-check');
+    if(check)check.innerHTML=isDone?'&#10003;':'';
+  });
+  const total=document.querySelectorAll('.procedure-step[data-proc="'+procId+'"]').length;
+  const done=completed.length;
+  const pct=total>0?Math.round(done/total*100):0;
+  const fill=document.getElementById('procProgressFill-'+procId);
+  if(fill)fill.style.width=pct+'%';
+  const text=document.getElementById('procProgressText-'+procId);
+  if(text)text.textContent=done+' / '+total+' steps completed ('+pct+'%)';
+}
+function resetProcedure(procId){
+  if(!confirm('Reset all progress for this procedure?'))return;
+  localStorage.removeItem('actt-proc-'+procId);
+  updateProcedureUI(procId,[]);
+}
+function enhanceProcedureSteps(){
+  const steps=document.querySelectorAll('.procedure-step:not([data-enhanced])');
+  if(!steps.length)return;
+  const procId=window.location.hash.split('/').pop()||'unknown';
+  const completed=JSON.parse(localStorage.getItem('actt-proc-'+procId)||'[]');
+  steps.forEach((step,idx)=>{
+    step.dataset.enhanced='true';
+    step.dataset.proc=procId;
+    step.dataset.idx=idx;
+    const check=document.createElement('span');
+    check.className='ps-check';
+    check.innerHTML=completed.includes(idx)?'&#10003;':'';
+    step.appendChild(check);
+    step.addEventListener('click',()=>toggleProcedureStep(procId,idx));
+    if(completed.includes(idx))step.classList.add('completed');
+  });
+  const parent=steps[0].parentElement;
+  if(parent&&!document.getElementById('procProgressFill-'+procId)){
+    const progress=document.createElement('div');
+    progress.className='procedure-progress';
+    progress.innerHTML='<div class="procedure-progress-text" id="procProgressText-'+procId+'"></div>'+
+      '<div class="procedure-progress-bar"><div class="procedure-progress-fill" id="procProgressFill-'+procId+'"></div></div>';
+    const controls=document.createElement('div');
+    controls.className='procedure-controls';
+    controls.innerHTML='<button class="btn btn-outline btn-sm" onclick="resetProcedure(\''+procId+'\')">&#8635; Reset Progress</button>';
+    parent.insertBefore(controls,steps[0]);
+    parent.insertBefore(progress,steps[0]);
+  }
+  updateProcedureUI(procId,completed);
+}
+
+// ===== Embedded Clinical Tools =====
+function renderEmbeddedGCS(){
+  return '<div class="embedded-tool"><div class="embedded-tool-header"><span class="embedded-tool-icon">&#129504;</span>Quick GCS Calculator</div>'+
+    '<div style="font-size:0.85rem;margin-bottom:12px;color:var(--text-secondary)">Rapid assessment for airway decision threshold (GCS ≤8)</div>'+
+    '<div class="gcs-component"><div style="font-weight:600;margin-bottom:6px;font-size:0.82rem">Eye (E)</div><div class="gcs-buttons">'+
+    '<button class="gcs-btn" data-component="eye" data-value="4" onclick="selectEmbeddedGCS(this)">4</button>'+
+    '<button class="gcs-btn" data-component="eye" data-value="3" onclick="selectEmbeddedGCS(this)">3</button>'+
+    '<button class="gcs-btn" data-component="eye" data-value="2" onclick="selectEmbeddedGCS(this)">2</button>'+
+    '<button class="gcs-btn" data-component="eye" data-value="1" onclick="selectEmbeddedGCS(this)">1</button>'+
+    '</div></div>'+
+    '<div class="gcs-component"><div style="font-weight:600;margin-bottom:6px;font-size:0.82rem">Verbal (V)</div><div class="gcs-buttons">'+
+    '<button class="gcs-btn" data-component="verbal" data-value="5" onclick="selectEmbeddedGCS(this)">5</button>'+
+    '<button class="gcs-btn" data-component="verbal" data-value="4" onclick="selectEmbeddedGCS(this)">4</button>'+
+    '<button class="gcs-btn" data-component="verbal" data-value="3" onclick="selectEmbeddedGCS(this)">3</button>'+
+    '<button class="gcs-btn" data-component="verbal" data-value="2" onclick="selectEmbeddedGCS(this)">2</button>'+
+    '<button class="gcs-btn" data-component="verbal" data-value="1" onclick="selectEmbeddedGCS(this)">1</button>'+
+    '</div></div>'+
+    '<div class="gcs-component"><div style="font-weight:600;margin-bottom:6px;font-size:0.82rem">Motor (M)</div><div class="gcs-buttons">'+
+    '<button class="gcs-btn" data-component="motor" data-value="6" onclick="selectEmbeddedGCS(this)">6</button>'+
+    '<button class="gcs-btn" data-component="motor" data-value="5" onclick="selectEmbeddedGCS(this)">5</button>'+
+    '<button class="gcs-btn" data-component="motor" data-value="4" onclick="selectEmbeddedGCS(this)">4</button>'+
+    '<button class="gcs-btn" data-component="motor" data-value="3" onclick="selectEmbeddedGCS(this)">3</button>'+
+    '<button class="gcs-btn" data-component="motor" data-value="2" onclick="selectEmbeddedGCS(this)">2</button>'+
+    '<button class="gcs-btn" data-component="motor" data-value="1" onclick="selectEmbeddedGCS(this)">1</button>'+
+    '</div></div>'+
+    '<div id="embeddedGCSResult" style="margin-top:12px;padding:12px;background:var(--bg-secondary);border-radius:var(--radius);text-align:center;font-weight:600;display:none"></div>'+
+    '</div>';
+}
+window._embeddedGCS={eye:0,verbal:0,motor:0};
+function selectEmbeddedGCS(btn){
+  const comp=btn.dataset.component;
+  const val=parseInt(btn.dataset.value);
+  btn.parentElement.querySelectorAll('.gcs-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  window._embeddedGCS[comp]=val;
+  const total=window._embeddedGCS.eye+window._embeddedGCS.verbal+window._embeddedGCS.motor;
+  const result=document.getElementById('embeddedGCSResult');
+  if(total>0){
+    result.style.display='block';
+    result.innerHTML='<div style="font-size:2rem;color:var(--accent);margin-bottom:4px">'+total+'</div>';
+    if(total<=8)result.innerHTML+='<div class="tool-alert red" style="margin:8px 0;font-size:0.82rem">GCS ≤ 8: Consider airway control</div>';
+    else result.innerHTML+='<div style="font-size:0.82rem;color:var(--text-secondary)">E'+window._embeddedGCS.eye+' V'+window._embeddedGCS.verbal+' M'+window._embeddedGCS.motor+'</div>';
+  }
+}
+function embedClinicalTools(){
+  const hash=window.location.hash;
+  if(hash.includes('airway-failure')){
+    setTimeout(()=>{
+      const container=document.querySelector('.content-section');
+      if(container&&!document.querySelector('.embedded-tool')){
+        const h4s=container.querySelectorAll('h4');
+        for(let h4 of h4s){
+          if(h4.textContent.includes('Immediate Assessment')){
+            const gcs=document.createElement('div');
+            gcs.innerHTML=renderEmbeddedGCS();
+            h4.parentNode.insertBefore(gcs.firstChild,h4.nextSibling);
+            break;
+          }
+        }
+      }
+    },300);
+  }
+}
+
 document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
