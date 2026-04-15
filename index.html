@@ -1520,13 +1520,13 @@ function renderHome(main){
     <div class="bridge-topline">
       <span class="bridge-badge">RCN · Physician Assistant</span>
       <span class="bridge-dot">•</span>
-      <span class="bridge-status">Field-Ready · Offline Enabled</span>
+      <span class="bridge-status">Field-Ready · Clinical Support</span>
       <span class="bridge-dot">•</span>
       <span class="bridge-status">${escapeHtml(dateStr)}</span>
     </div>
     <h1 id="homeTitle" class="bridge-hero-title">ACTT <span class="bridge-hero-em">Reference</span></h1>
     <p class="bridge-hero-tagline">Acute Care Team Training — Shipboard &amp; austere casualty care.</p>
-    <p class="bridge-hero-desc">Rapid, offline-capable decision support for the prolonged-hold reality: when definitive care is hours or days away and every sequence, number, and team role matters. Built for the Royal Canadian Navy Physician Assistant and the casualty clearing team around them.</p>
+    <p class="bridge-hero-desc">Rapid clinical decision support for the prolonged-hold reality: when definitive care is hours or days away and every sequence, number, and team role matters. Built for the Royal Canadian Navy Physician Assistant and the casualty clearing team around them.</p>
     <div class="bridge-hero-ctas">
       <a class="bridge-btn bridge-btn-primary" href="#/algorithms"><span>&#9889;</span> Emergency Algorithms</a>
       <a class="bridge-btn bridge-btn-secondary" href="#/checklists"><span>&#9776;</span> Run a Checklist</a>
@@ -1777,7 +1777,7 @@ function renderHome(main){
   // Status strip / footer
   html+=`<div class="home-status-strip">
     <div><span class="home-status-pill">Operational</span> &nbsp; Content last reviewed <strong>${escapeHtml(dateStr)}</strong> by ACTT Curriculum Team</div>
-    <div>Offline-ready &middot; v1.0 &middot; <a href="#/library">Source documents</a></div>
+    <div>v1.0 &middot; <a href="#/library">Source documents</a></div>
   </div>`;
 
   main.innerHTML='<div class="home-shell">'+html+'</div>';
