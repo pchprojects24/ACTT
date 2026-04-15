@@ -1023,7 +1023,7 @@ window.ACTT.appendices={
         '</tbody></table></div>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CURATION NOTE</span> Intentionally Not Fully Surfaced</div>'+
         '<p>Administrative drafts, candidate schedules, and duplicate legacy versions remain excluded from core navigation to avoid clutter. Use this appendix as a bridge to essential supplemental references while keeping the app focused on high-yield operational content.</p></div>',
-      relatedLinks:['algorithms/acs-stemi','appendices/appendix-l','team/handover','prolonged-holding/critical-care-priorities','tools/interactions'],
+      relatedLinks:['algorithms/stemi','appendices/appendix-l','team/handover','prolonged-holding/critical-care-24h-hold','tools/interactions'],
       sources:[
         {title:'ECG Cheat sheet.pdf',file:'ECG Cheat sheet.pdf'},
         {title:'Adjunct Medications for Management of Acute MI.pdf',file:'Adjunct Medications for Management of Acute MI.pdf'},
