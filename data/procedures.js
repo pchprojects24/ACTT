@@ -130,13 +130,14 @@ window.ACTT.procedures={
       '<li>Inability to provide continuous monitoring or immediate airway rescue.</li>'+
       '</ul>'+
       '<h4>Pre-Sedation Setup</h4>'+
+      '<p><span class="time-sensitive-badge">⏱ Time-Sensitive</span> All monitoring and equipment must be ready before first medication dose.</p>'+
       '<ul>'+
-      '<li>Two qualified personnel (sedation/monitor and procedure operator) with roles and backup airway plan verbalized.</li>'+
+      '<li><span class="warning-badge">Critical</span> Two qualified personnel (sedation/monitor and procedure operator) with roles and backup airway plan verbalized.</li>'+
       '<li>Consent and time-out completed; weight recorded for dosing; baseline vitals and fasting/aspiration risk noted.</li>'+
       '<li>IV access preferred and patent; oxygen source, suction, BVM with adjuncts, and SGA/ETT rescue equipment at bedside.</li>'+
       '<li>Monitoring on before first dose: SpO\u2082, BP, ECG, and EtCO\u2082 if available (cycle frequently during sedation).</li>'+
       '<li>Medications drawn up, diluted, labeled, and double-checked: ketamine (prepare 10 mg/mL syringes), optional midazolam in 0.5\u20132 mg IV increments, opioid analgesia only if needed, ondansetron prophylaxis considered.</li>'+
-      '<li>Reversal agents ready if applicable: naloxone for opioid-induced respiratory depression, flumazenil for selected benzodiazepine reversal.</li>'+
+      '<li><span class="warning-badge amber">Caution</span> Reversal agents ready if applicable: naloxone for opioid-induced respiratory depression, flumazenil for selected benzodiazepine reversal.</li>'+
       '</ul>'+
       '<h4>Step-by-Step Technique</h4>'+
       '<div class="procedure-step"><div class="ps-num">1</div><div class="ps-text">State the indication, target depth (anxiolysis, moderate, dissociative), and rescue plan. Assign a dedicated monitor separate from the proceduralist.</div></div>'+

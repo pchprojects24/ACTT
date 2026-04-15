@@ -31,14 +31,31 @@ window.ACTT.algorithms={
         '</ul>' +
 
         '<h4>Immediate Actions / Execution Sequence</h4>' +
-        '<ul>' +
+        '<div class="critical-callout high-priority">' +
+        '<div class="critical-callout-header"><span class="critical-icon">!</span> Time-Critical Steps</div>' +
+        '<div class="critical-callout-body">' +
+        '<p><strong>These actions must be performed immediately and in order:</strong></p>' +
+        '<ol>' +
         '<li>Apply high-concentration oxygen immediately and place the patient in the best achievable airway position.</li>' +
         '<li>Suction aggressively if blood, vomit, soot, or secretions are present.</li>' +
         '<li>Apply continuous monitoring: pulse oximetry, cardiac monitoring, and end-tidal CO<sub>2</sub> as soon as it is available.</li>' +
         '<li>If oral intubation is appropriate, pre-oxygenate and set a strict attempt limit before the first attempt starts.</li>' +
+        '</ol>' +
+        '</div></div>' +
+        '<ul>' +
         '<li>If oral intubation is not appropriate, or if the predefined attempt limit is reached, move directly to surgical cricothyroidotomy rather than repeating low-probability attempts.</li>' +
         '<li>After tube placement, confirm with direct visualization if possible, chest rise, auscultation, and end-tidal CO<sub>2</sub>. Then move immediately to post-intubation ventilation and sedation management.</li>' +
         '</ul>' +
+
+        '<div class="must-not-miss">' +
+        '<div class="must-not-miss-title"><span class="critical-icon amber">⚠</span> Must-Not-Miss Assessment Points</div>' +
+        '<ul>' +
+        '<li>GCS ≤8 requires immediate airway decision</li>' +
+        '<li>Signs of impending airway loss: stridor, drooling, respiratory distress, declining SpO2</li>' +
+        '<li>Failed first attempt = immediate escalation, not retry</li>' +
+        '<li>Post-intubation hypotension requires immediate treatment</li>' +
+        '</ul>' +
+        '</div>' +
 
         '<h4>Decision Branches</h4>' +
         '<p>The airway plan must include a declared rescue step before the first attempt. If oral intubation is not appropriate or the predefined attempt limit is reached, move directly to surgical cricothyroidotomy. After tube placement, transition to post-intubation ventilation and sedation management.</p>' +

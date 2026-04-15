@@ -825,6 +825,296 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   a{color:#000;text-decoration:none}
   .breadcrumbs,.section-subtitle{display:none}
 }
+
+/* ---------- Quick Reference / Favorites System ---------- */
+.quick-ref-section{
+  background:linear-gradient(135deg,var(--bg-card),var(--bg-surface));
+  border:2px solid var(--accent);
+  border-radius:var(--radius-lg);
+  padding:clamp(16px,3vw,24px);
+  margin-bottom:32px;
+  position:relative;
+  overflow:hidden;
+}
+.quick-ref-section::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-hover));
+}
+.quick-ref-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+.quick-ref-title{
+  font-size:1.3rem;
+  font-weight:800;
+  color:var(--text-primary);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.quick-ref-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--accent);
+  color:#fff;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:0.75rem;
+  font-weight:700;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+}
+.quick-ref-empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--text-muted);
+}
+.quick-ref-empty-icon{
+  font-size:48px;
+  margin-bottom:12px;
+  opacity:0.5;
+}
+.quick-ref-empty-title{
+  font-size:1.1rem;
+  font-weight:600;
+  margin-bottom:8px;
+  color:var(--text-secondary);
+}
+.quick-ref-empty-desc{
+  font-size:0.9rem;
+  max-width:50ch;
+  margin:0 auto 16px;
+  line-height:1.6;
+}
+.fav-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:14px;
+}
+.fav-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:16px;
+  position:relative;
+  transition:all 0.2s ease;
+  display:block;
+  text-decoration:none;
+  color:inherit;
+}
+.fav-card:hover{
+  border-color:var(--accent);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+  text-decoration:none;
+}
+.fav-card-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+.fav-card-icon{
+  font-size:24px;
+  line-height:1;
+}
+.fav-card-remove{
+  background:none;
+  border:none;
+  color:var(--text-muted);
+  font-size:18px;
+  line-height:1;
+  padding:4px;
+  cursor:pointer;
+  border-radius:4px;
+  transition:all 0.2s ease;
+  opacity:0.6;
+}
+.fav-card-remove:hover{
+  background:var(--severity-red-bg);
+  color:var(--severity-red);
+  opacity:1;
+}
+.fav-card-type{
+  font-size:0.7rem;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--text-muted);
+  font-weight:600;
+  margin-bottom:4px;
+}
+.fav-card-title{
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text-primary);
+  margin-bottom:6px;
+}
+.fav-card-path{
+  font-size:0.8rem;
+  color:var(--text-secondary);
+}
+.fav-btn{
+  background:none;
+  border:none;
+  color:var(--text-muted);
+  font-size:20px;
+  padding:6px 8px;
+  cursor:pointer;
+  border-radius:6px;
+  transition:all 0.2s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  line-height:1;
+}
+.fav-btn:hover{
+  background:var(--bg-tertiary);
+  color:var(--text-primary);
+}
+.fav-btn.active{
+  color:var(--accent);
+}
+.fav-btn.active:hover{
+  background:var(--accent-dim);
+}
+
+/* ---------- Critical Information Visual System ---------- */
+.warning-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--severity-red);
+  color:#fff;
+  padding:4px 10px;
+  border-radius:6px;
+  font-size:0.75rem;
+  font-weight:700;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  margin-right:8px;
+  vertical-align:middle;
+}
+.warning-badge.amber{
+  background:var(--severity-amber);
+  color:#000;
+}
+.warning-badge.green{
+  background:var(--severity-green);
+  color:#fff;
+}
+.critical-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:var(--severity-red);
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  margin-right:8px;
+  flex-shrink:0;
+}
+.critical-icon.amber{
+  background:var(--severity-amber);
+  color:#000;
+}
+.critical-callout{
+  border-left:4px solid var(--severity-red);
+  background:var(--severity-red-bg);
+  border-radius:var(--radius);
+  padding:14px 18px;
+  margin:16px 0;
+  position:relative;
+}
+.critical-callout.amber{
+  border-left-color:var(--severity-amber);
+  background:var(--severity-amber-bg);
+}
+.critical-callout.high-priority{
+  border-width:4px;
+  border-style:solid;
+  border-color:var(--severity-red);
+  box-shadow:0 0 0 4px var(--severity-red-bg);
+}
+.critical-callout-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:1rem;
+  margin-bottom:8px;
+  color:var(--text-primary);
+}
+.critical-callout-body{
+  color:var(--text-primary);
+  line-height:1.6;
+}
+.critical-callout-body ul{
+  margin:8px 0 0 20px;
+}
+.critical-callout-body li{
+  margin-bottom:6px;
+}
+.time-sensitive-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  background:var(--severity-red-bg);
+  border:1px solid var(--severity-red);
+  color:var(--severity-red);
+  padding:3px 8px;
+  border-radius:4px;
+  font-size:0.75rem;
+  font-weight:600;
+  letter-spacing:0.3px;
+  text-transform:uppercase;
+}
+.contraindication-box{
+  background:var(--severity-red-bg);
+  border:2px solid var(--severity-red);
+  border-radius:var(--radius-lg);
+  padding:16px 20px;
+  margin:16px 0;
+}
+.contraindication-box-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  font-size:1.05rem;
+  margin-bottom:10px;
+  color:var(--severity-red);
+}
+.must-not-miss{
+  background:var(--severity-amber-bg);
+  border-left:4px solid var(--severity-amber);
+  padding:12px 16px;
+  margin:12px 0;
+  border-radius:var(--radius);
+}
+.must-not-miss-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  margin-bottom:6px;
+  color:var(--severity-amber);
+}
+
 /* ---------- Reference Library ---------- */
 .lib-filter{margin:12px 0 18px}
 .lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:10px 0 22px}
@@ -1430,7 +1720,7 @@ const SEARCH_SYNONYMS={rsi:['airway','intubation'],intubation:['rsi','airway'],s
 const QUIZ_BANK={algorithms:[{q:'In shock management, what matters most first?',options:['Trend perfusion and treat cause rapidly','Wait for complete labs before intervention','Prioritize transport paperwork'],answer:0},{q:'For sepsis onboard, the highest-yield early action is:',options:['Early antibiotics with source-focused reassessment','Delay antibiotics until culture results return','Use vasopressors before fluid assessment'],answer:0},{q:'When burn airway edema is expected to worsen, best approach is:',options:['Plan early definitive airway before failure','Wait for overt obstruction signs','Use repeated sedatives to calm breathing'],answer:0}],procedures:[{q:'If IV access fails in unstable patient, next best access is:',options:['IO access','Delay meds and retry later','Oral medications only'],answer:0},{q:'Chest decompression is indicated when:',options:['Tension physiology with respiratory/hemodynamic compromise','Any chest pain after trauma','Only when imaging confirms pneumothorax'],answer:0},{q:'During RSI, the most important team behavior is:',options:['Clear role assignment and closed-loop communication','Silent workflow with independent actions','Skip pre-brief to save time'],answer:0}],medications:[{q:'Onboard medication safety should emphasize:',options:['Dose, contraindications, and monitoring trends','Name memorization only','Mixing meds quickly without checks'],answer:0},{q:'A useful medication cognitive aid is:',options:['Standardized prep and reassessment checklist','Ad hoc undocumented dosing','Single-provider memory only'],answer:0},{q:'When sedating prolonged-hold patients, watch for:',options:['Accumulation and delayed respiratory compromise','Only immediate blood pressure changes','No change if doses are small'],answer:0}]};
 function initBackToTop(){const btn=document.getElementById('backToTop');const main=document.getElementById('appMain');if(!btn||!main)return;main.addEventListener('scroll',()=>{btn.classList.toggle('visible',main.scrollTop>300);},{ passive:true });btn.addEventListener('click',()=>main.scrollTo({top:0,behavior:'smooth'}));}
 function init(){enrichAllMetadata();if(!state.darkMode)document.body.classList.add('light-mode');document.documentElement.style.setProperty('--font-scale',state.fontScale);buildSidebar();buildSearchIndex();window.addEventListener('hashchange',handleRoute);window.addEventListener('resize',()=>{if(!isMobileViewport())document.body.classList.remove('mobile-search-open');});handleRoute();initBackToTop();if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}}
-const state={currentRoute:'',bookmarks:(()=>{try{return JSON.parse(localStorage.getItem('actt-bookmarks')||'[]');}catch(e){return[];}})(),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:(v=>{const n=parseFloat(v);return isNaN(n)?1:Math.max(0.8,Math.min(1.4,n));})(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null,searchFilter:localStorage.getItem('actt-search-filter')||'all',learnerProgress:(()=>{try{return JSON.parse(localStorage.getItem('actt-learner-progress')||'{"visited":{},"quiz":{}}');}catch(e){return{visited:{},quiz:{}};}})()};
+const state={currentRoute:'',bookmarks:(()=>{try{return JSON.parse(localStorage.getItem('actt-bookmarks')||'[]');}catch(e){return[];}})(),favorites:(()=>{try{return JSON.parse(localStorage.getItem('actt-favorites')||'[]');}catch(e){return[];}})(),darkMode:localStorage.getItem('actt-darkmode')!=='light',fontScale:(v=>{const n=parseFloat(v);return isNaN(n)?1:Math.max(0.8,Math.min(1.4,n));})(localStorage.getItem('actt-fontscale')||'1'),sidebarOpen:false,searchIndex:[],timers:[],timerIntervals:{},lastFocusedElement:null,searchFilter:localStorage.getItem('actt-search-filter')||'all',learnerProgress:(()=>{try{return JSON.parse(localStorage.getItem('actt-learner-progress')||'{"visited":{},"quiz":{}}');}catch(e){return{visited:{},quiz:{}};}})()};
 function getNavSections(){return[
 {id:'home',title:'Home Overview',icon:'&#8962;',path:'#/',group:'primary'},
 {id:'algorithms',title:'Algorithms',icon:'&#9881;',path:'#/algorithms',group:'primary',items:ACTT.algorithms?ACTT.algorithms.sections.map(s=>({id:s.id,title:s.title,path:'#/algorithms/'+s.id})):[]},
@@ -1472,9 +1762,9 @@ function renderMetadataBanner(meta){if(!meta)return'';return '<div class="metada
 function setSearchFilter(filter){state.searchFilter=filter||'all';localStorage.setItem('actt-search-filter',state.searchFilter);const input=document.getElementById('searchInput');if(input&&input.value.trim().length>=2)handleSearch(input.value);}
 function expandTerms(query){const terms=query.toLowerCase().split(/\s+/).filter(t=>t.length>1);const expanded=new Set(terms);terms.forEach(t=>(SEARCH_SYNONYMS[t]||[]).forEach(s=>expanded.add(s)));return [...expanded];}
 function announceSearchResults(message){const status=document.getElementById('searchStatus');if(status)status.textContent=message;}
-function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;case'library':renderLibrary(main,sub);break;case'scenarios':renderScenariosList(main);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}setTimeout(()=>{enhanceProcedureSteps();embedClinicalTools();},100);}
+function handleRoute(){const hash=window.location.hash||'#/';state.currentRoute=hash;updateActiveNav();updateBookmarkBtn();updateFavoriteBtn();if(window.innerWidth<=768)closeSidebar();const filterEl=document.getElementById('searchFilter');if(filterEl)filterEl.value=state.searchFilter;const main=document.getElementById('appMain');main.scrollTop=0;const parts=hash.replace('#/','').split('/').filter(Boolean);const section=parts[0]||'home';const sub=parts[1]||'';try{switch(section){case'':case'home':renderHome(main);break;case'domains':renderSection(main,ACTT.domains,sub,'Clinical Domains','#/domains');break;case'algorithms':renderSection(main,ACTT.algorithms,sub,'Algorithms','#/algorithms');break;case'procedures':renderSection(main,ACTT.procedures,sub,'Procedures','#/procedures');break;case'medications':renderSection(main,ACTT.medications,sub,'Medication Reference','#/medications');break;case'sickbay':renderSection(main,ACTT.sickbay,sub,'Sick Bay','#/sickbay');break;case'sickbay-meds':renderSection(main,ACTT.sickbayMeds,sub,'Sick Bay Medication Library','#/sickbay-meds');break;case'prolonged-holding':renderSection(main,ACTT.prolongedHolding,sub,'Prolonged Holding','#/prolonged-holding');break;case'thresholds':renderSection(main,ACTT.thresholds,sub,'Critical Numbers','#/thresholds');break;case'pitfalls':renderSection(main,ACTT.pitfalls,sub,'Pitfalls & Errors','#/pitfalls');break;case'shipboard':renderSection(main,ACTT.shipboard,sub,'Shipboard Application','#/shipboard');break;case'team':renderSection(main,ACTT.team,sub,'Team & Communication','#/team');break;case'casualty-clearing-team':renderSection(main,ACTT.casualtyClearingTeam,sub,'Casualty Clearing Team','#/casualty-clearing-team');break;case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;case'tools':renderTools(main,sub);break;case'checklists':renderChecklists(main,sub);break;case'quiz':renderQuiz(main,sub);break;case'library':renderLibrary(main,sub);break;case'scenarios':renderScenariosList(main);break;default:renderHome(main);}}catch(e){main.innerHTML=`<div class="severity-card red"><div class="sc-title">Error loading content</div><p>${e.message}</p></div>`;console.error(e);}setTimeout(()=>{enhanceProcedureSteps();embedClinicalTools();},100);}
 function renderBreadcrumbs(crumbs){return`<div class="breadcrumbs">${crumbs.map((c,i)=>{if(i===crumbs.length-1)return`<span class="bc-current">${c.title}</span>`;return`<a href="${c.path}">${c.title}</a><span class="bc-sep">&#8250;</span>`;}).join('')}</div>`;}
-function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
+function renderSectionHeader(title,subtitle,crumbs){let html=crumbs?renderBreadcrumbs(crumbs):'';html+=`<div class="section-header"><div><div class="section-title">${title}</div>`;if(subtitle)html+=`<div class="section-subtitle">${subtitle}</div>`;html+=`</div><div class="section-actions"><button class="fav-btn" id="favoriteBtn" onclick="toggleFavorite()" aria-label="Add to Quick Reference">&#9734;</button><button class="btn btn-outline btn-sm" onclick="toggleBookmark()">&#9734; Bookmark</button><button class="btn btn-outline btn-sm" onclick="printSection()">&#128424; Print</button></div></div>`;return html;}
 function renderSectionNavActions(parentTitle,parentPath,data,sectionId){if(!parentPath)return'';const isHome=parentPath==='#/';const backLabel=isHome?'Back':'Back to '+parentTitle;const backPath=isHome?'#/':parentPath;let html=`<div class="section-nav-actions"><a class="btn btn-outline btn-sm" href="${backPath}">&#8592; ${backLabel}</a>`;if(!isHome)html+='<a class="btn btn-outline btn-sm" href="#/">&#8962; Home</a>';if(data&&data.sections&&sectionId){const idx=data.sections.findIndex(s=>s.id===sectionId);if(idx>0){const prev=data.sections[idx-1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${prev.id}">&#8592; ${prev.title}</a>`;}if(idx<data.sections.length-1){const next=data.sections[idx+1];html+=`<a class="btn btn-outline btn-sm" href="${parentPath}/${next.id}">${next.title} &#8594;</a>`;}}html+='</div>';return html;}
 function stripChapterLabel(text){if(!text)return'';return String(text).replace(/^\s*Chapter\s+\d+\s*[—-]\s*/i,'').trim();}
 function cleanHeadingNumbering(html){if(!html)return'';return String(html)
@@ -1563,6 +1853,46 @@ function renderHome(main){
       <div class="bridge-stat" role="listitem"><strong>${stats.scenarios}</strong><span>Scenarios</span></div>
     </div>
   </section>`;
+
+  // Quick Reference / Favorites Section
+  if(state.favorites&&state.favorites.length>0){
+    html+=`<section class="quick-ref-section" aria-labelledby="quickRefHeading">
+    <div class="quick-ref-header">
+      <h2 id="quickRefHeading" class="quick-ref-title">
+        <span>&#9889;</span>
+        Quick Reference
+        <span class="quick-ref-badge">${state.favorites.length} Pinned</span>
+      </h2>
+    </div>
+    <div class="fav-grid">`;
+    state.favorites.forEach(fav=>{
+      const info=fav.title?fav:getContentInfo(fav.path);
+      html+=`<a class="fav-card" href="${escapeHtml(fav.path)}">
+        <div class="fav-card-header">
+          <div class="fav-card-icon">${info.icon||fav.icon}</div>
+          <button class="fav-card-remove" onclick="event.preventDefault();event.stopPropagation();removeFavorite('${escapeHtml(fav.path)}')" aria-label="Remove from Quick Reference">&#10005;</button>
+        </div>
+        <div class="fav-card-type">${info.type||fav.type}</div>
+        <div class="fav-card-title">${escapeHtml(info.title||fav.title)}</div>
+      </a>`;
+    });
+    html+=`</div></section>`;
+  }else{
+    html+=`<section class="quick-ref-section" aria-labelledby="quickRefHeading">
+    <div class="quick-ref-header">
+      <h2 id="quickRefHeading" class="quick-ref-title">
+        <span>&#9889;</span>
+        Quick Reference
+        <span class="quick-ref-badge">Empty</span>
+      </h2>
+    </div>
+    <div class="quick-ref-empty">
+      <div class="quick-ref-empty-icon">&#9734;</div>
+      <div class="quick-ref-empty-title">No items pinned yet</div>
+      <p class="quick-ref-empty-desc">Pin your most-used algorithms, procedures, checklists, medications, and tools for instant access. Look for the star button (&#9734;) on any content page.</p>
+    </div>
+  </section>`;
+  }
 
   // Mission Critical Access
   html+=`<section class="home-section" aria-labelledby="mcHeading">
@@ -2109,6 +2439,60 @@ function toggleBookmark(){const route=state.currentRoute||'#/';const idx=state.b
 function updateBookmarkBtn(){const btn=document.getElementById('bookmarkBtn');const isB=state.bookmarks.includes(state.currentRoute);btn.innerHTML=isB?'&#9733;':'&#9734;';btn.classList.toggle('active',isB);}
 function updateBookmarksPanel(){const panel=document.getElementById('bookmarksPanel');if(!panel)return;if(state.bookmarks.length===0){panel.innerHTML='<div style="padding:8px 16px;font-size:0.85rem;color:var(--text-muted)">No bookmarks yet</div>';return;}panel.innerHTML=state.bookmarks.map(b=>{const title=b.replace('#/','').replace(/\//g,' > ')||'Home';return`<div class="bookmark-item" style="display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:0.85rem;color:var(--text-secondary);cursor:pointer" onclick="window.location.hash='${b.replace('#','')}'"><span>${title}</span><span style="color:var(--severity-red);font-size:12px;margin-left:auto;opacity:0.5;cursor:pointer" onclick="event.stopPropagation();removeBookmark('${b}')">&#10005;</span></div>`;}).join('');}
 function removeBookmark(route){state.bookmarks=state.bookmarks.filter(b=>b!==route);localStorage.setItem('actt-bookmarks',JSON.stringify(state.bookmarks));updateBookmarkBtn();updateBookmarksPanel();}
+
+// ===== Favorites / Quick Reference System =====
+function toggleFavorite(path,title,type,icon){
+  if(!path)path=state.currentRoute||'#/';
+  const idx=state.favorites.findIndex(f=>f.path===path);
+  if(idx>=0){
+    state.favorites.splice(idx,1);
+    showToast('Removed from Quick Reference','info');
+  }else{
+    state.favorites.push({path,title:title||'Item',type:type||'content',icon:icon||'&#128209;',added:Date.now()});
+    showToast('Added to Quick Reference!','success');
+  }
+  localStorage.setItem('actt-favorites',JSON.stringify(state.favorites));
+  updateFavoriteBtn();
+}
+function isFavorite(path){
+  if(!path)path=state.currentRoute||'#/';
+  return state.favorites.some(f=>f.path===path);
+}
+function updateFavoriteBtn(){
+  const btn=document.getElementById('favoriteBtn');
+  if(!btn)return;
+  const isFav=isFavorite(state.currentRoute);
+  btn.innerHTML=isFav?'&#9733;':'&#9734;';
+  btn.classList.toggle('active',isFav);
+  btn.setAttribute('aria-label',isFav?'Remove from Quick Reference':'Add to Quick Reference');
+}
+function removeFavorite(path){
+  state.favorites=state.favorites.filter(f=>f.path!==path);
+  localStorage.setItem('actt-favorites',JSON.stringify(state.favorites));
+  updateFavoriteBtn();
+  if(state.currentRoute==='#/')handleRoute();
+}
+function getContentInfo(path){
+  const typeIconMap={'algorithms':'&#9881;','procedures':'&#9874;','checklists':'&#128221;','medications':'&#128138;','thresholds':'&#128200;','prolonged-holding':'&#9201;','sickbay':'&#129658;','domains':'&#9883;','shipboard':'&#9875;','team':'&#128101;','pitfalls':'&#9888;','tools':'&#128295;'};
+  const typeLabelMap={'algorithms':'Algorithm','procedures':'Procedure','checklists':'Checklist','medications':'Medication','thresholds':'Critical Number','prolonged-holding':'Prolonged Care','sickbay':'Sick Bay','domains':'Domain','shipboard':'Shipboard','team':'Team','pitfalls':'Pitfall','tools':'Tool'};
+  if(!path||path==='#/')return{type:'home',icon:'&#8962;',title:'Home'};
+  const parts=path.replace('#/','').split('/');
+  const section=parts[0];
+  const sub=parts[1];
+  let title='Unknown';
+  let type=typeLabelMap[section]||'Content';
+  let icon=typeIconMap[section]||'&#128209;';
+  const moduleMap={'algorithms':ACTT.algorithms,'procedures':ACTT.procedures,'medications':ACTT.medications,'sickbay':ACTT.sickbay,'domains':ACTT.domains,'thresholds':ACTT.thresholds,'pitfalls':ACTT.pitfalls,'prolonged-holding':ACTT.prolongedHolding,'shipboard':ACTT.shipboard,'team':ACTT.team,'checklists':ACTT.checklists};
+  const mod=moduleMap[section];
+  if(mod&&mod.sections&&sub){
+    const sec=mod.sections.find(s=>s.id===sub);
+    if(sec)title=sec.title||title;
+  }else if(mod&&mod.title){
+    title=mod.title;
+  }
+  return{type,icon,title};
+}
+
 window.addEventListener('resize',()=>{if(window.innerWidth>768&&state.sidebarOpen)toggleSidebar(false);});
 function getSidebarFocusableElements(){return Array.from(document.querySelectorAll('#appSidebar a[href], #appSidebar button:not([disabled]), #appSidebar [tabindex]:not([tabindex="-1"]), #appSidebar input:not([disabled]), #appSidebar select:not([disabled]), #appSidebar textarea:not([disabled])')).filter(el=>el.offsetParent!==null);}
 function setSidebarOpen(isOpen){state.sidebarOpen=isOpen;const sidebar=document.getElementById('appSidebar');const overlay=document.getElementById('sidebarOverlay');const menuToggle=document.querySelector('.menu-toggle');sidebar.classList.toggle('open',isOpen);overlay.classList.toggle('active',isOpen);document.body.classList.toggle('sidebar-open',isOpen);sidebar.setAttribute('aria-hidden',isOpen?'false':'true');if(menuToggle)menuToggle.setAttribute('aria-expanded',isOpen?'true':'false');if(isOpen){state.lastFocusedElement=document.activeElement;const first=getSidebarFocusableElements()[0];if(first)first.focus();}else if(state.lastFocusedElement&&typeof state.lastFocusedElement.focus==='function'){state.lastFocusedElement.focus();state.lastFocusedElement=null;}}

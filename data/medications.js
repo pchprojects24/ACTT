@@ -100,6 +100,15 @@ window.ACTT.medications={
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Midazolam Administration Warning</div>'+
         '<p>Slow IV push is essential. Fast IV push can cause apnea, hypotension, and loss of airway control. When combining with opioids, reduce the midazolam dose because respiratory depression is synergistic and can be severe. Always have airway equipment immediately available.</p></div>'+
 
+        '<div class="contraindication-box">'+
+        '<div class="contraindication-box-title"><span class="critical-icon">!</span> Absolute Contraindications</div>'+
+        '<ul>'+
+        '<li>Known hypersensitivity to benzodiazepines</li>'+
+        '<li>Acute narrow-angle glaucoma (unless emergent seizure control)</li>'+
+        '<li>Concurrent use with sodium oxybate</li>'+
+        '</ul>'+
+        '</div>'+
+
         '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, EtCO2, blood pressure, and level of consciousness. Continue monitoring for at least 30 minutes after the last dose.</p>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Error: Stacking</div>'+
