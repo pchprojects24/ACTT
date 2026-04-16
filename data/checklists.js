@@ -201,6 +201,11 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Syringe for cuff inflation and tube securing device/tape present',
         'Capnography/ETCO\u2082 device present and functional',
         'Rescue supraglottic airway devices and surgical airway kit available per policy'
+      ],
+      sources:[
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf'},
+        {title:'Med Tech Airway.pdf',file:'Med Tech Airway.pdf'},
+        {title:'airway handout.pdf',file:'airway handout.pdf'}
       ]
     },
     {
@@ -322,6 +327,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'After convulsions stop: repeat neuro exam (GCS/pupils), consider non-convulsive status if not waking, maintain lateral positioning',
         'Document seizure duration, all doses/times, response, and neurologic trend',
         'Evacuation/teleconsultation arranged; maintenance antiepileptic plan and monitoring assigned'
+      ],
+      sources:[
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
       ]
     },
     {
@@ -369,6 +377,10 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Bleeding source identified; urgent procedural/surgical escalation arranged as needed',
         'Contributing medications reviewed (e.g., anticoagulants)',
         'Products, timings, response, and transfer/evacuation plan documented'
+      ],
+      sources:[
+        {title:'VCH Major Burn - Initial 24 hr Fluid Resuscitation Orders.pdf',file:'VCH Major Burn - Initial 24 hr Fluid Resuscitation Orders.pdf'},
+        {title:'Burn Fluid Resus Flowsheet.pdf',file:'Burn Fluid Resus Flowsheet.pdf'}
       ]
     },
     {
