@@ -1,4 +1,4 @@
-const CACHE_NAME = 'actt-reference-v8';
+const CACHE_NAME = 'actt-reference-v9';
 const ASSETS = [
   './',
   './index.html',
@@ -30,6 +30,7 @@ const ASSETS = [
   './data/team.js',
   './data/casualty-clearing-team.js',
   './data/study.js',
+  './data/pathways.js',
   './data/appendices.js',
   './data/tools.js',
   './data/cross-links.js',
