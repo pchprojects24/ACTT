@@ -58,6 +58,11 @@ window.ACTT.medications={
         '<p><strong>Clinical Role:</strong> Analgesia (sub-dissociative), procedural sedation (dissociative), induction agent for RSI, continuous sedation for intubated or non-intubated patients.</p>'+
         '<p><strong>Indications:</strong> Severe pain, painful bedside procedures, combative patient requiring chemical restraint, induction for airway control.</p>'+
 
+        '<div class="contraindication-box">'+
+        '<div class="contraindication-box-title"><span class="critical-icon">!</span> Contraindications</div>'+
+        '<p><strong>Relative contraindications:</strong> Severe uncontrolled hypertension, acute coronary syndrome, increased intracranial pressure (ICP) concern has been re-evaluated; ketamine may be used with caution in TBI when benefits outweigh risks), known hypersensitivity to ketamine.</p>'+
+        '</div>'+
+
         '<h4>Adult Dosing</h4>'+
         '<div class="table-wrapper"><table><thead><tr><th>Indication</th><th>Dose</th><th>Route</th><th>Notes</th></tr></thead><tbody>'+
         '<tr><td>Pain (sub-dissociative)</td><td>0.1&ndash;0.2 mg/kg</td><td>IV/IO slow push</td><td>Usually 10&ndash;20 mg per dose. Repeat every 10&ndash;30 minutes as needed.</td></tr>'+
@@ -67,9 +72,22 @@ window.ACTT.medications={
         '<tr><td>Continuous sedation (post-intubation)</td><td>1&ndash;2 mg/kg/hr</td><td>IV infusion</td><td>Titrate to sedation depth target. Pair with ongoing monitoring of SpO2, EtCO2, BP.</td></tr>'+
         '</tbody></table></div>'+
 
-        '<p><strong>Preparation:</strong> Draw dose carefully and label the syringe. Administer by slow push. Rapid IV push increases the risk of apnea and laryngospasm.</p>'+
+        '<p><strong>Reconstitution:</strong> Ketamine is typically supplied as a ready-to-use solution. Common concentrations: 10 mg/mL, 50 mg/mL, or 100 mg/mL. Verify concentration before drawing dose. No reconstitution required for standard vials.</p>'+
+        '<p><strong>Preparation:</strong> Draw dose carefully based on verified concentration and label the syringe with drug name, concentration, and time prepared. For continuous infusion: dilute in normal saline or D5W to desired concentration (typical: 1&ndash;2 mg/mL). Administer IV bolus by slow push over 60 seconds. Rapid IV push increases the risk of apnea and laryngospasm.</p>'+
+        '<p><strong>Stability:</strong> Once drawn into a syringe, ketamine is stable at room temperature for 24 hours when protected from light. Ketamine infusions diluted in standard IV fluids are stable for 24 hours at room temperature or 7 days refrigerated.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, and lactated Ringer\'s. Do not mix with barbiturates or diazepam in the same syringe (precipitation may occur). May be administered through the same IV line as most common emergency medications if the line is flushed between drugs.</p>'+
+        '<p><strong>Administration Rate:</strong> IV bolus doses should be given over 60 seconds minimum to reduce the risk of respiratory depression and laryngospasm. IM injections should be given deep into large muscle mass. Continuous infusions should be administered via infusion pump with clearly labeled concentration.</p>'+
 
         '<p><strong>Monitoring:</strong> Continuous SpO2, cardiac monitoring, blood pressure, EtCO2 when available. Reassess mental status and respiratory effort every few minutes during and after administration.</p>'+
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Respiratory depression and apnea:</strong> especially with rapid administration or when combined with other sedatives.</li>'+
+        '<li><strong>Laryngospasm:</strong> rare but potentially fatal; have positive pressure ventilation and suction immediately available.</li>'+
+        '<li><strong>Hypersalivation:</strong> can compromise airway in sedated patients; suction must be ready.</li>'+
+        '<li><strong>Cardiovascular stimulation:</strong> ketamine increases heart rate and blood pressure via sympathetic stimulation; monitor closely in patients with cardiac disease.</li>'+
+        '<li><strong>Emergence reactions:</strong> dysphoria, hallucinations, and agitation can occur during recovery, particularly in adults.</li>'+
+        '</ul></div>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Ketamine Cautions</div>'+
         '<ul>'+
@@ -97,6 +115,12 @@ window.ACTT.medications={
         '<tr><td>Active seizure</td><td>5 mg</td><td>IV/IO/IM</td><td>Repeat every 5 minutes until seizure stops. Prepare for airway management if repeated doses needed.</td></tr>'+
         '</tbody></table></div>'+
 
+        '<p><strong>Reconstitution:</strong> Midazolam is supplied as a ready-to-use solution. Common concentrations: 1 mg/mL or 5 mg/mL. Verify vial concentration before drawing dose to prevent dosing errors. No reconstitution required.</p>'+
+        '<p><strong>Preparation:</strong> Draw calculated dose from vial and label syringe with drug name, concentration, dose, and time. For continuous infusion: dilute in normal saline or D5W to a concentration of 0.5&ndash;1 mg/mL. Use infusion pump for continuous administration.</p>'+
+        '<p><strong>Stability:</strong> Midazolam is stable at room temperature for 24 hours once drawn into a syringe. Infusion solutions diluted in compatible IV fluids are stable for 24 hours at room temperature.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, and lactated Ringer\'s solution. Compatible with most analgesics and anesthetics. Flush IV line between incompatible medications.</p>'+
+        '<p><strong>Administration Rate:</strong> Administer IV doses slowly over 2&ndash;3 minutes. Rapid IV push significantly increases risk of respiratory depression, apnea, and hypotension. IM administration should be deep into large muscle mass; onset is delayed (10&ndash;15 minutes) compared to IV route.</p>'+
+
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Midazolam Administration Warning</div>'+
         '<p>Slow IV push is essential. Fast IV push can cause apnea, hypotension, and loss of airway control. When combining with opioids, reduce the midazolam dose because respiratory depression is synergistic and can be severe. Always have airway equipment immediately available.</p></div>'+
 
@@ -111,6 +135,15 @@ window.ACTT.medications={
 
         '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, EtCO2, blood pressure, and level of consciousness. Continue monitoring for at least 30 minutes after the last dose.</p>'+
 
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Respiratory depression and apnea:</strong> dose-dependent, especially severe when combined with opioids or other CNS depressants.</li>'+
+        '<li><strong>Hypotension:</strong> particularly in hypovolemic or elderly patients; monitor blood pressure closely.</li>'+
+        '<li><strong>Paradoxical reactions:</strong> agitation, aggression, or hyperactivity may occur, particularly in elderly or pediatric patients.</li>'+
+        '<li><strong>Prolonged sedation:</strong> effect may be longer than expected in patients with hepatic impairment or reduced clearance.</li>'+
+        '<li><strong>Synergistic CNS depression:</strong> combined use with opioids dramatically increases respiratory depression risk.</li>'+
+        '</ul></div>'+
+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Error: Stacking</div>'+
         '<p>The most common midazolam error is stacking doses before allowing sufficient time for the previous dose to take effect. IV onset takes several minutes. IM onset is slower still. Impatient redosing leads to sudden deep sedation and airway compromise.</p></div>'+
         '</div>'+
@@ -120,16 +153,60 @@ window.ACTT.medications={
 
         '<h4>Hydromorphone</h4>'+
         '<p><strong>Clinical Role:</strong> Preferred prolonged-care opioid in ACTT. Longer duration of action than fentanyl and less histamine release than morphine make it a practical choice for sustained analgesia during delayed evacuation.</p>'+
+        '<p><strong>Indications:</strong> Moderate to severe pain, particularly in prolonged care scenarios.</p>'+
         '<p><strong>Dosing:</strong> 0.5&ndash;1 mg IV slowly. Titrate to effect. Allow adequate time between doses to assess response.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 1 mg/mL, 2 mg/mL, or 4 mg/mL. Verify concentration before use.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw calculated dose and label syringe. Administer by slow IV push over 2&ndash;3 minutes. For continuous infusion: dilute in normal saline or D5W (typical concentration 0.1&ndash;1 mg/mL).</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature for 24 hours once drawn. Diluted infusions stable for 24 hours at room temperature or 7 days refrigerated.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, and lactated Ringer\'s. Do not mix with alkaline solutions or barbiturates.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 5&ndash;15 minutes, peak effect 15&ndash;30 minutes, duration 3&ndash;4 hours.</p>'+
+        '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, sedation level, pain score, blood pressure. Assess for nausea and pruritus.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Respiratory depression:</strong> dose-dependent; risk increases with rapid administration and combined use with benzodiazepines.</li>'+
+        '<li><strong>Hypotension:</strong> may occur, especially in hypovolemic patients.</li>'+
+        '<li><strong>Nausea and vomiting:</strong> common; have antiemetic available.</li>'+
+        '<li><strong>Pruritus:</strong> histamine-mediated itching; less common than with morphine.</li>'+
+        '</ul></div>'+
 
         '<h4>Fentanyl</h4>'+
         '<p><strong>Clinical Role:</strong> Fast onset, short duration opioid. Useful when rapid pain control is needed and the clinician wants the effect to dissipate quickly for reassessment.</p>'+
+        '<p><strong>Indications:</strong> Acute severe pain requiring rapid onset analgesia, procedural analgesia.</p>'+
         '<p><strong>Dosing:</strong> 25&ndash;100 mcg IV/IO slowly. Titrate carefully.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution, typically 50 mcg/mL. Verify concentration on vial.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw dose carefully using tuberculin or 1 mL syringe for accuracy. Label with drug, dose, concentration, and time. Administer by slow IV push over 1&ndash;2 minutes minimum to prevent chest wall rigidity.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature for 24 hours once drawn. Protect from light during storage.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Compatible with most common IV medications when flushed appropriately.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 1&ndash;2 minutes, peak effect 3&ndash;5 minutes, duration 30&ndash;60 minutes.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous monitoring during and after administration. Watch respiratory rate, SpO2, chest wall movement, blood pressure, and sedation level.</p>'+
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Fentanyl Rapid Push Risk</div>'+
         '<p>Rapid IV push of fentanyl can cause chest wall rigidity (wooden chest syndrome), making ventilation impossible until the rigidity resolves or is treated. Always administer slowly.</p></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Chest wall rigidity:</strong> potentially life-threatening complication of rapid administration; requires immediate airway management.</li>'+
+        '<li><strong>Severe respiratory depression:</strong> rapid onset; have reversal agent (naloxone) immediately available.</li>'+
+        '<li><strong>Bradycardia:</strong> especially with large or rapid doses.</li>'+
+        '<li><strong>Hypotension:</strong> particularly in hypovolemic patients.</li>'+
+        '<li><strong>Short duration:</strong> pain may return before next planned dose; plan reassessment timing.</li>'+
+        '</ul></div>'+
 
         '<h4>Morphine</h4>'+
         '<p><strong>Clinical Role:</strong> Less favored in ACTT due to higher risk of hypotension, nausea, and pruritus compared to alternatives. Use in small IV doses slowly when other opioids are unavailable.</p>'+
+        '<p><strong>Indications:</strong> Moderate to severe pain when other opioids unavailable.</p>'+
+        '<p><strong>Dosing:</strong> 2&ndash;5 mg IV slowly every 5&ndash;15 minutes. Titrate to effect.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 1 mg/mL, 2 mg/mL, 4 mg/mL, or 10 mg/mL. Verify concentration before drawing dose.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw dose and label syringe. Administer by slow IV push over 3&ndash;5 minutes. Dilute in normal saline or D5W for continuous infusion.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature for 24 hours once drawn. Infusion solutions stable for 24 hours at room temperature.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Do not mix with alkaline solutions, barbiturates, or phenytoin.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 5&ndash;10 minutes, peak 20 minutes, duration 3&ndash;5 hours.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Histamine release:</strong> causes hypotension, flushing, pruritus; more pronounced than other opioids.</li>'+
+        '<li><strong>Respiratory depression:</strong> especially when combined with other sedatives.</li>'+
+        '<li><strong>Nausea and vomiting:</strong> common; prophylactic antiemetic often needed.</li>'+
+        '<li><strong>Severe pruritus:</strong> can be distressing; may require diphenhydramine.</li>'+
+        '<li><strong>Hypotension:</strong> particularly problematic in hypovolemic or shocked patients.</li>'+
+        '</ul></div>'+
 
         '<h4>Acetaminophen</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Acetaminophen</div>'+
@@ -162,8 +239,14 @@ window.ACTT.medications={
 
         '<h4>Succinylcholine</h4>'+
         '<p><strong>Clinical Role:</strong> Depolarizing neuromuscular blocker with rapid onset and short duration. Provides a brief paralysis window for intubation.</p>'+
+        '<p><strong>Indications:</strong> Neuromuscular blockade for rapid sequence intubation.</p>'+
         '<p><strong>Dosing:</strong> 1&ndash;1.5 mg/kg IV/IO.</p>'+
         '<p><strong>Onset:</strong> 30&ndash;60 seconds. <strong>Duration:</strong> 5&ndash;10 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Usually supplied as ready-to-use solution (20 mg/mL or 50 mg/mL). Some formulations require reconstitution with sterile water; follow package instructions. Verify concentration.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw calculated weight-based dose. Label syringe with drug name, dose, and time. Administer as rapid IV push. Flush line immediately after administration. Must be given after induction agent.</p>'+
+        '<p><strong>Stability:</strong> Refrigeration required for most formulations. Once at room temperature, use within manufacturer guidelines (typically 24 hours). Reconstituted solutions stable 24 hours refrigerated. Do not use if solution is discolored.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with alkaline solutions (thiopental, sodium bicarbonate). Flush line before and after administration if other medications were recently given.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous SpO2, EtCO2, cardiac monitoring. Watch for fasciculations (normal, brief muscle twitching before paralysis), confirm complete paralysis before intubation attempt, monitor for return of muscle tone.</p>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Succinylcholine Contraindications</div>'+
         '<ul>'+
         '<li>Hyperkalemia or suspected hyperkalemia.</li>'+
@@ -172,11 +255,25 @@ window.ACTT.medications={
         '<li>Known neuromuscular disease or denervation injury.</li>'+
         '<li>If any of these apply, use rocuronium instead.</li>'+
         '</ul></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Hyperkalemia:</strong> can cause life-threatening cardiac dysrhythmias or arrest in susceptible patients.</li>'+
+        '<li><strong>Malignant hyperthermia:</strong> rare genetic disorder triggered by succinylcholine; presents with hyperthermia, muscle rigidity, tachycardia, acidosis.</li>'+
+        '<li><strong>Masseter spasm:</strong> jaw muscle rigidity that can interfere with intubation.</li>'+
+        '<li><strong>Bradycardia:</strong> especially with repeat dosing or in pediatric patients.</li>'+
+        '<li><strong>Increased intraocular and intragastric pressure:</strong> theoretical concerns rarely clinically significant.</li>'+
+        '</ul></div>'+
 
         '<h4>Rocuronium</h4>'+
         '<p><strong>Clinical Role:</strong> Non-depolarizing neuromuscular blocker. Slower onset than succinylcholine but longer duration and fewer hyperkalemic concerns.</p>'+
+        '<p><strong>Indications:</strong> Neuromuscular blockade for RSI, especially when succinylcholine is contraindicated.</p>'+
         '<p><strong>Dosing:</strong> 1&ndash;1.2 mg/kg IV/IO for RSI.</p>'+
         '<p><strong>Onset:</strong> 60&ndash;90 seconds. <strong>Duration:</strong> 30&ndash;60 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution, typically 10 mg/mL. No reconstitution required. Verify concentration before drawing dose.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw weight-based dose. Label syringe clearly. Administer as rapid IV push after induction agent. Flush line after administration.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. Once drawn, use within 24 hours. Do not use if solution contains particulate matter or is discolored.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Do not mix with alkaline solutions. May precipitate if mixed with certain antibiotics in same syringe.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous SpO2, EtCO2, cardiac monitoring. Confirm adequate paralysis before intubation. Monitor for prolonged paralysis duration.</p>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Rocuronium Tradeoff</div>'+
         '<p>The tradeoff with rocuronium is that if the airway attempt fails, the patient will remain paralyzed much longer than with succinylcholine. A failed airway with rocuronium means a prolonged cannot-oxygenate situation unless a rescue airway is ready. The rescue plan must be established before rocuronium is given.</p></div>'+
         '</div>'+
@@ -220,6 +317,7 @@ window.ACTT.medications={
         '<p>Norepinephrine is the first-line vasopressor for persistent hypotension after fluid resuscitation, particularly in septic and vasodilatory shock. Do not delay initiation while waiting for a central line if the patient remains hypotensive after adequate volume resuscitation.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Alpha-1 and beta-1 adrenergic agonist. Increases vascular tone and blood pressure. Primary vasopressor in ACTT for vasodilatory and septic shock.</p>'+
+        '<p><strong>Indications:</strong> Persistent hypotension after adequate fluid resuscitation, septic shock, vasodilatory shock, distributive shock.</p>'+
 
         '<h4>Dosing and Administration</h4>'+
         '<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Detail</th></tr></thead><tbody>'+
@@ -229,10 +327,25 @@ window.ACTT.medications={
         '<tr><td>Peripheral IV precautions</td><td>Check for blanching and swelling frequently. If extravasation occurs, stop the infusion immediately and treat.</td></tr>'+
         '</tbody></table></div>'+
 
+        '<p><strong>Reconstitution and Preparation:</strong> Standard norepinephrine ampules contain 4 mg in 4 mL (1 mg/mL). Common preparation: mix 4 mg (1 ampule) in 250 mL D5W or normal saline for a concentration of 16 mcg/mL. Alternatively, 8 mg in 250 mL yields 32 mcg/mL for higher concentration needs. Label bag clearly with drug name, concentration, and time prepared.</p>'+
+        '<p><strong>Stability:</strong> Once diluted, norepinephrine infusions are stable for 24 hours at room temperature when protected from light. Discard if solution is brown or contains precipitate.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with D5W, normal saline, and D5W in normal saline. Do not mix with alkaline solutions (sodium bicarbonate). Compatible with most vasopressors and sedatives in Y-site administration if lines are flushed appropriately.</p>'+
+        '<p><strong>Administration:</strong> Must be administered via infusion pump with clearly labeled concentration. Titrate to blood pressure response in increments of 1&ndash;2 mcg/min every 5&ndash;10 minutes. Typical effective range 2&ndash;20 mcg/min; doses above 30 mcg/min suggest inadequate resuscitation or other pathology.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous blood pressure monitoring (arterial line preferred for doses &gt;10 mcg/min), heart rate and rhythm, urine output, perfusion status (capillary refill, mentation, lactate), IV site for extravasation every 15&ndash;30 minutes.</p>'+
+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Extravasation</div>'+
         '<p>Extravasation of norepinephrine through a peripheral IV causes local tissue necrosis. Monitor the infusion site frequently. If blanching or swelling appears, stop the infusion and consider phentolamine injection at the site if available.</p></div>'+
 
         '<p><strong>Extravasation rescue:</strong> Phentolamine, if available, injected into the affected area.</p>'+
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Tissue necrosis from extravasation:</strong> potentially devastating complication requiring vigilant IV site monitoring.</li>'+
+        '<li><strong>Severe hypertension:</strong> excessive vasoconstriction can cause end-organ ischemia; titrate carefully.</li>'+
+        '<li><strong>Arrhythmias:</strong> tachycardia and ventricular dysrhythmias possible at high doses.</li>'+
+        '<li><strong>Decreased peripheral perfusion:</strong> excessive vasoconstriction can compromise limb perfusion.</li>'+
+        '<li><strong>Rebound hypotension:</strong> when weaning, taper gradually; abrupt discontinuation can cause severe hypotension.</li>'+
+        '</ul></div>'+
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Operational Burden<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>Norepinephrine creates a significant staffing task. It requires continuous blood pressure trending, line site monitoring, pump management, and ongoing patient response assessment. Before starting a pressor at sea, confirm that the monitoring burden can be sustained. A pressor plan that cannot be safely monitored is an incomplete plan.</p>'+
@@ -324,10 +437,21 @@ window.ACTT.medications={
         '<div class="drug-card">'+
         '<h4>6.9.2 Levetiracetam</h4>'+
         '<p><strong>Clinical Role:</strong> Seizure loading and prophylaxis, particularly in traumatic brain injury. Does not replace benzodiazepine rescue for active seizures but helps prevent seizure recurrence after initial control.</p>'+
+        '<p><strong>Indications:</strong> Seizure prophylaxis in TBI, status epilepticus (after benzodiazepine control), ongoing seizure prevention.</p>'+
 
         '<p><strong>Dosing:</strong> 2 g (2000 mg) IV/IO over approximately 15 minutes.</p>'+
-        '<p><strong>Administration:</strong> Ensure a patent IV/IO line before infusion. Infuse over 15 minutes to reduce infusion-related side effects.</p>'+
-
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution in vials or premixed bags. Common concentration: 100 mg/mL in 5 mL vials. Can be administered undiluted or diluted in compatible IV solution.</p>'+
+        '<p><strong>Preparation and Administration:</strong> For loading dose, dilute 2 g in 100 mL normal saline or D5W. Administer over 15 minutes via infusion pump. Slower infusion reduces risk of infusion-related adverse effects. Can be given undiluted via slow IV push if necessary, but infusion preferred.</p>'+
+        '<p><strong>Stability:</strong> Undiluted solution stable for 24 hours at room temperature. Diluted solutions stable for 24 hours at room temperature in polyvinyl chloride bags.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Compatible with most common IV medications. Do not mix with other drugs in same syringe or bag.</p>'+
+        '<p><strong>Monitoring:</strong> Blood pressure during infusion, mental status, seizure activity. Assess for somnolence, dizziness, or behavioral changes. No routine drug level monitoring required in acute setting.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Infusion site reactions:</strong> pain, erythema at IV site if infused too rapidly.</li>'+
+        '<li><strong>Somnolence and dizziness:</strong> common CNS effects; may compound altered mental status in TBI patients.</li>'+
+        '<li><strong>Behavioral changes:</strong> agitation, psychosis, or mood changes rarely occur.</li>'+
+        '<li><strong>Hypotension:</strong> rare but can occur with rapid infusion; monitor blood pressure.</li>'+
+        '</ul></div>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Levetiracetam Does Not Replace Benzo Rescue</div>'+
         '<p>Levetiracetam is a maintenance and prophylactic agent. It does not work fast enough to terminate an active seizure. If a seizure is ongoing, use midazolam first. Levetiracetam is the follow-through to prevent the next seizure.</p></div>'+
 
@@ -350,7 +474,13 @@ window.ACTT.medications={
         '<p>Hypertonic saline 3% is the primary osmotic therapy for elevated intracranial pressure and impending cerebral herniation. Give when neurologic deterioration occurs, when a pupil becomes fixed and dilated, or when clinical signs suggest rising ICP that is progressing toward herniation.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Reduces cerebral edema by osmotic gradient. Draws fluid out of the brain parenchyma into the intravascular space.</p>'+
+        '<p><strong>Indications:</strong> Elevated ICP with neurologic deterioration, impending herniation, acute TBI with pupillary changes or declining GCS.</p>'+
         '<p><strong>Dosing:</strong> 250 mL of 3% hypertonic saline IV over approximately 20 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as premixed ready-to-use solution in 250 mL or 500 mL bags. Concentration: 3% (30 mg/mL or 513 mEq sodium per liter). No mixing required. Verify concentration before administration.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Use bag as supplied. Administer via infusion pump or gravity infusion over 20 minutes. Can be given via peripheral or central line. Label line clearly during infusion. Flush line after administration.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. Use as supplied; do not add medications to hypertonic saline bags.</p>'+
+        '<p><strong>Compatibility:</strong> Do not mix with other medications in same bag or syringe. May be infused through same IV catheter as other medications if line is flushed between drugs.</p>'+
+        '<p><strong>Monitoring:</strong> Neurologic exam before and after administration (GCS, pupils, motor exam), serum sodium levels when possible, urine output, blood pressure. Document timing and response. Recheck neurologic status every 15&ndash;30 minutes after administration.</p>'+
         '<p><strong>Indication triggers:</strong></p>'+
         '<ul>'+
         '<li>Neurologic deterioration in a TBI patient.</li>'+
@@ -364,6 +494,14 @@ window.ACTT.medications={
         '<li>Document the neurologic exam before and after administration to assess response.</li>'+
         '<li>Hypertonic saline is a temporizing measure. It does not fix the underlying pathology.</li>'+
         '</ul></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Hypernatremia:</strong> rapid or excessive sodium elevation can cause osmotic demyelination syndrome; monitor sodium levels.</li>'+
+        '<li><strong>Phlebitis:</strong> hypertonic solution can irritate peripheral veins; monitor IV site.</li>'+
+        '<li><strong>Volume overload:</strong> in patients with heart failure or renal dysfunction, monitor for fluid overload.</li>'+
+        '<li><strong>Rebound ICP elevation:</strong> effect is temporary; definitive management required.</li>'+
+        '<li><strong>Hypokalemia:</strong> osmotic diuresis may lower potassium; monitor electrolytes.</li>'+
+        '</ul></div>'+
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Shipboard Availability<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>Hypertonic saline 3% is not confirmed in standard Sick Bay stock. If unavailable, mannitol may be an alternative if the patient is not hypotensive or volume-depleted. The absence of both osmotic agents is a hard limitation for ICP management at sea.</p>'+
@@ -373,7 +511,13 @@ window.ACTT.medications={
         '<div class="drug-card">'+
         '<h4>6.9.4 Mannitol</h4>'+
         '<p><strong>Clinical Role:</strong> Alternative osmotic agent for elevated ICP. Reduces intracranial pressure through osmotic diuresis.</p>'+
+        '<p><strong>Indications:</strong> Elevated ICP with neurologic deterioration when hypertonic saline unavailable and patient is hemodynamically stable with adequate intravascular volume.</p>'+
         '<p><strong>Dosing:</strong> 1 g/kg IV over approximately 20 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 20% (200 mg/mL) or 25% (250 mg/mL). Verify concentration. Mannitol may crystallize at low temperatures; if crystals present, warm bag in hot water bath until crystals dissolve before use.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Use in-line filter (5 micron) to prevent crystal administration. Calculate dose based on patient weight and mannitol concentration. Administer via infusion pump over 20 minutes. Central or large peripheral IV preferred.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. If crystallization occurs, redissolve by warming; do not use if crystals cannot be dissolved. Once opened, use promptly; do not store partially used vials.</p>'+
+        '<p><strong>Compatibility:</strong> Do not mix with other medications. Flush line before and after administration. Incompatible with blood products.</p>'+
+        '<p><strong>Monitoring:</strong> Neurologic exam before and after, blood pressure (watch for hypotension), urine output (expect diuresis), serum osmolality and electrolytes when possible, fluid balance. Monitor for hypovolemia from osmotic diuresis.</p>'+
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Mannitol Contraindications</div>'+
         '<ul>'+
@@ -382,6 +526,15 @@ window.ACTT.medications={
         '<li><strong>Avoid when volume-depleted:</strong> the patient must have adequate intravascular volume before mannitol is safe to use.</li>'+
         '</ul>'+
         '<p>In the hypotensive or bleeding TBI patient, hypertonic saline is preferred because it does not cause diuresis.</p></div>'+
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Hypovolemia and hypotension:</strong> osmotic diuresis can cause significant fluid loss; monitor blood pressure and replace volume as needed.</li>'+
+        '<li><strong>Electrolyte disturbances:</strong> hyponatremia, hypokalemia from diuresis; monitor electrolytes.</li>'+
+        '<li><strong>Renal dysfunction:</strong> high osmotic load can worsen renal function; use with caution in renal impairment.</li>'+
+        '<li><strong>Rebound cerebral edema:</strong> repeated dosing without adequate systemic effect can worsen ICP.</li>'+
+        '<li><strong>Crystallization:</strong> crystals in solution can cause vascular occlusion; always use filter.</li>'+
+        '</ul></div>'+
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Shipboard Availability<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>Mannitol is not confirmed in standard Sick Bay stock. If neither hypertonic saline nor mannitol is available, ICP management is limited to positioning, ventilation control, seizure prevention, and avoiding secondary insults.</p>'+
@@ -552,6 +705,20 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Ceftriaxone</div>'+
         '<p>Ceftriaxone is confirmed in Sick Bay stock. Backbone for unknown source, pneumonia, urinary, intra-abdominal, and CNS coverage.</p></div>'+
         '<p><strong>Clinical Role:</strong> Broad gram-negative and gram-positive coverage with once-daily dosing.</p>'+
+        '<p><strong>Indications:</strong> Empiric sepsis coverage (unknown source, pneumonia, UTI, intra-abdominal), meningitis, gonorrhea.</p>'+
+        '<p><strong>Dosing:</strong> 2 g IV every 24 hours for sepsis. For meningitis: 2 g IV every 12 hours.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as powder requiring reconstitution. Reconstitute 1 g vial with 10 mL sterile water or normal saline; 2 g vial with 19.2 mL. Final concentration approximately 100 mg/mL. Shake well until fully dissolved.</p>'+
+        '<p><strong>Preparation and Administration:</strong> After reconstitution, further dilute in 50&ndash;100 mL normal saline or D5W for IV infusion. Administer over 30 minutes. For IM administration (not preferred in ACTT), reconstitute with lidocaine as per package insert.</p>'+
+        '<p><strong>Stability:</strong> Reconstituted solution stable 24 hours at room temperature or 3 days refrigerated. Diluted IV solution stable 24 hours at room temperature or 3 days refrigerated. Protect from light.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with calcium-containing solutions (can form precipitate). Do not mix with other antibiotics in same bag. Flush line between incompatible medications.</p>'+
+        '<p><strong>Monitoring:</strong> Clinical response to therapy, signs of allergic reaction, renal function, CBC if prolonged therapy. Watch for diarrhea (C. difficile risk with any antibiotic).</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Allergic reactions:</strong> cross-reactivity with penicillin allergy possible (approximately 10% risk).</li>'+
+        '<li><strong>Calcium precipitation:</strong> do not mix with calcium-containing IV solutions; fatal reactions reported in neonates.</li>'+
+        '<li><strong>Biliary sludging:</strong> can cause gallbladder issues with prolonged use.</li>'+
+        '<li><strong>Clostridioides difficile:</strong> can cause antibiotic-associated diarrhea and colitis.</li>'+
+        '</ul></div>'+
         '</div>'+
 
         '<div class="drug-card">'+
@@ -559,6 +726,20 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Metronidazole IV</div>'+
         '<p>Metronidazole IV is confirmed in Sick Bay stock.</p></div>'+
         '<p><strong>Clinical Role:</strong> Anaerobic coverage paired with ceftriaxone for unknown or intra-abdominal sepsis.</p>'+
+        '<p><strong>Indications:</strong> Anaerobic infections, intra-abdominal sepsis, C. difficile infection, aspiration pneumonia (anaerobic component).</p>'+
+        '<p><strong>Dosing:</strong> 500 mg IV every 8&ndash;12 hours. Loading dose 1 g for severe infections.</p>'+
+        '<p><strong>Reconstitution:</strong> Often supplied as ready-to-use premixed solution (500 mg in 100 mL). If powder form, reconstitute and dilute per package insert. Verify formulation before use.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Ready-to-use bags require no preparation. Administer over 30&ndash;60 minutes via IV infusion. Do not give as IV push.</p>'+
+        '<p><strong>Stability:</strong> Premixed bags stable until expiration. Once opened, use promptly. Protect from light during storage and administration (some formulations light-sensitive).</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with other medications in same container. May be infused through same line if flushed appropriately.</p>'+
+        '<p><strong>Monitoring:</strong> Clinical response, neurologic exam (peripheral neuropathy with prolonged use), avoid alcohol (disulfiram-like reaction).</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Disulfiram-like reaction with alcohol:</strong> severe nausea, vomiting, flushing if patient consumes alcohol; avoid alcohol during and 48 hours after therapy.</li>'+
+        '<li><strong>Peripheral neuropathy:</strong> can occur with prolonged use; monitor neurologic status.</li>'+
+        '<li><strong>CNS effects:</strong> seizures, encephalopathy rare but serious; higher risk with high doses or hepatic impairment.</li>'+
+        '<li><strong>QT prolongation:</strong> rare; use with caution in patients with cardiac issues.</li>'+
+        '</ul></div>'+
         '</div>'+
 
         '<div class="drug-card">'+
@@ -627,6 +808,7 @@ window.ACTT.medications={
         '<p>Naloxone reverses opioid toxicity but must be titrated carefully. A full rapid dose can precipitate acute withdrawal, severe vomiting, agitation, hypertension, and return of severe pain. The goal is to restore respiratory drive, not to fully reverse all opioid effect.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Opioid receptor antagonist. Reverses respiratory depression, sedation, and apnea caused by opioids.</p>'+
+        '<p><strong>Indications:</strong> Opioid-induced respiratory depression, opioid overdose with inadequate ventilation, apnea from known or suspected opioid use.</p>'+
 
         '<h4>Titration Method</h4>'+
         '<ol>'+
@@ -637,10 +819,25 @@ window.ACTT.medications={
         '<li>Stop when the patient is breathing adequately, not when fully awake.</li>'+
         '</ol>'+
 
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 0.4 mg/mL or 1 mg/mL. Verify concentration on ampule. Dilute as described above for titration.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw naloxone dose into syringe, add to normal saline to create dilute solution for titration. Label concentration clearly. Administer slow IV push in small increments. May also be given IM (0.4&ndash;2 mg) or intranasal (2&ndash;4 mg) when IV access unavailable.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. Once diluted, use within 24 hours. Protect from light during storage.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with alkaline solutions or bisulfite-containing solutions.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 1&ndash;2 minutes, IM onset 2&ndash;5 minutes, intranasal onset 3&ndash;8 minutes. Duration 30&ndash;90 minutes (shorter than most opioids).</p>'+
+        '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, level of consciousness, pain level, blood pressure, heart rate. Watch for re-sedation after naloxone wears off. Continuous monitoring required for at least 2 hours after last dose.</p>'+
+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Naloxone Duration Warning</div>'+
         '<p>Naloxone may wear off before the opioid does. After successful reversal, the patient must be monitored for re-sedation and recurrent respiratory depression. This is especially important with long-acting opioids such as morphine and hydromorphone. Re-dosing may be necessary.</p></div>'+
 
         '<p><strong>Be ready for:</strong> Vomiting (position patient to protect airway), agitation, acute pain return, and hemodynamic changes.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Acute opioid withdrawal:</strong> agitation, tachycardia, hypertension, vomiting, diarrhea; titrate slowly to avoid.</li>'+
+        '<li><strong>Pulmonary edema:</strong> rare but severe complication; associated with rapid reversal.</li>'+
+        '<li><strong>Severe pain return:</strong> sudden reversal removes analgesia; patient may experience severe untreated pain.</li>'+
+        '<li><strong>Cardiovascular stress:</strong> hypertension, tachycardia, ventricular arrhythmias possible with rapid reversal.</li>'+
+        '<li><strong>Re-sedation:</strong> naloxone duration shorter than many opioids; patient may become re-sedated after initial improvement.</li>'+
+        '</ul></div>'+
         '</div>'+
 
         '<div class="drug-card">'+
@@ -658,6 +855,13 @@ window.ACTT.medications={
         '<p>Protamine sulfate is confirmed in Sick Bay stock.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Reversal agent for heparin anticoagulation. Provides partial reversal for enoxaparin. Used when life-threatening bleeding occurs in a patient receiving heparin or enoxaparin.</p>'+
+        '<p><strong>Indications:</strong> Life-threatening bleeding in patient on heparin therapy, heparin overdose, emergency reversal of heparin anticoagulation for urgent surgery or procedure, partial reversal of enoxaparin in critical bleeding.</p>'+
+        '<p><strong>Dosing:</strong> Dose depends on amount of heparin given and time since last heparin dose. General guideline: 1 mg protamine neutralizes approximately 100 units of heparin. Maximum single dose: 50 mg. For enoxaparin: 1 mg protamine per 1 mg enoxaparin (partial reversal only).</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution, typically 10 mg/mL. Verify concentration before drawing dose. No reconstitution required for standard vials.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Calculate dose based on heparin received. Draw dose and dilute in 50 mL normal saline or D5W. Administer slowly via IV infusion over 10 minutes (no faster than 5 mg/min). Too-rapid administration causes severe adverse reactions. Use infusion pump for controlled rate.</p>'+
+        '<p><strong>Stability:</strong> Stable at refrigerated temperature. Once diluted, use immediately; do not store diluted solutions.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Incompatible with many antibiotics and other medications; use dedicated IV line or flush thoroughly between medications.</p>'+
+        '<p><strong>Monitoring:</strong> Blood pressure (watch for hypotension), heart rate (bradycardia possible), signs of allergic reaction (flushing, dyspnea), coagulation studies if available (aPTT, ACT), bleeding assessment. Monitor continuously during and for 30 minutes after infusion.</p>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Protamine Administration</div>'+
         '<ul>'+
@@ -665,6 +869,15 @@ window.ACTT.medications={
         '<li>Administer slowly. Rapid administration causes hypotension and hypersensitivity reactions.</li>'+
         '<li>Watch for hypotension, bradycardia, and allergic reactions during and after infusion.</li>'+
         '<li>Reversal of enoxaparin is only partial. Protamine does not fully neutralize the anti-Xa activity of low-molecular-weight heparin.</li>'+
+        '</ul></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Severe hypotension:</strong> rapid administration can cause catastrophic blood pressure drop; always give slowly.</li>'+
+        '<li><strong>Anaphylactoid reactions:</strong> hypersensitivity reactions including bronchospasm, pulmonary hypertension, cardiovascular collapse; higher risk in fish-allergic patients and those on NPH insulin.</li>'+
+        '<li><strong>Bradycardia:</strong> significant heart rate reduction possible.</li>'+
+        '<li><strong>Pulmonary hypertension:</strong> transient but potentially severe.</li>'+
+        '<li><strong>Rebound anticoagulation:</strong> protamine effect wears off; heparin effect may return; monitor for recurrent bleeding.</li>'+
+        '<li><strong>Protamine excess:</strong> overdose can paradoxically cause anticoagulation and bleeding.</li>'+
         '</ul></div>'+
         '</div>',
       relatedLinks:['medications/analgesics','medications/fibrinolytics','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','appendices/appendix-c']
