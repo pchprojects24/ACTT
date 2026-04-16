@@ -1692,6 +1692,7 @@ body.light-mode .bridge-hero {
         <option value="procedures">Procedures</option>
         <option value="medications">Medications</option>
         <option value="checklists">Checklists</option>
+        <option value="pathways">Pathways</option>
         <option value="scenarios">Scenarios</option>
         <option value="docs">Docs & References</option>
         <option value="tools">Tools</option>
@@ -1749,6 +1750,7 @@ body.light-mode .bridge-hero {
 <script src="data/team.js"></script>
 <script src="data/casualty-clearing-team.js"></script>
 <script src="data/study.js"></script>
+<script src="data/pathways.js"></script>
 <script src="data/appendices.js"></script>
 <script src="data/tools.js"></script>
 <script src="data/checklists.js"></script>
@@ -1778,6 +1780,7 @@ function getNavSections(){return[
 {id:'study',title:'Study & Review',icon:'&#128214;',path:'#/study',group:'reference',items:ACTT.study?ACTT.study.sections.map(s=>({id:s.id,title:s.title,path:'#/study/'+s.id})):[]},
 {id:'appendices',title:'Quick Reference',icon:'&#128203;',path:'#/appendices',group:'reference',items:ACTT.appendices?ACTT.appendices.sections.map(s=>({id:s.id,title:s.title,path:'#/appendices/'+s.id})):[]},
 {id:'library',title:'Reference Library',icon:'&#128218;',path:'#/library',group:'reference',items:ACTT.library?ACTT.library.categories.map(c=>({id:c.id,title:c.label,path:'#/library/'+c.id})):[]},
+{id:'pathways',title:'Learning Pathways',icon:'&#128197;',path:'#/pathways',group:'utilities',items:ACTT.pathways?ACTT.pathways.sections.map(s=>({id:s.id,title:s.title,path:'#/pathways/'+s.id})):[]},
 {id:'tools',title:'Clinical Tools',icon:'&#128295;',path:'#/tools',group:'utilities',items:[
 {id:'gcs',title:'GCS Calculator',path:'#/tools/gcs'},
 {id:'burn',title:'Burn Calculator',path:'#/tools/burn'},
@@ -1793,7 +1796,7 @@ function toggleNavSection(id){const items=document.getElementById('navItems-'+id
 function navigateTo(path){window.location.hash=path.replace('#','');if(window.innerWidth<=768)closeSidebar();}
 function updateActiveNav(){const hash=window.location.hash||'#/';document.querySelectorAll('.nav-section-header').forEach(h=>h.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));const exactItem=document.querySelector(`.nav-item[data-path="${hash}"]`);if(exactItem){exactItem.classList.add('active');const parent=exactItem.closest('.nav-section');if(parent){parent.querySelector('.nav-section-header')?.classList.add('active','expanded');parent.querySelector('.nav-section-items')?.classList.add('expanded');}setTimeout(()=>{exactItem.scrollIntoView({block:'nearest',behavior:'smooth'});},120);}else{const parts=hash.split('/');const secPath='#/'+parts[1];document.querySelectorAll('.nav-section-header').forEach(h=>{if(h.dataset.path===hash||h.dataset.path===secPath)h.classList.add('active');});}}
 function ensureMetadata(data){if(!data||!Array.isArray(data.sections))return;data.sections.forEach(sec=>{if(!sec.meta)sec.meta={};sec.meta.lastReviewed=sec.meta.lastReviewed||'2026-03-20';sec.meta.reviewer=sec.meta.reviewer||'ACTT Curriculum Team';sec.meta.sourceDate=sec.meta.sourceDate||'2025-01-01';sec.meta.expiryNotice=sec.meta.expiryNotice||'Review within 12 months or after protocol change';});}
-function enrichAllMetadata(){[ACTT.domains,ACTT.algorithms,ACTT.procedures,ACTT.medications,ACTT.sickbay,ACTT.sickbayMeds,ACTT.prolongedHolding,ACTT.thresholds,ACTT.pitfalls,ACTT.shipboard,ACTT.team,ACTT.casualtyClearingTeam,ACTT.study,ACTT.appendices,ACTT.checklists].forEach(ensureMetadata);}
+function enrichAllMetadata(){[ACTT.domains,ACTT.algorithms,ACTT.procedures,ACTT.medications,ACTT.sickbay,ACTT.sickbayMeds,ACTT.prolongedHolding,ACTT.thresholds,ACTT.pitfalls,ACTT.shipboard,ACTT.team,ACTT.casualtyClearingTeam,ACTT.study,ACTT.pathways,ACTT.appendices,ACTT.checklists].forEach(ensureMetadata);}
 function saveLearnerProgress(){localStorage.setItem('actt-learner-progress',JSON.stringify(state.learnerProgress));}
 function markVisited(path){state.learnerProgress.visited[path]=new Date().toISOString();saveLearnerProgress();}
 function recordQuizScore(domain,score,total){state.learnerProgress.quiz[domain]={score,total,updated:new Date().toISOString()};saveLearnerProgress();}
@@ -1839,6 +1842,7 @@ function handleRoute(){
       case'cct':window.location.hash='#/casualty-clearing-team'+(sub?'/'+sub:'');break;
       case'study':renderSection(main,ACTT.study,sub,'Study & Review','#/study');break;
       case'appendices':renderSection(main,ACTT.appendices,sub,'Quick Reference','#/appendices');break;
+      case'pathways':renderSection(main,ACTT.pathways,sub,'Learning Pathways','#/pathways');break;
       case'tools':renderTools(main,sub);break;
       case'checklists':renderChecklists(main,sub);break;
       case'quiz':renderQuiz(main,sub);break;
@@ -1892,7 +1896,7 @@ function isValidRoute(link){
     'sickbay':ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'domains':ACTT.domains,
     'thresholds':ACTT.thresholds,'pitfalls':ACTT.pitfalls,'prolonged-holding':ACTT.prolongedHolding,
     'shipboard':ACTT.shipboard,'team':ACTT.team,'casualty-clearing-team':ACTT.casualtyClearingTeam,
-    'study':ACTT.study,'appendices':ACTT.appendices,'checklists':ACTT.checklists
+    'study':ACTT.study,'appendices':ACTT.appendices,'checklists':ACTT.checklists,'pathways':ACTT.pathways
   };
   const mod=moduleMap[topic];
   if(!mod)return false;
@@ -2520,7 +2524,7 @@ function seedLibrarySearchEntries(){
   });
   return out;
 }
-function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,'casualty-clearing-team':ACTT.casualtyClearingTeam,study:ACTT.study,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity,topic:key});});});
+function buildSearchIndex(){state.searchIndex=[];const dataSets={domains:ACTT.domains,algorithms:ACTT.algorithms,procedures:ACTT.procedures,medications:ACTT.medications,sickbay:ACTT.sickbay,'sickbay-meds':ACTT.sickbayMeds,'prolonged-holding':ACTT.prolongedHolding,thresholds:ACTT.thresholds,pitfalls:ACTT.pitfalls,shipboard:ACTT.shipboard,team:ACTT.team,'casualty-clearing-team':ACTT.casualtyClearingTeam,study:ACTT.study,pathways:ACTT.pathways,appendices:ACTT.appendices,checklists:ACTT.checklists};Object.entries(dataSets).forEach(([key,data])=>{if(!data||!data.sections)return;data.sections.forEach(sec=>{const text=(sec.content||(sec.items||[]).join(', ')||((sec.groups||[]).flatMap(g=>(g.items||[]).map(i=>i.label+(i.notes?' '+i.notes:''))).join(', '))).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();state.searchIndex.push({id:sec.id,title:sec.title,text:text.substring(0,500),fullText:text,section:data.title,path:`#/${key}/${sec.id}`,severity:sec.severity,topic:key});});});
   // Seed standalone pages so header search can reach them.
   STATIC_SEARCH_ENTRIES.forEach(function(e){state.searchIndex.push({id:e.path,title:e.title,text:e.text,fullText:e.title+' '+e.text,section:e.section,path:e.path,topic:e.topic||'all'});});
   seedLibrarySearchEntries().forEach(function(e){state.searchIndex.push({id:e.path+':'+e.title,title:e.title,text:e.text,fullText:e.title+' '+e.text,section:e.section,path:e.externalHref||e.path,topic:e.topic||'all'});});
