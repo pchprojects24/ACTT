@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZOLL EMV+ 731 — ACTT Sick Bay</title>
+<title>ZOLL EMV+ 731 Ventilator — ACTT Sick Bay</title>
 <link rel="stylesheet" href="../sickbay-shared.css">
-
 </head>
 <body>
 <header class="site-header">
@@ -15,74 +14,82 @@
 </header>
 <main class="content">
 <h1>Ventilator — Zoll EMV+ 731</h1>
-<p class="lead">Portable critical‑care ventilator for adult, pediatric, and infant patients. Operates on internal battery (&asymp;&thinsp;10&thinsp;h runtime), AC, or vehicle power with optional external O<sub>2</sub> supply.</p>
+<p class="lead">Portable turbine ventilator for adult, pediatric, and infant patients. Operates on internal battery (&asymp;&thinsp;10&thinsp;h runtime), AC, or vehicle power with optional external O<sub>2</sub> supply. Suitable for hospital, transport, and austere settings.</p>
 
-<h2>Quick start</h2>
+<nav class="page-nav" aria-label="Jump to section">
+  <a href="#quick-start">Quick Start</a>
+  <a href="#key-specs">Key Specs</a>
+  <a href="#settings">Core Settings</a>
+  <a href="#scenarios">By Scenario</a>
+  <a href="#functions">Functions</a>
+  <a href="#troubleshooting">Troubleshooting</a>
+  <a href="#prolonged">Prolonged Hold</a>
+  <a href="#shipboard">Shipboard</a>
+  <a href="#care">Care</a>
+  <a href="#videos">Videos</a>
+  <a href="#references">References</a>
+</nav>
+
+<h2 id="quick-start">Quick start</h2>
 <ol>
-  <li>Confirm the battery is charged (or connect AC/vehicle power). Attach the correct patient circuit for the intended patient size (adult, pediatric, or infant).</li>
-  <li>If supplemental oxygen is required, connect the high‑pressure O<sub>2</sub> hose to the inlet and the gas source; otherwise the device ventilates on ambient air.</li>
-  <li>Press the Power button. The ventilator boots and may run an automatic pre‑use self‑test&mdash;follow on‑screen prompts.</li>
-  <li>Select the ventilation mode (AC, SIMV, CPAP, NIV, or Pressure/Volume Control) and enter patient parameters: tidal volume, respiratory rate, FiO<sub>2</sub>, PEEP, and I:E ratio.</li>
-  <li>Connect the circuit to the patient interface (ETT, tracheostomy, or mask). Confirm chest rise, waveform display, and absence of alarms before leaving the bedside.</li>
+  <li>Inspect ventilator, battery status, breathing circuit, bacterial/viral filter, and oxygen source connection (if higher FiO<sub>2</sub> is required).</li>
+  <li>Press the Power button; the ventilator boots and runs an automatic pre‑use self‑test — follow on‑screen prompts. Select patient category (Adult/Pediatric/Infant) and verify units/alarms.</li>
+  <li>Assemble circuit, add HME/filter, and connect to a test lung. If supplemental O<sub>2</sub> is required, connect the high‑pressure hose to the inlet and gas source; otherwise the device ventilates on ambient air.</li>
+  <li>Select the ventilation mode (A/C-VC, SIMV, CPAP, NIV, or Pressure Control) and enter patient parameters: tidal volume, respiratory rate, FiO<sub>2</sub>, PEEP, and I:E ratio.</li>
+  <li>Connect the circuit to the patient interface (ETT, tracheostomy, or mask). Observe waveforms and values for 1–2 minutes; confirm chest rise and absence of alarms before leaving the bedside.</li>
 </ol>
 
-<p class="safety-note"><strong>Safety:</strong> Always have a manual resuscitation bag immediately available as a backup. Verify alarm settings after every mode or parameter change. Never silence alarms without investigating the cause.</p>
+<p class="safety-note"><strong>Safety:</strong> Always have a manual resuscitation bag immediately available as a backup. Verify alarm settings after every mode or parameter change. Never silence alarms without investigating the cause. Any sudden deterioration requires immediate airway reassessment and manual ventilation.</p>
 
-<h2>Common functions</h2>
-<ul>
-  <li><strong>Ventilation modes:</strong> Assist/Control (AC) for full support; SIMV &plusmn; Pressure Support for weaning; CPAP/NIV for spontaneously breathing patients.</li>
-  <li><strong>FiO<sub>2</sub> adjustment:</strong> Set from 21&thinsp;% (room air) to 100&thinsp;% when connected to an external O<sub>2</sub> source.</li>
-  <li><strong>Alarm management:</strong> The Smart Help feature displays the alarm cause and suggested corrective actions on screen. Silence the alarm temporarily while correcting the issue.</li>
-  <li><strong>Monitoring:</strong> View real‑time pressure, volume, and flow waveforms; review minute ventilation, peak pressure, and SpO<sub>2</sub> (if pulse‑ox module is connected).</li>
-  <li><strong>Transport:</strong> Disconnect from AC, confirm battery level, secure the circuit, and continue ventilation during patient movement.</li>
-</ul>
-
-<h2>Core settings &amp; alarms (PERLs)</h2>
-<table>
-  <thead><tr><th>Setting</th><th>Targets</th><th>Notes</th></tr></thead>
+<h2 id="key-specs">Key specifications</h2>
+<table class="specs-table">
   <tbody>
-    <tr><td>Tidal volume (V<sub>T</sub>)</td><td>6&ndash;8 mL/kg PBW (up to 8&ndash;10 mL/kg if normal lungs)</td><td>Adjust respiratory rate to hit EtCO<sub>2</sub> target; monitor plateau pressure.</td></tr>
-    <tr><td>PEEP</td><td>&ge; 5 cmH<sub>2</sub>O; increase to 8&ndash;10 if oxygenation poor</td><td>Use lower PEEP (0&ndash;5) in severe obstructive disease to reduce air trapping.</td></tr>
-    <tr><td>FiO<sub>2</sub></td><td>Start 1.0 then titrate to SpO<sub>2</sub> &ge; 95%</td><td>Use the lowest FiO<sub>2</sub> that maintains target once stable.</td></tr>
-    <tr><td>I:E ratio</td><td>Default 1:2</td><td>Lengthen expiration (1:3&ndash;1:4) in bronchospasm/COPD to prevent auto‑PEEP.</td></tr>
-    <tr><td>Peak inspiratory pressure (PIP)</td><td>< 35 cmH<sub>2</sub>O (normal); < 40 cmH<sub>2</sub>O (injured lung)</td><td>Investigate rising PIP: obstruction, bronchospasm, or worsening compliance.</td></tr>
-    <tr><td>Plateau pressure</td><td>< 30 cmH<sub>2</sub>O</td><td>Check with inspiratory hold when available; lower V<sub>T</sub> or raise PEEP if exceeded.</td></tr>
-    <tr><td>Alarm limits</td><td>High pressure: 10&ndash;15 cmH<sub>2</sub>O above current PIP; Low pressure: 10&ndash;15 below</td><td>Enable low minute ventilation and apnea backup; always keep BVM at bedside.</td></tr>
+    <tr><th>Patient populations</th><td>Adult, pediatric, infant (circuit-dependent)</td></tr>
+    <tr><th>Ventilation modes</th><td>A/C-VC, A/C-PC, SIMV ± PS, CPAP, NIV, Spontaneous/Pressure Support</td></tr>
+    <tr><th>Tidal volume range</th><td>50–2,000 mL (volume modes)</td></tr>
+    <tr><th>Rate range</th><td>1–80 breaths/min</td></tr>
+    <tr><th>PEEP range</th><td>0–30 cmH<sub>2</sub>O</td></tr>
+    <tr><th>FiO<sub>2</sub></th><td>21% (ambient air) to 100% (with external O<sub>2</sub>)</td></tr>
+    <tr><th>Battery runtime</th><td>&asymp; 10 hours (internal); also AC and vehicle DC power</td></tr>
+    <tr><th>O<sub>2</sub> source</th><td>Optional high-pressure external supply; operates on room air without it</td></tr>
+    <tr><th>Weight</th><td>&asymp; 3.4 kg (7.5 lb) without accessories</td></tr>
+    <tr><th>Drive mechanism</th><td>Internal turbine (no compressed gas required for basic ventilation)</td></tr>
   </tbody>
 </table>
 
-<h2>Initial approach by scenario</h2>
+<h2 id="settings">Core settings &amp; alarm targets</h2>
+<table>
+  <thead><tr><th>Setting</th><th>Targets</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Tidal volume (V<sub>T</sub>)</td><td>6–8 mL/kg PBW (up to 8–10 mL/kg if normal lungs)</td><td>Adjust RR to hit EtCO<sub>2</sub> target; monitor plateau pressure.</td></tr>
+    <tr><td>PEEP</td><td>&ge; 5 cmH<sub>2</sub>O; 8–10 if oxygenation poor</td><td>Use lower PEEP (0–5) in severe obstructive disease to reduce air trapping.</td></tr>
+    <tr><td>FiO<sub>2</sub></td><td>Start 1.0 → titrate to SpO<sub>2</sub> &ge; 95%</td><td>Use the lowest FiO<sub>2</sub> that maintains target once stable.</td></tr>
+    <tr><td>I:E ratio</td><td>Default 1:2</td><td>Lengthen expiration (1:3–1:4) in bronchospasm/COPD to prevent auto‑PEEP.</td></tr>
+    <tr><td>Peak inspiratory pressure (PIP)</td><td>&lt; 35 cmH<sub>2</sub>O (normal); &lt; 40 (injured lung)</td><td>Investigate rising PIP: obstruction, bronchospasm, or worsening compliance.</td></tr>
+    <tr><td>Plateau pressure</td><td>&lt; 30 cmH<sub>2</sub>O</td><td>Check with inspiratory hold; lower V<sub>T</sub> or raise PEEP if exceeded.</td></tr>
+    <tr><td>Alarm limits</td><td>High pressure 10–15 cmH<sub>2</sub>O above PIP; Low pressure 10–15 below</td><td>Enable low minute ventilation and apnea backup; always keep BVM at bedside.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="scenarios">Initial approach by scenario</h2>
 <ul>
-  <li><strong>Post-intubation, normal lungs:</strong> A/C-VC; V<sub>T</sub> 6&ndash;8 mL/kg PBW; RR 14&ndash;18; PEEP 5; FiO<sub>2</sub> 1.0 then down; EtCO<sub>2</sub> 35&ndash;45 mmHg (35&ndash;40 if TBI).</li>
-  <li><strong>Hypoxic/ARDS or sepsis:</strong> A/C-VC; V<sub>T</sub> &asymp; 6 mL/kg PBW; RR 18&ndash;24 as needed for EtCO<sub>2</sub>; PEEP 8&ndash;10; keep plateau < 30 cmH<sub>2</sub>O; accept mild permissive hypercapnia unless neuro concerns.</li>
-  <li><strong>Obstructive (asthma/COPD):</strong> A/C or SIMV with pressure support; V<sub>T</sub> 6&ndash;8 mL/kg PBW; RR 10&ndash;12; I:E 1:3 to 1:4; PEEP 0&ndash;5; watch for air trapping and rising auto‑PEEP.</li>
-  <li><strong>Neuro/TBI:</strong> Avoid hypoxia/hypotension; maintain EtCO<sub>2</sub> 35&ndash;40 mmHg (≈30 only as a short rescue for impending herniation); keep plateau < 30 cmH<sub>2</sub>O.</li>
+  <li><strong>Post-intubation, normal lungs:</strong> A/C-VC; V<sub>T</sub> 6–8 mL/kg PBW; RR 14–18; PEEP 5; FiO<sub>2</sub> 1.0 then down; EtCO<sub>2</sub> 35–45 mmHg (35–40 if TBI).</li>
+  <li><strong>Hypoxic/ARDS or sepsis:</strong> A/C-VC; V<sub>T</sub> &asymp; 6 mL/kg PBW; RR 18–24 as needed for EtCO<sub>2</sub>; PEEP 8–10; keep plateau &lt; 30 cmH<sub>2</sub>O; accept mild permissive hypercapnia unless neuro concerns.</li>
+  <li><strong>Obstructive (asthma/COPD):</strong> A/C or SIMV + PS; V<sub>T</sub> 6–8 mL/kg PBW; RR 10–12; I:E 1:3 to 1:4; PEEP 0–5; watch for air trapping and rising auto‑PEEP.</li>
+  <li><strong>Neuro/TBI:</strong> Avoid hypoxia/hypotension; maintain EtCO<sub>2</sub> 35–40 mmHg (&asymp;30 only as a short rescue for impending herniation); keep plateau &lt; 30 cmH<sub>2</sub>O.</li>
   <li><strong>Transport/limited staffing:</strong> Use the simplest full‑support mode (A/C‑VC), confirm alarms, and keep suction and BVM at the bedside for any move.</li>
 </ul>
-<h1>ZOLL EMV+ 731</h1>
-<p class="lead">Portable turbine ventilator designed for transport and austere settings, supporting adult and pediatric invasive/non-invasive ventilation.</p>
 
-<h2>Quick start</h2>
-<ol>
-  <li>Inspect ventilator, battery status, breathing circuit, bacterial/viral filter, and oxygen source connection (if higher FiO<sub>2</sub> is required).</li>
-  <li>Power on and allow self-test to complete. Select patient category (adult/pediatric) and verify units/alarms.</li>
-  <li>Assemble circuit, add HME/filter, and connect to test lung or patient airway interface.</li>
-  <li>Select initial mode and settings (e.g., A/C-VC or pressure support), then confirm tidal volume/pressure limits, rate, PEEP, and FiO<sub>2</sub>.</li>
-  <li>Start ventilation, observe waveform/values for 1&ndash;2 minutes, and titrate settings to oxygenation/ventilation targets.</li>
-</ol>
-
-<p class="safety-note"><strong>Safety:</strong> Verify alarm limits and backup manual ventilation (BVM) are available before initiating ventilation. Any sudden deterioration should trigger immediate airway reassessment and manual ventilation if needed.</p>
-
-<h2>Common functions</h2>
+<h2 id="functions">Common functions</h2>
 <ul>
-  <li>Use volume-control for predictable minute ventilation in sedated/intubated patients.</li>
-  <li>Use pressure-support/CPAP for spontaneous breathing support and weaning when appropriate.</li>
-  <li>Adjust FiO<sub>2</sub> based on pulse oximetry/ABG targets; reduce oxygen when clinically safe to avoid prolonged hyperoxia.</li>
-  <li>Enable apnea backup and confirm alarm limits (high pressure, low pressure/disconnect, low minute volume).</li>
-  <li>Trend PIP and plateau pressure after changes; aim for plateau < 30 cmH<sub>2</sub>O and PIP < 35 cmH<sub>2</sub>O when possible.</li>
+  <li><strong>Ventilation modes:</strong> Assist/Control (AC) for full support; SIMV &plusmn; Pressure Support for weaning; CPAP/NIV for spontaneously breathing patients.</li>
+  <li><strong>FiO<sub>2</sub> adjustment:</strong> Set from 21% (room air) to 100% when connected to an external O<sub>2</sub> source.</li>
+  <li><strong>Alarm management:</strong> The Smart Help feature displays the alarm cause and suggested corrective actions on screen. Silence temporarily while correcting the issue.</li>
+  <li><strong>Monitoring:</strong> View real‑time pressure, volume, and flow waveforms; review minute ventilation, peak pressure, and SpO<sub>2</sub> (if pulse‑ox module connected).</li>
+  <li><strong>Transport:</strong> Disconnect from AC, confirm battery level, secure the circuit, and continue ventilation during patient movement.</li>
 </ul>
 
-<h2>Troubleshooting</h2>
+<h2 id="troubleshooting">Troubleshooting</h2>
 <ul>
   <li><strong>High‑pressure alarm:</strong> Kinked circuit, patient biting ETT, mucus plugging, bronchospasm, endobronchial intubation, pneumothorax, or stiff lungs. Suction, give bronchodilator if needed, confirm tube depth, and consider chest decompression if tension suspected.</li>
   <li><strong>Low‑pressure / disconnect alarm:</strong> Circuit disconnect, cuff leak, loose HME/filter, cracked tubing, or air leak around mask. Reseat connections, re‑inflate cuff, and check for tube displacement.</li>
@@ -94,7 +101,7 @@
   <li><strong>Persistent alarm with instability:</strong> Disconnect from ventilator and ventilate with BVM while troubleshooting; re‑establish controlled ventilation only after cause is fixed.</li>
 </ul>
 
-<h2>Prolonged-hold monitoring</h2>
+<h2 id="prolonged">Prolonged-hold monitoring</h2>
 <ul>
   <li>Document V<sub>T</sub>, RR, PEEP, FiO<sub>2</sub>, PIP, plateau, and alarm limits after every change; verify against EtCO<sub>2</sub> and SpO<sub>2</sub> targets.</li>
   <li>Recheck tube depth, cuff pressure, and circuit securement after movement or agitation; assign a team member to guard the airway during transport.</li>
@@ -103,7 +110,7 @@
   <li>Review comfort and synchrony each watch: pain control, sedation level, agitation triggers, and whether ventilator assist settings match patient effort.</li>
 </ul>
 
-<h2>Shipboard and transport considerations</h2>
+<h2 id="shipboard">Shipboard and transport considerations</h2>
 <ul>
   <li>Stabilize the ventilator and circuit before moving through passageways; secure tubing to avoid kinking or traction on the airway.</li>
   <li>Use the simplest effective mode for transport to reduce programming errors; confirm alarms are audible in noisy spaces.</li>
@@ -111,7 +118,7 @@
   <li>Protect the intake and exhaust vents from salt spray and debris; avoid blocking airflow when stowing the device.</li>
 </ul>
 
-<h2>Care &amp; consumables</h2>
+<h2 id="care">Care &amp; consumables</h2>
 <ul>
   <li>Replace or clean the intake air filter per the maintenance schedule; a clogged filter reduces performance and triggers alarms.</li>
   <li>Use single‑use patient circuits and bacterial/viral filters; replace between patients.</li>
@@ -124,7 +131,24 @@
   <li>Replace consumables after each patient and follow biomedical preventive maintenance schedule.</li>
 </ul>
 
-<h2>References</h2>
+<h2 id="videos">Video resources</h2>
+<p class="info-note">No official ZOLL-produced YouTube training video for the EMV+ 731 has been publicly released. ZOLL provides e-learning modules through their education portal (registration required). Use the links below for video-based learning.</p>
+<ul class="video-list">
+  <li>
+    <div>
+      <a href="https://www.zoll.com/en-us/education-and-resources/training/elearning" target="_blank" rel="noopener">ZOLL E-Learning Portal — EMV+ training modules</a>
+      <span class="vid-meta">Official ZOLL e-learning (registration required) — includes ventilator setup and operation modules</span>
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="https://www.youtube.com/results?search_query=ZOLL+EMV+731+ventilator" target="_blank" rel="noopener">YouTube: Search "ZOLL EMV 731 ventilator"</a>
+      <span class="vid-meta">Community and training videos — review closely and cross-check with the operator's guide</span>
+    </div>
+  </li>
+</ul>
+
+<h2 id="references">References</h2>
 <ul>
   <li><a href="https://www.manualslib.com/manual/1682621/Zoll-731-Series.html">ZOLL 731 Series operator&rsquo;s manual (Manualslib)</a></li>
   <li><a href="https://www.zoll.com/-/media/Product-Materials/product-manuals/ventilators/01/906-0731-01-01-SF_P.ashx">ZOLL EMV+ Ventilator operator&rsquo;s guide (PDF)</a></li>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>i-STAT — ACTT Sick Bay</title>
+<title>i-STAT Handheld Analyzer — ACTT Sick Bay</title>
 <link rel="stylesheet" href="../sickbay-shared.css">
 </head>
 <body>
@@ -14,9 +14,17 @@
 </header>
 <main class="content">
 <h1>i-STAT Handheld Blood Analyzer</h1>
-<p class="lead">Portable point-of-care analyzer for rapid blood chemistry, blood gas, cardiac markers, and coagulation testing in the Sick Bay.</p>
+<p class="lead">Portable point-of-care analyzer for rapid blood chemistry, blood gas, cardiac markers, and coagulation testing in the Sick Bay. Results available in 2–3 minutes with no laboratory infrastructure required.</p>
 
-<div class="scope-block">
+<nav class="page-nav" aria-label="Jump to section">
+  <a href="#overview">Overview</a>
+  <a href="#cartridges">Cartridges</a>
+  <a href="#videos">Videos</a>
+  <a href="#care">Care</a>
+  <a href="#lab-section">Lab Section</a>
+</nav>
+
+<div class="scope-block" id="overview">
   <strong>Full i-STAT reference is in the Lab section.</strong> Detailed cartridge guides, QC procedures, daily/weekly checks, and troubleshooting are maintained there.
   <br><br>
   <a href="../Lab/index.html">&rarr; Go to Lab References (i-STAT)</a>
@@ -27,9 +35,22 @@
   <li>Handheld analyzer using single-use cartridges filled with 2–3 drops of whole blood.</li>
   <li>Results in 2–3 minutes; no laboratory infrastructure required.</li>
   <li>Operated by trained Sick Bay personnel; requires QC verification before patient testing.</li>
+  <li>Store analyzer at room temperature; cartridges must be warmed from refrigerator before use.</li>
 </ul>
 
-<h2>Available Cartridges</h2>
+<h2>Key specifications</h2>
+<table class="specs-table">
+  <tbody>
+    <tr><th>Sample type</th><td>Whole blood (capillary or venous); 2–3 drops per cartridge</td></tr>
+    <tr><th>Result time</th><td>2–3 minutes per cartridge</td></tr>
+    <tr><th>Connectivity</th><td>Download to RALS-Plus or equivalent LIS/HIS via cradle/wireless</td></tr>
+    <tr><th>QC requirement</th><td>Electronic QC simulator (E3) before patient testing; per-shift or after transport</td></tr>
+    <tr><th>Cartridge storage</th><td>Refrigerated 2–8°C; warm to room temperature before use (5 min)</td></tr>
+    <tr><th>Analyzer storage</th><td>Room temperature; avoid humidity/extremes; carry case provided</td></tr>
+  </tbody>
+</table>
+
+<h2 id="cartridges">Available Cartridges</h2>
 <ul>
   <li><strong>CHEM8+</strong> — electrolytes (Na, K, Cl), BUN/Cr, glucose, ionized Ca, Hct/Hgb</li>
   <li><strong>CG4+</strong> — blood gas (pH, pCO₂, pO₂), lactate, base excess</li>
@@ -37,15 +58,38 @@
   <li><strong>Troponin I</strong> — cardiac biomarker for ACS evaluation</li>
 </ul>
 
-<h2>Device Care</h2>
-<ul>
-  <li>Store analyzer at room temperature; avoid extreme heat, cold, or moisture.</li>
-  <li>Cartridges refrigerated at 2–8°C; warm to room temperature before use.</li>
-  <li>Run electronic simulator weekly and after transport to verify analyzer function.</li>
-  <li>Clean analyzer surface with mild disinfectant wipe; avoid liquid ingress into ports.</li>
+<h2 id="videos">Video resources</h2>
+<ul class="video-list">
+  <li>
+    <div>
+      <a href="https://www.youtube.com/watch?v=iVF6jWM-vYg" target="_blank" rel="noopener">How to Use i-STAT — Running a Patient Sample (Demo)</a>
+      <span class="vid-meta">Step-by-step walkthrough from cartridge loading to result review</span>
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="https://www.youtube.com/watch?v=iOZ0CaqgCko" target="_blank" rel="noopener">Running Patient Sample on i-STAT</a>
+      <span class="vid-meta">Practical demonstration — cartridge prep, blood loading, and reading results</span>
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="https://www.youtube.com/watch?v=Am3AdokJWaU" target="_blank" rel="noopener">Introduction to the i-STAT Analyzer</a>
+      <span class="vid-meta">Device overview, setup, sample processing, and result interpretation</span>
+    </div>
+  </li>
 </ul>
 
-<h2>Lab Section Reference</h2>
+<h2 id="care">Device Care</h2>
+<ul>
+  <li>Store analyzer at room temperature; avoid extreme heat, cold, or moisture.</li>
+  <li>Cartridges refrigerated at 2–8°C; warm to room temperature for at least 5 minutes before use.</li>
+  <li>Run electronic QC simulator before each shift and after transport to verify analyzer function.</li>
+  <li>Clean analyzer surface with mild disinfectant wipe; avoid liquid ingress into ports.</li>
+  <li>Inspect the cartridge port and connector pins routinely; remove any visible contamination with a dry swab.</li>
+</ul>
+
+<h2 id="lab-section">Lab Section Reference</h2>
 <ul>
   <li><a href="../Lab/overview.html">i-STAT Overview &amp; Setup</a></li>
   <li><a href="../Lab/cartridges.html">Cartridge Types &amp; Handling</a></li>
@@ -54,6 +98,6 @@
   <li><a href="../Lab/troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </main>
-<footer class="site-footer">ACTT Sick Bay</footer>
+<footer class="site-footer">Last updated: 2026-04-16 &bull; ACTT Sick Bay</footer>
 </body>
 </html>
