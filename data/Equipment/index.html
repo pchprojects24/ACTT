@@ -5,88 +5,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Equipment References — ACTT Sick Bay</title>
 <link rel="stylesheet" href="../sickbay-shared.css">
+<style>
+  .eq-card { position: relative; }
+  .eq-card .card-badge-row { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .eq-badge {
+    display: inline-block; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 20px;
+    background: #1e293b; border: 1px solid var(--border); color: var(--text-muted);
+  }
+  .eq-badge.video  { color: #f87171; border-color: #7f1d1d; background: #1c0a0a; }
+  .eq-badge.specs  { color: #60a5fa; border-color: #1e3a5f; background: #0a1628; }
+  .eq-badge.interactive { color: #34d399; border-color: #065f46; background: #022c22; }
+  .search-row { padding: 12px 20px 0; max-width: 960px; margin: 0 auto; }
+  #eq-filter {
+    width: 100%; padding: 10px 14px; border-radius: var(--radius);
+    border: 1px solid var(--border); background: var(--bg-card);
+    color: var(--text-primary); font-size: 0.9rem;
+  }
+  #eq-filter::placeholder { color: var(--text-muted); }
+  #eq-filter:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+  .card[hidden] { display: none !important; }
+</style>
 </head>
 <body>
 <div class="idx-bar">
-  <h1>Equipment References</h1>
+  <h1>&#9881; Equipment References</h1>
   <a class="back-link" href="../../index.html#/sickbay">&larr; Back to Sick Bay</a>
 </div>
-<p class="idx-subtitle">Onboard medical equipment guides, setup procedures, and troubleshooting references.</p>
+<p class="idx-subtitle">13 device guides covering monitors, ventilator, defibrillator, infusion pump, oxygen, suction, warming, and field laboratory equipment. Each guide includes a quick start, key specs, troubleshooting, care instructions, and — where available — training video links.</p>
+
+<div class="search-row">
+  <input id="eq-filter" type="search" placeholder="&#128269; Filter equipment by name or type&hellip;" aria-label="Filter equipment">
+</div>
 
 <div class="category">
   <div class="category-label">Monitoring &amp; Diagnostics</div>
-  <div class="cards-grid">
-    <a class="card" href="i-stat.html">
-      <div class="card-title">i-STAT Analyzer</div>
-      <div class="card-desc">Handheld blood analyzer overview. Full cartridge and QC detail in Lab section.</div>
+  <div class="cards-grid" id="grid-monitoring">
+    <a class="card eq-card" href="i-stat.html" data-search="i-stat istat blood analyzer cartridge lab">
+      <div class="card-title">i-STAT Blood Analyzer</div>
+      <div class="card-desc">Portable point-of-care analyzer — chemistry (CHEM8+), blood gas (CG4+), coagulation (PT/INR), and cardiac biomarkers (Troponin I). Results in 2–3 min.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="patient-monitor-mindray-n1.html">
-      <div class="card-title">Patient Monitor — Mindray N1</div>
-      <div class="card-desc">Vital signs monitor setup, alarms, and operation.</div>
+    <a class="card eq-card" href="patient-monitor-mindray-n1.html" data-search="mindray benevision n1 patient monitor ecg nibp spo2 transport">
+      <div class="card-title">Patient Monitor — Mindray BeneVision N1</div>
+      <div class="card-desc">Transport-capable multiparameter monitor. ECG, SpO&#8322;, NIBP, temperature, CO&#8322;. Docks to host or runs standalone on battery for up to 4 hours.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="ecg-schiller-at102g2.html">
-      <div class="card-title">ECG — Schiller AT-102 G2</div>
-      <div class="card-desc">12-lead ECG machine operation, filters, and troubleshooting.</div>
+    <a class="card eq-card" href="ecg-schiller-at102g2.html" data-search="schiller cardiovit at-102 ecg 12 lead electrocardiogram">
+      <div class="card-title">ECG — Schiller CARDIOVIT AT-102 G2</div>
+      <div class="card-desc">12-lead resting ECG with automatic interpretation (SEMA), rhythm strips, and USB/network export. Official SCHILLER training videos available.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="masimo-rad57.html">
-      <div class="card-title">Masimo Rad-57</div>
-      <div class="card-desc">Pulse CO-oximeter for SpO₂, pulse rate, SpCO, and SpMet monitoring.</div>
+    <a class="card eq-card" href="masimo-rad57.html" data-search="masimo rad-57 rad57 pulse oximeter spo2 spco spmet co poisoning methemoglobin">
+      <div class="card-title">Masimo Rad-57 Pulse CO-Oximeter</div>
+      <div class="card-desc">Handheld noninvasive monitor for SpO&#8322;, pulse rate, SpCO (carboxyhemoglobin), and SpMet (methemoglobin). Key tool for CO poisoning screening.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
   </div>
 </div>
 
 <div class="category">
   <div class="category-label">Resuscitation</div>
-  <div class="cards-grid">
-    <a class="card" href="zoll-propaq-md.html">
-      <div class="card-title">Zoll Propaq MD</div>
-      <div class="card-desc">Monitor/defibrillator — pacing, cardioversion, and monitoring.</div>
+  <div class="cards-grid" id="grid-resus">
+    <a class="card eq-card" href="zoll-propaq-md.html" data-search="zoll propaq md defibrillator monitor pacing cardioversion ecg aed cpr">
+      <div class="card-title">Zoll Propaq MD Monitor/Defibrillator</div>
+      <div class="card-desc">Portable monitor/defibrillator with 12-lead ECG, SpO&#8322;, NIBP, EtCO&#8322;, manual defibrillation, AED, cardioversion, external pacing, and Real CPR Help&reg;. Official ZOLL training videos available.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="zoll-emv-731.html">
-      <div class="card-title">Zoll EMV+ 731</div>
-      <div class="card-desc">Portable ventilator setup, modes, and alarm management.</div>
+    <a class="card eq-card" href="zoll-emv-731.html" data-search="zoll emv 731 ventilator vent modes peep fio2 transport intubated">
+      <div class="card-title">Zoll EMV+ 731 Ventilator</div>
+      <div class="card-desc">Portable turbine ventilator for adult, pediatric, and infant patients. Modes: A/C-VC, A/C-PC, SIMV, CPAP, NIV. Runs on internal battery (~10 h), AC, or vehicle power. Operates without external O&#8322; supply.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="braun-infusomat.html">
-      <div class="card-title">Braun Infusomat</div>
-      <div class="card-desc">IV infusion pump programming and rate management.</div>
+    <a class="card eq-card" href="braun-infusomat.html" data-search="braun infusomat space iv pump infusion rate programming drug library vasopressor">
+      <div class="card-title">B. Braun Infusomat Space</div>
+      <div class="card-desc">Large-volume IV infusion pump with drug library (Critical Care &amp; Generic, ~1,200 entries), bolus, secondary (piggyback), and KVO modes. Official B. Braun training videos and playlist available.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
   </div>
 </div>
 
 <div class="category">
   <div class="category-label">Supportive Care</div>
-  <div class="cards-grid">
-    <a class="card" href="oxygen-invacare-platinum10.html">
+  <div class="cards-grid" id="grid-supportive">
+    <a class="card eq-card" href="oxygen-invacare-platinum10.html" data-search="invacare platinum 10 oxygen concentrator o2 flow humidifier">
       <div class="card-title">Oxygen — Invacare Platinum 10</div>
-      <div class="card-desc">Oxygen concentrator setup, flow settings, and maintenance.</div>
+      <div class="card-desc">Stationary 10 L/min oxygen concentrator. Produces medical-grade O&#8322; from room air — no cylinder refills during normal operation. Requires uninterrupted AC power; cylinder backup essential.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="suction-laerdal-lsu.html">
+    <a class="card eq-card" href="suction-laerdal-lsu.html" data-search="laerdal suction unit lsu airway clearance secretion portable vacuum">
       <div class="card-title">Suction — Laerdal LSU</div>
-      <div class="card-desc">Portable suction unit operation and maintenance.</div>
+      <div class="card-desc">Portable rechargeable suction unit. Up to 530 mmHg vacuum; adjustable for adult/pediatric/neonatal use. Operates on battery, AC, or vehicle power. Videos available.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="cocoon-warming-device.html">
+    <a class="card eq-card" href="cocoon-warming-device.html" data-search="cocoon warming device hypothermia patient warming forced air temperature">
       <div class="card-title">Cocoon Warming Device</div>
-      <div class="card-desc">Patient warming system setup and operation.</div>
+      <div class="card-desc">Active forced-air patient warming for hypothermia prevention and treatment. Used post-arrest, post-trauma, and exposure casualties. Monitor temperature and skin every 15–30 min.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="belmont-buddy-lite.html">
-      <div class="card-title">Belmont buddy lite</div>
-      <div class="card-desc">Portable blood/fluid warmer for IV crystalloids and blood products.</div>
+    <a class="card eq-card" href="belmont-buddy-lite.html" data-search="belmont buddy lite fluid warmer blood warmer iv crystalloid blood product">
+      <div class="card-title">Belmont buddy lite Fluid Warmer</div>
+      <div class="card-desc">Portable battery-powered in-line fluid warmer. Warms crystalloid at up to 4.8 L/hr and packed RBCs at up to 50 mL/min to physiological temperature. Official full instructional video available.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
   </div>
 </div>
 
 <div class="category">
   <div class="category-label">Laboratory &amp; Environmental</div>
-  <div class="cards-grid">
-    <a class="card" href="incubator-millipore-xx631.html">
+  <div class="cards-grid" id="grid-lab">
+    <a class="card eq-card" href="incubator-millipore-xx631.html" data-search="incubator millipore xx631 microbiology membrane filtration temperature culture">
       <div class="card-title">Incubator — Millipore XX631</div>
-      <div class="card-desc">Laboratory incubator setup and temperature management.</div>
+      <div class="card-desc">Single-chamber portable incubator for field microbiology (membrane filtration). Maintains 35–37&deg;C (coliforms) or 44.5&deg;C (thermotolerant tests). Foam-lined carry case for field use.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
-    <a class="card" href="water-colorimeter-hach-dr900.html">
+    <a class="card eq-card" href="water-colorimeter-hach-dr900.html" data-search="hach dr900 colorimeter water quality testing chlorine turbidity">
       <div class="card-title">Water Colorimeter — Hach DR900</div>
-      <div class="card-desc">Water quality testing device operation and methods.</div>
+      <div class="card-desc">Handheld multiparameter colorimeter with 80+ pre-programmed EPA methods (chlorine, ammonia, nitrate, iron, fluoride, and more). Official Hach training videos available.</div>
+      <div class="card-badge-row">
+        <span class="eq-badge specs">Specs</span>
+        <span class="eq-badge video">Videos</span>
+        <span class="eq-badge interactive">Nav</span>
+      </div>
     </a>
   </div>
 </div>
+
+<script>
+(function () {
+  var inp = document.getElementById('eq-filter');
+  var cards = Array.from(document.querySelectorAll('.eq-card'));
+  inp.addEventListener('input', function () {
+    var q = this.value.trim().toLowerCase();
+    cards.forEach(function (c) {
+      var text = (c.textContent + ' ' + (c.getAttribute('data-search') || '')).toLowerCase();
+      c.hidden = q.length > 0 && text.indexOf(q) === -1;
+    });
+  });
+})();
+</script>
 </body>
 </html>

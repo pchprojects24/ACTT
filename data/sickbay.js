@@ -36,7 +36,7 @@ window.ACTT.sickbay={
     <a class="quick-card" href="data/Equipment/index.html">
       <div class="qc-icon">&#9881;</div>
       <div class="qc-title">Equipment</div>
-      <div class="qc-desc">11 device guides including monitors, ventilator, defibrillator, infusion pump, oxygen, suction, and warming equipment.</div>
+      <div class="qc-desc">13 device guides — monitors, ventilator, defibrillator, infusion pump, oxygen, suction, warming, and field lab. Each guide includes quick start, key specs, troubleshooting, and training video links.</div>
     </a>
     <a class="quick-card" href="data/Lab/index.html">
       <div class="qc-icon">&#129514;</div>
