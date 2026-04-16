@@ -43,7 +43,14 @@ window.ACTT.pitfalls={
         '<p><strong>Immediate corrective action:</strong> Reassess the airway immediately. Stop non-essential tasks. Prepare for definitive airway management. Commit to RSI or surgical airway.</p>'+
         '<p><strong>Prevention habit:</strong> Act on trend, not on the current snapshot. Define explicit airway triggers early in the case. Verbalize the backup plan before it is needed.</p>'+
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Shipboard Consideration<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
-        '<p>Losing the airway later at sea means losing it when fatigue, progressive swelling, limited staff, and constrained workspace make rescue significantly harder. The margin for delay is narrower onboard.</p>'+
+        '<ul>'+
+        '<li><strong>"Wait and see" is a more expensive strategy at sea.</strong> Ashore, a late airway means calling anesthesia and using the OR. At sea, it means RSI at 0300 on a rolling deck under a fatigued watch, with the rescue surgical airway as your only backup. The threshold to secure the airway should be <em>lower</em> than ashore, not the same.</li>'+
+        '<li><strong>Progressive swelling outpaces evacuation timelines.</strong> Burn, inhalation, angioedema, or expanding neck hematoma can go from manageable to impossible in the hours between recognition and helicopter arrival. If the trajectory is worsening, intubate before MEDEVAC arrives &mdash; do not assume the receiving team will be able to do it in flight.</li>'+
+        '<li><strong>Set explicit numeric triggers and post them at the bedside.</strong> Example: "RSI if SpO<sub>2</sub> &lt; 92% on 15 L NRB, RR &gt; 30, stridor, GCS drop &ge; 2, or new inability to handle secretions." A written trigger is obeyed by the watch at 0300; a remembered trigger is not.</li>'+
+        '<li><strong>Brief the backup airway plan before the deterioration.</strong> On a small ship, the surgical cricothyroidotomy tray should be opened, counted, and staged beside the patient the moment there is any concern. If you wait until the moment of failure, the kit is still in the cupboard when you need it in your hands.</li>'+
+        '<li><strong>Watch turnover is when airways are lost.</strong> Pre-dawn watches, fatigue, and verbal-only handoffs are a known drift pattern. Written airway criteria plus a named "if X, do Y" instruction in the chart bridges that gap.</li>'+
+        '<li><strong>MEDEVAC timing should not be a reason to defer intubation.</strong> "We will be hoisted in 2 hours" is not a reason to wait; it is a reason to secure the airway in the controlled Sick Bay environment rather than on a hoist cable or in a confined aircraft cabin.</li>'+
+        '</ul>'+
         '</div></div>'+
         '</div>'+
 
