@@ -135,9 +135,13 @@ window.ACTT.shipboard={
         '<h4>10.6.1 Choosing the Best Care Location</h4>'+
         '<div class="shipboard-callout">'+
         '<ul>'+
-          '<li>Prefer a location with oxygen, suction, monitoring, lighting, room to work, and stable surfaces for equipment.</li>'+
-          '<li>Consider whether the location can safely support prolonged holding if evacuation is delayed.</li>'+
-          '<li>In rough conditions, choose a location where the patient and equipment can be secured more reliably.</li>'+
+          '<li>Prefer a location with wall oxygen, wall suction, monitoring, 220V power, overhead lighting, room to work, and stable surfaces for equipment.</li>'+
+          '<li>On most RCN platforms the default is the Sick Bay or medical treatment room. Secondary locations in order of preference are typically the wardroom, the cafeteria or dining space (cleared tables), and finally the mess deck or passageway only if no other option exists.</li>'+
+          '<li>Position the patient with the long axis of the stretcher aligned with the ship\'s long axis (head to bow or stern, not athwartships) so that roll does not throw the patient sideways and so that the airway operator can stand at the head without fighting pitch.</li>'+
+          '<li>Confirm the location allows stretcher access in and out — narrow dog-legs, vertical ladders, and watertight scuttles can make a theoretically perfect location inaccessible when MEDEVAC arrives. Walk the evacuation route before committing.</li>'+
+          '<li>Choose a location that can sustain the expected holding duration, not just the initial resuscitation. A wardroom that must be cleared within 2 hours for an operational brief is not a holding location.</li>'+
+          '<li>In rough conditions, choose a location as close to the ship\'s center of buoyancy as possible (lower midships) to minimize pitch and roll effect on the patient and procedural work.</li>'+
+          '<li>Confirm red-light/white-light availability for night operations — some locations may be under EMCON or darken-ship conditions that limit examination.</li>'+
         '</ul></div>'+
 
         '<h4>10.6.2 Movement Risks</h4>'+
@@ -172,6 +176,14 @@ window.ACTT.shipboard={
 
         '<h4>10.7.3 Oxygen and Ventilation Resource Use</h4>'+
         '<p>Oxygen planning becomes a logistics issue during prolonged holding. The clinician should identify which patients need the highest oxygen reserve and which can be safely stepped down after reassessment. Oxygen conservation must never become undertreatment, but casual waste can later eliminate options.</p>'+
+        '<div class="shipboard-callout">'+
+        '<ul>'+
+          '<li>Count cylinders against projected hours of use before the hold begins: a standard E-cylinder of ~660 L at 15 L/min runs ~44 minutes; at 2 L/min nasal cannula ~5.5 hours. On smaller platforms with no wall O2 in the holding space, this math decides whether local holding is realistic.</li>'+
+          '<li>Identify whether the holding location is on ship wall-O2 or relying on portable cylinders, and whether the medical oxygen manifold can be isolated if a general damage-control incident occurs.</li>'+
+          '<li>For ventilated patients, use the lowest FiO2 that maintains SpO2 94&ndash;98% (88&ndash;92% in suspected COPD). FiO2 weaning is a stock-conservation strategy, not just a clinical refinement.</li>'+
+          '<li>Titrate non-rebreather down to nasal cannula as early as the patient tolerates. Every hour of NRB 15 L/min is ~900 L of O2 gone.</li>'+
+          '<li>Escalate to command if projected O2 consumption exceeds 12 hours of on-hand stock — this is a cross-deck resupply or accelerated MEDEVAC decision, not just a medical one.</li>'+
+        '</ul></div>'+
 
         '<h4>10.7.4 Thoracic Devices at Sea</h4>'+
         '<div class="shipboard-callout">'+
@@ -189,6 +201,15 @@ window.ACTT.shipboard={
 
         '<h4>10.8.1 Fluid Use in a Shipboard Setting</h4>'+
         '<p>Repeated fluid boluses without reassessment are particularly dangerous at sea because fluid overload increases respiratory burden and may create a problem the ship cannot support. Each bolus should have a reassessment plan linked to perfusion, blood pressure, work of breathing, oxygen requirement, and the overall disease process.</p>'+
+        '<div class="shipboard-callout">'+
+        '<ul>'+
+          '<li>Default to permissive hypotension (SBP ~90 mmHg, palpable radial) in hemorrhagic shock until bleeding is controlled; higher targets apply in TBI (SBP &ge;110 mmHg).</li>'+
+          '<li>Sepsis: cap crystalloid at 30 mL/kg before transitioning to early peripheral norepinephrine. Do not keep chasing volume past this ceiling without an explicit reason.</li>'+
+          '<li>Burns: titrate to urine output 30&ndash;50 mL/hr (50&ndash;100 mL/hr for high-voltage electrical). Adjust the rate in 20% steps at 1-hour reassessment intervals, not by continuous "eyeballing."</li>'+
+          '<li>Check the crystalloid shelf count before the second bag goes up. A 40% TBSA burn in an 80 kg adult projects ~12.8 L of crystalloid in the first 24 hours — on many ACTT platforms, that is 40&ndash;60% of total IV fluid stock.</li>'+
+          '<li>Warm fluids whenever possible. Cold fluid into a marginal trauma patient worsens the lethal triad. If a fluid warmer is not available, immerse bags in warm water before hanging.</li>'+
+          '<li>Switch to pressor early rather than keep bolusing. Every extra bag beyond endpoint is oxygen delivery lost to pulmonary edema later in the hold.</li>'+
+        '</ul></div>'+
 
         '<h4>10.8.2 Blood Pressure and Perfusion Monitoring</h4>'+
         '<div class="shipboard-callout">'+
@@ -200,6 +221,16 @@ window.ACTT.shipboard={
 
         '<h4>10.8.3 Vasopressors at Sea</h4>'+
         '<p>Pressors can stabilize perfusion, but they create a large monitoring burden. Before starting a pressor, confirm that the line can be watched, the pump can be supported, the concentration is clear, and someone is responsible for ongoing reassessment. A pressor plan that cannot be safely monitored is an incomplete plan.</p>'+
+        '<div class="shipboard-callout">'+
+        '<ul>'+
+          '<li>First-line pressor for most shock states at sea is norepinephrine. Standard mix 4 mg in 250 mL D5W = 16 mcg/mL; double-concentration 8 mg in 250 mL D5W = 32 mcg/mL is preferred on smaller platforms with limited pump channels and fluid reserves.</li>'+
+          '<li>Peripheral norepinephrine via a reliable, large-gauge IV in the antecubital or forearm is acceptable for up to 24&ndash;48 hours with hourly site checks. Do not delay pressor start waiting for central access that the platform cannot place.</li>'+
+          '<li>Starting dose 0.05 mcg/kg/min, titrate by 0.05 mcg/kg/min every 2&ndash;5 minutes to MAP &ge;65 mmHg (higher targets for TBI, post-arrest).</li>'+
+          '<li>For anaphylaxis or cardiogenic collapse needing an additional agent, epinephrine 4 mg in 250 mL D5W (16 mcg/mL) run at 0.05&ndash;0.5 mcg/kg/min is the go-to. Vasopressin is a bolus/infusion adjunct when available.</li>'+
+          '<li>Push-dose epinephrine (10 mcg/mL: 1 mL of 1:10,000 in 9 mL saline; give 0.5&ndash;2 mL q2&ndash;5 min) is the bridge while the infusion is being mixed and primed, not a substitute for it.</li>'+
+          '<li>Name the pressor watch: one person specifically responsible for pump rate, drip chamber, IV site, and MAP trend. Ship motion + sleeping watch + pump dropout = preventable death.</li>'+
+          '<li>Label the bag with drug, concentration, rate, time started, and MAP target in thick marker. Fatigued teams cannot decode lab labels on a rolling deck at night.</li>'+
+        '</ul></div>'+
 
         '<h4>10.8.4 Access Management</h4>'+
         '<div class="shipboard-callout">'+
