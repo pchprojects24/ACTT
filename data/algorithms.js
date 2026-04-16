@@ -335,7 +335,7 @@ window.ACTT.algorithms={
         '<ul>' +
         '<li>Do not let trauma resuscitation drift into permissive hypotension if TBI is also present without consciously weighing cerebral perfusion needs.</li>' +
         '<li>Treat fever early because temperature control is part of secondary injury prevention.</li>' +
-        '<li>Hyperventilation is a rescue manoeuvre for impending herniation, not a default setting.</li>' +
+        '<li>Hyperventilation is a rescue manoeuvre for impending herniation, not a default setting. Target EtCO<sub>2</sub> ~30&ndash;35 mmHg is a bridge measure only. Return to normocapnia (EtCO<sub>2</sub> 35&ndash;40 mmHg) within 30 minutes unless herniation is ongoing. Do not maintain prophylactic hyperventilation.</li>' +
         '</ul>' +
 
         '<h4>Reassessment Points</h4>' +
