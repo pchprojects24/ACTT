@@ -705,6 +705,20 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Ceftriaxone</div>'+
         '<p>Ceftriaxone is confirmed in Sick Bay stock. Backbone for unknown source, pneumonia, urinary, intra-abdominal, and CNS coverage.</p></div>'+
         '<p><strong>Clinical Role:</strong> Broad gram-negative and gram-positive coverage with once-daily dosing.</p>'+
+        '<p><strong>Indications:</strong> Empiric sepsis coverage (unknown source, pneumonia, UTI, intra-abdominal), meningitis, gonorrhea.</p>'+
+        '<p><strong>Dosing:</strong> 2 g IV every 24 hours for sepsis. For meningitis: 2 g IV every 12 hours.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as powder requiring reconstitution. Reconstitute 1 g vial with 10 mL sterile water or normal saline; 2 g vial with 19.2 mL. Final concentration approximately 100 mg/mL. Shake well until fully dissolved.</p>'+
+        '<p><strong>Preparation and Administration:</strong> After reconstitution, further dilute in 50&ndash;100 mL normal saline or D5W for IV infusion. Administer over 30 minutes. For IM administration (not preferred in ACTT), reconstitute with lidocaine as per package insert.</p>'+
+        '<p><strong>Stability:</strong> Reconstituted solution stable 24 hours at room temperature or 3 days refrigerated. Diluted IV solution stable 24 hours at room temperature or 3 days refrigerated. Protect from light.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with calcium-containing solutions (can form precipitate). Do not mix with other antibiotics in same bag. Flush line between incompatible medications.</p>'+
+        '<p><strong>Monitoring:</strong> Clinical response to therapy, signs of allergic reaction, renal function, CBC if prolonged therapy. Watch for diarrhea (C. difficile risk with any antibiotic).</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Allergic reactions:</strong> cross-reactivity with penicillin allergy possible (approximately 10% risk).</li>'+
+        '<li><strong>Calcium precipitation:</strong> do not mix with calcium-containing IV solutions; fatal reactions reported in neonates.</li>'+
+        '<li><strong>Biliary sludging:</strong> can cause gallbladder issues with prolonged use.</li>'+
+        '<li><strong>Clostridioides difficile:</strong> can cause antibiotic-associated diarrhea and colitis.</li>'+
+        '</ul></div>'+
         '</div>'+
 
         '<div class="drug-card">'+
@@ -712,6 +726,20 @@ window.ACTT.medications={
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Metronidazole IV</div>'+
         '<p>Metronidazole IV is confirmed in Sick Bay stock.</p></div>'+
         '<p><strong>Clinical Role:</strong> Anaerobic coverage paired with ceftriaxone for unknown or intra-abdominal sepsis.</p>'+
+        '<p><strong>Indications:</strong> Anaerobic infections, intra-abdominal sepsis, C. difficile infection, aspiration pneumonia (anaerobic component).</p>'+
+        '<p><strong>Dosing:</strong> 500 mg IV every 8&ndash;12 hours. Loading dose 1 g for severe infections.</p>'+
+        '<p><strong>Reconstitution:</strong> Often supplied as ready-to-use premixed solution (500 mg in 100 mL). If powder form, reconstitute and dilute per package insert. Verify formulation before use.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Ready-to-use bags require no preparation. Administer over 30&ndash;60 minutes via IV infusion. Do not give as IV push.</p>'+
+        '<p><strong>Stability:</strong> Premixed bags stable until expiration. Once opened, use promptly. Protect from light during storage and administration (some formulations light-sensitive).</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with other medications in same container. May be infused through same line if flushed appropriately.</p>'+
+        '<p><strong>Monitoring:</strong> Clinical response, neurologic exam (peripheral neuropathy with prolonged use), avoid alcohol (disulfiram-like reaction).</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Disulfiram-like reaction with alcohol:</strong> severe nausea, vomiting, flushing if patient consumes alcohol; avoid alcohol during and 48 hours after therapy.</li>'+
+        '<li><strong>Peripheral neuropathy:</strong> can occur with prolonged use; monitor neurologic status.</li>'+
+        '<li><strong>CNS effects:</strong> seizures, encephalopathy rare but serious; higher risk with high doses or hepatic impairment.</li>'+
+        '<li><strong>QT prolongation:</strong> rare; use with caution in patients with cardiac issues.</li>'+
+        '</ul></div>'+
         '</div>'+
 
         '<div class="drug-card">'+
@@ -780,6 +808,7 @@ window.ACTT.medications={
         '<p>Naloxone reverses opioid toxicity but must be titrated carefully. A full rapid dose can precipitate acute withdrawal, severe vomiting, agitation, hypertension, and return of severe pain. The goal is to restore respiratory drive, not to fully reverse all opioid effect.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Opioid receptor antagonist. Reverses respiratory depression, sedation, and apnea caused by opioids.</p>'+
+        '<p><strong>Indications:</strong> Opioid-induced respiratory depression, opioid overdose with inadequate ventilation, apnea from known or suspected opioid use.</p>'+
 
         '<h4>Titration Method</h4>'+
         '<ol>'+
@@ -790,10 +819,25 @@ window.ACTT.medications={
         '<li>Stop when the patient is breathing adequately, not when fully awake.</li>'+
         '</ol>'+
 
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 0.4 mg/mL or 1 mg/mL. Verify concentration on ampule. Dilute as described above for titration.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw naloxone dose into syringe, add to normal saline to create dilute solution for titration. Label concentration clearly. Administer slow IV push in small increments. May also be given IM (0.4&ndash;2 mg) or intranasal (2&ndash;4 mg) when IV access unavailable.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. Once diluted, use within 24 hours. Protect from light during storage.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with alkaline solutions or bisulfite-containing solutions.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 1&ndash;2 minutes, IM onset 2&ndash;5 minutes, intranasal onset 3&ndash;8 minutes. Duration 30&ndash;90 minutes (shorter than most opioids).</p>'+
+        '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, level of consciousness, pain level, blood pressure, heart rate. Watch for re-sedation after naloxone wears off. Continuous monitoring required for at least 2 hours after last dose.</p>'+
+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Naloxone Duration Warning</div>'+
         '<p>Naloxone may wear off before the opioid does. After successful reversal, the patient must be monitored for re-sedation and recurrent respiratory depression. This is especially important with long-acting opioids such as morphine and hydromorphone. Re-dosing may be necessary.</p></div>'+
 
         '<p><strong>Be ready for:</strong> Vomiting (position patient to protect airway), agitation, acute pain return, and hemodynamic changes.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Acute opioid withdrawal:</strong> agitation, tachycardia, hypertension, vomiting, diarrhea; titrate slowly to avoid.</li>'+
+        '<li><strong>Pulmonary edema:</strong> rare but severe complication; associated with rapid reversal.</li>'+
+        '<li><strong>Severe pain return:</strong> sudden reversal removes analgesia; patient may experience severe untreated pain.</li>'+
+        '<li><strong>Cardiovascular stress:</strong> hypertension, tachycardia, ventricular arrhythmias possible with rapid reversal.</li>'+
+        '<li><strong>Re-sedation:</strong> naloxone duration shorter than many opioids; patient may become re-sedated after initial improvement.</li>'+
+        '</ul></div>'+
         '</div>'+
 
         '<div class="drug-card">'+
@@ -811,6 +855,13 @@ window.ACTT.medications={
         '<p>Protamine sulfate is confirmed in Sick Bay stock.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Reversal agent for heparin anticoagulation. Provides partial reversal for enoxaparin. Used when life-threatening bleeding occurs in a patient receiving heparin or enoxaparin.</p>'+
+        '<p><strong>Indications:</strong> Life-threatening bleeding in patient on heparin therapy, heparin overdose, emergency reversal of heparin anticoagulation for urgent surgery or procedure, partial reversal of enoxaparin in critical bleeding.</p>'+
+        '<p><strong>Dosing:</strong> Dose depends on amount of heparin given and time since last heparin dose. General guideline: 1 mg protamine neutralizes approximately 100 units of heparin. Maximum single dose: 50 mg. For enoxaparin: 1 mg protamine per 1 mg enoxaparin (partial reversal only).</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution, typically 10 mg/mL. Verify concentration before drawing dose. No reconstitution required for standard vials.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Calculate dose based on heparin received. Draw dose and dilute in 50 mL normal saline or D5W. Administer slowly via IV infusion over 10 minutes (no faster than 5 mg/min). Too-rapid administration causes severe adverse reactions. Use infusion pump for controlled rate.</p>'+
+        '<p><strong>Stability:</strong> Stable at refrigerated temperature. Once diluted, use immediately; do not store diluted solutions.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Incompatible with many antibiotics and other medications; use dedicated IV line or flush thoroughly between medications.</p>'+
+        '<p><strong>Monitoring:</strong> Blood pressure (watch for hypotension), heart rate (bradycardia possible), signs of allergic reaction (flushing, dyspnea), coagulation studies if available (aPTT, ACT), bleeding assessment. Monitor continuously during and for 30 minutes after infusion.</p>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Protamine Administration</div>'+
         '<ul>'+
@@ -818,6 +869,15 @@ window.ACTT.medications={
         '<li>Administer slowly. Rapid administration causes hypotension and hypersensitivity reactions.</li>'+
         '<li>Watch for hypotension, bradycardia, and allergic reactions during and after infusion.</li>'+
         '<li>Reversal of enoxaparin is only partial. Protamine does not fully neutralize the anti-Xa activity of low-molecular-weight heparin.</li>'+
+        '</ul></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Severe hypotension:</strong> rapid administration can cause catastrophic blood pressure drop; always give slowly.</li>'+
+        '<li><strong>Anaphylactoid reactions:</strong> hypersensitivity reactions including bronchospasm, pulmonary hypertension, cardiovascular collapse; higher risk in fish-allergic patients and those on NPH insulin.</li>'+
+        '<li><strong>Bradycardia:</strong> significant heart rate reduction possible.</li>'+
+        '<li><strong>Pulmonary hypertension:</strong> transient but potentially severe.</li>'+
+        '<li><strong>Rebound anticoagulation:</strong> protamine effect wears off; heparin effect may return; monitor for recurrent bleeding.</li>'+
+        '<li><strong>Protamine excess:</strong> overdose can paradoxically cause anticoagulation and bleeding.</li>'+
         '</ul></div>'+
         '</div>',
       relatedLinks:['medications/analgesics','medications/fibrinolytics','thresholds/medication-safety','pitfalls/medication-errors','prolonged-holding/sedation-pain','appendices/appendix-c']
