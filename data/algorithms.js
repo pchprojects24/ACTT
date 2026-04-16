@@ -664,8 +664,8 @@ window.ACTT.algorithms={
         '<h4>Immediate Actions / Execution Sequence</h4>' +
         '<ul>' +
         '<li>Place two large-bore IVs, cardiac monitoring, and start isotonic crystalloid. Give roughly 15&ndash;20 mL/kg (~1&ndash;2 L) in the first hour unless clear overload risk, then continue 250&ndash;500 mL/hr guided by perfusion, urine output, and respiratory tolerance.</li>' +
-        '<li>Do not start insulin until potassium is known. If K &lt; 3.3 mmol/L, hold insulin and replace potassium (e.g., 40 mEq KCl per liter while resuscitating) until K is safe.</li>' +
-        '<li>If K &ge; 3.3 mmol/L, start regular insulin infusion at 0.1 units/kg/hr (no bolus). Continue potassium supplementation because intracellular shift will drop serum K.</li>' +
+        '<li>Do not start insulin until potassium is known. If K &lt; 3.5 mmol/L, hold insulin and replace potassium (e.g., 40 mEq KCl per liter while resuscitating) until K is safe.</li>' +
+        '<li>If K &ge; 3.5 mmol/L, start regular insulin infusion at 0.1 units/kg/hr (no bolus). Continue potassium supplementation because intracellular shift will drop serum K.</li>' +
         '<li>Add dextrose to the fluid when glucose falls below ~14 mmol/L so insulin can continue to clear ketones.</li>' +
         '<li>Check glucose at least hourly and potassium about every 2 hours; repeat VBG/anion gap and osmolality when available to trend closure.</li>' +
         '<li>Treat the precipitating cause (antibiotics for infection, ACS pathway if indicated) while resuscitation continues.</li>' +

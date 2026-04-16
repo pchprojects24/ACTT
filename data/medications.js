@@ -824,10 +824,11 @@ window.ACTT.medications={
         '<p><strong>Stability:</strong> Stable at room temperature. Once diluted, use within 24 hours. Protect from light during storage.</p>'+
         '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with alkaline solutions or bisulfite-containing solutions.</p>'+
         '<p><strong>Onset and Duration:</strong> IV onset 1&ndash;2 minutes, IM onset 2&ndash;5 minutes, intranasal onset 3&ndash;8 minutes. Duration 30&ndash;90 minutes (shorter than most opioids).</p>'+
-        '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, level of consciousness, pain level, blood pressure, heart rate. Watch for re-sedation after naloxone wears off. Continuous monitoring required for at least 2 hours after last dose.</p>'+
+        '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, level of consciousness, pain level, blood pressure, heart rate. Watch for re-sedation after naloxone wears off. Continuous monitoring required for at least 2&ndash;4 hours after last naloxone dose. For long-acting opioids (morphine, hydromorphone, methadone), monitor for minimum 4&ndash;6 hours.</p>'+
+        '<p><strong>Re-dosing for re-sedation:</strong> Repeat 0.04 mg aliquots as needed if respiratory depression recurs. For long-acting opioids, consider naloxone infusion: use 2/3 of the effective reversal dose per hour (e.g., if 0.4 mg total was needed for initial reversal, infuse ~0.25 mg/hr).</p>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Naloxone Duration Warning</div>'+
-        '<p>Naloxone may wear off before the opioid does. After successful reversal, the patient must be monitored for re-sedation and recurrent respiratory depression. This is especially important with long-acting opioids such as morphine and hydromorphone. Re-dosing may be necessary.</p></div>'+
+        '<p>Naloxone duration of action (30&ndash;90 minutes) is shorter than virtually every opioid it reverses. After successful reversal, the patient MUST be monitored continuously for re-sedation and recurrent respiratory depression. This is especially critical with long-acting opioids such as morphine, hydromorphone, and methadone. Minimum monitoring period: 2&ndash;4 hours for short-acting opioids, 4&ndash;6 hours or longer for long-acting opioids. Re-dosing is often necessary.</p></div>'+
 
         '<p><strong>Be ready for:</strong> Vomiting (position patient to protect airway), agitation, acute pain return, and hemodynamic changes.</p>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
