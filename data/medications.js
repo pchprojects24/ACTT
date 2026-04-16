@@ -192,6 +192,21 @@ window.ACTT.medications={
 
         '<h4>Morphine</h4>'+
         '<p><strong>Clinical Role:</strong> Less favored in ACTT due to higher risk of hypotension, nausea, and pruritus compared to alternatives. Use in small IV doses slowly when other opioids are unavailable.</p>'+
+        '<p><strong>Indications:</strong> Moderate to severe pain when other opioids unavailable.</p>'+
+        '<p><strong>Dosing:</strong> 2&ndash;5 mg IV slowly every 5&ndash;15 minutes. Titrate to effect.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 1 mg/mL, 2 mg/mL, 4 mg/mL, or 10 mg/mL. Verify concentration before drawing dose.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw dose and label syringe. Administer by slow IV push over 3&ndash;5 minutes. Dilute in normal saline or D5W for continuous infusion.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature for 24 hours once drawn. Infusion solutions stable for 24 hours at room temperature.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Do not mix with alkaline solutions, barbiturates, or phenytoin.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 5&ndash;10 minutes, peak 20 minutes, duration 3&ndash;5 hours.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Histamine release:</strong> causes hypotension, flushing, pruritus; more pronounced than other opioids.</li>'+
+        '<li><strong>Respiratory depression:</strong> especially when combined with other sedatives.</li>'+
+        '<li><strong>Nausea and vomiting:</strong> common; prophylactic antiemetic often needed.</li>'+
+        '<li><strong>Severe pruritus:</strong> can be distressing; may require diphenhydramine.</li>'+
+        '<li><strong>Hypotension:</strong> particularly problematic in hypovolemic or shocked patients.</li>'+
+        '</ul></div>'+
 
         '<h4>Acetaminophen</h4>'+
         '<div class="severity-card green"><div class="sc-title"><span class="sc-label">CONFIRMED ONBOARD</span> Acetaminophen</div>'+
@@ -224,8 +239,14 @@ window.ACTT.medications={
 
         '<h4>Succinylcholine</h4>'+
         '<p><strong>Clinical Role:</strong> Depolarizing neuromuscular blocker with rapid onset and short duration. Provides a brief paralysis window for intubation.</p>'+
+        '<p><strong>Indications:</strong> Neuromuscular blockade for rapid sequence intubation.</p>'+
         '<p><strong>Dosing:</strong> 1&ndash;1.5 mg/kg IV/IO.</p>'+
         '<p><strong>Onset:</strong> 30&ndash;60 seconds. <strong>Duration:</strong> 5&ndash;10 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Usually supplied as ready-to-use solution (20 mg/mL or 50 mg/mL). Some formulations require reconstitution with sterile water; follow package instructions. Verify concentration.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw calculated weight-based dose. Label syringe with drug name, dose, and time. Administer as rapid IV push. Flush line immediately after administration. Must be given after induction agent.</p>'+
+        '<p><strong>Stability:</strong> Refrigeration required for most formulations. Once at room temperature, use within manufacturer guidelines (typically 24 hours). Reconstituted solutions stable 24 hours refrigerated. Do not use if solution is discolored.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline and D5W. Do not mix with alkaline solutions (thiopental, sodium bicarbonate). Flush line before and after administration if other medications were recently given.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous SpO2, EtCO2, cardiac monitoring. Watch for fasciculations (normal, brief muscle twitching before paralysis), confirm complete paralysis before intubation attempt, monitor for return of muscle tone.</p>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Succinylcholine Contraindications</div>'+
         '<ul>'+
         '<li>Hyperkalemia or suspected hyperkalemia.</li>'+
@@ -234,11 +255,25 @@ window.ACTT.medications={
         '<li>Known neuromuscular disease or denervation injury.</li>'+
         '<li>If any of these apply, use rocuronium instead.</li>'+
         '</ul></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Hyperkalemia:</strong> can cause life-threatening cardiac dysrhythmias or arrest in susceptible patients.</li>'+
+        '<li><strong>Malignant hyperthermia:</strong> rare genetic disorder triggered by succinylcholine; presents with hyperthermia, muscle rigidity, tachycardia, acidosis.</li>'+
+        '<li><strong>Masseter spasm:</strong> jaw muscle rigidity that can interfere with intubation.</li>'+
+        '<li><strong>Bradycardia:</strong> especially with repeat dosing or in pediatric patients.</li>'+
+        '<li><strong>Increased intraocular and intragastric pressure:</strong> theoretical concerns rarely clinically significant.</li>'+
+        '</ul></div>'+
 
         '<h4>Rocuronium</h4>'+
         '<p><strong>Clinical Role:</strong> Non-depolarizing neuromuscular blocker. Slower onset than succinylcholine but longer duration and fewer hyperkalemic concerns.</p>'+
+        '<p><strong>Indications:</strong> Neuromuscular blockade for RSI, especially when succinylcholine is contraindicated.</p>'+
         '<p><strong>Dosing:</strong> 1&ndash;1.2 mg/kg IV/IO for RSI.</p>'+
         '<p><strong>Onset:</strong> 60&ndash;90 seconds. <strong>Duration:</strong> 30&ndash;60 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution, typically 10 mg/mL. No reconstitution required. Verify concentration before drawing dose.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw weight-based dose. Label syringe clearly. Administer as rapid IV push after induction agent. Flush line after administration.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. Once drawn, use within 24 hours. Do not use if solution contains particulate matter or is discolored.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Do not mix with alkaline solutions. May precipitate if mixed with certain antibiotics in same syringe.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous SpO2, EtCO2, cardiac monitoring. Confirm adequate paralysis before intubation. Monitor for prolonged paralysis duration.</p>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Rocuronium Tradeoff</div>'+
         '<p>The tradeoff with rocuronium is that if the airway attempt fails, the patient will remain paralyzed much longer than with succinylcholine. A failed airway with rocuronium means a prolonged cannot-oxygenate situation unless a rescue airway is ready. The rescue plan must be established before rocuronium is given.</p></div>'+
         '</div>'+
@@ -282,6 +317,7 @@ window.ACTT.medications={
         '<p>Norepinephrine is the first-line vasopressor for persistent hypotension after fluid resuscitation, particularly in septic and vasodilatory shock. Do not delay initiation while waiting for a central line if the patient remains hypotensive after adequate volume resuscitation.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Alpha-1 and beta-1 adrenergic agonist. Increases vascular tone and blood pressure. Primary vasopressor in ACTT for vasodilatory and septic shock.</p>'+
+        '<p><strong>Indications:</strong> Persistent hypotension after adequate fluid resuscitation, septic shock, vasodilatory shock, distributive shock.</p>'+
 
         '<h4>Dosing and Administration</h4>'+
         '<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Detail</th></tr></thead><tbody>'+
@@ -291,10 +327,25 @@ window.ACTT.medications={
         '<tr><td>Peripheral IV precautions</td><td>Check for blanching and swelling frequently. If extravasation occurs, stop the infusion immediately and treat.</td></tr>'+
         '</tbody></table></div>'+
 
+        '<p><strong>Reconstitution and Preparation:</strong> Standard norepinephrine ampules contain 4 mg in 4 mL (1 mg/mL). Common preparation: mix 4 mg (1 ampule) in 250 mL D5W or normal saline for a concentration of 16 mcg/mL. Alternatively, 8 mg in 250 mL yields 32 mcg/mL for higher concentration needs. Label bag clearly with drug name, concentration, and time prepared.</p>'+
+        '<p><strong>Stability:</strong> Once diluted, norepinephrine infusions are stable for 24 hours at room temperature when protected from light. Discard if solution is brown or contains precipitate.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with D5W, normal saline, and D5W in normal saline. Do not mix with alkaline solutions (sodium bicarbonate). Compatible with most vasopressors and sedatives in Y-site administration if lines are flushed appropriately.</p>'+
+        '<p><strong>Administration:</strong> Must be administered via infusion pump with clearly labeled concentration. Titrate to blood pressure response in increments of 1&ndash;2 mcg/min every 5&ndash;10 minutes. Typical effective range 2&ndash;20 mcg/min; doses above 30 mcg/min suggest inadequate resuscitation or other pathology.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous blood pressure monitoring (arterial line preferred for doses &gt;10 mcg/min), heart rate and rhythm, urine output, perfusion status (capillary refill, mentation, lactate), IV site for extravasation every 15&ndash;30 minutes.</p>'+
+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Extravasation</div>'+
         '<p>Extravasation of norepinephrine through a peripheral IV causes local tissue necrosis. Monitor the infusion site frequently. If blanching or swelling appears, stop the infusion and consider phentolamine injection at the site if available.</p></div>'+
 
         '<p><strong>Extravasation rescue:</strong> Phentolamine, if available, injected into the affected area.</p>'+
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Tissue necrosis from extravasation:</strong> potentially devastating complication requiring vigilant IV site monitoring.</li>'+
+        '<li><strong>Severe hypertension:</strong> excessive vasoconstriction can cause end-organ ischemia; titrate carefully.</li>'+
+        '<li><strong>Arrhythmias:</strong> tachycardia and ventricular dysrhythmias possible at high doses.</li>'+
+        '<li><strong>Decreased peripheral perfusion:</strong> excessive vasoconstriction can compromise limb perfusion.</li>'+
+        '<li><strong>Rebound hypotension:</strong> when weaning, taper gradually; abrupt discontinuation can cause severe hypotension.</li>'+
+        '</ul></div>'+
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Operational Burden<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>Norepinephrine creates a significant staffing task. It requires continuous blood pressure trending, line site monitoring, pump management, and ongoing patient response assessment. Before starting a pressor at sea, confirm that the monitoring burden can be sustained. A pressor plan that cannot be safely monitored is an incomplete plan.</p>'+
