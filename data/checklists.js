@@ -154,6 +154,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Line 7 \u2014 Method of marking pickup site: A-Panels / B-Pyro / C-Smoke / D-None / E-Other',
         'Line 8 \u2014 Patient nationality and status: A-Military / B-Allied / C-Non-military / D-POW',
         'Line 9 \u2014 NBC contamination: N-None / B-Biological / C-Chemical / R-Radiological / N-Nuclear'
+      ],
+      sources:[
+        {title:'NATO TCCC Maritime Scenarios',file:'NATO TCCC Maritime Scenarios_MedNP_UPDATE 24JUN2020.pdf'}
       ]
     },
     {
@@ -242,6 +245,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Fluid resuscitation need assessed per protocol',
         'Antibiotic urgency escalated to clinician/prescriber',
         'Reassessment interval, documentation, and transfer/evacuation plan established as needed'
+      ],
+      sources:[
+        {title:'Naval Empiric Abx Selection in SEPSIS updated 2022.pdf',file:'Naval Emperic Abx Seletion in SEPSIS updated 2022.pdf'}
       ]
     },
     {
@@ -264,6 +270,11 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Underlying cause addressed (infection/ACS/med changes); antibiotics/other treatments started if indicated',
         'Airway risk reassessed; avoid intubation if possible but prepare to match pre-intubation minute ventilation if required',
         'Teleconsultation and evacuation plan initiated early; document times, doses, fluids, and responses'
+      ],
+      sources:[
+        {title:'DKA Protocol.pdf',file:'DKA Protocol.pdf'},
+        {title:'DKA Order Set_Treatment Protocol_TOH 2015.pdf',file:'DKA Order Set_Treatment Protocol_TOH 2015.pdf'},
+        {title:'Ch15_HyperglycemicEmergencies.pdf',file:'Ch15_HyperglycemicEmergencies.pdf'}
       ]
     },
     {
@@ -285,6 +296,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Stroke-capable facility/transfer pathway activated if indicated',
         'Repeat neuro checks scheduled; airway protection risk assessed',
         'Findings clearly documented with times'
+      ],
+      sources:[
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
       ]
     },
     {
@@ -329,6 +343,10 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Clinician/prescriber notified; local chest pain pathway initiated',
         'Urgent transfer/evacuation need assessed',
         'Ongoing monitoring, repeat vitals, and documentation completed'
+      ],
+      sources:[
+        {title:'Acute chest pain Protocol.pdf',file:'Acute chest pain Protocol.pdf'},
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
       ]
     },
     {
@@ -373,6 +391,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Perform rhythm/pulse checks at protocol intervals',
         'Use ETCO\u2082 if advanced airway is in place and available',
         'Recognize ROSC promptly and initiate post-ROSC care pathway; debrief/document'
+      ],
+      sources:[
+        {title:'ACLS Guidelines 2020.pdf',file:'ACLS Guidelines 2020.pdf'}
       ]
     },
     {
@@ -395,6 +416,10 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Video laryngoscope ready if available',
         'Tube size selected with backup size available',
         'Attempt limit, escalation trigger, and post-airway confirmation plan agreed'
+      ],
+      sources:[
+        {title:'ACTT 2026-01 Airway.pdf',file:'ACTT 2026-01 Airway .pdf'},
+        {title:'Airway resources and Pearls.pdf',file:'Airway ressources and Pearls.pdf'}
       ]
     },
     {
@@ -419,6 +444,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Dose deliberately with slow push and reassessment between increments; avoid mid-range ketamine (0.3\u20130.8 mg/kg) and dose stacking',
         'Dedicated monitor observes airway, ventilation, and hemodynamics continuously; document times/doses/responses; manage secretions early',
         'Recovery: monitor until awake with stable vitals and protective reflexes, nausea managed, escort/transport arranged; complications and discharge instructions documented'
+      ],
+      sources:[
+        {title:'ACTT 2026-01 Procedural Sedation.pdf',file:'ACTT 2026-01 Procedural Sedation.pdf'}
       ]
     },
     {
@@ -465,6 +493,12 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Command / Fleet Surgeon / duty physician notification completed early when suicidality, psychosis, or prolonged observation needs exceed local capacity',
         'Evacuation / repatriation threshold reviewed: active plan, persistent psychosis, recurrent dangerous agitation, inability to monitor safely onboard',
         'Documentation completed: trigger, differential considered, de-escalation steps, restraints/meds used, reassessment times, observation plan, handover details'
+      ],
+      sources:[
+        {title:'Agitation in the ED_1073_April 2019.pdf',file:'Agitation in the ED_1073_April 2019.pdf'},
+        {title:'Combative patient.pdf',file:'Combative patient.pdf'},
+        {title:'Med Tech Combative patient.pdf',file:'Med Tech Combative patient.pdf'},
+        {title:'MH Emergencies - ACTT 2026.pdf',file:'MH Emergencies - ACTT 2026.pdf'}
       ]
     },
     {
@@ -489,6 +523,9 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Mental health/physician/duty clinician notified as required',
         'Urgent transfer or emergency evaluation arranged when indicated',
         'Safety plan, follow-up plan, and objective documentation completed'
+      ],
+      sources:[
+        {title:'MH Emergencies - ACTT 2026.pdf',file:'MH Emergencies - ACTT 2026.pdf'}
       ]
     },
     {
@@ -511,6 +548,11 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'Tetanus status and associated trauma mechanism reviewed',
         'Transfer/burn center criteria reviewed',
         'Photos/documentation completed per policy; reassessment plan established'
+      ],
+      sources:[
+        {title:'Burn_Management_PFC_13_Jan_2017_ID57.pdf',file:'Burn_Management_PFC_13_Jan_2017_ID57.pdf'},
+        {title:'Med Tech Burn Protocol.pdf',file:'Med Tech Burn Protocol.pdf'},
+        {title:'Burns - Dr Papp - AMTRP 0045.pdf',file:'Burns - Dr Papp - AMTRP 0045.pdf'}
       ]
     },
     {
@@ -533,6 +575,10 @@ window.ACTT=window.ACTT||{};window.ACTT.checklists={
         'If B exceeds C: initiate bladder pressure monitoring every 4 hours',
         'If urine output is >50 ml/hr, decrease IV fluid rate by 20% and recheck hourly',
         'Document totals, rate changes, and reassessment times on the burn flowsheet'
+      ],
+      sources:[
+        {title:'8-Hour-Check.pdf',file:'8-Hour-Check.pdf'},
+        {title:'Burn Fluid Resus Flowsheet.pdf',file:'Burn Fluid Resus Flowsheet.pdf'}
       ]
     },
     {
