@@ -318,6 +318,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/famotidine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/famotidine.html" title="Famotidine monograph" loading="lazy"></iframe>'
     },
     {
+      id:'fentanyl',
+      title:'Fentanyl',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical RSI/ACLS drug.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/fentanyl.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/fentanyl.html" title="Fentanyl monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'fluconazole',
       title:'Fluconazole',
       severity:'green',
@@ -420,6 +426,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/isopropyl_alcohol.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/isopropyl_alcohol.html" title="Isopropyl Alcohol monograph" loading="lazy"></iframe>'
     },
     {
+      id:'ketamine',
+      title:'Ketamine',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical RSI/sedation drug.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/ketamine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/ketamine.html" title="Ketamine monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'ketorolac',
       title:'Ketorolac',
       severity:'green',
@@ -510,6 +522,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/miconazole.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/miconazole.html" title="Miconazole monograph" loading="lazy"></iframe>'
     },
     {
+      id:'midazolam',
+      title:'Midazolam',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical RSI/sedation drug.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/midazolam.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/midazolam.html" title="Midazolam monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'mineral_oil',
       title:'Mineral Oil',
       severity:'green',
@@ -544,6 +562,12 @@ window.ACTT.sickbayMeds={
       title:'Nitroglycerin',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/nitroglycerin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/nitroglycerin.html" title="Nitroglycerin monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'norepinephrine',
+      title:'Norepinephrine',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical ACLS/post-ROSC drug.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/norepinephrine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/norepinephrine.html" title="Norepinephrine monograph" loading="lazy"></iframe>'
     },
     {
       id:'nystatin',
@@ -642,6 +666,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/quetiapine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/quetiapine.html" title="Quetiapine monograph" loading="lazy"></iframe>'
     },
     {
+      id:'rocuronium',
+      title:'Rocuronium',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical RSI paralytic.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/rocuronium.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/rocuronium.html" title="Rocuronium monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'salbutamol',
       title:'Salbutamol',
       severity:'green',
@@ -714,6 +744,12 @@ window.ACTT.sickbayMeds={
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/sodium_thiosulfate.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/sodium_thiosulfate.html" title="Sodium Thiosulfate monograph" loading="lazy"></iframe>'
     },
     {
+      id:'succinylcholine',
+      title:'Succinylcholine',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical RSI paralytic.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/succinylcholine.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/succinylcholine.html" title="Succinylcholine monograph" loading="lazy"></iframe>'
+    },
+    {
       id:'sulfamethoxazole_trimethoprim',
       title:'Sulfamethoxazole Trimethoprim',
       severity:'green',
@@ -784,6 +820,12 @@ window.ACTT.sickbayMeds={
       title:'Valsartan',
       severity:'green',
       content:'<p><strong>Source:</strong> Sick Bay medication monograph.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/valsartan.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/valsartan.html" title="Valsartan monograph" loading="lazy"></iframe>'
+    },
+    {
+      id:'vasopressin',
+      title:'Vasopressin',
+      severity:'red',
+      content:'<p><strong>Source:</strong> Sick Bay medication monograph — Critical ACLS drug.</p><p><a class="btn btn-outline btn-sm" href="data/Meds/vasopressin.html" target="_blank" rel="noopener">Open standalone page</a></p><iframe class="med-monograph-frame" src="data/Meds/vasopressin.html" title="Vasopressin monograph" loading="lazy"></iframe>'
     },
     {
       id:'zinc_oxide',

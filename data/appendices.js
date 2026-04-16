@@ -318,6 +318,12 @@ window.ACTT.appendices={
           '<td>Monitor sodium and neurologic response</td>' +
         '</tr>' +
         '<tr>' +
+          '<td><strong>Hypertonic saline 23.4%</strong></td>' +
+          '<td>ICP herniation rescue (smaller volume, equivalent osmotic effect)</td>' +
+          '<td>30&ndash;60 mL IV push</td>' +
+          '<td>Formulary status uncertain; verify availability before emergency. Preferred if volume restriction critical</td>' +
+        '</tr>' +
+        '<tr>' +
           '<td><strong>Mannitol</strong></td>' +
           '<td>Alternative ICP-lowering agent</td>' +
           '<td>1 g/kg IV over about 20 min</td>' +
