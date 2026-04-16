@@ -58,6 +58,11 @@ window.ACTT.medications={
         '<p><strong>Clinical Role:</strong> Analgesia (sub-dissociative), procedural sedation (dissociative), induction agent for RSI, continuous sedation for intubated or non-intubated patients.</p>'+
         '<p><strong>Indications:</strong> Severe pain, painful bedside procedures, combative patient requiring chemical restraint, induction for airway control.</p>'+
 
+        '<div class="contraindication-box">'+
+        '<div class="contraindication-box-title"><span class="critical-icon">!</span> Contraindications</div>'+
+        '<p><strong>Relative contraindications:</strong> Severe uncontrolled hypertension, acute coronary syndrome, increased intracranial pressure (ICP) concern has been re-evaluated; ketamine may be used with caution in TBI when benefits outweigh risks), known hypersensitivity to ketamine.</p>'+
+        '</div>'+
+
         '<h4>Adult Dosing</h4>'+
         '<div class="table-wrapper"><table><thead><tr><th>Indication</th><th>Dose</th><th>Route</th><th>Notes</th></tr></thead><tbody>'+
         '<tr><td>Pain (sub-dissociative)</td><td>0.1&ndash;0.2 mg/kg</td><td>IV/IO slow push</td><td>Usually 10&ndash;20 mg per dose. Repeat every 10&ndash;30 minutes as needed.</td></tr>'+
@@ -67,9 +72,22 @@ window.ACTT.medications={
         '<tr><td>Continuous sedation (post-intubation)</td><td>1&ndash;2 mg/kg/hr</td><td>IV infusion</td><td>Titrate to sedation depth target. Pair with ongoing monitoring of SpO2, EtCO2, BP.</td></tr>'+
         '</tbody></table></div>'+
 
-        '<p><strong>Preparation:</strong> Draw dose carefully and label the syringe. Administer by slow push. Rapid IV push increases the risk of apnea and laryngospasm.</p>'+
+        '<p><strong>Reconstitution:</strong> Ketamine is typically supplied as a ready-to-use solution. Common concentrations: 10 mg/mL, 50 mg/mL, or 100 mg/mL. Verify concentration before drawing dose. No reconstitution required for standard vials.</p>'+
+        '<p><strong>Preparation:</strong> Draw dose carefully based on verified concentration and label the syringe with drug name, concentration, and time prepared. For continuous infusion: dilute in normal saline or D5W to desired concentration (typical: 1&ndash;2 mg/mL). Administer IV bolus by slow push over 60 seconds. Rapid IV push increases the risk of apnea and laryngospasm.</p>'+
+        '<p><strong>Stability:</strong> Once drawn into a syringe, ketamine is stable at room temperature for 24 hours when protected from light. Ketamine infusions diluted in standard IV fluids are stable for 24 hours at room temperature or 7 days refrigerated.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, and lactated Ringer\'s. Do not mix with barbiturates or diazepam in the same syringe (precipitation may occur). May be administered through the same IV line as most common emergency medications if the line is flushed between drugs.</p>'+
+        '<p><strong>Administration Rate:</strong> IV bolus doses should be given over 60 seconds minimum to reduce the risk of respiratory depression and laryngospasm. IM injections should be given deep into large muscle mass. Continuous infusions should be administered via infusion pump with clearly labeled concentration.</p>'+
 
         '<p><strong>Monitoring:</strong> Continuous SpO2, cardiac monitoring, blood pressure, EtCO2 when available. Reassess mental status and respiratory effort every few minutes during and after administration.</p>'+
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Respiratory depression and apnea:</strong> especially with rapid administration or when combined with other sedatives.</li>'+
+        '<li><strong>Laryngospasm:</strong> rare but potentially fatal; have positive pressure ventilation and suction immediately available.</li>'+
+        '<li><strong>Hypersalivation:</strong> can compromise airway in sedated patients; suction must be ready.</li>'+
+        '<li><strong>Cardiovascular stimulation:</strong> ketamine increases heart rate and blood pressure via sympathetic stimulation; monitor closely in patients with cardiac disease.</li>'+
+        '<li><strong>Emergence reactions:</strong> dysphoria, hallucinations, and agitation can occur during recovery, particularly in adults.</li>'+
+        '</ul></div>'+
 
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Ketamine Cautions</div>'+
         '<ul>'+
@@ -97,6 +115,12 @@ window.ACTT.medications={
         '<tr><td>Active seizure</td><td>5 mg</td><td>IV/IO/IM</td><td>Repeat every 5 minutes until seizure stops. Prepare for airway management if repeated doses needed.</td></tr>'+
         '</tbody></table></div>'+
 
+        '<p><strong>Reconstitution:</strong> Midazolam is supplied as a ready-to-use solution. Common concentrations: 1 mg/mL or 5 mg/mL. Verify vial concentration before drawing dose to prevent dosing errors. No reconstitution required.</p>'+
+        '<p><strong>Preparation:</strong> Draw calculated dose from vial and label syringe with drug name, concentration, dose, and time. For continuous infusion: dilute in normal saline or D5W to a concentration of 0.5&ndash;1 mg/mL. Use infusion pump for continuous administration.</p>'+
+        '<p><strong>Stability:</strong> Midazolam is stable at room temperature for 24 hours once drawn into a syringe. Infusion solutions diluted in compatible IV fluids are stable for 24 hours at room temperature.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, and lactated Ringer\'s solution. Compatible with most analgesics and anesthetics. Flush IV line between incompatible medications.</p>'+
+        '<p><strong>Administration Rate:</strong> Administer IV doses slowly over 2&ndash;3 minutes. Rapid IV push significantly increases risk of respiratory depression, apnea, and hypotension. IM administration should be deep into large muscle mass; onset is delayed (10&ndash;15 minutes) compared to IV route.</p>'+
+
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Midazolam Administration Warning</div>'+
         '<p>Slow IV push is essential. Fast IV push can cause apnea, hypotension, and loss of airway control. When combining with opioids, reduce the midazolam dose because respiratory depression is synergistic and can be severe. Always have airway equipment immediately available.</p></div>'+
 
@@ -111,6 +135,15 @@ window.ACTT.medications={
 
         '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, EtCO2, blood pressure, and level of consciousness. Continue monitoring for at least 30 minutes after the last dose.</p>'+
 
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Respiratory depression and apnea:</strong> dose-dependent, especially severe when combined with opioids or other CNS depressants.</li>'+
+        '<li><strong>Hypotension:</strong> particularly in hypovolemic or elderly patients; monitor blood pressure closely.</li>'+
+        '<li><strong>Paradoxical reactions:</strong> agitation, aggression, or hyperactivity may occur, particularly in elderly or pediatric patients.</li>'+
+        '<li><strong>Prolonged sedation:</strong> effect may be longer than expected in patients with hepatic impairment or reduced clearance.</li>'+
+        '<li><strong>Synergistic CNS depression:</strong> combined use with opioids dramatically increases respiratory depression risk.</li>'+
+        '</ul></div>'+
+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Common Error: Stacking</div>'+
         '<p>The most common midazolam error is stacking doses before allowing sufficient time for the previous dose to take effect. IV onset takes several minutes. IM onset is slower still. Impatient redosing leads to sudden deep sedation and airway compromise.</p></div>'+
         '</div>'+
@@ -120,13 +153,42 @@ window.ACTT.medications={
 
         '<h4>Hydromorphone</h4>'+
         '<p><strong>Clinical Role:</strong> Preferred prolonged-care opioid in ACTT. Longer duration of action than fentanyl and less histamine release than morphine make it a practical choice for sustained analgesia during delayed evacuation.</p>'+
+        '<p><strong>Indications:</strong> Moderate to severe pain, particularly in prolonged care scenarios.</p>'+
         '<p><strong>Dosing:</strong> 0.5&ndash;1 mg IV slowly. Titrate to effect. Allow adequate time between doses to assess response.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 1 mg/mL, 2 mg/mL, or 4 mg/mL. Verify concentration before use.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw calculated dose and label syringe. Administer by slow IV push over 2&ndash;3 minutes. For continuous infusion: dilute in normal saline or D5W (typical concentration 0.1&ndash;1 mg/mL).</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature for 24 hours once drawn. Diluted infusions stable for 24 hours at room temperature or 7 days refrigerated.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, and lactated Ringer\'s. Do not mix with alkaline solutions or barbiturates.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 5&ndash;15 minutes, peak effect 15&ndash;30 minutes, duration 3&ndash;4 hours.</p>'+
+        '<p><strong>Monitoring:</strong> Respiratory rate, SpO2, sedation level, pain score, blood pressure. Assess for nausea and pruritus.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Respiratory depression:</strong> dose-dependent; risk increases with rapid administration and combined use with benzodiazepines.</li>'+
+        '<li><strong>Hypotension:</strong> may occur, especially in hypovolemic patients.</li>'+
+        '<li><strong>Nausea and vomiting:</strong> common; have antiemetic available.</li>'+
+        '<li><strong>Pruritus:</strong> histamine-mediated itching; less common than with morphine.</li>'+
+        '</ul></div>'+
 
         '<h4>Fentanyl</h4>'+
         '<p><strong>Clinical Role:</strong> Fast onset, short duration opioid. Useful when rapid pain control is needed and the clinician wants the effect to dissipate quickly for reassessment.</p>'+
+        '<p><strong>Indications:</strong> Acute severe pain requiring rapid onset analgesia, procedural analgesia.</p>'+
         '<p><strong>Dosing:</strong> 25&ndash;100 mcg IV/IO slowly. Titrate carefully.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution, typically 50 mcg/mL. Verify concentration on vial.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Draw dose carefully using tuberculin or 1 mL syringe for accuracy. Label with drug, dose, concentration, and time. Administer by slow IV push over 1&ndash;2 minutes minimum to prevent chest wall rigidity.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature for 24 hours once drawn. Protect from light during storage.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Compatible with most common IV medications when flushed appropriately.</p>'+
+        '<p><strong>Onset and Duration:</strong> IV onset 1&ndash;2 minutes, peak effect 3&ndash;5 minutes, duration 30&ndash;60 minutes.</p>'+
+        '<p><strong>Monitoring:</strong> Continuous monitoring during and after administration. Watch respiratory rate, SpO2, chest wall movement, blood pressure, and sedation level.</p>'+
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Fentanyl Rapid Push Risk</div>'+
         '<p>Rapid IV push of fentanyl can cause chest wall rigidity (wooden chest syndrome), making ventilation impossible until the rigidity resolves or is treated. Always administer slowly.</p></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Chest wall rigidity:</strong> potentially life-threatening complication of rapid administration; requires immediate airway management.</li>'+
+        '<li><strong>Severe respiratory depression:</strong> rapid onset; have reversal agent (naloxone) immediately available.</li>'+
+        '<li><strong>Bradycardia:</strong> especially with large or rapid doses.</li>'+
+        '<li><strong>Hypotension:</strong> particularly in hypovolemic patients.</li>'+
+        '<li><strong>Short duration:</strong> pain may return before next planned dose; plan reassessment timing.</li>'+
+        '</ul></div>'+
 
         '<h4>Morphine</h4>'+
         '<p><strong>Clinical Role:</strong> Less favored in ACTT due to higher risk of hypotension, nausea, and pruritus compared to alternatives. Use in small IV doses slowly when other opioids are unavailable.</p>'+
