@@ -437,10 +437,21 @@ window.ACTT.medications={
         '<div class="drug-card">'+
         '<h4>6.9.2 Levetiracetam</h4>'+
         '<p><strong>Clinical Role:</strong> Seizure loading and prophylaxis, particularly in traumatic brain injury. Does not replace benzodiazepine rescue for active seizures but helps prevent seizure recurrence after initial control.</p>'+
+        '<p><strong>Indications:</strong> Seizure prophylaxis in TBI, status epilepticus (after benzodiazepine control), ongoing seizure prevention.</p>'+
 
         '<p><strong>Dosing:</strong> 2 g (2000 mg) IV/IO over approximately 15 minutes.</p>'+
-        '<p><strong>Administration:</strong> Ensure a patent IV/IO line before infusion. Infuse over 15 minutes to reduce infusion-related side effects.</p>'+
-
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution in vials or premixed bags. Common concentration: 100 mg/mL in 5 mL vials. Can be administered undiluted or diluted in compatible IV solution.</p>'+
+        '<p><strong>Preparation and Administration:</strong> For loading dose, dilute 2 g in 100 mL normal saline or D5W. Administer over 15 minutes via infusion pump. Slower infusion reduces risk of infusion-related adverse effects. Can be given undiluted via slow IV push if necessary, but infusion preferred.</p>'+
+        '<p><strong>Stability:</strong> Undiluted solution stable for 24 hours at room temperature. Diluted solutions stable for 24 hours at room temperature in polyvinyl chloride bags.</p>'+
+        '<p><strong>Compatibility:</strong> Compatible with normal saline, D5W, lactated Ringer\'s. Compatible with most common IV medications. Do not mix with other drugs in same syringe or bag.</p>'+
+        '<p><strong>Monitoring:</strong> Blood pressure during infusion, mental status, seizure activity. Assess for somnolence, dizziness, or behavioral changes. No routine drug level monitoring required in acute setting.</p>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Infusion site reactions:</strong> pain, erythema at IV site if infused too rapidly.</li>'+
+        '<li><strong>Somnolence and dizziness:</strong> common CNS effects; may compound altered mental status in TBI patients.</li>'+
+        '<li><strong>Behavioral changes:</strong> agitation, psychosis, or mood changes rarely occur.</li>'+
+        '<li><strong>Hypotension:</strong> rare but can occur with rapid infusion; monitor blood pressure.</li>'+
+        '</ul></div>'+
         '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Levetiracetam Does Not Replace Benzo Rescue</div>'+
         '<p>Levetiracetam is a maintenance and prophylactic agent. It does not work fast enough to terminate an active seizure. If a seizure is ongoing, use midazolam first. Levetiracetam is the follow-through to prevent the next seizure.</p></div>'+
 
@@ -463,7 +474,13 @@ window.ACTT.medications={
         '<p>Hypertonic saline 3% is the primary osmotic therapy for elevated intracranial pressure and impending cerebral herniation. Give when neurologic deterioration occurs, when a pupil becomes fixed and dilated, or when clinical signs suggest rising ICP that is progressing toward herniation.</p></div>'+
 
         '<p><strong>Clinical Role:</strong> Reduces cerebral edema by osmotic gradient. Draws fluid out of the brain parenchyma into the intravascular space.</p>'+
+        '<p><strong>Indications:</strong> Elevated ICP with neurologic deterioration, impending herniation, acute TBI with pupillary changes or declining GCS.</p>'+
         '<p><strong>Dosing:</strong> 250 mL of 3% hypertonic saline IV over approximately 20 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as premixed ready-to-use solution in 250 mL or 500 mL bags. Concentration: 3% (30 mg/mL or 513 mEq sodium per liter). No mixing required. Verify concentration before administration.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Use bag as supplied. Administer via infusion pump or gravity infusion over 20 minutes. Can be given via peripheral or central line. Label line clearly during infusion. Flush line after administration.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. Use as supplied; do not add medications to hypertonic saline bags.</p>'+
+        '<p><strong>Compatibility:</strong> Do not mix with other medications in same bag or syringe. May be infused through same IV catheter as other medications if line is flushed between drugs.</p>'+
+        '<p><strong>Monitoring:</strong> Neurologic exam before and after administration (GCS, pupils, motor exam), serum sodium levels when possible, urine output, blood pressure. Document timing and response. Recheck neurologic status every 15&ndash;30 minutes after administration.</p>'+
         '<p><strong>Indication triggers:</strong></p>'+
         '<ul>'+
         '<li>Neurologic deterioration in a TBI patient.</li>'+
@@ -477,6 +494,14 @@ window.ACTT.medications={
         '<li>Document the neurologic exam before and after administration to assess response.</li>'+
         '<li>Hypertonic saline is a temporizing measure. It does not fix the underlying pathology.</li>'+
         '</ul></div>'+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Hypernatremia:</strong> rapid or excessive sodium elevation can cause osmotic demyelination syndrome; monitor sodium levels.</li>'+
+        '<li><strong>Phlebitis:</strong> hypertonic solution can irritate peripheral veins; monitor IV site.</li>'+
+        '<li><strong>Volume overload:</strong> in patients with heart failure or renal dysfunction, monitor for fluid overload.</li>'+
+        '<li><strong>Rebound ICP elevation:</strong> effect is temporary; definitive management required.</li>'+
+        '<li><strong>Hypokalemia:</strong> osmotic diuresis may lower potassium; monitor electrolytes.</li>'+
+        '</ul></div>'+
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Shipboard Availability<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>Hypertonic saline 3% is not confirmed in standard Sick Bay stock. If unavailable, mannitol may be an alternative if the patient is not hypotensive or volume-depleted. The absence of both osmotic agents is a hard limitation for ICP management at sea.</p>'+
@@ -486,7 +511,13 @@ window.ACTT.medications={
         '<div class="drug-card">'+
         '<h4>6.9.4 Mannitol</h4>'+
         '<p><strong>Clinical Role:</strong> Alternative osmotic agent for elevated ICP. Reduces intracranial pressure through osmotic diuresis.</p>'+
+        '<p><strong>Indications:</strong> Elevated ICP with neurologic deterioration when hypertonic saline unavailable and patient is hemodynamically stable with adequate intravascular volume.</p>'+
         '<p><strong>Dosing:</strong> 1 g/kg IV over approximately 20 minutes.</p>'+
+        '<p><strong>Reconstitution:</strong> Supplied as ready-to-use solution. Common concentrations: 20% (200 mg/mL) or 25% (250 mg/mL). Verify concentration. Mannitol may crystallize at low temperatures; if crystals present, warm bag in hot water bath until crystals dissolve before use.</p>'+
+        '<p><strong>Preparation and Administration:</strong> Use in-line filter (5 micron) to prevent crystal administration. Calculate dose based on patient weight and mannitol concentration. Administer via infusion pump over 20 minutes. Central or large peripheral IV preferred.</p>'+
+        '<p><strong>Stability:</strong> Stable at room temperature. If crystallization occurs, redissolve by warming; do not use if crystals cannot be dissolved. Once opened, use promptly; do not store partially used vials.</p>'+
+        '<p><strong>Compatibility:</strong> Do not mix with other medications. Flush line before and after administration. Incompatible with blood products.</p>'+
+        '<p><strong>Monitoring:</strong> Neurologic exam before and after, blood pressure (watch for hypotension), urine output (expect diuresis), serum osmolality and electrolytes when possible, fluid balance. Monitor for hypovolemia from osmotic diuresis.</p>'+
 
         '<div class="severity-card red"><div class="sc-title"><span class="sc-label">CRITICAL</span> Mannitol Contraindications</div>'+
         '<ul>'+
@@ -495,6 +526,15 @@ window.ACTT.medications={
         '<li><strong>Avoid when volume-depleted:</strong> the patient must have adequate intravascular volume before mannitol is safe to use.</li>'+
         '</ul>'+
         '<p>In the hypotensive or bleeding TBI patient, hypertonic saline is preferred because it does not cause diuresis.</p></div>'+
+
+        '<div class="severity-card amber"><div class="sc-title"><span class="sc-label">CAUTION</span> Parenteral Hazards</div>'+
+        '<ul>'+
+        '<li><strong>Hypovolemia and hypotension:</strong> osmotic diuresis can cause significant fluid loss; monitor blood pressure and replace volume as needed.</li>'+
+        '<li><strong>Electrolyte disturbances:</strong> hyponatremia, hypokalemia from diuresis; monitor electrolytes.</li>'+
+        '<li><strong>Renal dysfunction:</strong> high osmotic load can worsen renal function; use with caution in renal impairment.</li>'+
+        '<li><strong>Rebound cerebral edema:</strong> repeated dosing without adequate systemic effect can worsen ICP.</li>'+
+        '<li><strong>Crystallization:</strong> crystals in solution can cause vascular occlusion; always use filter.</li>'+
+        '</ul></div>'+
 
         '<div class="shipboard-callout"><div class="shipboard-callout-header" onclick="this.classList.toggle(\'expanded\');this.nextElementSibling.classList.toggle(\'expanded\')"><span>&#9875;</span> Shipboard Availability<span class="sc-chevron">&#9654;</span></div><div class="shipboard-callout-body">'+
         '<p>Mannitol is not confirmed in standard Sick Bay stock. If neither hypertonic saline nor mannitol is available, ICP management is limited to positioning, ventilation control, seizure prevention, and avoiding secondary insults.</p>'+
