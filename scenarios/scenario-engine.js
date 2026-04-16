@@ -117,10 +117,11 @@
     this.totalDecisionPoints = config.totalDecisionPoints || 5;
     this.continueRequirements = config.continueRequirements || {};
     this.decisionMetadata = config.decisionMetadata || {};
+    this.initialStageUnlocks = config.initialStageUnlocks || { 1: true };
 
     // State
     this.answers = {};
-    this.stageUnlocks = config.initialStageUnlocks || { 1: true };
+    this.stageUnlocks = Object.assign({}, this.initialStageUnlocks);
     this.currentStage = 1;
 
     // Auto-save timer
@@ -169,7 +170,7 @@
      * Check if a decision point has been answered
      */
     isAnswered: function(dpId) {
-      return this.answers.hasOwnProperty(dpId);
+      return Object.prototype.hasOwnProperty.call(this.answers, dpId);
     },
 
     /**
@@ -199,7 +200,7 @@
       if (!requirements || requirements.length === 0) return true;
 
       return requirements.every(function(dpId) {
-        return this.answers.hasOwnProperty(dpId);
+        return Object.prototype.hasOwnProperty.call(this.answers, dpId);
       }, this);
     },
 
@@ -327,7 +328,7 @@
      */
     reset: function() {
       this.answers = {};
-      this.stageUnlocks = { 1: true };
+      this.stageUnlocks = Object.assign({}, this.initialStageUnlocks);
       this.currentStage = 1;
       clearProgress(this.scenarioId);
     },
