@@ -44,7 +44,7 @@ window.ACTT.algorithms={
         '</div></div>' +
         '<ul>' +
         '<li>If oral intubation is not appropriate, or if the predefined attempt limit is reached, move directly to surgical cricothyroidotomy rather than repeating low-probability attempts.</li>' +
-        '<li>After tube placement, confirm with direct visualization if possible, chest rise, auscultation, and end-tidal CO<sub>2</sub>. Then move immediately to post-intubation ventilation and sedation management.</li>' +
+        '<li>After tube placement, confirm with direct visualization if possible, chest rise, auscultation, and end-tidal CO<sub>2</sub>. Then move immediately to post-intubation ventilation and sedation management. For post-intubation sedation: <strong>ketamine infusion 1-2 mg/kg/hr</strong> (preserves hemodynamics, good for unstable patients) or <strong>propofol infusion 5-50 mcg/kg/min</strong> (short-acting, easier neuro checks, requires BP monitoring) or <strong>midazolam infusion 1-5 mg/hr</strong> (longer-acting, may accumulate). Add <strong>fentanyl 25-100 mcg IV q1-2h</strong> or <strong>fentanyl infusion 25-100 mcg/hr</strong> for analgesia. Titrate to sedation target and monitor airway, ventilation, and hemodynamics continuously.</li>' +
         '</ul>' +
 
         '<div class="must-not-miss">' +
@@ -58,7 +58,7 @@ window.ACTT.algorithms={
         '</div>' +
 
         '<h4>Decision Branches</h4>' +
-        '<p>The airway plan must include a declared rescue step before the first attempt. If oral intubation is not appropriate or the predefined attempt limit is reached, move directly to surgical cricothyroidotomy. After tube placement, transition to post-intubation ventilation and sedation management.</p>' +
+        '<p>The airway plan must include a declared rescue step before the first attempt. If oral intubation is not appropriate or the predefined attempt limit is reached, move directly to surgical cricothyroidotomy. After tube placement, transition to post-intubation ventilation and sedation management with specific agents selected based on hemodynamic status and need for neurologic monitoring (ketamine for unstable patients, propofol for short-acting sedation with easier neuro checks, midazolam for longer-acting sedation).</p>' +
 
         '<h4>Key Execution Points</h4>' +
         '<ul>' +
@@ -118,7 +118,7 @@ window.ACTT.algorithms={
         '<li>Use verbal de-escalation first if the patient can still engage and the environment is controlled.</li>' +
         '<li>If the patient remains unsafe, apply physical control promptly using enough personnel to avoid an extended struggle.</li>' +
         '<li>Obtain vital signs, oxygenation, and blood glucose as soon as feasible without escalating risk.</li>' +
-        '<li>Use chemical restraint when verbal measures fail or when the patient is too dangerous to assess safely.</li>' +
+        '<li>Use chemical restraint when verbal measures fail or when the patient is too dangerous to assess safely. First-line agent: <strong>ketamine 4-5 mg/kg IM</strong> (no IV access) or <strong>1 mg/kg IV</strong> over 60 seconds, or <strong>midazolam 5-10 mg IM</strong> or <strong>5 mg IV</strong>. Ketamine is preferred when airway protection and hemodynamic stability are priorities; midazolam when pure anxiolysis is sufficient.</li>' +
         '<li>After sedation, reassess airway patency, respiratory effort, oxygenation, circulation, and level of consciousness immediately and repeatedly.</li>' +
         '<li>If the patient remains unsafe despite sedation, or if sedation results in loss of airway control, transition to the airway pathway.</li>' +
         '</ul>' +
@@ -184,7 +184,7 @@ window.ACTT.algorithms={
         '<li>Use verbal de-escalation first when safe: one speaker, calm voice, short phrases, visible hands, clear limits, and simple choices.</li>' +
         '<li>Move the patient to the quietest controllable space available and reduce unnecessary personnel and stimulation.</li>' +
         '<li>Obtain ABCs, SpO<sub>2</sub>, glucose, temperature, and focused trauma / tox exam as early as feasible; treat abnormal findings in parallel.</li>' +
-        '<li>If the patient becomes dangerous or blocks essential care, use physical restraint only as a brief bridge to chemical sedation. Avoid prone restraint and any neck or chest compression.</li>' +
+        '<li>If the patient becomes dangerous or blocks essential care, use physical restraint only as a brief bridge to chemical sedation. Avoid prone restraint and any neck or chest compression. For chemical sedation: <strong>ketamine 4-5 mg/kg IM</strong> or <strong>1 mg/kg IV</strong> for severe agitation with possible medical cause, or <strong>midazolam 5-10 mg IM/IV</strong> for anxiety-driven agitation. For psychosis with moderate agitation, consider <strong>haloperidol 5-10 mg IM</strong> or <strong>olanzapine 10 mg IM</strong> (slower onset but less extrapyramidal effects).</li>' +
         '<li>After sedation or control, place on continuous monitoring, reassess airway and breathing immediately, and keep resuscitation equipment at the bedside.</li>' +
         '<li>For suicidality, do not leave the patient alone, remove access to obvious means, and start command / supervisory notification and evacuation planning early.</li>' +
         '</ul>' +
@@ -269,6 +269,7 @@ window.ACTT.algorithms={
         '<li><strong>Chest:</strong> breath sounds, chest wall injury, penetrating wounds, paradoxical movement, and chest tube need or function.</li>' +
         '<li><strong>Abdomen and pelvis:</strong> tenderness, distension, bruising, penetrating injury, pelvic instability risk, and perineum / rectum / vagina when the mechanism requires it.</li>' +
         '<li><strong>Extremities and back:</strong> deformity, wounds, burns, fracture, pulses, motor function, sensation, and posterior inspection when log roll can be done safely.</li>' +
+        '<li><strong>Pain management:</strong> address moderate to severe pain once ABC threats are stabilized. For hemodynamically stable patients: <strong>morphine 0.05-0.1 mg/kg IV</strong> (typically 5-10 mg, titrate carefully). For unstable or multi-trauma patients: <strong>ketamine 0.1-0.2 mg/kg IV</strong> (sub-dissociative, typically 10-20 mg, repeat q10-30min as needed). Ketamine preserves blood pressure and airway reflexes; morphine requires closer hemodynamic monitoring.</li>' +
         '<li><strong>Adjuncts:</strong> trend vital signs, SpO<sub>2</sub>, urine output, ECG, targeted labs, and focused ultrasound only if they change the next action.</li>' +
         '</ul>' +
 
@@ -357,7 +358,7 @@ window.ACTT.algorithms={
         '<li><strong>Protect cerebral perfusion against ship motion.</strong> Head-of-bed 30&deg; only if spine is cleared and sea state allows secure positioning; otherwise, reverse-Trendelenburg with strap securement is safer than losing control of the patient on a rolling deck. Avoid flat supine unless CPR is needed.</li>' +
         '<li><strong>Ventilation targets must survive watch turnover.</strong> Post the target EtCO<sub>2</sub> (35&ndash;40 mmHg normally; brief 30&ndash;35 mmHg only as a herniation rescue), the SpO<sub>2</sub> floor (&ge; 94%), and the SBP floor (&ge; 110 mmHg or MAP &ge; 80) in large print on the ventilator and monitor. Do not assume the next watch will remember verbal targets.</li>' +
         '<li><strong>Avoid hypotonic fluids entirely</strong> and confirm all maintenance/resuscitation bags are 0.9% NaCl or balanced isotonic. Do not use D5W. Hypertonic saline (3%) or mannitol is reserved for the herniation branch; confirm stock and dosing before it is needed.</li>' +
-        '<li><strong>Sedation must not mask the exam.</strong> Favor short-acting agents (propofol, fentanyl) that can be interrupted briefly for a neuro check. Ketamine is acceptable at ACTT doses; avoid deep, long-acting sedation that eliminates the only monitor you have.</li>' +
+        '<li><strong>Sedation must not mask the exam.</strong> Favor short-acting agents that can be interrupted briefly for a neuro check. For intubated TBI patients: <strong>propofol infusion 5-50 mcg/kg/min</strong> (short-acting, easy to interrupt for neuro checks, monitor BP closely) plus <strong>fentanyl 25-100 mcg IV q1-2h</strong> or <strong>fentanyl infusion 25-100 mcg/hr</strong> for analgesia. <strong>Ketamine 1-2 mg/kg/hr infusion</strong> is acceptable at ACTT doses when hemodynamic instability is present; avoid deep, long-acting sedation (e.g., high-dose midazolam) that eliminates the only monitor you have. Plan sedation interruption windows for serial GCS and pupil checks.</li>' +
         '<li><strong>Temperature control is secondary injury prevention.</strong> Treat fever aggressively with acetaminophen and active cooling; track core temperature on the same chart as GCS so the trend is visible.</li>' +
         '<li><strong>Request MEDEVAC as soon as TBI is suspected</strong>, not when deterioration is confirmed. Weather, flight deck status, and distance to a neurosurgical asset mean the request-to-wheels-up window may be hours; a deteriorating TBI cannot wait.</li>' +
         '</ul></div></div>',
@@ -459,7 +460,7 @@ window.ACTT.algorithms={
         '<li>Begin isotonic fluid resuscitation using the course formula and then adjust to response.</li>' +
         '<li>Place a Foley catheter when urine-output guided resuscitation is needed and not contraindicated.</li>' +
         '<li>Use urine output as the main practical endpoint and adjust the fluid rate deliberately rather than reflexively.</li>' +
-        '<li>Protect the patient from further heat loss and treat pain early.</li>' +
+        '<li>Protect the patient from further heat loss and treat pain early. For severe burn pain: <strong>ketamine 0.1-0.2 mg/kg IV</strong> (sub-dissociative dose, repeat q10-30min as needed) or <strong>morphine 0.05-0.1 mg/kg IV</strong> (typically 5-10 mg, titrate to effect). Ketamine is preferred in unstable patients; morphine for stable patients without airway concerns. Consider continuous analgesia for large burns: <strong>ketamine infusion 1 mg/kg/hr</strong> or <strong>morphine infusion 2-10 mg/hr</strong> with close monitoring.</li>' +
         '<li>Inspect circumferential burns for compromised perfusion or restrictive chest mechanics.</li>' +
         '<li>If pulses are deteriorating or ventilation is restricted because of circumferential full-thickness burns, move to escharotomy planning.</li>' +
         '</ul>' +
@@ -735,7 +736,7 @@ window.ACTT.algorithms={
         '<li>If PCI within the time target is not realistic, move immediately to a structured fibrinolysis contraindication screen with baseline neuro and bleeding assessment.</li>' +
         '<li>Prepare tenecteplase: clear dextrose from the IV line, reconstitute with 10 mL sterile water (gentle swirl, no shake), select the correct weight band (mg and mL), label the time if not given immediately.</li>' +
         '<li>Administer tenecteplase as a single IV push over 5 seconds, then flush with normal saline. Do not re-dose.</li>' +
-        '<li>Start adjuncts without delay: aspirin if not already given, P2Y12 plan (clopidogrel 300 mg load if naive, 75 mg if on &gt; 7 days; defer load if age &gt; 75), and anticoagulant within 5 minutes (enoxaparin 30 mg IV then 1 mg/kg SC q12h if age &le; 75 and eGFR &ge; 30; otherwise unfractionated heparin using low-PTT target protocol).</li>' +
+        '<li>Start adjuncts without delay: aspirin if not already given, P2Y12 plan (clopidogrel 300 mg load if naive, 75 mg if on &gt; 7 days; defer load if age &gt; 75), and anticoagulant within 5 minutes (enoxaparin 30 mg IV then 1 mg/kg SC q12h if age &le; 75 and eGFR &ge; 30; otherwise unfractionated heparin using low-PTT target protocol). For pain control: <strong>morphine 2-4 mg IV</strong> (titrate in 2 mg increments to pain relief, monitor respirations and BP closely) or <strong>nitroglycerin 0.4 mg sublingual</strong> or <strong>spray q5min x 3</strong> if SBP &gt; 90 mmHg and no right ventricular infarct suspected. Avoid nitrates if inferior STEMI with right-sided ECG changes or recent PDE5 inhibitor use.</li>' +
         '<li>Apply bleeding precautions: avoid new punctures if possible for 24 hours, hold firm pressure if unavoidable.</li>' +
         '<li>Continuous monitoring: rhythm, frequent neuro checks, and bleeding surveillance. Obtain a 12-lead ECG at ~75 minutes to look for &ge; 50% ST resolution.</li>' +
         '</ul>' +
